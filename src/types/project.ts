@@ -1,26 +1,16 @@
-export type ProjectStatus = 'completed' | 'in_progress' | 'archived';
-
-export interface ProjectTech {
-  name: string;
-  color?: string;
-}
-
 export interface Project {
   id: string;
   title: string;
   description: string;
   longDescription?: string;
   image?: string;
-  tech: ProjectTech[];
+  techStack: string[];
   githubUrl?: string;
   liveUrl?: string;
   featured: boolean;
-  status: ProjectStatus;
+  category: "ai-ml" | "web" | "tools" | "other";
   stars?: number;
   forks?: number;
-  language?: string;
-  topics?: string[];
-  updatedAt?: string;
 }
 
 export interface GithubRepo {
@@ -36,5 +26,15 @@ export interface GithubRepo {
   topics: string[];
   updated_at: string;
   fork: boolean;
-  private: boolean;
+}
+
+export interface GithubUser {
+  login: string;
+  name: string;
+  bio: string | null;
+  avatar_url: string;
+  public_repos: number;
+  followers: number;
+  following: number;
+  html_url: string;
 }

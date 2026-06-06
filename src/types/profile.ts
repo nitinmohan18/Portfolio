@@ -1,16 +1,14 @@
-export interface SocialLinks {
-  github: string;
-  linkedin: string;
-  instagram: string;
-  twitter: string;
-  email: string;
+export interface SocialLink {
+  platform: "github" | "linkedin" | "instagram" | "twitter" | "email";
+  url: string;
+  label: string;
 }
 
-export interface ProfileStats {
-  label: string;
-  value: string;
-  description: string;
+export interface StatCard {
   icon: string;
+  value: string;
+  label: string;
+  description: string;
 }
 
 export interface Profile {
@@ -21,12 +19,10 @@ export interface Profile {
   role: string;
   tagline: string;
   bio: string;
-  shortBio: string;
   email: string;
   location: string;
-  available: boolean;
-  social: SocialLinks;
-  stats: ProfileStats[];
   resumeUrl: string | null;
+  socials: SocialLink[];
+  stats: StatCard[];
   typingRoles: string[];
 }

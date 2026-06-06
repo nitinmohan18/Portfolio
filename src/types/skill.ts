@@ -1,21 +1,16 @@
-export type SkillLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert';
-
 export type SkillCategory =
-  | 'frontend'
-  | 'backend'
-  | 'languages'
-  | 'databases'
-  | 'ai_ml'
-  | 'tools';
+  | "frontend"
+  | "backend"
+  | "languages"
+  | "databases"
+  | "ai-ml"
+  | "devtools";
 
 export interface Skill {
-  id: string;
   name: string;
-  category: SkillCategory;
-  level: SkillLevel;
-  percentage: number;
-  icon?: string;
-  color?: string;
+  icon: string;
+  level: number; // 0-100
+  color: string;
 }
 
 export interface SkillGroup {

@@ -1,62 +1,73 @@
-// src/data/profile.ts
-
-import type { Profile } from '@/types/profile';
+import type { Profile } from "@/types/profile";
 
 export const profile: Profile = {
-  name: 'Nitin Mohan',
-  firstName: 'Nitin',
-  lastName: 'Mohan',
-  initials: 'NM',
-  role: 'AI & Machine Learning Student',
-  tagline: 'Building the future at the intersection of intelligence and technology.',
-  bio: `I'm a passionate AI & Machine Learning student driven by curiosity and a deep
-fascination with how machines learn. I love building intelligent systems, exploring
-neural architectures, and turning complex ideas into elegant, working solutions.
-My journey is fueled by a commitment to continuous learning and a vision to contribute
-meaningfully to the AI revolution.`,
-  shortBio: 'AI & ML student exploring intelligent systems, neural networks, and the future of technology.',
-  email: 'mohannitin494@gmail.com',
-  location: 'India',
-  available: true,
-  social: {
-    github: 'https://github.com/nitinmohan18',
-    linkedin: 'https://www.linkedin.com/in/nitin-mohan-9251ab328',
-    instagram: 'https://www.instagram.com/nitin__.pandey',
-    twitter: 'https://x.com/NitinPandey494',
-    email: 'mailto:mohannitin494@gmail.com',
-  },
-  stats: [
-    {
-      label: 'Years Learning',
-      value: '3+',
-      description: 'Consistent learning and building',
-      icon: 'code',
-    },
-    {
-      label: 'Projects Completed',
-      value: '15+',
-      description: 'Real-world projects delivered',
-      icon: 'briefcase',
-    },
-    {
-      label: 'Problem Solver',
-      value: '5+',
-      description: 'DSA and algorithm enthusiast',
-      icon: 'trophy',
-    },
-    {
-      label: 'AI/ML Explorer',
-      value: 'AI/ML',
-      description: 'Exploring the future with AI',
-      icon: 'rocket',
-    },
-  ],
+  name: "Nitin Mohan",
+  firstName: "Nitin",
+  lastName: "Mohan",
+  initials: "NM",
+  role: "AI & Machine Learning Student",
+  tagline: "Full Stack Developer & AI Enthusiast",
+  bio: "I'm a passionate AI & Machine Learning student who loves turning ideas into real-world solutions. I enjoy combining code, creativity, and technology to build intelligent, scalable applications that make an impact.",
+  email: "mohannitin494@gmail.com",
+  location: "India",
   resumeUrl: null,
   typingRoles: [
-    'AI & ML Student',
-    'Python Developer',
-    'Deep Learning Explorer',
-    'Problem Solver',
-    'Open Source Contributor',
+    "AI & ML Student",
+    "Full Stack Developer",
+    "Problem Solver",
+    "Open Source Enthusiast",
+  ],
+  socials: [
+    {
+      platform: "github",
+      url: "https://github.com/nitinmohan18",
+      label: "GitHub",
+    },
+    {
+      platform: "linkedin",
+      url: "https://www.linkedin.com/in/nitin-mohan-9251ab328",
+      label: "LinkedIn",
+    },
+    {
+      platform: "instagram",
+      url: "https://www.instagram.com/nitin__.pandey",
+      label: "Instagram",
+    },
+    {
+      platform: "twitter",
+      url: "https://x.com/NitinPandey494",
+      label: "Twitter / X",
+    },
+    {
+      platform: "email",
+      url: "mailto:mohannitin494@gmail.com",
+      label: "Email",
+    },
+  ],
+  stats: [
+    {
+      icon: "code",
+      value: "3+",
+      label: "Years Learning",
+      description: "Consistent learning and building",
+    },
+    {
+      icon: "briefcase",
+      value: "15+",
+      label: "Projects Completed",
+      description: "Real-world projects delivered",
+    },
+    {
+      icon: "trophy",
+      value: "5+",
+      label: "Problem Solver",
+      description: "DSA and algorithm enthusiast",
+    },
+    {
+      icon: "sparkles",
+      value: "AI/ML",
+      label: "Explorer",
+      description: "Exploring the future with AI",
+    },
   ],
 };

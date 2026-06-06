@@ -1,44 +1,51 @@
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nitinmohan.dev';
-export const GITHUB_USERNAME = 'nitinmohan18';
-export const GITHUB_API = 'https://api.github.com';
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://nitinmohan.dev";
 
-export const NAV_LINKS = [
-  { label: 'Home', href: '#home', index: '01' },
-  { label: 'About', href: '#about', index: '02' },
-  { label: 'Skills', href: '#skills', index: '03' },
-  { label: 'Projects', href: '#projects', index: '04' },
-  { label: 'Education', href: '#education', index: '05' },
-  { label: 'Certifications', href: '#certifications', index: '06' },
-  { label: 'Contact', href: '#contact', index: '07' },
+export const GITHUB_USERNAME = "nitinmohan18";
+
+export const NAV_ITEMS = [
+  { id: "home", label: "Home", href: "#home" },
+  { id: "about", label: "About", href: "#about" },
+  { id: "skills", label: "Skills", href: "#skills" },
+  { id: "projects", label: "Projects", href: "#projects" },
+  { id: "education", label: "Education", href: "#education" },
+  { id: "certifications", label: "Certifications", href: "#certifications" },
+  { id: "contact", label: "Contact", href: "#contact" },
 ] as const;
 
-export const SECTION_IDS = {
-  HOME: 'home',
-  ABOUT: 'about',
-  SKILLS: 'skills',
-  PROJECTS: 'projects',
-  EDUCATION: 'education',
-  CERTIFICATIONS: 'certifications',
-  CONTACT: 'contact',
+export const SECTION_IDS = NAV_ITEMS.map((item) => item.id);
+
+export const ANIMATION_DURATION = {
+  fast: 0.2,
+  normal: 0.4,
+  slow: 0.8,
+  cinematic: 1.4,
 } as const;
 
 export const EMAILJS_CONFIG = {
-  serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? '',
-  templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? '',
-  publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? '',
+  serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "",
+  templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "",
+  publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? "",
 } as const;
 
-export const ANIMATION_DURATION = {
-  fast: 0.3,
-  normal: 0.5,
-  slow: 0.8,
-  verySlow: 1.2,
+export const THEME_COLORS = {
+  primary: "#6C63FF",
+  secondary: "#A78BFA",
+  accent: "#38BDF8",
+  glow: "#7C3AED",
+  dark: {
+    900: "#030712",
+    800: "#0a0f1e",
+    700: "#0d1424",
+    600: "#111827",
+    500: "#1f2937",
+  },
+  glass: "rgba(255,255,255,0.04)",
+  glassBorder: "rgba(255,255,255,0.08)",
 } as const;
 
-export const BREAKPOINTS = {
-  sm: 640,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
-  '2xl': 1536,
+export const PERFORMANCE = {
+  // Reduce particle count / polygon count on mobile
+  MOBILE_QUALITY_MULTIPLIER: 0.5,
+  TARGET_FPS: 60,
 } as const;

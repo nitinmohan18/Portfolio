@@ -1,63 +1,56 @@
-import { GITHUB_API, GITHUB_USERNAME } from './constants';
-import type { GithubRepo, Project } from '@/types/project';
+import type { GithubRepo, GithubUser } from "@/types/project";
 
-export async function fetchGithubRepos(): Promise<GithubRepo[]> {
+const BASE = "https://api.github.com";
+const USERNAME = "nitinmohan18";
+
+const headers: HeadersInit = {
+  Accept: "application/vnd.github+json",
+  ...(process.env.GITHUB_TOKEN
+    ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+    : {}),
+};
+
+export async function getGithubUser(): Promise<GithubUser | null> {
+  try {
+    const res = await fetch(`${BASE}/users/${USERNAME}`, {
+      headers,
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return null;
+    return res.json() as Promise<GithubUser>;
+  } catch {
+    return null;
+  }
+}
+
+export async function getGithubRepos(): Promise<GithubRepo[]> {
   try {
     const res = await fetch(
-      `${GITHUB_API}/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=30&type=public`,
-      {
-        headers: { Accept: 'application/vnd.github.v3+json' },
-        next: { revalidate: 3600 },
-      },
+      `${BASE}/users/${USERNAME}/repos?sort=updated&per_page=30`,
+      { headers, next: { revalidate: 3600 } }
     );
-    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+    if (!res.ok) return [];
     const repos: GithubRepo[] = await res.json();
-    return repos.filter((r) => !r.fork && !r.private);
-  } catch (err) {
-    console.error('Failed to fetch GitHub repos:', err);
+    return repos.filter((r) => !r.fork).sort(
+      (a, b) => b.stargazers_count - a.stargazers_count
+    );
+  } catch {
     return [];
   }
 }
 
-export function repoToProject(repo: GithubRepo): Project {
-  return {
-    id: String(repo.id),
-    title: repo.name
-      .replace(/-/g, ' ')
-      .replace(/\b\w/g, (c) => c.toUpperCase()),
-    description: repo.description ?? 'No description available.',
-    tech: buildTechStack(repo),
-    githubUrl: repo.html_url,
-    liveUrl: repo.homepage ?? undefined,
-    featured: repo.stargazers_count > 0,
-    status: 'completed',
-    stars: repo.stargazers_count,
-    forks: repo.forks_count,
-    language: repo.language ?? undefined,
-    topics: repo.topics,
-    updatedAt: repo.updated_at,
+export function detectLanguageColor(language: string | null): string {
+  const map: Record<string, string> = {
+    Python: "#3776AB",
+    TypeScript: "#3178C6",
+    JavaScript: "#F7DF1E",
+    "C++": "#00599C",
+    Java: "#ED8B00",
+    HTML: "#E34F26",
+    CSS: "#1572B6",
+    Rust: "#DEA584",
+    Go: "#00ADD8",
+    Shell: "#89E051",
   };
-}
-
-function buildTechStack(repo: GithubRepo): Project['tech'] {
-  const stack: Project['tech'] = [];
-  if (repo.language) stack.push({ name: repo.language });
-  repo.topics.slice(0, 4).forEach((t) =>
-    stack.push({ name: t.replace(/-/g, ' ') }),
-  );
-  return stack;
-}
-
-export async function fetchGithubStats() {
-  try {
-    const res = await fetch(`${GITHUB_API}/users/${GITHUB_USERNAME}`, {
-      headers: { Accept: 'application/vnd.github.v3+json' },
-      next: { revalidate: 3600 },
-    });
-    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
-    return await res.json();
-  } catch (err) {
-    console.error('Failed to fetch GitHub stats:', err);
-    return null;
-  }
+  return language ? (map[language] ?? "#6C63FF") : "#6C63FF";
 }
