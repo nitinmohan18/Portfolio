@@ -8,7 +8,7 @@ export default function Stars() {
   const starsRef = useRef<THREE.Points>(null);
 
   const [positions, sizes] = useMemo(() => {
-    const count = 1000;
+    const count = 3000;
     const positions = new Float32Array(count * 3);
     const sizes = new Float32Array(count);
 

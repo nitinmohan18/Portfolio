@@ -7,13 +7,14 @@ import * as THREE from "three";
 export default function Lighting() {
   return (
     <>
+      {/* AmbientLight blue dim */}
       <ambientLight intensity={0.1} color="#4b6b9e" />
       
-      {/* Moon Light */}
+      {/* DirectionalLight cool white from top-left simulating moonlight */}
       <directionalLight
-        position={[-10, 20, -20]}
-        intensity={0.6}
-        color="#8aaedc"
+        position={[-20, 30, -10]}
+        intensity={0.8}
+        color="#e2e8f0"
         castShadow
       />
       
@@ -21,19 +22,8 @@ export default function Lighting() {
       <pointLight
         position={[8, 1, 5]}
         intensity={1.5}
-        color="#ff9900"
+        color="#ff8c42"
         distance={20}
-        decay={2}
-      />
-      
-      {/* Subtle Waterfall rim light */}
-      <spotLight
-        position={[15, 15, -10]}
-        angle={0.5}
-        penumbra={1}
-        intensity={1.2}
-        color="#a2c2e6"
-        distance={40}
         decay={2}
       />
     </>

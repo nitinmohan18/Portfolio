@@ -1,40 +1,56 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { waterfallVertexShader, waterfallFragmentShader } from "../shaders/WaterfallShader";
 
 export default function Waterfall() {
-  const materialRef = useRef<THREE.ShaderMaterial>(null);
+  const pointsRef = useRef<THREE.Points>(null);
+  const count = 2000;
 
-  useFrame((state) => {
-    if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
+  const [positions, speeds] = useMemo(() => {
+    const pos = new Float32Array(count * 3);
+    const spd = new Float32Array(count);
+    for (let i = 0; i < count; i++) {
+      pos[i * 3] = (Math.random() - 0.5) * 6; // x spread
+      pos[i * 3 + 1] = Math.random() * 20; // y height
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 2; // z depth
+      spd[i] = 0.2 + Math.random() * 0.5;
     }
+    return [pos, spd];
+  }, []);
+
+  useFrame(() => {
+    if (!pointsRef.current) return;
+    const posAttr = pointsRef.current.geometry.attributes.position;
+    for (let i = 0; i < count; i++) {
+      let y = posAttr.getY(i);
+      y -= speeds[i];
+      if (y < -5) {
+        y = 15;
+      }
+      posAttr.setY(i, y);
+      
+      // Slight x sway
+      let x = posAttr.getX(i);
+      x += Math.sin(y * 0.5) * 0.02;
+      posAttr.setX(i, x);
+    }
+    posAttr.needsUpdate = true;
   });
 
   return (
-    <group position={[15, 8, -10]} rotation={[0, -Math.PI / 6, 0]}>
-      {/* Waterfall face */}
-      <mesh>
-        <planeGeometry args={[10, 20, 64, 64]} />
-        <shaderMaterial
-          ref={materialRef}
-          vertexShader={waterfallVertexShader}
-          fragmentShader={waterfallFragmentShader}
-          uniforms={{
-            uTime: { value: 0 },
-          }}
-          transparent
-          side={THREE.DoubleSide}
-        />
-      </mesh>
-      
+    <group position={[18, 5, -12]}>
+      <points ref={pointsRef}>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+        </bufferGeometry>
+        <pointsMaterial size={0.15} color="#dbeafe" transparent opacity={0.6} blending={THREE.AdditiveBlending} depthWrite={false} />
+      </points>
       {/* Underlying cliff face behind waterfall */}
-      <mesh position={[0, 0, -1]}>
-        <planeGeometry args={[12, 22, 16, 16]} />
-        <meshStandardMaterial color="#1a1c23" roughness={0.9} />
+      <mesh position={[0, 5, -2]}>
+        <planeGeometry args={[8, 25, 1, 1]} />
+        <meshStandardMaterial color="#0f172a" roughness={1} />
       </mesh>
     </group>
   );

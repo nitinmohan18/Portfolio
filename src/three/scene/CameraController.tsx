@@ -21,12 +21,12 @@ export default function CameraController() {
     cameraGroupRef.current.rotation.x = THREE.MathUtils.lerp(
       cameraGroupRef.current.rotation.x,
       targetRotation.current.x,
-      0.05
+      0.02
     );
     cameraGroupRef.current.rotation.y = THREE.MathUtils.lerp(
       cameraGroupRef.current.rotation.y,
       targetRotation.current.y,
-      0.05
+      0.02
     );
 
     // Auto cinematic drift

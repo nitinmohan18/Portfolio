@@ -136,11 +136,10 @@ export default function ContactForm() {
         </label>
         <textarea
           id="contact-message"
-          rows={5}
           placeholder="Tell me about your project or opportunity…"
           value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })}
-          className={`${inputClass} resize-none`}
+          className={`${inputClass} resize-none min-h-[150px]`}
           disabled={state === "loading"}
         />
         {errors.message && <p className="text-xs text-red-400">{errors.message}</p>}
@@ -169,19 +168,17 @@ export default function ContactForm() {
         )}
       </AnimatePresence>
 
-      <GlowButton
+      <button
         type="submit"
-        size="md"
         disabled={state === "loading"}
-        glow
-        className="self-start"
+        className="w-full py-3.5 mt-2 rounded-xl bg-gradient-to-r from-[var(--accent-blue)] to-[var(--accent-purple)] text-white font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
       >
         {state === "loading" ? (
-          <><Loader2 size={15} className="animate-spin" /> Sending…</>
+          <><Loader2 size={18} className="animate-spin" /> Sending…</>
         ) : (
-          <><Send size={15} /> Send Message</>
+          <><Send size={18} /> Send Message</>
         )}
-      </GlowButton>
+      </button>
     </form>
   );
 }

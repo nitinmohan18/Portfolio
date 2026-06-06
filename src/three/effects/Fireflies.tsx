@@ -5,49 +5,44 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 export default function Fireflies() {
-  const count = 60;
-  const meshRef = useRef<THREE.InstancedMesh>(null);
+  const count = 100;
+  const pointsRef = useRef<THREE.Points>(null);
   
-  const dummy = useMemo(() => new THREE.Object3D(), []);
-  
-  const particles = useMemo(() => {
-    const temp = [];
+  const [positions, phases] = useMemo(() => {
+    const pos = new Float32Array(count * 3);
+    const pha = new Float32Array(count);
     for (let i = 0; i < count; i++) {
-      const x = (Math.random() - 0.5) * 20;
-      const y = Math.random() * 2 + 0.1;
-      const z = (Math.random() - 0.5) * 15;
-      const speed = Math.random() * 0.5 + 0.5;
-      const offset = Math.random() * Math.PI * 2;
-      temp.push({ x, y, z, speed, offset });
+      pos[i * 3] = (Math.random() - 0.5) * 40;
+      pos[i * 3 + 1] = Math.random() * 5 + 0.5;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 20 + 5;
+      pha[i] = Math.random() * Math.PI * 2;
     }
-    return temp;
+    return [pos, pha];
   }, [count]);
 
   useFrame((state) => {
-    const mesh = meshRef.current;
-    if (!mesh) return;
+    if (!pointsRef.current) return;
     const time = state.clock.elapsedTime;
+    const posAttr = pointsRef.current.geometry.attributes.position;
     
-    particles.forEach((particle, i) => {
-      const { x, y, z, speed, offset } = particle;
-      dummy.position.set(
-        x + Math.sin(time * speed * 0.5 + offset) * 1.5,
-        y + Math.cos(time * speed * 0.4 + offset) * 0.5,
-        z + Math.sin(time * speed * 0.3 + offset) * 1.5
-      );
-      // Gentle scale pulsing
-      const scale = 0.03 + Math.abs(Math.sin(time * speed * 2 + offset)) * 0.02;
-      dummy.scale.set(scale, scale, scale);
-      dummy.updateMatrix();
-      mesh.setMatrixAt(i, dummy.matrix);
-    });
-    mesh.instanceMatrix.needsUpdate = true;
+    for (let i = 0; i < count; i++) {
+      let y = posAttr.getY(i);
+      y += Math.sin(time * 2.0 + phases[i]) * 0.01;
+      posAttr.setY(i, y);
+      
+      let x = posAttr.getX(i);
+      x += Math.cos(time * 1.0 + phases[i]) * 0.01;
+      posAttr.setX(i, x);
+    }
+    posAttr.needsUpdate = true;
   });
 
   return (
-    <instancedMesh ref={meshRef} args={[undefined, undefined, count]}>
-      <sphereGeometry args={[1, 8, 8]} />
-      <meshBasicMaterial color="#a78bfa" toneMapped={false} />
-    </instancedMesh>
+    <points ref={pointsRef}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+      </bufferGeometry>
+      <pointsMaterial size={0.1} color="#a78bfa" transparent opacity={0.8} blending={THREE.AdditiveBlending} depthWrite={false} />
+    </points>
   );
 }

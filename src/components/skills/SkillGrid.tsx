@@ -1,59 +1,71 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { SkillGroup } from "@/types/skill";
-import SkillCard from "./SkillCard";
-import {
-  Code2,
-  Server,
-  Database,
-  Brain,
-  Wrench,
-  FileCode2,
-} from "lucide-react";
+import { skillGroups } from "@/data/skills";
+import Image from "next/image";
 
-const categoryIconMap: Record<string, React.ReactNode> = {
-  languages: <FileCode2 size={16} />,
-  "ai-ml": <Brain size={16} />,
-  frontend: <Code2 size={16} />,
-  backend: <Server size={16} />,
-  databases: <Database size={16} />,
-  devtools: <Wrench size={16} />,
-};
-
-interface SkillGridProps {
-  groups: SkillGroup[];
-}
-
-export default function SkillGrid({ groups }: SkillGridProps) {
+export default function SkillGrid() {
   return (
-    <div className="flex flex-col gap-10">
-      {groups.map((group, gi) => (
-        <motion.div
-          key={group.category}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.6, delay: gi * 0.08 }}
-        >
-          {/* Group header */}
-          <div className="flex items-center gap-3 mb-5">
-            <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-              {categoryIconMap[group.category] ?? <Code2 size={16} />}
+    <div className="flex flex-col gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+        {skillGroups.map((group, i) => (
+          <motion.div
+            key={group.category}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            className="glass-card flex flex-col h-full overflow-hidden border-[var(--border-default)] group"
+          >
+            {/* Terminal Header */}
+            <div className="bg-dark-900/60 border-b border-[var(--border-default)] px-4 py-2.5 flex items-center justify-between">
+              <span className="text-[10px] font-mono tracking-widest text-[var(--text-muted)] group-hover:text-[var(--text-secondary)] transition-colors">
+                POWERSHELL • \SKILLS\{group.category.toUpperCase()}
+              </span>
             </div>
-            <h3 className="font-display font-semibold text-white text-base">{group.label}</h3>
-            <div className="flex-1 h-px bg-white/5" />
-            <span className="text-xs text-slate-600 font-mono">{group.skills.length} skills</span>
-          </div>
 
-          {/* Skills row */}
-          <div className="flex overflow-x-auto gap-3 pb-4 scrollbar-hide w-full max-w-full">
-            {group.skills.map((skill, si) => (
-              <SkillCard key={skill.name} skill={skill} index={si} />
-            ))}
-          </div>
-        </motion.div>
-      ))}
+            {/* Terminal Body */}
+            <div className="p-6 flex flex-col flex-1 gap-5">
+              <div className="flex flex-col gap-1">
+                <h3 className="text-lg font-mono font-bold text-white group-hover:text-[var(--accent-purple)] transition-colors">
+                  <span className="text-[var(--accent-purple)] mr-2">&gt;</span>
+                  {group.label}
+                </h3>
+                <span className="text-xs font-mono italic text-[var(--text-muted)] animate-pulse pl-5">
+                  Loading modules...
+                </span>
+              </div>
+
+              {/* Chips */}
+              <div className="flex flex-wrap gap-2.5 pt-2">
+                {group.skills.map((skill, si) => (
+                  <motion.div
+                    key={skill.name}
+                    whileHover={{ scale: 1.05 }}
+                    style={{
+                      backgroundColor: skill.color,
+                      borderRadius: "var(--radius-sm)",
+                    }}
+                    className="flex items-center gap-1.5 px-3 py-1.5 shadow-sm cursor-default"
+                  >
+                    <Image
+                      src={`https://cdn.simpleicons.org/${skill.icon}/white`}
+                      alt={skill.name}
+                      width={14}
+                      height={14}
+                      className="w-3.5 h-3.5 object-contain"
+                      unoptimized
+                    />
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-white">
+                      {skill.name}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }

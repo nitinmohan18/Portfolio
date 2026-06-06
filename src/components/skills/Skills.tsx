@@ -3,7 +3,6 @@
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SkillGrid from "./SkillGrid";
-import { skillGroups } from "@/data/skills";
 
 export default function Skills() {
   return (
@@ -15,7 +14,7 @@ export default function Skills() {
           highlight="Work With"
           description="A curated set of tools and technologies I use to build intelligent, scalable, and beautiful products."
         />
-        <SkillGrid groups={skillGroups} />
+        <SkillGrid />
       </div>
     </SectionWrapper>
   );
