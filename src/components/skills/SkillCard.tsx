@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 import type { Skill } from "@/types/skill";
+import Image from "next/image";
 
 interface SkillCardProps {
   skill: Skill;
@@ -15,28 +15,25 @@ export default function SkillCard({ skill, index }: SkillCardProps) {
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-30px" }}
-      transition={{ duration: 0.4, delay: index * 0.04, ease: [0.4, 0, 0.2, 1] }}
-      whileHover={{ y: -3, scale: 1.03 }}
-      className="flex flex-col gap-3 p-4 glass-card group cursor-default"
+      transition={{ duration: 0.3, delay: index * 0.04, ease: "easeOut" }}
+      whileHover={{ scale: 1.05 }}
+      style={{
+        backgroundColor: skill.color,
+        borderRadius: "var(--radius-xl)",
+        borderColor: "var(--border-default)",
+        transition: "var(--transition-fast)",
+      }}
+      className="flex items-center gap-2 px-4 py-2 border text-white shadow-sm hover:shadow-[var(--glow-sm)] cursor-default shrink-0"
     >
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-slate-200 group-hover:text-white transition-colors">
-          {skill.name}
-        </span>
-        <span className="text-xs text-slate-500 font-mono">{skill.level}%</span>
-      </div>
-
-      {/* Progress bar */}
-      <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-        <motion.div
-          className="h-full rounded-full"
-          style={{ backgroundColor: skill.color }}
-          initial={{ width: 0 }}
-          whileInView={{ width: `${skill.level}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, delay: index * 0.04 + 0.3, ease: [0.4, 0, 0.2, 1] }}
-        />
-      </div>
+      <Image
+        src={`https://cdn.simpleicons.org/${skill.icon}/white`}
+        alt={skill.name}
+        width={16}
+        height={16}
+        className="w-4 h-4 object-contain"
+        unoptimized
+      />
+      <span className="text-xs font-bold uppercase tracking-wider">{skill.name}</span>
     </motion.div>
   );
 }

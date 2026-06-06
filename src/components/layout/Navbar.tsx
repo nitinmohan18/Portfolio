@@ -69,7 +69,7 @@ export default function Navbar() {
           </MagneticButton>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Primary navigation">
+          <nav className="hidden lg:flex items-center gap-10" aria-label="Primary navigation">
             {NAV_ITEMS.map((item) => (
               <button
                 key={item.id}

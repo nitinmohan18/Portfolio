@@ -7,9 +7,9 @@ export const profile: Profile = {
   initials: "NM",
   role: "AI & Machine Learning Student",
   tagline: "Full Stack Developer & AI Enthusiast",
-  bio: "I'm a passionate AI & Machine Learning student who loves turning ideas into real-world solutions. I enjoy combining code, creativity, and technology to build intelligent, scalable applications that make an impact.",
+  bio: "AI & Machine Learning student at SIRT Bhopal, building intelligent systems and turning complex problems into elegant solutions.",
   email: "mohannitin494@gmail.com",
-  location: "India",
+  location: "Bhopal, India",
   resumeUrl: null,
   typingRoles: [
     "AI & ML Student",

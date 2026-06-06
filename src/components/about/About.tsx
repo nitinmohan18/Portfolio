@@ -54,22 +54,22 @@ export default function About() {
           <div className="flex flex-col gap-5 text-slate-400 leading-relaxed">
             <FadeIn delay={0.15}>
               <p>
-                I&apos;m a passionate <span className="text-white font-medium">AI & Machine Learning student</span> who
-                loves turning ideas into real-world solutions. My journey into tech started with
-                curiosity about how machines can think — and that curiosity has never stopped.
+                I&apos;m an AI & ML engineering student at Sagar Institute of Research
+                and Technology, Bhopal (RGPV). I build production-ready intelligent
+                systems — from neural networks to full-stack web applications.
               </p>
             </FadeIn>
             <FadeIn delay={0.25}>
               <p>
-                I enjoy bridging the gap between cutting-edge AI research and production-ready
-                software. Whether it&apos;s building intelligent web apps, training neural networks, or
-                crafting elegant UIs — I bring the same level of care and precision to everything I build.
+                With a strong mathematical foundation from ISC and hands-on
+                experience in Python, deep learning, and modern web frameworks,
+                I focus on work that is precise, scalable, and impactful.
               </p>
             </FadeIn>
             <FadeIn delay={0.35}>
               <p>
-                My goal is to work at the intersection of <span className="text-primary font-medium">AI and product engineering</span> —
-                creating tools that genuinely improve people&apos;s lives.
+                Currently seeking internships and collaborations at the intersection
+                of AI and product engineering.
               </p>
             </FadeIn>
           </div>

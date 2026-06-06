@@ -21,8 +21,8 @@ export default function ProjectCard({ repo, index }: ProjectCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, delay: index * 0.07 }}
-      whileHover={{ y: -6 }}
-      className="glass-card p-6 flex flex-col gap-4 group h-full"
+      style={{ transition: "all var(--transition-normal)" }}
+      className="glass-card p-6 flex flex-col gap-4 h-full hover:-translate-y-1 hover:shadow-[var(--glow-blue)] group"
     >
       {/* Header */}
       <div className="flex items-start justify-between gap-2">

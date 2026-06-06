@@ -51,16 +51,6 @@ export default function Certifications() {
               </p>
             </div>
 
-            {/* Placeholder cards */}
-            <div className="grid sm:grid-cols-3 gap-4 w-full max-w-2xl mt-4 opacity-30 pointer-events-none">
-              {[1, 2, 3].map((n) => (
-                <div key={n} className="glass-card p-5 flex flex-col gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-white/5 shimmer" />
-                  <div className="h-3 bg-white/5 rounded shimmer w-3/4" />
-                  <div className="h-2.5 bg-white/5 rounded shimmer w-1/2" />
-                </div>
-              ))}
-            </div>
           </motion.div>
         )}
       </div>

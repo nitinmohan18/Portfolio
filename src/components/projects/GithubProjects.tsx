@@ -35,10 +35,14 @@ export default function GithubProjects() {
     );
   }
 
+  const filteredRepos = repos.filter(
+    (repo) => repo.name.toLowerCase() !== "nitin-portfolio" && repo.description
+  );
+
   return (
     <div className="flex flex-col gap-8">
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {repos.slice(0, 9).map((repo, i) => (
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+        {filteredRepos.slice(0, 9).map((repo, i) => (
           <ProjectCard key={repo.id} repo={repo} index={i} />
         ))}
       </div>

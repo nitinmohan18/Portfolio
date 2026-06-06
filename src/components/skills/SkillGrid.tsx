@@ -46,8 +46,8 @@ export default function SkillGrid({ groups }: SkillGridProps) {
             <span className="text-xs text-slate-600 font-mono">{group.skills.length} skills</span>
           </div>
 
-          {/* Skills grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {/* Skills row */}
+          <div className="flex overflow-x-auto gap-3 pb-4 scrollbar-hide w-full max-w-full">
             {group.skills.map((skill, si) => (
               <SkillCard key={skill.name} skill={skill} index={si} />
             ))}

@@ -76,7 +76,7 @@ export default function ContactForm() {
   }
 
   const inputClass =
-    "w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all duration-200";
+    "w-full bg-[var(--surface-1)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-blue)] transition-all duration-[var(--transition-fast)]";
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">

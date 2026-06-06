@@ -1,55 +1,59 @@
 "use client";
 
 import { useRef, useMemo } from "react";
-import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 export default function Mountains() {
   const meshRef = useRef<THREE.Mesh>(null);
 
-  // Simple procedural terrain using noise
-  const { geometry, material } = useMemo(() => {
-    const geo = new THREE.PlaneGeometry(60, 40, 64, 64);
-    
-    // Displace vertices to create mountains
-    const pos = geo.attributes.position;
-    for (let i = 0; i < pos.count; i++) {
-      const x = pos.getX(i);
-      const y = pos.getY(i);
+  // Generate procedural mountain terrain
+  const geometry = useMemo(() => {
+    const geo = new THREE.PlaneGeometry(100, 40, 128, 64);
+    geo.rotateX(-Math.PI / 2);
+
+    const positions = geo.attributes.position;
+    for (let i = 0; i < positions.count; i++) {
+      const x = positions.getX(i);
+      const z = positions.getZ(i);
       
-      // Simple math-based height generation
-      let z = Math.sin(x * 0.2) * Math.cos(y * 0.2) * 2;
-      z += Math.sin(x * 0.5 + y * 0.3) * 1.5;
-      z += Math.sin(x * 0.05) * 4; // Main shape
+      // We want mountains primarily in the background (z < -10)
+      // and higher in the center (x between -20 and 20)
+      let height = 0;
       
-      // Keep edges lower
-      const distFromCenter = Math.sqrt(x*x + y*y);
-      z = Math.max(0, z - distFromCenter * 0.1);
+      if (z < -10) {
+        const depthFactor = Math.abs(z + 10) / 30; // 0 to 1
+        
+        // Base noise
+        const noise1 = Math.sin(x * 0.1) * Math.cos(z * 0.1) * 5;
+        const noise2 = Math.sin(x * 0.3) * Math.cos(z * 0.3) * 2;
+        
+        // Center peak grouping
+        const centerDist = Math.abs(x);
+        const centerPeak = Math.max(0, 15 - centerDist) * 1.2;
+        
+        height = (noise1 + noise2 + centerPeak) * depthFactor;
+      }
       
-      pos.setZ(i, z);
+      positions.setY(i, height > 0 ? height : 0);
     }
     
     geo.computeVertexNormals();
-
-    const mat = new THREE.MeshStandardMaterial({
-      color: "#1c2b3b",
-      roughness: 0.8,
-      metalness: 0.1,
-      flatShading: true,
-    });
-
-    return { geometry: geo, material: mat };
+    return geo;
   }, []);
 
   return (
-    <mesh
-      ref={meshRef}
-      geometry={geometry}
-      material={material}
-      position={[0, -2, -15]}
-      rotation={[-Math.PI / 2, 0, 0]}
+    <mesh 
+      ref={meshRef} 
+      geometry={geometry} 
+      position={[0, -2, -20]}
       receiveShadow
-      castShadow
-    />
+    >
+      <meshStandardMaterial 
+        color="#1a233a" 
+        roughness={0.8}
+        metalness={0.1}
+        flatShading
+      />
+    </mesh>
   );
 }

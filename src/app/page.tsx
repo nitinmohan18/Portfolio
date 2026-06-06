@@ -19,19 +19,15 @@ export default function Home() {
         
         <main className="flex-1 w-full">
           <Hero />
-          <div className="bg-dark-900/40 backdrop-blur-sm">
-            <About />
-            <Skills />
-            <Projects />
-            <Education />
-            <Certifications />
-            <Contact />
-          </div>
+          <About />
+          <Skills />
+          <Projects />
+          <Education />
+          <Certifications />
+          <Contact />
         </main>
 
-        <div className="bg-dark-900/60 backdrop-blur-md">
-          <Footer />
-        </div>
+        <Footer />
       </div>
     </>
   );

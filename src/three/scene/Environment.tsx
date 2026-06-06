@@ -1,22 +1,34 @@
 "use client";
 
-import { Fog } from "three";
 import Mountains from "../terrain/Mountains";
+import Waterfall from "../terrain/Waterfall";
 import Lake from "../water/Lake";
 import Stars from "../sky/Stars";
-import DataParticles from "../ai/DataParticles";
+import Aurora from "../sky/Aurora";
+import Mist from "../sky/Mist";
+import Cabin from "../effects/Cabin";
+import Fireflies from "../effects/Fireflies";
+import Forest from "../wildlife/Forest";
+import Birds from "../wildlife/Birds";
 import Lighting from "./Lighting";
 
 export default function Environment() {
   return (
     <>
-      <fog attach="fog" args={["#030712", 10, 40]} />
+      {/* Dark blue cinematic night fog */}
+      <fog attach="fog" args={["#050a18", 10, 60]} />
       
       <Lighting />
       <Stars />
+      <Aurora />
       <Mountains />
+      <Waterfall />
       <Lake />
-      <DataParticles />
+      <Forest />
+      <Cabin />
+      <Fireflies />
+      <Mist />
+      <Birds />
     </>
   );
 }

@@ -1,33 +1,42 @@
 "use client";
 
 import { useRef } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
+import { PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
-import { useMouseParallax } from "@/hooks/useMouseParallax";
 
 export default function CameraController() {
-  const { camera } = useThree();
-  const mouse = useMouseParallax(0.5);
-  
-  // Initial camera position
-  const targetPos = useRef(new THREE.Vector3(0, 1.5, 5));
+  const cameraGroupRef = useRef<THREE.Group>(null);
+  const targetRotation = useRef({ x: 0, y: 0 });
 
-  useFrame(() => {
-    // Subtle float
-    const time = Date.now() * 0.001;
-    const floatY = Math.sin(time * 0.5) * 0.1;
-    
-    // Mouse parallax target
-    const targetX = mouse.normalizedX * 1.5;
-    const targetY = 1.5 + floatY + mouse.normalizedY * -0.5; // Invert Y
-    
-    // Smooth damp
-    camera.position.x += (targetX - camera.position.x) * 0.05;
-    camera.position.y += (targetY - camera.position.y) * 0.05;
-    
-    // Always look at center/horizon slightly above
-    camera.lookAt(0, 1.5, 0);
+  useFrame((state) => {
+    if (!cameraGroupRef.current) return;
+
+    // Mouse parallax
+    const { x, y } = state.pointer;
+    targetRotation.current.x = (y * Math.PI) / 40;
+    targetRotation.current.y = -(x * Math.PI) / 40;
+
+    // Smooth lerp
+    cameraGroupRef.current.rotation.x = THREE.MathUtils.lerp(
+      cameraGroupRef.current.rotation.x,
+      targetRotation.current.x,
+      0.05
+    );
+    cameraGroupRef.current.rotation.y = THREE.MathUtils.lerp(
+      cameraGroupRef.current.rotation.y,
+      targetRotation.current.y,
+      0.05
+    );
+
+    // Auto cinematic drift
+    state.camera.position.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.5;
+    state.camera.position.y = 1.5 + Math.cos(state.clock.elapsedTime * 0.1) * 0.2;
   });
 
-  return null;
+  return (
+    <group ref={cameraGroupRef}>
+      <PerspectiveCamera makeDefault position={[0, 1.5, 8]} fov={50} near={0.1} far={1000} />
+    </group>
+  );
 }

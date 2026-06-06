@@ -1,32 +1,40 @@
 "use client";
 
+import { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+
 export default function Lighting() {
   return (
     <>
-      <ambientLight intensity={0.4} color="#a0b5d9" />
+      <ambientLight intensity={0.1} color="#4b6b9e" />
       
-      {/* Main directional light (moon/cool light) */}
+      {/* Moon Light */}
       <directionalLight
-        position={[10, 20, -10]}
-        intensity={1.2}
-        color="#b0c4de"
+        position={[-10, 20, -20]}
+        intensity={0.6}
+        color="#8aaedc"
         castShadow
-        shadow-mapSize={[1024, 1024]}
       />
       
-      {/* Accent light for the focal point */}
+      {/* Cabin Warm Glow */}
+      <pointLight
+        position={[8, 1, 5]}
+        intensity={1.5}
+        color="#ff9900"
+        distance={20}
+        decay={2}
+      />
+      
+      {/* Subtle Waterfall rim light */}
       <spotLight
-        position={[-5, 10, 5]}
-        intensity={2}
-        color="#6C63FF"
-        distance={30}
+        position={[15, 15, -10]}
         angle={0.5}
         penumbra={1}
-      />
-      
-      {/* Soft fill light */}
-      <hemisphereLight
-        args={["#030712", "#1a3a5c", 0.6]}
+        intensity={1.2}
+        color="#a2c2e6"
+        distance={40}
+        decay={2}
       />
     </>
   );
