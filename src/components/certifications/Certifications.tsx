@@ -27,30 +27,31 @@ export default function Certifications() {
         ) : (
           /* Empty state */
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-col items-center justify-center gap-6 py-20"
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col items-center justify-center py-[80px]"
           >
             <div className="relative">
-              <div className="w-20 h-20 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
-                <Award size={32} className="text-primary/60" />
-              </div>
-              <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-dark-800 border border-white/10 flex items-center justify-center">
-                <Plus size={12} className="text-slate-400" />
+              <div 
+                className="absolute inset-0 rounded-full border-[2px] border-[#60a5fa]"
+                style={{ animation: "pulse-ring 2s ease-out infinite" }}
+              />
+              <div className="w-[80px] h-[80px] rounded-full bg-[rgba(96,165,250,0.08)] border-[2px] border-[rgba(96,165,250,0.15)] flex items-center justify-center relative z-10">
+                <Award size={40} className="text-[rgba(96,165,250,0.5)]" />
               </div>
             </div>
 
-            <div className="flex flex-col items-center gap-2 text-center max-w-sm">
-              <h3 className="font-display font-semibold text-white">
+            <div className="flex flex-col items-center mt-[20px] text-center max-w-[400px]">
+              <h3 className="font-display font-[700] text-[20px] text-white">
                 Certifications Coming Soon
               </h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-[15px] text-[rgba(255,255,255,0.5)] leading-[1.7] mt-2">
                 Currently pursuing professional certifications in AI/ML and cloud technologies.
                 This section will be updated as credentials are earned.
               </p>
             </div>
-
           </motion.div>
         )}
       </div>

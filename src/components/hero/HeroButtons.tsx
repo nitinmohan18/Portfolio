@@ -35,44 +35,47 @@ export default function HeroButtons() {
       transition={{ delay: 1.0, duration: 0.7 }}
     >
       {/* CTA buttons */}
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-4">
         <MagneticButton>
-          <GlowButton
-            size="lg"
-            onClick={() =>
-              document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
-            }
-            glow
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+            className="flex items-center gap-2 bg-gradient-to-br from-[#60a5fa] to-[#a78bfa] text-white border-none px-[28px] py-[14px] rounded-[50px] font-[600] text-[15px] cursor-pointer"
           >
             View My Work
-            <ArrowRight size={16} />
-          </GlowButton>
+            <ArrowRight size={18} />
+          </motion.button>
         </MagneticButton>
 
         <MagneticButton>
-          <GlowButton
-            size="lg"
-            variant="outline"
-            onClick={() =>
-              document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
-            }
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+            className="flex items-center gap-2 bg-transparent border border-[rgba(255,255,255,0.25)] text-white px-[28px] py-[14px] rounded-[50px] font-[600] text-[15px] cursor-pointer"
           >
             Contact Me
-            <Mail size={16} />
-          </GlowButton>
+            <Mail size={18} />
+          </motion.button>
         </MagneticButton>
 
         {profile.resumeUrl && (
           <MagneticButton>
-            <GlowButton href={profile.resumeUrl} size="lg" variant="ghost">
-              Resume <Download size={16} />
-            </GlowButton>
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              href={profile.resumeUrl}
+              className="flex items-center gap-2 bg-transparent text-white px-[20px] py-[14px] rounded-[50px] font-[600] text-[15px] cursor-pointer"
+            >
+              Resume <Download size={18} />
+            </motion.a>
           </MagneticButton>
         )}
       </div>
 
       {/* Social links */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         {socials.map((social, i) => (
           <motion.div
             key={social.platform}
@@ -86,7 +89,7 @@ export default function HeroButtons() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="w-10 h-10 flex items-center justify-center rounded-xl glass text-slate-400 hover:text-white hover:border-primary/30 transition-all duration-300"
+                className="w-[44px] h-[44px] flex items-center justify-center rounded-full bg-[rgba(255,255,255,0.07)] border border-[rgba(255,255,255,0.1)] text-white hover:bg-[rgba(255,255,255,0.15)] transition-colors duration-200"
               >
                 {socialIcons[social.platform] ?? null}
               </a>

@@ -46,7 +46,7 @@ export default function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           scrolled
-            ? "glass border-b border-white/[0.06] py-3"
+            ? "bg-[rgba(5,10,20,0.6)] backdrop-blur-[20px] border-b border-[rgba(255,255,255,0.06)] py-3"
             : "bg-transparent py-5"
         )}
       >
@@ -75,10 +75,10 @@ export default function Navbar() {
                 key={item.id}
                 onClick={() => handleNav(item.href)}
                 className={cn(
-                  "px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200",
+                  "px-[16px] py-[8px] text-[14px] rounded-[8px] transition-all duration-200",
                   activeSection === item.id
-                    ? "text-white bg-primary/10"
-                    : "text-slate-400 hover:text-white hover:bg-white/5"
+                    ? "text-white font-[600] bg-[rgba(255,255,255,0.05)]"
+                    : "text-[rgba(255,255,255,0.6)] font-[500] hover:text-[rgba(255,255,255,0.9)] hover:bg-[rgba(255,255,255,0.03)]"
                 )}
               >
                 {item.label}
@@ -118,10 +118,17 @@ export default function Navbar() {
             </MagneticButton>
 
             {profile.resumeUrl && (
-              <GlowButton href={profile.resumeUrl} size="sm" className="hidden sm:flex gap-1.5">
-                <Download size={14} />
-                Resume
-              </GlowButton>
+              <MagneticButton>
+                <motion.a
+                  whileHover={{ opacity: 0.9, scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                  href={profile.resumeUrl}
+                  className="hidden sm:flex items-center gap-1.5 bg-gradient-to-br from-[#60a5fa] to-[#a78bfa] text-white px-[18px] py-[8px] rounded-[8px] text-[13px] font-[600] border-none"
+                >
+                  <Download size={14} />
+                  Resume
+                </motion.a>
+              </MagneticButton>
             )}
             {!profile.resumeUrl && (
               <div className="hidden sm:flex px-4 py-2 text-xs font-medium text-slate-500 border border-white/10 rounded-xl">
@@ -161,10 +168,10 @@ export default function Navbar() {
                   transition={{ delay: i * 0.05 }}
                   onClick={() => handleNav(item.href)}
                   className={cn(
-                    "text-left px-4 py-3 text-sm font-medium rounded-xl transition-all",
+                    "text-left px-4 py-3 text-[14px] rounded-[12px] transition-all",
                     activeSection === item.id
-                      ? "text-white bg-primary/10 border border-primary/20"
-                      : "text-slate-400 hover:text-white hover:bg-white/5"
+                      ? "text-white font-[600] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)]"
+                      : "text-[rgba(255,255,255,0.6)] font-[500] hover:text-[rgba(255,255,255,0.9)] hover:bg-[rgba(255,255,255,0.03)]"
                   )}
                 >
                   <span className="text-primary/60 mr-2 font-mono text-xs">

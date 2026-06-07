@@ -51,7 +51,7 @@ export default function About() {
             align="left"
           />
 
-          <div className="flex flex-col gap-5 text-slate-400 leading-relaxed">
+          <div className="flex flex-col gap-5 text-[rgba(255,255,255,0.72)] text-[16px] leading-[1.8]">
             <FadeIn delay={0.15}>
               <p>
                 I&apos;m an AI & ML engineering student at Sagar Institute of Research
@@ -83,8 +83,8 @@ export default function About() {
                 { value: "AI/ML", label: "Primary Focus" },
               ].map((s) => (
                 <div key={s.label} className="flex flex-col">
-                  <span className="font-display font-bold text-2xl gradient-text">{s.value}</span>
-                  <span className="text-xs text-slate-500 mt-0.5">{s.label}</span>
+                  <span className="font-display font-[800] text-[32px] gradient-text leading-none mb-1">{s.value}</span>
+                  <span className="text-[12px] text-[rgba(255,255,255,0.5)] uppercase tracking-[0.1em]">{s.label}</span>
                 </div>
               ))}
             </div>

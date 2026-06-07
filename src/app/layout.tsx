@@ -36,7 +36,7 @@ export default function RootLayout({
         <meta name="color-scheme" content="dark" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body className="bg-transparent text-slate-100 antialiased overflow-x-hidden noise-overlay">
+      <body className="bg-transparent text-slate-100 antialiased overflow-x-hidden">
         {children}
       </body>
     </html>

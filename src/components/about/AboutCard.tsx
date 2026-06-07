@@ -16,31 +16,22 @@ export default function AboutCard({
   title,
   description,
   delay = 0,
-  accent = "primary",
 }: AboutCardProps) {
-  const accentMap: Record<string, string> = {
-    primary: "text-primary bg-primary/10 border-primary/20",
-    violet: "text-violet-400 bg-violet-500/10 border-violet-500/20",
-    accent: "text-sky-400 bg-sky-500/10 border-sky-500/20",
-    emerald: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
-  };
-  const accentClass = accentMap[accent] ?? accentMap.primary;
-
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.6, delay, ease: [0.4, 0, 0.2, 1] }}
-      whileHover={{ y: -4 }}
-      className="glass-card p-6 flex flex-col gap-4 group cursor-default"
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6, delay, ease: "easeOut" }}
+      whileHover={{ y: -4, borderColor: "rgba(96,165,250,0.3)" }}
+      className="premium-card p-[24px] flex flex-col group cursor-default"
     >
-      <div className={cn("w-11 h-11 rounded-xl border flex items-center justify-center", accentClass)}>
+      <div className="w-[48px] h-[48px] rounded-full bg-[rgba(96,165,250,0.12)] border border-[rgba(96,165,250,0.2)] flex items-center justify-center text-[#60a5fa]">
         {icon}
       </div>
       <div>
-        <h3 className="font-display font-semibold text-white mb-1.5">{title}</h3>
-        <p className="text-slate-400 text-sm leading-relaxed">{description}</p>
+        <h3 className="font-display font-[700] text-[15px] text-white mt-[14px]">{title}</h3>
+        <p className="text-[rgba(255,255,255,0.55)] text-[13px] leading-[1.6] mt-[6px]">{description}</p>
       </div>
     </motion.div>
   );

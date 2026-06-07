@@ -27,7 +27,7 @@ export default function SocialLinks() {
       <p className="text-xs font-semibold tracking-widest uppercase text-slate-500">
         Find me on
       </p>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col">
         {profile.socials.map((social, i) => (
           <motion.a
             key={social.platform}
@@ -37,14 +37,14 @@ export default function SocialLinks() {
             initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            whileHover={{ x: 4 }}
-            className="flex items-center gap-3 text-slate-400 hover:text-white transition-colors group"
+            transition={{ delay: i * 0.08, duration: 0.2 }}
+            whileHover={{ x: 4, color: "white" }}
+            className="flex items-center gap-[12px] py-[12px] border-b border-[rgba(255,255,255,0.05)] text-[rgba(255,255,255,0.75)] hover:text-white transition-all duration-200"
           >
-            <div className="w-9 h-9 rounded-xl glass flex items-center justify-center group-hover:border-primary/30 group-hover:text-primary transition-all">
+            <div className="text-[rgba(255,255,255,0.5)]">
               {socialIcons[social.platform] ?? null}
             </div>
-            <span className="text-sm font-medium">{social.label}</span>
+            <span className="text-[14px]">{social.label}</span>
           </motion.a>
         ))}
       </div>

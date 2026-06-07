@@ -19,17 +19,17 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 const statColors = [
-  "from-primary/20 to-primary/5 border-primary/20",
-  "from-violet-500/20 to-violet-500/5 border-violet-500/20",
-  "from-emerald-500/20 to-emerald-500/5 border-emerald-500/20",
-  "from-amber-500/20 to-amber-500/5 border-amber-500/20",
+  "text-[#60a5fa]",
+  "text-[#a78bfa]",
+  "text-[#34d399]",
+  "text-[#fbbf24]",
 ];
 
 const iconColors = [
-  "text-primary bg-primary/10",
-  "text-violet-400 bg-violet-500/10",
-  "text-emerald-400 bg-emerald-500/10",
-  "text-amber-400 bg-amber-500/10",
+  "bg-[rgba(96,165,250,0.1)] text-[#60a5fa]",
+  "bg-[rgba(167,139,250,0.1)] text-[#a78bfa]",
+  "bg-[rgba(52,211,153,0.1)] text-[#34d399]",
+  "bg-[rgba(251,191,36,0.1)] text-[#fbbf24]",
 ];
 
 const container = {
@@ -52,8 +52,8 @@ export default function HeroContent() {
     >
       {/* Eyebrow */}
       <motion.div variants={item} className="flex items-center gap-2">
-        <span className="h-px w-10 bg-primary/60" />
-        <span className="text-xs font-semibold tracking-[0.25em] uppercase text-primary/80">
+        <span className="h-px w-10 bg-[rgba(255,255,255,0.45)]" />
+        <span className="premium-heading-label">
           Hey, I&apos;m —
         </span>
       </motion.div>
@@ -61,20 +61,20 @@ export default function HeroContent() {
       {/* Name */}
       <motion.h1
         variants={item}
-        className="font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.0] tracking-tight text-white"
-        style={{ textShadow: "0 0 80px rgba(108,99,255,0.15)" }}
+        className="font-display font-[800] text-white tracking-tight"
+        style={{ fontSize: "clamp(36px, 5vw, 56px)" }}
       >
         {profile.firstName}{" "}
         <span className="gradient-text">{profile.lastName}</span>
       </motion.h1>
 
       {/* Role typing */}
-      <motion.div variants={item} className="text-xl sm:text-2xl text-slate-300 font-display min-h-[2rem]">
+      <motion.div variants={item} className="font-display font-[600] text-[rgba(255,255,255,0.85)] min-h-[2rem]" style={{ fontSize: "clamp(18px, 2.5vw, 26px)" }}>
         <TypingText />
       </motion.div>
 
       {/* Bio */}
-      <motion.p variants={item} className="text-slate-400 text-base sm:text-lg leading-relaxed max-w-xl">
+      <motion.p variants={item} className="text-[rgba(255,255,255,0.65)] text-[16px] leading-[1.75] max-w-[520px]">
         {profile.bio}
       </motion.p>
 
@@ -86,22 +86,22 @@ export default function HeroContent() {
       {/* Stats grid */}
       <motion.div
         variants={item}
-        className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2"
+        className="grid grid-cols-2 sm:grid-cols-4 gap-[12px] pt-2"
       >
         {profile.stats.map((stat, i) => (
           <motion.div
             key={stat.label}
-            whileHover={{ y: -4, scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className={`flex flex-col gap-3 p-4 rounded-xl border bg-gradient-to-br backdrop-blur-sm ${statColors[i]}`}
+            whileHover={{ y: -3, borderColor: "rgba(255,255,255,0.2)" }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="flex flex-col p-[20px] rounded-[14px] bg-[rgba(5,10,20,0.7)] border border-[rgba(255,255,255,0.1)] backdrop-blur-[16px]"
           >
-            <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${iconColors[i]}`}>
-              {iconMap[stat.icon] ?? <Code2 size={18} />}
+            <div className={`w-[36px] h-[36px] rounded-lg flex items-center justify-center mb-3 ${iconColors[i]}`}>
+              {iconMap[stat.icon] ?? <Code2 size={20} />}
             </div>
             <div>
-              <div className="font-display font-bold text-xl text-white">{stat.value}</div>
-              <div className="text-xs font-semibold text-slate-300">{stat.label}</div>
-              <div className="text-[10px] text-slate-500 mt-0.5 leading-tight">{stat.description}</div>
+              <div className="font-display font-[800] text-[28px] text-white leading-none mb-1">{stat.value}</div>
+              <div className="text-[13px] font-[600] text-[rgba(255,255,255,0.8)]">{stat.label}</div>
+              <div className="text-[11px] text-[rgba(255,255,255,0.45)] mt-[4px] leading-tight">{stat.description}</div>
             </div>
           </motion.div>
         ))}

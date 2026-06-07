@@ -76,13 +76,15 @@ export default function ContactForm() {
   }
 
   const inputClass =
-    "w-full bg-[var(--surface-1)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-blue)] transition-all duration-[var(--transition-fast)]";
+    "w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.12)] rounded-[10px] px-[16px] py-[14px] text-[14px] text-white placeholder-[rgba(255,255,255,0.3)] focus:outline-none focus:border-[rgba(96,165,250,0.5)] focus:bg-[rgba(255,255,255,0.07)] transition-colors duration-200";
+
+  const labelClass = "text-[12px] text-[rgba(255,255,255,0.5)] font-[500] mb-[6px] block";
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div className="grid sm:grid-cols-2 gap-4">
-        <div className="flex flex-col gap-1.5">
-          <label className="text-xs text-slate-400 font-medium" htmlFor="contact-name">
+        <div className="flex flex-col">
+          <label className={labelClass} htmlFor="contact-name">
             Your Name
           </label>
           <input
@@ -97,8 +99,8 @@ export default function ContactForm() {
           {errors.name && <p className="text-xs text-red-400">{errors.name}</p>}
         </div>
 
-        <div className="flex flex-col gap-1.5">
-          <label className="text-xs text-slate-400 font-medium" htmlFor="contact-email">
+        <div className="flex flex-col">
+          <label className={labelClass} htmlFor="contact-email">
             Your Email
           </label>
           <input
@@ -114,8 +116,8 @@ export default function ContactForm() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-1.5">
-        <label className="text-xs text-slate-400 font-medium" htmlFor="contact-subject">
+      <div className="flex flex-col">
+        <label className={labelClass} htmlFor="contact-subject">
           Subject
         </label>
         <input
@@ -130,8 +132,8 @@ export default function ContactForm() {
         {errors.subject && <p className="text-xs text-red-400">{errors.subject}</p>}
       </div>
 
-      <div className="flex flex-col gap-1.5">
-        <label className="text-xs text-slate-400 font-medium" htmlFor="contact-message">
+      <div className="flex flex-col">
+        <label className={labelClass} htmlFor="contact-message">
           Message
         </label>
         <textarea
@@ -139,7 +141,7 @@ export default function ContactForm() {
           placeholder="Tell me about your project or opportunity…"
           value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })}
-          className={`${inputClass} resize-none min-h-[150px]`}
+          className={`${inputClass} min-h-[120px] resize-y`}
           disabled={state === "loading"}
         />
         {errors.message && <p className="text-xs text-red-400">{errors.message}</p>}
@@ -168,17 +170,19 @@ export default function ContactForm() {
         )}
       </AnimatePresence>
 
-      <button
+      <motion.button
         type="submit"
         disabled={state === "loading"}
-        className="w-full py-3.5 mt-2 rounded-xl bg-gradient-to-r from-[var(--accent-blue)] to-[var(--accent-purple)] text-white font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
+        whileHover={{ opacity: 0.9 }}
+        whileTap={{ scale: 0.98 }}
+        className="w-full mt-4 p-[16px] rounded-[10px] bg-gradient-to-br from-[#60a5fa] to-[#a78bfa] text-white font-[600] text-[15px] border-none flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
       >
         {state === "loading" ? (
           <><Loader2 size={18} className="animate-spin" /> Sending…</>
         ) : (
           <><Send size={18} /> Send Message</>
         )}
-      </button>
+      </motion.button>
     </form>
   );
 }

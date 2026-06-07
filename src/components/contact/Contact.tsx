@@ -28,34 +28,32 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="flex flex-col gap-8"
           >
-            <div className="flex flex-col gap-5">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 mt-0.5">
-                  <Mail size={18} />
+            <div className="flex flex-col gap-6">
+              <div className="flex items-center gap-[14px]">
+                <div className="w-[44px] h-[44px] rounded-full bg-[rgba(96,165,250,0.1)] border border-[rgba(96,165,250,0.2)] flex items-center justify-center text-[#60a5fa] shrink-0">
+                  <Mail size={20} />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 mb-1">Email</p>
+                  <p className="text-[11px] text-[rgba(255,255,255,0.4)] uppercase tracking-[0.1em] mb-1">Email</p>
                   <a
                     href={`mailto:${profile.email}`}
-                    className="text-white hover:text-primary transition-colors font-medium text-sm"
+                    className="text-white text-[15px] font-[600] hover:text-[#60a5fa] transition-colors"
                   >
                     {profile.email}
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 mt-0.5">
-                  <MapPin size={18} />
+              <div className="flex items-center gap-[14px]">
+                <div className="w-[44px] h-[44px] rounded-full bg-[rgba(96,165,250,0.1)] border border-[rgba(96,165,250,0.2)] flex items-center justify-center text-[#60a5fa] shrink-0">
+                  <MapPin size={20} />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 mb-1">Location</p>
-                  <p className="text-white font-medium text-sm">{profile.location}</p>
+                  <p className="text-[11px] text-[rgba(255,255,255,0.4)] uppercase tracking-[0.1em] mb-1">Location</p>
+                  <p className="text-white text-[15px] font-[600]">{profile.location}</p>
                 </div>
               </div>
             </div>
-
-            <div className="h-px bg-white/[0.06]" />
 
             <SocialLinks />
 
@@ -75,9 +73,9 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="glass-card p-8"
+            className="p-[32px] rounded-[16px] border border-[rgba(255,255,255,0.08)] bg-[rgba(5,10,20,0.75)] backdrop-blur-[20px]"
           >
-            <h3 className="font-display font-semibold text-white mb-6 text-lg">
+            <h3 className="font-display font-[600] text-white mb-6 text-lg">
               Send a Message
             </h3>
             <ContactForm />
