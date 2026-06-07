@@ -7,12 +7,12 @@ import Projects from "@/components/projects/Projects";
 import Education from "@/components/education/Education";
 import Certifications from "@/components/certifications/Certifications";
 import Contact from "@/components/contact/Contact";
-import Experience from "@/three/scene/Experience";
+import HeroBackground from "@/components/ui/HeroBackground";
 
 export default function Home() {
   return (
     <>
-      <Experience />
+      <HeroBackground />
       
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
