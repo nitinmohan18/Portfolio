@@ -33,51 +33,68 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
       style={{ perspective: "1400px", perspectiveOrigin: "50% 30%" }}
     >
       {/* Eyebrow */}
-      <div className="hey-label">
-        <motion.span 
-          className="hey-line"
-          initial={{ opacity: 0, x: -10 }}
-          animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0 }}
-          style={{ willChange: "transform, opacity" }}
-        />
-        <motion.span 
-          initial={{ opacity: 0 }}
-          animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-          style={{ willChange: "opacity" }}
-        >
-          Hey, I&apos;m
-        </motion.span>
-        <motion.span 
-          className="hey-line-right"
-          initial={{ opacity: 0, x: 10 }}
-          animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 10 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
-          style={{ willChange: "transform, opacity" }}
-        />
-      </div>
+      <motion.div 
+        className="hey-label"
+        initial={{ opacity: 0 }}
+        animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0 }}
+        style={{ willChange: "opacity" }}
+      >
+        <span className="hey-line-left" />
+        <span className="hey-diamond">✦</span>
+        <span className="hey-text">HEY, I&apos;M</span>
+        <span className="hey-diamond">✦</span>
+        <span className="hey-line-right" />
+      </motion.div>
 
       <style>{`
         .hey-label {
           display: flex;
           align-items: center;
-          gap: 10px;
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 4px;
-          text-transform: uppercase;
-          color: rgba(100, 255, 218, 0.45);
+          gap: 8px;
+          margin-bottom: 16px;
         }
-        .hey-line {
-          width: 28px;
+        .hey-text {
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 5px;
+          text-transform: uppercase;
+          color: rgba(100, 255, 218, 0.5);
+          font-family: monospace;
+        }
+        .hey-diamond {
+          font-size: 10px;
+          color: rgba(100, 255, 218, 0.35);
+          animation: diamondPulse 3s ease-in-out infinite;
+        }
+        .hey-diamond:last-of-type {
+          animation-delay: 1.5s;
+        }
+        @keyframes diamondPulse {
+          0%, 100% { opacity: 0.25; transform: scale(0.8); }
+          50%       { opacity: 0.8;  transform: scale(1.2); }
+        }
+        .hey-line-left {
+          width: 40px;
           height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.4));
+          background: linear-gradient(90deg, transparent, rgba(100,255,218,0.35));
         }
         .hey-line-right {
-          width: 28px;
+          width: 40px;
           height: 1px;
-          background: linear-gradient(90deg, rgba(100, 255, 218, 0.4), transparent);
+          background: linear-gradient(90deg, rgba(100,255,218,0.35), transparent);
+        }
+        .bio-text {
+          font-size: 15px;
+          line-height: 1.85;
+          color: rgba(148, 163, 184, 0.85);
+          max-width: 460px;
+          font-weight: 400;
+          letter-spacing: 0.2px;
+        }
+        .bio-highlight {
+          color: rgba(100, 255, 218, 0.75);
+          font-weight: 500;
         }
         @keyframes floatWhite {
           0%, 100% { transform: translateY(0); }
@@ -145,30 +162,16 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
 
       {/* Bio */}
       <motion.div 
-        className="text-[rgba(148,163,184,0.9)] text-[16px] leading-[1.75] max-w-[500px] font-[400]"
-        initial="hidden"
-        animate={isVisible ? "visible" : "hidden"}
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.06, delayChildren: 0.8 } }
-        }}
+        className="bio-text"
+        initial={{ opacity: 0, y: 8 }}
+        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.9 }}
+        style={{ willChange: "transform, opacity" }}
       >
-        {profile.bio.split(" ").map((word, i) => (
-          <motion.span
-            key={i}
-            variants={{
-              hidden: { opacity: 0, y: 10 },
-              visible: { 
-                opacity: 1, 
-                y: 0,
-                transition: { duration: 0.5, ease: "easeOut" }
-              }
-            }}
-            style={{ willChange: "transform, opacity", display: "inline-block", marginRight: "0.25em" }}
-          >
-            {word}
-          </motion.span>
-        ))}
+        Building <span className="bio-highlight">scalable</span> web applications,{" "}
+        <span className="bio-highlight">intelligent systems</span>, and impactful digital experiences through{" "}
+        <span className="bio-highlight">AI</span>, innovation, and{" "}
+        <span className="bio-highlight">open-source</span> contributions.
       </motion.div>
 
       {/* CTA Buttons + Socials */}

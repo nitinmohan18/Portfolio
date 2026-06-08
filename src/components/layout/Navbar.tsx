@@ -122,6 +122,138 @@ export default function Navbar() {
           opacity: 1;
           transform: translateY(0);
         }
+        /* Container */
+        .side-nav {
+          position: fixed;
+          right: 28px;
+          top: 50%;
+          transform: translateY(-50%);
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 22px;
+          z-index: 100;
+        }
+
+        /* Vertical line connecting all dots */
+        .side-nav-track {
+          position: absolute;
+          right: 5px;
+          top: 10px;
+          bottom: 10px;
+          width: 1px;
+          background: linear-gradient(
+            180deg,
+            transparent 0%,
+            rgba(100,255,218,0.2) 20%,
+            rgba(100,255,218,0.2) 80%,
+            transparent 100%
+          );
+          z-index: -1;
+        }
+
+        /* Each row */
+        .side-nav-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          cursor: pointer;
+          position: relative;
+        }
+
+        /* Section name label */
+        .side-nav-label {
+          font-size: 9px;
+          font-weight: 600;
+          letter-spacing: 2.5px;
+          text-transform: uppercase;
+          color: rgba(100,255,218,0.0);
+          transform: translateX(6px);
+          transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+          pointer-events: none;
+          font-family: monospace;
+        }
+
+        /* Label appears on hover OR active */
+        .side-nav-item:hover .side-nav-label,
+        .side-nav-item.active .side-nav-label {
+          color: rgba(100,255,218,0.7);
+          transform: translateX(0px);
+        }
+
+        /* Dot wrapper */
+        .side-nav-dot {
+          position: relative;
+          width: 12px;
+          height: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* Outer ring — hidden by default */
+        .dot-ring {
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          border: 1px solid rgba(100,255,218,0.0);
+          transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        /* Inner dot */
+        .dot-core {
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background: rgba(100,255,218,0.25);
+          transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        /* HOVER STATE */
+        .side-nav-item:hover .dot-core {
+          background: rgba(100,255,218,0.6);
+          transform: scale(1.2);
+        }
+
+        .side-nav-item:hover .dot-ring {
+          border-color: rgba(100,255,218,0.4);
+          transform: scale(1.3);
+        }
+
+        /* ACTIVE STATE */
+        .side-nav-item.active .dot-core {
+          width: 7px;
+          height: 7px;
+          background: #64FFDA;
+          box-shadow: 0 0 8px rgba(100,255,218,0.8),
+                      0 0 16px rgba(100,255,218,0.4);
+        }
+
+        .side-nav-item.active .dot-ring {
+          width: 14px;
+          height: 14px;
+          border-color: rgba(100,255,218,0.5);
+          animation: ringPulse 2s ease-in-out infinite;
+        }
+
+        /* Active ring pulse */
+        @keyframes ringPulse {
+          0%, 100% {
+            transform: scale(1);
+            opacity: 0.5;
+          }
+          50% {
+            transform: scale(1.5);
+            opacity: 0;
+          }
+        }
+
+        /* Active section label stays permanently visible */
+        .side-nav-item.active .side-nav-label {
+          color: rgba(100,255,218,0.9);
+          transform: translateX(0);
+        }
       `}</style>
       {/* Scroll progress bar */}
       <motion.div
@@ -315,95 +447,23 @@ export default function Navbar() {
       </AnimatePresence>
 
       {/* Right side vertical nav indicator (desktop & tablet) */}
-      <div className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-6">
-        {/* Full track line */}
-        <div className="absolute right-[5px] top-4 bottom-4 w-[2px] border-r-2 border-dashed border-[rgba(96,165,250,0.12)] z-[-1]" />
-        
-        {NAV_ITEMS.map((item, i) => {
-          const isActive = activeSection === item.id;
-          return (
-            <SideNavItem 
-              key={item.id} 
-              item={item} 
-              i={i} 
-              isActive={isActive} 
-              onClick={() => handleNav(item.href)} 
-            />
-          );
-        })}
+      <div className="side-nav hidden md:flex">
+        <div className="side-nav-track" />
+        {sectionIds.map((section) => (
+          <div
+            key={section}
+            className={`side-nav-item ${activeSection === section ? 'active' : ''}`}
+            onClick={() => handleNav(`#${section}`)}
+          >
+            <span className="side-nav-label">{section}</span>
+            <div className="side-nav-dot">
+              <div className="dot-ring" />
+              <div className="dot-core" />
+            </div>
+          </div>
+        ))}
       </div>
     </>
-  );
-}
-
-function SideNavItem({ item, i, isActive, onClick }: { item: any; i: number; isActive: boolean; onClick: () => void }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [clicked, setClicked] = useState(false);
-
-  const handleClick = () => {
-    setClicked(true);
-    onClick();
-    setTimeout(() => setClicked(false), 600);
-  };
-
-  return (
-    <motion.button
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 2.2 + i * 0.1, duration: 0.5, ease: "easeOut" }}
-      style={{ willChange: "transform, opacity" }}
-      onClick={handleClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="flex items-center justify-end gap-4 group relative h-[12px] w-[12px]"
-      aria-label={`Navigate to ${item.label}`}
-    >
-      <AnimatePresence mode="wait">
-        {(isActive || isHovered) && (
-          <motion.div
-            key="text"
-            initial={{ opacity: 0, x: 8 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 8 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            style={{ willChange: "transform, opacity" }}
-            className="absolute right-[24px] flex items-center gap-2 whitespace-nowrap bg-[rgba(10,12,20,0.8)] px-3 py-1.5 rounded-lg border border-[rgba(96,165,250,0.2)] backdrop-blur-md"
-          >
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-white">
-              {item.label}
-            </span>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <div className="relative flex items-center justify-center w-[12px] h-[12px] shrink-0">
-        <motion.div
-          animate={{
-            width: isActive ? 12 : 8,
-            height: isActive ? 12 : 8,
-            backgroundColor: isActive ? "#60a5fa" : "rgba(96,165,250,0.2)",
-            borderColor: "rgba(96,165,250,0.4)",
-            boxShadow: isActive ? "0 0 10px rgba(96,165,250,0.6)" : "none",
-          }}
-          transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
-          style={{ willChange: "transform, opacity" }}
-          className="rounded-full border absolute"
-        />
-        
-        {/* Click pulse ring */}
-        <AnimatePresence>
-          {clicked && (
-            <motion.div
-              initial={{ scale: 1, opacity: 0.8 }}
-              animate={{ scale: 2.5, opacity: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="absolute rounded-full border-[2px] border-[#60a5fa] w-[12px] h-[12px]"
-            />
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.button>
   );
 }
 

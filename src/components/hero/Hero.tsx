@@ -29,6 +29,27 @@ export default function Hero({ isVisible = true }: HeroProps) {
         </div>
 
         {/* Scroll indicator */}
+        <style>{`
+          .scroll-text {
+            font-size: 9px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(100,255,218,0.35);
+            font-family: monospace;
+            animation: scrollTextPulse 2.5s ease-in-out infinite;
+          }
+          @keyframes scrollTextPulse {
+            0%, 100% { opacity: 0.3; }
+            50%       { opacity: 0.7; }
+          }
+          .scroll-mouse {
+            border-color: rgba(100,255,218,0.3);
+          }
+          .scroll-dot {
+            background: #64FFDA;
+            box-shadow: 0 0 6px rgba(100,255,218,0.6);
+          }
+        `}</style>
         <motion.div
           className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[5] flex flex-col items-center gap-2"
           initial={{ opacity: 0 }}
@@ -36,17 +57,12 @@ export default function Hero({ isVisible = true }: HeroProps) {
           transition={{ delay: 1.2, duration: 0.8 }}
           style={{ willChange: "transform, opacity" }}
         >
-          <motion.span 
-            className="text-[10px] uppercase text-[rgba(255,255,255,0.65)] font-mono"
-            animate={{ letterSpacing: ["0.25em", "0.35em", "0.25em"], opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            style={{ willChange: "opacity, letter-spacing" }}
-          >
+          <span className="scroll-text">
             Scroll Down
-          </motion.span>
-          <div className="w-5 h-8 border border-[rgba(255,255,255,0.18)] rounded-[50px] flex items-start justify-center p-1">
+          </span>
+          <div className="w-5 h-8 border rounded-[50px] flex items-start justify-center p-1 scroll-mouse">
             <motion.div
-              className="w-1 h-1.5 bg-[#60a5fa] rounded-full"
+              className="w-1 h-1.5 rounded-full scroll-dot"
               animate={{ y: [0, 6, 0] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
               style={{ willChange: "transform" }}
