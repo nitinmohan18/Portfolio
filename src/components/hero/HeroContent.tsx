@@ -34,7 +34,7 @@ const iconColors = [
 
 const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 2.6 } },
 };
 
 const item = {
