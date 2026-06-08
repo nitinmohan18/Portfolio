@@ -133,8 +133,8 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -100, filter: "blur(12px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ delay: 1.8, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        style={{ willChange: "transform", backdropFilter: "blur(24px) saturate(180%)" }}
-        className="fixed top-0 left-0 w-full z-[1000] bg-[rgba(8,10,18,0.8)] border-b border-[rgba(125,211,252,0.06)] py-3 transition-all duration-400"
+        style={{ willChange: "transform", backdropFilter: "none" }}
+        className="fixed top-0 left-0 w-full z-[1000] bg-transparent border-b-0 py-3 transition-all duration-400"
       >
         <div className="container-wide flex items-center justify-between">
           {/* Logo */}

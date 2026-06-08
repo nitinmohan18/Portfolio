@@ -33,21 +33,52 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
       style={{ perspective: "1400px", perspectiveOrigin: "50% 30%" }}
     >
       {/* Eyebrow */}
-      <motion.div 
-        initial={{ opacity: 0, y: 48, filter: "blur(12px)", scale: 0.94 }}
-        animate={isVisible ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 } : {}}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        style={{ willChange: "transform" }}
-        className="flex items-center gap-3"
-      >
-        <span className="h-[1px] w-10 bg-[rgba(100,255,218,0.25)]" />
-        <span className="text-[14px] font-mono tracking-widest text-[rgba(100,255,218,0.5)] uppercase font-[600]">
+      <div className="hey-label">
+        <motion.span 
+          className="hey-line"
+          initial={{ opacity: 0, x: -10 }}
+          animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0 }}
+          style={{ willChange: "transform, opacity" }}
+        />
+        <motion.span 
+          initial={{ opacity: 0 }}
+          animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+          style={{ willChange: "opacity" }}
+        >
           Hey, I&apos;m
-        </span>
-        <span className="h-[1px] w-10 bg-[rgba(100,255,218,0.25)]" />
-      </motion.div>
+        </motion.span>
+        <motion.span 
+          className="hey-line-right"
+          initial={{ opacity: 0, x: 10 }}
+          animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 10 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+          style={{ willChange: "transform, opacity" }}
+        />
+      </div>
 
       <style>{`
+        .hey-label {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 4px;
+          text-transform: uppercase;
+          color: rgba(100, 255, 218, 0.45);
+        }
+        .hey-line {
+          width: 28px;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.4));
+        }
+        .hey-line-right {
+          width: 28px;
+          height: 1px;
+          background: linear-gradient(90deg, rgba(100, 255, 218, 0.4), transparent);
+        }
         @keyframes floatWhite {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-3px); }
