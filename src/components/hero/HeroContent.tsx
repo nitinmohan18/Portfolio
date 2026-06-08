@@ -4,24 +4,43 @@ import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 import TypingText from "./TypingText";
 import HeroButtons from "./HeroButtons";
-import { Code2, Briefcase, Trophy, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { Code2, GitBranch, Target, Sparkles } from "lucide-react";
 
 interface HeroContentProps {
   isVisible?: boolean;
 }
 
-const iconMap: Record<string, React.ReactNode> = {
-  code: <Code2 size={20} />,
-  briefcase: <Briefcase size={20} />,
-  trophy: <Trophy size={20} />,
-  sparkles: <Sparkles size={20} />,
-};
-
-const iconColors = [
-  "bg-[rgba(96,165,250,0.1)] text-[#60a5fa]",
-  "bg-[rgba(167,139,250,0.1)] text-[#a78bfa]",
-  "bg-[rgba(52,211,153,0.1)] text-[#34d399]",
-  "bg-[rgba(251,191,36,0.1)] text-[#fbbf24]",
+const STAT_CARDS = [
+  {
+    icon: <Sparkles size={18} />,
+    iconColor: "#818cf8",
+    label: "CURRENTLY EXPLORING",
+    title: "Generative AI & LLMs",
+    subtitle: "RAG · Agents · Prompt Eng."
+  },
+  {
+    icon: <Code2 size={18} />,
+    iconColor: "#38bdf8",
+    label: "CORE STACK",
+    title: "Full-Stack · Python · React",
+    subtitle: "Node.js · TensorFlow · SQL"
+  },
+  {
+    icon: <GitBranch size={18} />,
+    iconColor: "#34d399",
+    label: "OPEN SOURCE",
+    title: "Active GitHub Contributor",
+    subtitle: "Building in Public"
+  },
+  {
+    icon: <Target size={18} />,
+    iconColor: "#f472b6",
+    label: "OPEN TO",
+    title: "Internships & Collabs",
+    subtitle: "AI/ML · Full-Stack Roles",
+    special: true
+  }
 ];
 
 export default function HeroContent({ isVisible = true }: HeroContentProps) {
@@ -122,6 +141,126 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           color: #64FFDA;
           margin-left: 0.3em;
         }
+        .stat-card-wrapper {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+          max-width: 780px;
+        }
+        @media (max-width: 768px) {
+          .stat-card-wrapper {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+          }
+        }
+        @media (max-width: 480px) {
+          .stat-card-wrapper {
+            gap: 8px;
+          }
+        }
+        .stat-card {
+          background: rgba(13, 16, 28, 0.85);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 16px;
+          padding: 20px 18px;
+          backdrop-filter: blur(12px);
+          position: relative;
+          overflow: hidden;
+          cursor: default;
+          transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        @media (max-width: 480px) {
+          .stat-card {
+            padding: 14px 12px;
+          }
+        }
+        .stat-card:hover {
+          transform: translateY(-6px) scale(1.02);
+          border-color: var(--hover-border);
+          box-shadow: 0 16px 40px rgba(0,0,0,0.3), 0 0 20px var(--hover-glow);
+        }
+        .stat-card-top-line {
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 2px;
+          border-radius: 2px 2px 0 0;
+          background: linear-gradient(90deg, var(--icon-color), transparent);
+          transform: scaleX(0.6);
+          transform-origin: left;
+          opacity: 0.8;
+          transition: 0.4s ease;
+        }
+        .stat-card:hover .stat-card-top-line {
+          transform: scaleX(1);
+          opacity: 1;
+        }
+        .stat-card-inner-glow {
+          position: absolute;
+          bottom: -20px; right: -20px;
+          width: 80px; height: 80px;
+          border-radius: 50%;
+          filter: blur(25px);
+          opacity: 0.06;
+          background: var(--icon-color);
+          pointer-events: none;
+        }
+        .stat-card-icon-box {
+          width: 36px; height: 36px;
+          border-radius: 10px;
+          display: flex; align-items: center; justify-content: center;
+          margin-bottom: 14px;
+          background: var(--icon-bg);
+          border: 1px solid var(--icon-border);
+          color: var(--icon-color);
+          transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .stat-card:hover .stat-card-icon-box {
+          background: var(--icon-bg-hover);
+          border-color: var(--icon-border-hover);
+          transform: scale(1.1) rotate(-5deg);
+        }
+        .stat-card-label {
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 2.5px;
+          text-transform: uppercase;
+          color: var(--icon-label);
+          font-family: monospace;
+          margin-bottom: 8px;
+        }
+        .stat-card-title {
+          font-size: 13px;
+          font-weight: 600;
+          color: rgba(220, 235, 255, 0.92);
+          line-height: 1.4;
+          margin-bottom: 5px;
+        }
+        .stat-card-subtitle {
+          font-size: 11px;
+          font-weight: 400;
+          color: rgba(148, 163, 184, 0.65);
+          line-height: 1.5;
+        }
+        .stat-card-special {
+          margin-top: 10px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .stat-card-special-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #22c55e;
+          box-shadow: 0 0 6px rgba(34,197,94,0.6);
+          animation: statusPulse 2s ease-in-out infinite;
+        }
+        .stat-card-special-text {
+          font-size: 10px;
+          color: rgba(34,197,94,0.8);
+          font-weight: 500;
+          letter-spacing: 0.5px;
+        }
       `}</style>
       
       {/* Name */}
@@ -180,45 +319,65 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
       </div>
 
       {/* Stats grid */}
-      <motion.div
-        className="grid grid-cols-2 sm:grid-cols-4 gap-[12px] pt-2"
-        initial="hidden"
-        animate={isVisible ? "visible" : "hidden"}
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.1, delayChildren: 1.9 } }
-        }}
-      >
-        {profile.stats.map((stat, i) => (
-          <motion.div
-            key={stat.label}
-            variants={{
-              hidden: { opacity: 0, y: 80, filter: "blur(12px)", scale: 0.94 },
-              visible: {
-                opacity: 1, y: 0, filter: "blur(0px)", scale: 1,
-                transition: { type: "spring", stiffness: 120, damping: 14 }
-              }
-            }}
-            whileHover={{ 
-              y: -4, 
-              borderColor: "rgba(100,255,218,0.3)", 
-              boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
-              transition: { duration: 0.3, ease: "easeOut" } 
-            }}
-            style={{ willChange: "transform" }}
-            className="flex flex-col p-[20px] rounded-[14px] bg-[rgba(5,10,20,0.75)] backdrop-blur-[20px] border border-[rgba(255,255,255,0.08)] cursor-pointer"
-          >
-            <div className={`w-[36px] h-[36px] rounded-[12px] flex items-center justify-center mb-3 ${iconColors[i]}`}>
-              {iconMap[stat.icon] ?? <Code2 size={20} />}
-            </div>
-            <div>
-              <div className="font-display font-[800] text-[28px] text-white leading-none mb-1">{stat.value}</div>
-              <div className="text-[13px] font-[600] text-[rgba(255,255,255,0.65)]">{stat.label}</div>
-              <div className="text-[11px] text-[rgba(255,255,255,0.45)] mt-[4px] leading-tight">{stat.description}</div>
-            </div>
-          </motion.div>
+      <div className="stat-card-wrapper pt-2">
+        {STAT_CARDS.map((stat, i) => (
+          <StatCardItem key={stat.label} stat={stat} index={i} isVisible={isVisible} />
         ))}
-      </motion.div>
+      </div>
     </div>
+  );
+}
+
+function StatCardItem({ stat, index, isVisible }: { stat: typeof STAT_CARDS[0], index: number, isVisible: boolean }) {
+  const [willChange, setWillChange] = useState<"transform, opacity" | "auto">("transform, opacity");
+  
+  const hexToRgba = (hex: string, alpha: number) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.95 }}
+      transition={{ 
+        duration: 0.6, 
+        delay: index * 0.15 + 1.9,
+        ease: [0.22, 1, 0.36, 1]
+      }}
+      onAnimationComplete={() => setWillChange("auto")}
+      className="stat-card"
+      style={{ 
+        willChange,
+        "--icon-color": stat.iconColor,
+        "--hover-border": hexToRgba(stat.iconColor, 0.25),
+        "--hover-glow": hexToRgba(stat.iconColor, 0.08),
+        "--icon-bg": hexToRgba(stat.iconColor, 0.1),
+        "--icon-border": hexToRgba(stat.iconColor, 0.2),
+        "--icon-bg-hover": hexToRgba(stat.iconColor, 0.18),
+        "--icon-border-hover": hexToRgba(stat.iconColor, 0.4),
+        "--icon-label": hexToRgba(stat.iconColor, 0.7),
+      } as React.CSSProperties}
+    >
+      <div className="stat-card-top-line" />
+      <div className="stat-card-inner-glow" />
+      
+      <div className="stat-card-icon-box">
+        {stat.icon}
+      </div>
+      
+      <div className="stat-card-label">{stat.label}</div>
+      <div className="stat-card-title">{stat.title}</div>
+      <div className="stat-card-subtitle">{stat.subtitle}</div>
+      
+      {stat.special && (
+        <div className="stat-card-special">
+          <div className="stat-card-special-dot" />
+          <span className="stat-card-special-text">Available now</span>
+        </div>
+      )}
+    </motion.div>
   );
 }
