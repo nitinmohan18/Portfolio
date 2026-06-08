@@ -6,15 +6,25 @@ export function useScrollProgress() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    let ticking = false;
     const update = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight <= 0) return;
-      setProgress(window.scrollY / totalHeight);
+      if (totalHeight > 0) {
+        setProgress(window.scrollY / totalHeight);
+      }
+      ticking = false;
     };
 
-    window.addEventListener("scroll", update, { passive: true });
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
     update();
-    return () => window.removeEventListener("scroll", update);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return progress;
@@ -33,7 +43,7 @@ export function useActiveSection(sectionIds: string[]) {
         ([entry]) => {
           if (entry.isIntersecting) setActiveSection(id);
         },
-        { rootMargin: "-40% 0px -55% 0px" }
+        { threshold: 0.5 }
       );
       observer.observe(el);
       observers.push(observer);

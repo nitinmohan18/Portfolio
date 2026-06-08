@@ -34,15 +34,20 @@ export default function Hero({ isVisible = true }: HeroProps) {
           initial={{ opacity: 0 }}
           animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          style={{ willChange: "transform" }}
+          style={{ willChange: "transform, opacity" }}
         >
-          <span className="text-[10px] tracking-[0.25em] uppercase text-[rgba(255,255,255,0.65)] font-mono">
+          <motion.span 
+            className="text-[10px] uppercase text-[rgba(255,255,255,0.65)] font-mono"
+            animate={{ letterSpacing: ["0.25em", "0.35em", "0.25em"], opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            style={{ willChange: "opacity, letter-spacing" }}
+          >
             Scroll Down
-          </span>
+          </motion.span>
           <div className="w-5 h-8 border border-[rgba(255,255,255,0.18)] rounded-[50px] flex items-start justify-center p-1">
             <motion.div
               className="w-1 h-1.5 bg-[#60a5fa] rounded-full"
-              animate={{ y: [0, 12, 0] }}
+              animate={{ y: [0, 6, 0] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
               style={{ willChange: "transform" }}
             />

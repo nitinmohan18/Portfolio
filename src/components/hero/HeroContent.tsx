@@ -38,91 +38,112 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         animate={isVisible ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 } : {}}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         style={{ willChange: "transform" }}
-        className="flex items-center gap-2"
+        className="flex items-center gap-3"
       >
-        <span className="h-px w-10 bg-[rgba(255,255,255,0.45)]" />
-        <span className="text-[14px] font-mono tracking-widest text-[#60a5fa] uppercase font-[600]">
-          Hey, I&apos;m —
+        <span className="h-[1px] w-10 bg-[rgba(100,255,218,0.25)]" />
+        <span className="text-[14px] font-mono tracking-widest text-[rgba(100,255,218,0.5)] uppercase font-[600]">
+          Hey, I&apos;m
         </span>
+        <span className="h-[1px] w-10 bg-[rgba(100,255,218,0.25)]" />
       </motion.div>
 
+      <style>{`
+        @keyframes floatWhite {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-3px); }
+        }
+        @keyframes floatCyan {
+          0%, 100% { 
+            transform: translateY(0);
+            text-shadow: 0 0 20px rgba(100,255,218,0);
+          }
+          50% { 
+            transform: translateY(-3px);
+            text-shadow: 0 0 30px rgba(100,255,218,0.35);
+          }
+        }
+        .name-first {
+          display: inline-block;
+          animation: floatWhite 4s ease-in-out infinite;
+          animation-delay: 0s;
+        }
+        .name-second {
+          display: inline-block;
+          animation: floatCyan 4s ease-in-out infinite;
+          animation-delay: 2s;
+          color: #64FFDA;
+          margin-left: 0.3em;
+        }
+      `}</style>
+      
       {/* Name */}
-      <motion.h1
+      <h1
         className="font-display font-[800] text-white tracking-tight flex flex-wrap"
         style={{ fontSize: "clamp(36px, 5vw, 56px)" }}
-        initial="hidden"
-        animate={isVisible ? "visible" : "hidden"}
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.04 } }
-        }}
       >
-        {nameLetters.map((letter, i) => (
-          <motion.span
-            key={i}
-            variants={{
-              hidden: { opacity: 0, y: 60, scale: 0.6, filter: "blur(12px)" },
-              visible: { 
-                opacity: 1, y: 0, scale: 1, filter: "blur(0px)",
-                transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
-              }
-            }}
-            style={{ 
-              willChange: "transform, opacity, filter", 
-              marginRight: letter === " " ? "0.3em" : "0" 
-            }}
-            className={i >= profile.firstName.length + 1 ? "text-[#60a5fa]" : ""}
-          >
-            {letter}
-          </motion.span>
-        ))}
-      </motion.h1>
+        <motion.span
+          className="name-first"
+          initial={{ opacity: 0, x: -40 }}
+          animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          style={{ willChange: "transform, opacity" }}
+        >
+          {profile.firstName}
+        </motion.span>
+        <motion.span
+          className="name-second"
+          initial={{ opacity: 0, x: 40 }}
+          animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+          style={{ willChange: "transform, opacity" }}
+        >
+          {profile.lastName}
+        </motion.span>
+      </h1>
 
       {/* Role typing / Subtitle shimmer */}
       <motion.div 
         initial={{ opacity: 0, y: 48, filter: "blur(12px)", scale: 0.94 }}
         animate={isVisible ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 } : {}}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        style={{ willChange: "transform" }}
-        className="font-display font-[600] text-[rgba(255,255,255,0.85)] min-h-[2rem] relative overflow-hidden" 
+        style={{ willChange: "transform", fontSize: "clamp(20px, 3vw, 28px)" }}
+        className="font-display font-[600] text-white min-h-[52px] relative" 
       >
-        <motion.div
-          initial={{ backgroundPosition: "200% center" }}
-          animate={isVisible ? { backgroundPosition: "-200% center" } : {}}
-          transition={{ duration: 2.5, ease: "linear", repeat: Infinity }}
-          style={{
-            fontSize: "clamp(18px, 2.5vw, 26px)",
-            background: "linear-gradient(90deg, rgba(255,255,255,0.85) 0%, #ffffff 50%, rgba(255,255,255,0.85) 100%)",
-            backgroundSize: "200% auto",
-            color: "transparent",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          <TypingText />
-        </motion.div>
+        <TypingText />
       </motion.div>
 
       {/* Bio */}
-      <motion.p 
-        initial={{ opacity: 0, y: 48, filter: "blur(12px)", scale: 0.94 }}
-        animate={isVisible ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 } : {}}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-        style={{ willChange: "transform" }}
-        className="text-[rgba(255,255,255,0.65)] text-[16px] leading-[1.75] max-w-[520px]"
+      <motion.div 
+        className="text-[rgba(148,163,184,0.9)] text-[16px] leading-[1.75] max-w-[500px] font-[400]"
+        initial="hidden"
+        animate={isVisible ? "visible" : "hidden"}
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.06, delayChildren: 0.8 } }
+        }}
       >
-        {profile.bio}
-      </motion.p>
+        {profile.bio.split(" ").map((word, i) => (
+          <motion.span
+            key={i}
+            variants={{
+              hidden: { opacity: 0, y: 10 },
+              visible: { 
+                opacity: 1, 
+                y: 0,
+                transition: { duration: 0.5, ease: "easeOut" }
+              }
+            }}
+            style={{ willChange: "transform, opacity", display: "inline-block", marginRight: "0.25em" }}
+          >
+            {word}
+          </motion.span>
+        ))}
+      </motion.div>
 
       {/* CTA Buttons + Socials */}
-      <motion.div 
-        initial={{ opacity: 0, y: 48, filter: "blur(12px)", scale: 0.94 }}
-        animate={isVisible ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 } : {}}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-        style={{ willChange: "transform" }}
-      >
+      <div className="relative z-10 w-full">
         <HeroButtons />
-      </motion.div>
+      </div>
 
       {/* Stats grid */}
       <motion.div
@@ -131,7 +152,7 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         animate={isVisible ? "visible" : "hidden"}
         variants={{
           hidden: {},
-          visible: { transition: { staggerChildren: 0.12, delayChildren: 0.5 } } // stagger 120ms
+          visible: { transition: { staggerChildren: 0.1, delayChildren: 1.9 } }
         }}
       >
         {profile.stats.map((stat, i) => (
@@ -144,7 +165,12 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
                 transition: { type: "spring", stiffness: 120, damping: 14 }
               }
             }}
-            whileHover={{ y: -3, borderColor: "rgba(255,255,255,0.18)", transition: { duration: 0.3, ease: "easeOut" } }}
+            whileHover={{ 
+              y: -4, 
+              borderColor: "rgba(100,255,218,0.3)", 
+              boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
+              transition: { duration: 0.3, ease: "easeOut" } 
+            }}
             style={{ willChange: "transform" }}
             className="flex flex-col p-[20px] rounded-[14px] bg-[rgba(5,10,20,0.75)] backdrop-blur-[20px] border border-[rgba(255,255,255,0.08)] cursor-pointer"
           >

@@ -13,16 +13,9 @@ import MagneticButton from "@/components/ui/MagneticButton";
 const sectionIds = NAV_ITEMS.map((n) => n.id);
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const activeSection = useActiveSection(sectionIds);
   const progress = useScrollProgress();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const handleNav = useCallback((href: string) => {
     setMobileOpen(false);
@@ -32,9 +25,33 @@ export default function Navbar() {
 
   return (
     <>
+      <style>{`
+        @keyframes logoPulse {
+          0% { box-shadow: 0 0 0 0 rgba(96,165,250,0.6); }
+          70% { box-shadow: 0 0 20px 10px rgba(96,165,250,0); }
+          100% { box-shadow: 0 0 0 0 rgba(96,165,250,0); }
+        }
+        .nav-link-hover::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 15%;
+          right: 15%;
+          height: 2px;
+          background: #60a5fa;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          border-radius: 2px;
+          box-shadow: 0 0 8px rgba(96,165,250,0.8);
+        }
+        .nav-link-hover:hover::after {
+          transform: scaleX(1);
+        }
+      `}</style>
       {/* Scroll progress bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-[#60a5fa] z-[100] origin-left"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-[#60a5fa] z-[1001] origin-left"
         style={{ scaleX: progress }}
       />
 
@@ -43,12 +60,7 @@ export default function Navbar() {
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ delay: 1.8, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         style={{ willChange: "transform" }}
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-400",
-          scrolled
-            ? "bg-[rgba(5,10,20,0.75)] backdrop-blur-[24px] py-3"
-            : "bg-transparent py-5"
-        )}
+        className="fixed top-0 left-0 w-full z-[1000] bg-[rgba(10,12,20,0.75)] backdrop-blur-[20px] border-b border-[rgba(100,180,255,0.08)] py-3 transition-all duration-400"
       >
         <div className="container-wide flex items-center justify-between">
           {/* Logo */}
@@ -58,7 +70,10 @@ export default function Navbar() {
               className="flex items-center gap-2.5 group relative"
               aria-label="Go to top"
             >
-              <div className="w-9 h-9 rounded-[12px] bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center text-sm font-bold font-display text-[#ffffff] transition-all duration-300 relative overflow-hidden group-hover:shadow-[0_0_20px_rgba(96,165,250,0.5)] group-hover:border-[rgba(96,165,250,0.5)]">
+              <div 
+                className="w-9 h-9 rounded-[12px] bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center text-sm font-bold font-display text-[#ffffff] transition-all duration-300 relative overflow-hidden group-hover:shadow-[0_0_20px_rgba(96,165,250,0.5)] group-hover:border-[rgba(96,165,250,0.5)]"
+                style={{ animation: 'logoPulse 2s ease-out 1.5s 1 forwards' }}
+              >
                 <div className="flex items-center transition-all duration-300">
                   <span>{profile.initials[0]}</span>
                   <span>{profile.initials[1]}</span>
@@ -91,20 +106,14 @@ export default function Navbar() {
                   transition={{ delay: 2.6 + i * 0.06, duration: 0.4 }}
                   onClick={() => handleNav(item.href)}
                   className={cn(
-                    "relative px-[16px] py-[8px] text-[14px] rounded-[12px] transition-all duration-200 border border-transparent",
+                    "nav-link-hover relative px-[16px] py-[8px] text-[14px] rounded-[12px] transition-all duration-200 border border-transparent",
                     isActive
                       ? "text-[#60a5fa] font-[600] bg-[rgba(96,165,250,0.12)] border-[rgba(96,165,250,0.3)]"
                       : "text-[rgba(255,255,255,0.65)] font-[500] hover:text-white hover:tracking-[0.02em]"
                   )}
+                  style={isActive ? { textShadow: '0 0 12px rgba(96,165,250,0.4)' } : {}}
                 >
                   {item.label}
-                  {isActive && (
-                    <motion.div
-                      layoutId="nav-underline"
-                      className="absolute bottom-[-1px] left-[15%] right-[15%] h-[2px] bg-[#60a5fa] rounded-full shadow-[0_0_8px_rgba(96,165,250,0.8)]"
-                      transition={{ type: "spring", stiffness: 120, damping: 14 }}
-                    />
-                  )}
                 </motion.button>
               );
             })}
@@ -172,17 +181,6 @@ export default function Navbar() {
           </div>
         </div>
         
-        {/* Animated Gradient Bottom Border on Scroll */}
-        {scrolled && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-[rgba(96,165,250,0.3)] to-[rgba(167,139,250,0.3)]"
-          />
-        )}
-
-        {/* Subtle Scanline Divider below navbar always */}
-        <div className="absolute -bottom-[1px] left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(96,165,250,0.15)] to-transparent pointer-events-none" />
       </motion.nav>
 
       {/* Mobile menu */}
@@ -240,26 +238,11 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Right side vertical nav indicator (desktop) */}
-      <div className="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-6">
+      {/* Right side vertical nav indicator (desktop & tablet) */}
+      <div className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-6">
         {/* Full track line */}
-        <div className="absolute right-[4px] top-4 bottom-4 w-[1px] bg-[rgba(255,255,255,0.08)] z-[-1]" />
+        <div className="absolute right-[5px] top-4 bottom-4 w-[2px] border-r-2 border-dashed border-[rgba(96,165,250,0.12)] z-[-1]" />
         
-        {/* Active line fill (computed based on active index) */}
-        {(() => {
-          const activeIndex = NAV_ITEMS.findIndex(n => n.id === activeSection);
-          const heightPercent = activeIndex >= 0 ? (activeIndex / (NAV_ITEMS.length - 1)) * 100 : 0;
-          
-          return (
-            <motion.div 
-              className="absolute right-[4px] w-[1px] bg-gradient-to-b from-[#60a5fa] to-[#a78bfa] z-[-1]"
-              initial={{ height: 0 }}
-              animate={{ top: "16px", height: `calc(${heightPercent}% - 32px)` }}
-              transition={{ type: "spring", stiffness: 100, damping: 20 }}
-            />
-          );
-        })()}
-
         {NAV_ITEMS.map((item, i) => {
           const isActive = activeSection === item.id;
           return (
@@ -292,25 +275,24 @@ function SideNavItem({ item, i, isActive, onClick }: { item: any; i: number; isA
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 2.2 + i * 0.1, duration: 0.5, ease: "easeOut" }}
+      style={{ willChange: "transform, opacity" }}
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="flex items-center justify-end gap-4 group relative h-[10px]"
+      className="flex items-center justify-end gap-4 group relative h-[12px] w-[12px]"
       aria-label={`Navigate to ${item.label}`}
     >
       <AnimatePresence mode="wait">
         {(isActive || isHovered) && (
           <motion.div
             key="text"
-            initial={{ opacity: 0, x: 10 }}
+            initial={{ opacity: 0, x: 8 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 8 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="flex items-center gap-2"
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            style={{ willChange: "transform, opacity" }}
+            className="absolute right-[24px] flex items-center gap-2 whitespace-nowrap bg-[rgba(10,12,20,0.8)] px-3 py-1.5 rounded-lg border border-[rgba(96,165,250,0.2)] backdrop-blur-md"
           >
-            <span className="text-[10px] font-mono tracking-widest text-[#60a5fa]">
-              0{i + 1}
-            </span>
             <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-white">
               {item.label}
             </span>
@@ -318,38 +300,29 @@ function SideNavItem({ item, i, isActive, onClick }: { item: any; i: number; isA
         )}
       </AnimatePresence>
 
-      <div className="relative flex items-center justify-center w-[10px] h-[10px]">
-        {/* Inactive state */}
+      <div className="relative flex items-center justify-center w-[12px] h-[12px] shrink-0">
         <motion.div
           animate={{
-            width: isActive ? 10 : isHovered ? 8 : 6,
-            height: isActive ? 10 : isHovered ? 8 : 6,
-            backgroundColor: isActive ? "#60a5fa" : "transparent",
-            borderColor: isActive ? "#60a5fa" : isHovered ? "rgba(96,165,250,0.5)" : "rgba(71,85,105,1)",
-            boxShadow: isActive ? "0 0 12px rgba(96,165,250,0.8)" : "none",
+            width: isActive ? 12 : 8,
+            height: isActive ? 12 : 8,
+            backgroundColor: isActive ? "#60a5fa" : "rgba(96,165,250,0.2)",
+            borderColor: "rgba(96,165,250,0.4)",
+            boxShadow: isActive ? "0 0 10px rgba(96,165,250,0.6)" : "none",
           }}
-          transition={{ duration: isActive ? 0.4 : 0.3, type: isActive ? "spring" : "tween" }}
+          transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+          style={{ willChange: "transform, opacity" }}
           className="rounded-full border absolute"
         />
-
-        {/* Active pulsing ring */}
-        {isActive && (
-          <motion.div
-            animate={{ scale: [1, 2], opacity: [0.5, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
-            className="absolute rounded-full border border-[#60a5fa] w-[10px] h-[10px]"
-          />
-        )}
-
+        
         {/* Click pulse ring */}
         <AnimatePresence>
           {clicked && (
             <motion.div
               initial={{ scale: 1, opacity: 0.8 }}
-              animate={{ scale: 3, opacity: 0 }}
+              animate={{ scale: 2.5, opacity: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="absolute rounded-full border-[2px] border-[#60a5fa] w-[10px] h-[10px]"
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="absolute rounded-full border-[2px] border-[#60a5fa] w-[12px] h-[12px]"
             />
           )}
         </AnimatePresence>
