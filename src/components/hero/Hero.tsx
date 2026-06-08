@@ -11,9 +11,9 @@ export default function Hero({ isVisible = true }: HeroProps) {
   return (
     <section
       id="home"
-      className="relative z-10 w-full h-screen min-h-screen overflow-hidden flex flex-col isolate"
+      className="relative z-10 w-full isolate"
     >
-      <div className="relative z-10 w-full h-full overflow-hidden flex flex-col justify-center">
+      <div className="relative z-10 w-full flex flex-col justify-center">
         {/* Bottom fade into sections */}
         <div
           className="absolute bottom-0 left-0 right-0 h-48 z-[2] pointer-events-none"
@@ -51,7 +51,7 @@ export default function Hero({ isVisible = true }: HeroProps) {
           }
         `}</style>
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[5] flex flex-col items-center gap-2"
+          className="relative mt-[48px] pb-[32px] z-[5] flex flex-col items-center gap-2 mx-auto"
           initial={{ opacity: 0 }}
           animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}

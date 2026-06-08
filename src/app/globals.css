@@ -218,19 +218,30 @@ body {
   }
 }
 
-/* ─── Section Layout ─── */
-.section-padding {
+/* ─── Section Layout & Dividers ─── */
+section {
   padding-top: 120px;
   padding-bottom: 120px;
+  position: relative;
 }
 
-@media (min-width: 768px) {
-  .section-padding {
-    padding-top: 140px;
-    padding-bottom: 140px;
-  }
+#home, .home-section {
+  padding-top: 140px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 100px;
 }
 
+.section-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+}
+
+/* Also keep container-wide for elements that used it */
 .container-wide {
   width: 100%;
   max-width: 1280px;
@@ -240,12 +251,73 @@ body {
   padding-right: 1.5rem;
 }
 
-@media (min-width: 640px) {
-  .container-wide {
-    padding-left: 2rem;
-    padding-right: 2rem;
+.section-title {
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .section-container {
+    padding: 0 24px;
   }
 }
+
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(100,255,218,0.08) 20%,
+    rgba(100,255,218,0.12) 50%,
+    rgba(100,255,218,0.08) 80%,
+    transparent 100%
+  );
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+/* ─── Per Section Specific Fixes ─── */
+#home .stat-card-wrapper { margin-top: 40px !important; }
+#home .bio-text { margin-top: 20px !important; }
+#home .hero-buttons { margin-top: 32px !important; }
+
+#about { padding-top: 120px; }
+#about .section-heading-eyebrow { margin-bottom: 16px; }
+#about .section-heading-main { margin-bottom: 32px; }
+#about .flex.flex-col.gap-5 > div { margin-bottom: 20px; }
+#about .grid.lg\:grid-cols-2 { gap: 48px; }
+#about .flex.flex-wrap.gap-6.pt-2 { margin-top: 48px; gap: 40px; }
+
+#skills { padding-top: 120px; }
+#skills .section-heading-wrapper { margin-bottom: 60px; }
+#skills .flex.flex-col.gap-14 { gap: 16px; }
+#skills .skill-row { padding: 20px 24px; }
+#skills .skill-icon-gap { gap: 10px; }
+
+#projects { padding-top: 120px; }
+#projects .section-heading-wrapper { margin-bottom: 60px; }
+#projects .project-grid { gap: 24px; }
+#projects .project-card { padding: 28px 24px; }
+
+#education { padding-top: 120px; }
+#education .timeline-item { margin-bottom: 32px; }
+#education .timeline-dot-gap { gap: 24px; }
+
+#certifications { padding-top: 120px; }
+#certifications .cert-grid { gap: 20px; }
+#certifications .cert-card { padding: 24px 20px; }
+
+#contact { padding-top: 120px; padding-bottom: 140px; }
+#contact .form-fields { gap: 20px; }
+#contact .form-to-info { gap: 48px; }
 
 /* ─── Canvas (Three.js) ─── */
 #three-canvas {
