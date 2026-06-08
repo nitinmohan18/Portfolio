@@ -26,10 +26,41 @@ export default function Navbar() {
   return (
     <>
       <style>{`
-        @keyframes logoPulse {
-          0% { box-shadow: 0 0 0 0 rgba(96,165,250,0.6); }
-          70% { box-shadow: 0 0 20px 10px rgba(96,165,250,0); }
-          100% { box-shadow: 0 0 0 0 rgba(96,165,250,0); }
+        @keyframes statusPulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.4); opacity: 0.4; }
+        }
+        .nm-logo {
+          background: linear-gradient(135deg, #64FFDA 0%, #6366f1 60%, #a855f7 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          font-weight: 800;
+          letter-spacing: 2px;
+          position: relative;
+        }
+        .nm-logo-container {
+          border: 1px solid rgba(100,255,218,0.3);
+          border-radius: 6px;
+          padding: 4px 8px;
+          transition: all 0.3s ease;
+        }
+        .group:hover .nm-logo-container {
+          border-color: rgba(100,255,218,0.7);
+          box-shadow: 0 0 16px rgba(100,255,218,0.2);
+          transform: scale(1.05);
+        }
+        .nav-link-hover {
+          font-size: 13.5px;
+          font-weight: 500;
+          letter-spacing: 1.2px;
+          text-transform: uppercase;
+          transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+          padding: 4px 0;
+        }
+        .nav-link-hover:hover {
+          color: #CBD5E1;
+          transform: translateY(-1px);
         }
         .nav-link-hover::after {
           content: '';
@@ -38,15 +69,58 @@ export default function Navbar() {
           left: 15%;
           right: 15%;
           height: 2px;
-          background: #60a5fa;
+          background: linear-gradient(90deg, #64FFDA, #7DD3FC);
           transform: scaleX(0);
           transform-origin: left;
           transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           border-radius: 2px;
-          box-shadow: 0 0 8px rgba(96,165,250,0.8);
         }
-        .nav-link-hover:hover::after {
+        .nav-link-hover.active::after, .nav-link-hover:hover::after {
           transform: scaleX(1);
+        }
+        .nav-social-icons {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          padding: 6px 12px;
+          border: 1px solid rgba(100,255,218,0.12);
+          border-radius: 20px;
+          background: rgba(100,255,218,0.03);
+          position: relative;
+        }
+        .nav-social-icon {
+          color: rgba(200,200,210,0.6);
+          transition: all 0.3s ease;
+          border-radius: 50%;
+          padding: 4px;
+        }
+        .nav-social-icon.github:hover {
+          color: #ffffff;
+          box-shadow: 0 0 14px rgba(140,120,255,0.3);
+        }
+        .nav-social-icon.linkedin:hover {
+          color: #0A66C2;
+          box-shadow: 0 0 14px rgba(10,102,194,0.35);
+        }
+        .nav-social-tooltip {
+          position: absolute;
+          top: calc(100% + 8px);
+          right: 0;
+          background: rgba(10,12,20,0.95);
+          border: 1px solid rgba(100,255,218,0.2);
+          border-radius: 8px;
+          padding: 6px 12px;
+          font-size: 11px;
+          color: #64FFDA;
+          white-space: nowrap;
+          opacity: 0;
+          transform: translateY(-4px);
+          transition: all 0.25s ease;
+          pointer-events: none;
+        }
+        .nav-social-icons:hover .nav-social-tooltip {
+          opacity: 1;
+          transform: translateY(0);
         }
       `}</style>
       {/* Scroll progress bar */}
@@ -59,8 +133,8 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -100, filter: "blur(12px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ delay: 1.8, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        style={{ willChange: "transform" }}
-        className="fixed top-0 left-0 w-full z-[1000] bg-[rgba(10,12,20,0.75)] backdrop-blur-[20px] border-b border-[rgba(100,180,255,0.08)] py-3 transition-all duration-400"
+        style={{ willChange: "transform", backdropFilter: "blur(24px) saturate(180%)" }}
+        className="fixed top-0 left-0 w-full z-[1000] bg-[rgba(8,10,18,0.8)] border-b border-[rgba(125,211,252,0.06)] py-3 transition-all duration-400"
       >
         <div className="container-wide flex items-center justify-between">
           {/* Logo */}
@@ -70,32 +144,34 @@ export default function Navbar() {
               className="flex items-center gap-2.5 group relative"
               aria-label="Go to top"
             >
-              <div 
-                className="w-9 h-9 rounded-[12px] bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center text-sm font-bold font-display text-[#ffffff] transition-all duration-300 relative overflow-hidden group-hover:shadow-[0_0_20px_rgba(96,165,250,0.5)] group-hover:border-[rgba(96,165,250,0.5)]"
-                style={{ animation: 'logoPulse 2s ease-out 1.5s 1 forwards' }}
+              <motion.div 
+                initial={{ rotateY: 90 }}
+                animate={{ rotateY: 0 }}
+                transition={{ delay: 0.1, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+                className="nm-logo-container flex items-center justify-center relative overflow-hidden"
+                style={{ willChange: "transform" }}
               >
-                <div className="flex items-center transition-all duration-300">
+                <div className="flex items-center nm-logo">
                   <span>{profile.initials[0]}</span>
                   <span>{profile.initials[1]}</span>
                 </div>
-              </div>
+              </motion.div>
               
               <div className="hidden sm:flex relative overflow-hidden">
-                 <span className="font-display font-semibold text-white text-sm tracking-wide transition-all duration-300 group-hover:tracking-[0.15em] relative">
+                 <span className="font-display font-semibold text-white text-sm transition-all duration-300 relative" style={{ letterSpacing: "0.5px" }}>
                    <span className="relative z-10">{profile.name}</span>
                    <span className="absolute inset-0 z-20 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-[shimmer_1.5s_infinite] bg-[length:200%_100%] mix-blend-overlay pointer-events-none" />
                  </span>
               </div>
-              <motion.span 
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              <div 
+                style={{ animation: 'statusPulse 2s ease-in-out infinite' }}
                 className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] hidden sm:block ml-1" 
               />
             </button>
           </MagneticButton>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-2" aria-label="Primary navigation">
+          <nav className="hidden lg:flex items-center gap-[36px]" aria-label="Primary navigation">
             {NAV_ITEMS.map((item, i) => {
               const isActive = activeSection === item.id;
               return (
@@ -106,12 +182,10 @@ export default function Navbar() {
                   transition={{ delay: 2.6 + i * 0.06, duration: 0.4 }}
                   onClick={() => handleNav(item.href)}
                   className={cn(
-                    "nav-link-hover relative px-[16px] py-[8px] text-[14px] rounded-[12px] transition-all duration-200 border border-transparent",
-                    isActive
-                      ? "text-[#60a5fa] font-[600] bg-[rgba(96,165,250,0.12)] border-[rgba(96,165,250,0.3)]"
-                      : "text-[rgba(255,255,255,0.65)] font-[500] hover:text-white hover:tracking-[0.02em]"
+                    "nav-link-hover relative border border-transparent",
+                    isActive ? "active text-[#7DD3FC]" : "text-[rgba(180,195,220,0.75)]"
                   )}
-                  style={isActive ? { textShadow: '0 0 12px rgba(96,165,250,0.4)' } : {}}
+                  style={isActive ? { textShadow: '0 0 16px rgba(125,211,252,0.6)' } : {}}
                 >
                   {item.label}
                 </motion.button>
@@ -121,36 +195,38 @@ export default function Navbar() {
 
           {/* Right actions */}
           <div className="flex items-center gap-2">
-            <MagneticButton className="hidden sm:flex">
-              <motion.a
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 2.6 + NAV_ITEMS.length * 0.06, duration: 0.4 }}
-                whileHover={{ scale: 1.15, rotate: 8, textShadow: "0 0 12px rgba(255,255,255,0.8)", color: "#ffffff" }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 2.6 + NAV_ITEMS.length * 0.06, duration: 0.4 }}
+              className="hidden sm:flex nav-social-icons group/social"
+            >
+              <a
                 href={profile.socials.find((s) => s.platform === "github")?.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-[rgba(255,255,255,0.65)] transition-all duration-200"
+                className="nav-social-icon github relative"
                 aria-label="GitHub"
               >
                 <Github size={18} />
-              </motion.a>
-            </MagneticButton>
-            <MagneticButton className="hidden sm:flex">
-              <motion.a
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 2.6 + (NAV_ITEMS.length + 1) * 0.06, duration: 0.4 }}
-                whileHover={{ scale: 1.15, rotate: 8, textShadow: "0 0 12px rgba(255,255,255,0.8)", color: "#ffffff" }}
+                <div 
+                  className="absolute bottom-[2px] right-[2px] w-[6px] h-[6px] bg-[#22c55e] rounded-full shadow-[0_0_4px_rgba(34,197,94,0.6)]"
+                  style={{ animation: 'statusPulse 2s ease-in-out infinite' }}
+                />
+              </a>
+              <a
                 href={profile.socials.find((s) => s.platform === "linkedin")?.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-[rgba(255,255,255,0.65)] transition-all duration-200"
+                className="nav-social-icon linkedin"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={18} />
-              </motion.a>
-            </MagneticButton>
+              </a>
+              <div className="nav-social-tooltip">
+                <span className="animate-pulse mr-1 text-emerald-400">✦</span> Open to Opportunities
+              </div>
+            </motion.div>
 
             {profile.resumeUrl && (
               <MagneticButton>
