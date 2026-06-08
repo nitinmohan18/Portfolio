@@ -11,19 +11,16 @@ import {
   Sparkles,
 } from "lucide-react";
 
+interface HeroContentProps {
+  isVisible?: boolean;
+}
+
 const iconMap: Record<string, React.ReactNode> = {
   code: <Code2 size={20} />,
   briefcase: <Briefcase size={20} />,
   trophy: <Trophy size={20} />,
   sparkles: <Sparkles size={20} />,
 };
-
-const statColors = [
-  "text-[#60a5fa]",
-  "text-[#a78bfa]",
-  "text-[#34d399]",
-  "text-[#fbbf24]",
-];
 
 const iconColors = [
   "bg-[rgba(96,165,250,0.1)] text-[#60a5fa]",
@@ -34,24 +31,57 @@ const iconColors = [
 
 const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 2.6 } },
+  visible: { transition: { staggerChildren: 0.13, delayChildren: 0.1 } },
 };
 
-const item = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] as const } },
+const spaceItem = {
+  hidden: { opacity: 0, y: 80, rotateX: 25, scale: 0.75 },
+  visible: {
+    opacity: 1, 
+    y: 0, 
+    rotateX: 0, 
+    scale: 1,
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
+  }
 };
 
-export default function HeroContent() {
+const statContainer = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.07, delayChildren: 0.05 } }
+};
+
+const statItemVariant = {
+  hidden: {
+    opacity: 0,
+    y: 60,
+    z: -400,
+    scale: 0.85,
+    filter: "blur(12px)"
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    z: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1] as const
+    }
+  }
+};
+
+export default function HeroContent({ isVisible = true }: HeroContentProps) {
   return (
     <motion.div
       className="flex flex-col gap-7 max-w-2xl"
       variants={container}
       initial="hidden"
-      animate="visible"
+      animate={isVisible ? "visible" : "hidden"}
+      style={{ perspective: "1400px", perspectiveOrigin: "50% 30%" }}
     >
       {/* Eyebrow */}
-      <motion.div variants={item} className="flex items-center gap-2">
+      <motion.div variants={spaceItem} className="flex items-center gap-2">
         <span className="h-px w-10 bg-[rgba(255,255,255,0.45)]" />
         <span className="premium-heading-label">
           Hey, I&apos;m —
@@ -60,7 +90,7 @@ export default function HeroContent() {
 
       {/* Name */}
       <motion.h1
-        variants={item}
+        variants={spaceItem}
         className="font-display font-[800] text-white tracking-tight"
         style={{ fontSize: "clamp(36px, 5vw, 56px)" }}
       >
@@ -69,30 +99,30 @@ export default function HeroContent() {
       </motion.h1>
 
       {/* Role typing */}
-      <motion.div variants={item} className="font-display font-[600] text-[rgba(255,255,255,0.85)] min-h-[2rem]" style={{ fontSize: "clamp(18px, 2.5vw, 26px)" }}>
+      <motion.div variants={spaceItem} className="font-display font-[600] text-[rgba(255,255,255,0.85)] min-h-[2rem]" style={{ fontSize: "clamp(18px, 2.5vw, 26px)" }}>
         <TypingText />
       </motion.div>
 
       {/* Bio */}
-      <motion.p variants={item} className="text-[rgba(255,255,255,0.65)] text-[16px] leading-[1.75] max-w-[520px]">
+      <motion.p variants={spaceItem} className="text-[rgba(255,255,255,0.65)] text-[16px] leading-[1.75] max-w-[520px]">
         {profile.bio}
       </motion.p>
 
       {/* CTA Buttons + Socials */}
-      <motion.div variants={item}>
+      <motion.div variants={spaceItem}>
         <HeroButtons />
       </motion.div>
 
       {/* Stats grid */}
       <motion.div
-        variants={item}
+        variants={statContainer}
         className="grid grid-cols-2 sm:grid-cols-4 gap-[12px] pt-2"
       >
         {profile.stats.map((stat, i) => (
           <motion.div
             key={stat.label}
-            whileHover={{ y: -3, borderColor: "rgba(255,255,255,0.2)" }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            variants={statItemVariant}
+            whileHover={{ y: -3, borderColor: "rgba(255,255,255,0.2)", transition: { duration: 0.3, ease: "easeOut" } }}
             className="flex flex-col p-[20px] rounded-[14px] bg-[rgba(5,10,20,0.7)] border border-[rgba(255,255,255,0.1)] backdrop-blur-[16px]"
           >
             <div className={`w-[36px] h-[36px] rounded-lg flex items-center justify-center mb-3 ${iconColors[i]}`}>

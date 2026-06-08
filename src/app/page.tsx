@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import PagePreloader from "@/components/ui/PagePreloader";
@@ -15,31 +14,33 @@ import Certifications from "@/components/certifications/Certifications";
 import Contact from "@/components/contact/Contact";
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(true);
 
   useEffect(() => {
-    if (sessionStorage.getItem("preloader-shown") === "true") {
-      setLoading(false);
+    // Skip on subsequent visits this session
+    if (sessionStorage.getItem("visited") === "1") {
+      setShowPreloader(false);
+      setShowContent(true);
     }
   }, []);
 
   const handlePreloaderComplete = () => {
-    sessionStorage.setItem("preloader-shown", "true");
-    setLoading(false);
+    sessionStorage.setItem("visited", "1");
+    setShowContent(true);
+    setTimeout(() => setShowPreloader(false), 500); // let overlay fade
   };
 
   return (
     <>
-      <AnimatePresence mode="wait">
-        {loading && <PagePreloader onComplete={handlePreloaderComplete} />}
+      <AnimatePresence>
+        {showPreloader && <PagePreloader onComplete={handlePreloaderComplete} />}
       </AnimatePresence>
-
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
-        
         <main className="relative z-[1] flex-1 w-full">
           <ParallaxStarsBackground />
-          <Hero />
+          <Hero isVisible={showContent} />
           <About />
           <Skills />
           <Projects />
@@ -47,7 +48,6 @@ export default function Home() {
           <Certifications />
           <Contact />
         </main>
-
         <Footer />
       </div>
     </>

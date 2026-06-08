@@ -4,7 +4,11 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import HeroContent from "./HeroContent";
 
-export default function Hero() {
+interface HeroProps {
+  isVisible?: boolean;
+}
+
+export default function Hero({ isVisible = true }: HeroProps) {
   return (
     <section
       id="home"
@@ -26,15 +30,15 @@ export default function Hero() {
 
         {/* Content */}
         <div className="container-wide relative z-[5] w-full">
-          <HeroContent />
+          <HeroContent isVisible={isVisible} />
         </div>
 
         {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[5] flex flex-col items-center gap-2"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
+          animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
         >
           <span className="text-[10px] tracking-[0.25em] uppercase text-slate-500 font-mono">
             Scroll Down
