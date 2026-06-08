@@ -23,13 +23,13 @@ export default function SectionWrapper({
     <section
       id={id}
       className={cn(
-        "relative z-10 section-padding",
+        "relative overflow-hidden isolate py-[100px] md:py-[140px] bg-transparent",
         fullHeight && "min-h-screen",
         className
       )}
       {...rest}
     >
-      <div className={cn("container-wide", innerClassName)}>{children}</div>
+      <div className={cn("container-wide relative z-10", innerClassName)}>{children}</div>
     </section>
   );
 }

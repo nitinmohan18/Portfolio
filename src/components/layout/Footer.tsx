@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Heart } from "lucide-react";
+import { Mail, Heart, ArrowUp } from "lucide-react";
 import { Github, Linkedin } from "@/components/ui/Icons";
 import { profile } from "@/data/profile";
 import { NAV_ITEMS } from "@/lib/constants";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 const socialIcons: Record<string, React.ReactNode> = {
   github: <Github size={16} />,
@@ -25,25 +26,32 @@ const socialIcons: Record<string, React.ReactNode> = {
 export default function Footer() {
   const year = new Date().getFullYear();
 
+  const handleScrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="relative z-10 border-t border-white/[0.06]">
-      <div className="container-wide py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="relative z-10 w-full overflow-hidden bg-transparent">
+      {/* Top border: 1px linear gradient with glowing center */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#60a5fa]/50 to-transparent shadow-[0_0_15px_rgba(96,165,250,0.5)]" />
+
+      <div className="container-wide py-[60px]">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start gap-1">
-            <span className="font-display font-bold text-white text-lg">
+            <span className="font-display font-[800] text-white text-[20px] tracking-tight">
               {profile.name}
             </span>
-            <span className="text-slate-500 text-sm">{profile.role}</span>
+            <span className="text-[rgba(255,255,255,0.45)] text-[14px] font-mono tracking-widest uppercase">{profile.role}</span>
           </div>
 
           {/* Nav links */}
-          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+          <nav className="flex flex-wrap justify-center gap-x-8 gap-y-4">
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.id}
                 href={item.href}
-                className="text-slate-500 hover:text-white text-sm transition-colors"
+                className="text-[rgba(255,255,255,0.55)] hover:text-white text-[14px] font-[500] transition-colors duration-200"
               >
                 {item.label}
               </a>
@@ -53,29 +61,78 @@ export default function Footer() {
           {/* Socials */}
           <div className="flex items-center gap-3">
             {profile.socials.map((social) => (
-              <motion.a
-                key={social.platform}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="p-2 text-slate-500 hover:text-white rounded-lg hover:bg-white/5 transition-colors"
-                aria-label={social.label}
-              >
-                {socialIcons[social.platform] ?? null}
-              </motion.a>
+              <MagneticButton key={social.platform}>
+                <a
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-[40px] h-[40px] flex items-center justify-center rounded-[10px] bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] text-[rgba(255,255,255,0.65)] hover:text-white hover:bg-[rgba(255,255,255,0.08)] hover:border-[rgba(255,255,255,0.18)] transition-all duration-300"
+                  aria-label={social.label}
+                >
+                  <div className="hover:scale-110 transition-transform">
+                    {socialIcons[social.platform] ?? null}
+                  </div>
+                </a>
+              </MagneticButton>
             ))}
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-slate-600 text-xs">
-            © {year} {profile.name}. All rights reserved.
+        <div className="mt-[60px] pt-[30px] border-t border-[rgba(255,255,255,0.06)] flex flex-col sm:flex-row items-center justify-between gap-6 relative">
+          
+          {/* Copyright text: infinite gradient pan effect */}
+          <motion.p 
+            className="text-[13px] font-[600] font-mono tracking-wider"
+            animate={{ backgroundPosition: ["0% center", "200% center"] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            style={{
+              background: "linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.3) 100%)",
+              backgroundSize: "200% auto",
+              color: "transparent",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+            }}
+          >
+            © {year} {profile.name}. ALL RIGHTS RESERVED.
+          </motion.p>
+
+          <p className="text-[rgba(255,255,255,0.45)] text-[12px] flex items-center gap-1.5 font-mono">
+            BUILT WITH <Heart size={12} className="text-red-500 fill-red-500 animate-pulse" /> USING NEXT.JS
           </p>
-          <p className="text-slate-600 text-xs flex items-center gap-1">
-            Built with <Heart size={10} className="text-red-500 fill-red-500" /> using Next.js & Three.js
-          </p>
+
+          {/* Back to top button: floating spring bounce + hover rocket emoji */}
+          <div className="absolute right-0 top-[-24px] sm:top-[-32px]">
+            <MagneticButton>
+              <motion.button
+                onClick={handleScrollTop}
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                whileHover="hover"
+                className="w-[48px] h-[48px] sm:w-[64px] sm:h-[64px] flex items-center justify-center rounded-full bg-[rgba(5,10,20,0.8)] backdrop-blur-[12px] border border-[rgba(255,255,255,0.12)] cursor-pointer hover:border-[#60a5fa]/50 transition-colors group relative overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+                aria-label="Back to top"
+              >
+                <motion.div
+                  variants={{
+                    hover: { y: -40, opacity: 0 }
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="text-white"
+                >
+                  <ArrowUp size={20} className="sm:w-[24px] sm:h-[24px]" />
+                </motion.div>
+                <motion.div
+                  variants={{
+                    hover: { y: 0, opacity: 1 }
+                  }}
+                  initial={{ y: 40, opacity: 0 }}
+                  transition={{ duration: 0.3, type: "spring", stiffness: 200, damping: 15 }}
+                  className="absolute text-[20px] sm:text-[24px]"
+                >
+                  🚀
+                </motion.div>
+              </motion.button>
+            </MagneticButton>
+          </div>
         </div>
       </div>
     </footer>

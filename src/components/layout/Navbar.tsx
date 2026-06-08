@@ -2,14 +2,13 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, Menu, X, Sun } from "lucide-react";
+import { Download, Menu, X } from "lucide-react";
 import { Github, Linkedin } from "@/components/ui/Icons";
 import { cn } from "@/lib/utils";
 import { NAV_ITEMS } from "@/lib/constants";
 import { profile } from "@/data/profile";
 import { useActiveSection, useScrollProgress } from "@/hooks/useScrollProgress";
 import MagneticButton from "@/components/ui/MagneticButton";
-import GlowButton from "@/components/ui/GlowButton";
 
 const sectionIds = NAV_ITEMS.map((n) => n.id);
 
@@ -20,7 +19,7 @@ export default function Navbar() {
   const progress = useScrollProgress();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -35,18 +34,19 @@ export default function Navbar() {
     <>
       {/* Scroll progress bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-primary z-[100] origin-left"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-[#60a5fa] z-[100] origin-left"
         style={{ scaleX: progress }}
       />
 
       <motion.nav
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 1.8, duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+        initial={{ opacity: 0, y: -100, filter: "blur(12px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        transition={{ delay: 1.8, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        style={{ willChange: "transform" }}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-400",
           scrolled
-            ? "bg-[rgba(5,10,20,0.6)] backdrop-blur-[20px] border-b border-[rgba(255,255,255,0.06)] py-3"
+            ? "bg-[rgba(5,10,20,0.75)] backdrop-blur-[24px] py-3"
             : "bg-transparent py-5"
         )}
       >
@@ -55,91 +55,115 @@ export default function Navbar() {
           <MagneticButton strength={0.2}>
             <button
               onClick={() => handleNav("#home")}
-              className="flex items-center gap-2.5 group"
+              className="flex items-center gap-2.5 group relative"
               aria-label="Go to top"
             >
-              <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-sm font-bold font-display text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                {profile.initials}
+              <div className="w-9 h-9 rounded-[12px] bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] flex items-center justify-center text-sm font-bold font-display text-[#ffffff] transition-all duration-300 relative overflow-hidden group-hover:shadow-[0_0_20px_rgba(96,165,250,0.5)] group-hover:border-[rgba(96,165,250,0.5)]">
+                <div className="flex items-center transition-all duration-300">
+                  <span>{profile.initials[0]}</span>
+                  <span>{profile.initials[1]}</span>
+                </div>
               </div>
-              <span className="font-display font-semibold text-white text-sm tracking-wide hidden sm:block">
-                {profile.name}
-              </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse hidden sm:block" />
+              
+              <div className="hidden sm:flex relative overflow-hidden">
+                 <span className="font-display font-semibold text-white text-sm tracking-wide transition-all duration-300 group-hover:tracking-[0.15em] relative">
+                   <span className="relative z-10">{profile.name}</span>
+                   <span className="absolute inset-0 z-20 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-[shimmer_1.5s_infinite] bg-[length:200%_100%] mix-blend-overlay pointer-events-none" />
+                 </span>
+              </div>
+              <motion.span 
+                animate={{ scale: [1, 1.3, 1] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] hidden sm:block ml-1" 
+              />
             </button>
           </MagneticButton>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-10" aria-label="Primary navigation">
-            {NAV_ITEMS.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleNav(item.href)}
-                className={cn(
-                  "px-[16px] py-[8px] text-[14px] rounded-[8px] transition-all duration-200",
-                  activeSection === item.id
-                    ? "text-white font-[600] bg-[rgba(255,255,255,0.05)]"
-                    : "text-[rgba(255,255,255,0.6)] font-[500] hover:text-[rgba(255,255,255,0.9)] hover:bg-[rgba(255,255,255,0.03)]"
-                )}
-              >
-                {item.label}
-                {activeSection === item.id && (
-                  <motion.span
-                    layoutId="nav-underline"
-                    className="block h-[2px] bg-primary rounded-full mt-0.5 mx-auto w-4"
-                  />
-                )}
-              </button>
-            ))}
+          <nav className="hidden lg:flex items-center gap-2" aria-label="Primary navigation">
+            {NAV_ITEMS.map((item, i) => {
+              const isActive = activeSection === item.id;
+              return (
+                <motion.button
+                  key={item.id}
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 2.6 + i * 0.06, duration: 0.4 }}
+                  onClick={() => handleNav(item.href)}
+                  className={cn(
+                    "relative px-[16px] py-[8px] text-[14px] rounded-[12px] transition-all duration-200 border border-transparent",
+                    isActive
+                      ? "text-[#60a5fa] font-[600] bg-[rgba(96,165,250,0.12)] border-[rgba(96,165,250,0.3)]"
+                      : "text-[rgba(255,255,255,0.65)] font-[500] hover:text-white hover:tracking-[0.02em]"
+                  )}
+                >
+                  {item.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-underline"
+                      className="absolute bottom-[-1px] left-[15%] right-[15%] h-[2px] bg-[#60a5fa] rounded-full shadow-[0_0_8px_rgba(96,165,250,0.8)]"
+                      transition={{ type: "spring", stiffness: 120, damping: 14 }}
+                    />
+                  )}
+                </motion.button>
+              );
+            })}
           </nav>
 
           {/* Right actions */}
           <div className="flex items-center gap-2">
             <MagneticButton className="hidden sm:flex">
-              <a
+              <motion.a
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 2.6 + NAV_ITEMS.length * 0.06, duration: 0.4 }}
+                whileHover={{ scale: 1.15, rotate: 8, textShadow: "0 0 12px rgba(255,255,255,0.8)", color: "#ffffff" }}
                 href={profile.socials.find((s) => s.platform === "github")?.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-slate-400 hover:text-white transition-colors"
+                className="p-2 text-[rgba(255,255,255,0.65)] transition-all duration-200"
                 aria-label="GitHub"
               >
                 <Github size={18} />
-              </a>
+              </motion.a>
             </MagneticButton>
             <MagneticButton className="hidden sm:flex">
-              <a
+              <motion.a
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 2.6 + (NAV_ITEMS.length + 1) * 0.06, duration: 0.4 }}
+                whileHover={{ scale: 1.15, rotate: 8, textShadow: "0 0 12px rgba(255,255,255,0.8)", color: "#ffffff" }}
                 href={profile.socials.find((s) => s.platform === "linkedin")?.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-slate-400 hover:text-white transition-colors"
+                className="p-2 text-[rgba(255,255,255,0.65)] transition-all duration-200"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={18} />
-              </a>
+              </motion.a>
             </MagneticButton>
 
             {profile.resumeUrl && (
               <MagneticButton>
                 <motion.a
-                  whileHover={{ opacity: 0.9, scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 2.6 + (NAV_ITEMS.length + 2) * 0.06, duration: 0.4 }}
                   href={profile.resumeUrl}
-                  className="hidden sm:flex items-center gap-1.5 bg-gradient-to-br from-[#60a5fa] to-[#a78bfa] text-white px-[18px] py-[8px] rounded-[8px] text-[13px] font-[600] border-none"
+                  className="hidden sm:flex items-center gap-1.5 px-[18px] py-[8px] rounded-[50px] text-[13px] font-[600] text-white border border-[rgba(255,255,255,0.18)] relative overflow-hidden group/resume"
                 >
-                  <Download size={14} />
-                  Resume
+                  <div className="absolute inset-0 bg-gradient-to-br from-[rgba(255,255,255,0.05)] to-[rgba(255,255,255,0.1)] group-hover/resume:from-[rgba(96,165,250,0.2)] group-hover/resume:to-[rgba(167,139,250,0.2)] transition-all duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.2)] to-transparent opacity-0 group-hover/resume:opacity-100 group-hover/resume:animate-[shimmer_1.5s_infinite] bg-[length:200%_100%] -skew-x-12" />
+                  <Download size={14} className="relative z-10" />
+                  <span className="relative z-10">Resume</span>
                 </motion.a>
               </MagneticButton>
-            )}
-            {!profile.resumeUrl && (
-              <div className="hidden sm:flex px-4 py-2 text-xs font-medium text-slate-500 border border-white/10 rounded-xl">
-                Resume Soon
-              </div>
             )}
 
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileOpen((v) => !v)}
-              className="lg:hidden p-2 text-slate-400 hover:text-white transition-colors"
+              className="lg:hidden p-2 text-[rgba(255,255,255,0.65)] hover:text-white transition-colors"
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
             >
@@ -147,48 +171,65 @@ export default function Navbar() {
             </button>
           </div>
         </div>
+        
+        {/* Animated Gradient Bottom Border on Scroll */}
+        {scrolled && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-[rgba(96,165,250,0.3)] to-[rgba(167,139,250,0.3)]"
+          />
+        )}
+
+        {/* Subtle Scanline Divider below navbar always */}
+        <div className="absolute -bottom-[1px] left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[rgba(96,165,250,0.15)] to-transparent pointer-events-none" />
       </motion.nav>
 
       {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-x-0 top-[72px] z-40 glass border-b border-white/[0.06] px-6 py-6 lg:hidden"
+            initial={{ opacity: 0, y: -10, filter: "blur(12px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -10, filter: "blur(12px)" }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            style={{ willChange: "transform" }}
+            className="fixed inset-x-0 top-[72px] z-40 bg-[rgba(5,10,20,0.75)] backdrop-blur-[12px] border-b border-[rgba(255,255,255,0.08)] px-6 py-6 lg:hidden"
           >
             <div className="flex flex-col gap-1 mb-6">
-              {NAV_ITEMS.map((item, i) => (
-                <motion.button
-                  key={item.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  onClick={() => handleNav(item.href)}
-                  className={cn(
-                    "text-left px-4 py-3 text-[14px] rounded-[12px] transition-all",
-                    activeSection === item.id
-                      ? "text-white font-[600] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)]"
-                      : "text-[rgba(255,255,255,0.6)] font-[500] hover:text-[rgba(255,255,255,0.9)] hover:bg-[rgba(255,255,255,0.03)]"
-                  )}
-                >
-                  <span className="text-primary/60 mr-2 font-mono text-xs">
-                    0{i + 1}.
-                  </span>
-                  {item.label}
-                </motion.button>
-              ))}
+              {NAV_ITEMS.map((item, i) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <motion.button
+                    key={item.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ willChange: "transform" }}
+                    onClick={() => handleNav(item.href)}
+                    className={cn(
+                      "text-left px-4 py-3 text-[14px] rounded-[12px] transition-all duration-200",
+                      isActive
+                        ? "text-white font-[600] bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.18)]"
+                        : "text-[rgba(255,255,255,0.65)] font-[500] hover:text-white hover:bg-[rgba(255,255,255,0.05)]"
+                    )}
+                  >
+                    <span className="text-[#60a5fa]/60 mr-2 font-mono text-xs">
+                      0{i + 1}.
+                    </span>
+                    {item.label}
+                  </motion.button>
+                );
+              })}
             </div>
-            <div className="flex items-center gap-3 pt-4 border-t border-white/[0.06]">
+            <div className="flex items-center gap-3 pt-4 border-t border-[rgba(255,255,255,0.08)]">
               {profile.socials.slice(0, 4).map((social) => (
                 <a
                   key={social.platform}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 text-slate-400 hover:text-white transition-colors"
+                  className="p-2 text-[rgba(255,255,255,0.65)] hover:text-white transition-all duration-200 hover:-translate-y-[1.5px] hover:translate-x-[1.5px]"
                   aria-label={social.label}
                 >
                   <SocialIcon platform={social.platform} />
@@ -200,36 +241,120 @@ export default function Navbar() {
       </AnimatePresence>
 
       {/* Right side vertical nav indicator (desktop) */}
-      <div className="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-end gap-6">
-        {NAV_ITEMS.map((item, i) => (
-          <button
-            key={item.id}
-            onClick={() => handleNav(item.href)}
-            className="flex items-center gap-3 group"
-            aria-label={`Navigate to ${item.label}`}
-          >
-            <span
-              className={cn(
-                "text-[10px] font-mono tracking-widest transition-all duration-300",
-                activeSection === item.id
-                  ? "text-white opacity-100"
-                  : "text-slate-600 group-hover:text-slate-400 opacity-0 group-hover:opacity-100"
-              )}
-            >
-              0{i + 1} {item.label.toUpperCase()}
-            </span>
-            <span
-              className={cn(
-                "w-2 h-2 rounded-full border transition-all duration-300",
-                activeSection === item.id
-                  ? "bg-primary border-primary scale-125"
-                  : "bg-transparent border-slate-600 group-hover:border-slate-400"
-              )}
+      <div className="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-6">
+        {/* Full track line */}
+        <div className="absolute right-[4px] top-4 bottom-4 w-[1px] bg-[rgba(255,255,255,0.08)] z-[-1]" />
+        
+        {/* Active line fill (computed based on active index) */}
+        {(() => {
+          const activeIndex = NAV_ITEMS.findIndex(n => n.id === activeSection);
+          const heightPercent = activeIndex >= 0 ? (activeIndex / (NAV_ITEMS.length - 1)) * 100 : 0;
+          
+          return (
+            <motion.div 
+              className="absolute right-[4px] w-[1px] bg-gradient-to-b from-[#60a5fa] to-[#a78bfa] z-[-1]"
+              initial={{ height: 0 }}
+              animate={{ top: "16px", height: `calc(${heightPercent}% - 32px)` }}
+              transition={{ type: "spring", stiffness: 100, damping: 20 }}
             />
-          </button>
-        ))}
+          );
+        })()}
+
+        {NAV_ITEMS.map((item, i) => {
+          const isActive = activeSection === item.id;
+          return (
+            <SideNavItem 
+              key={item.id} 
+              item={item} 
+              i={i} 
+              isActive={isActive} 
+              onClick={() => handleNav(item.href)} 
+            />
+          );
+        })}
       </div>
     </>
+  );
+}
+
+function SideNavItem({ item, i, isActive, onClick }: { item: any; i: number; isActive: boolean; onClick: () => void }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(true);
+    onClick();
+    setTimeout(() => setClicked(false), 600);
+  };
+
+  return (
+    <motion.button
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 2.2 + i * 0.1, duration: 0.5, ease: "easeOut" }}
+      onClick={handleClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="flex items-center justify-end gap-4 group relative h-[10px]"
+      aria-label={`Navigate to ${item.label}`}
+    >
+      <AnimatePresence mode="wait">
+        {(isActive || isHovered) && (
+          <motion.div
+            key="text"
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 8 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="flex items-center gap-2"
+          >
+            <span className="text-[10px] font-mono tracking-widest text-[#60a5fa]">
+              0{i + 1}
+            </span>
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-white">
+              {item.label}
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="relative flex items-center justify-center w-[10px] h-[10px]">
+        {/* Inactive state */}
+        <motion.div
+          animate={{
+            width: isActive ? 10 : isHovered ? 8 : 6,
+            height: isActive ? 10 : isHovered ? 8 : 6,
+            backgroundColor: isActive ? "#60a5fa" : "transparent",
+            borderColor: isActive ? "#60a5fa" : isHovered ? "rgba(96,165,250,0.5)" : "rgba(71,85,105,1)",
+            boxShadow: isActive ? "0 0 12px rgba(96,165,250,0.8)" : "none",
+          }}
+          transition={{ duration: isActive ? 0.4 : 0.3, type: isActive ? "spring" : "tween" }}
+          className="rounded-full border absolute"
+        />
+
+        {/* Active pulsing ring */}
+        {isActive && (
+          <motion.div
+            animate={{ scale: [1, 2], opacity: [0.5, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+            className="absolute rounded-full border border-[#60a5fa] w-[10px] h-[10px]"
+          />
+        )}
+
+        {/* Click pulse ring */}
+        <AnimatePresence>
+          {clicked && (
+            <motion.div
+              initial={{ scale: 1, opacity: 0.8 }}
+              animate={{ scale: 3, opacity: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="absolute rounded-full border-[2px] border-[#60a5fa] w-[10px] h-[10px]"
+            />
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.button>
   );
 }
 

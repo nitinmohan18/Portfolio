@@ -3,11 +3,11 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Mail, Download } from "lucide-react";
 import { Github, Linkedin } from "@/components/ui/Icons";
-import GlowButton from "@/components/ui/GlowButton";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { profile } from "@/data/profile";
+import { useState, useRef, ReactNode } from "react";
 
-const socialIcons: Record<string, React.ReactNode> = {
+const socialIcons: Record<string, ReactNode> = {
   github: <Github size={18} />,
   linkedin: <Linkedin size={18} />,
   instagram: (
@@ -22,54 +22,89 @@ const socialIcons: Record<string, React.ReactNode> = {
   ),
 };
 
+function RippleButton({ children, className, onClick, href, as = "button" }: any) {
+  const [coords, setCoords] = useState({ x: -1, y: -1 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setCoords({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const Component = as as any;
+
+  return (
+    <Component
+      href={href}
+      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+      className={`relative overflow-hidden cursor-pointer ${className}`}
+    >
+      <div className="relative z-10 flex items-center justify-center gap-2">
+        {children}
+      </div>
+      {isHovering && (
+        <motion.div
+          className="absolute rounded-full pointer-events-none z-0"
+          style={{
+            background: "radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%)",
+            width: "150px",
+            height: "150px",
+            left: coords.x - 75,
+            top: coords.y - 75,
+          }}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.5 }}
+          transition={{ duration: 0.3 }}
+        />
+      )}
+    </Component>
+  );
+}
+
 export default function HeroButtons() {
   const socials = profile.socials.filter((s) =>
     ["github", "linkedin", "instagram", "twitter"].includes(s.platform)
   );
 
   return (
-    <motion.div
-      className="flex flex-col gap-6"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1.0, duration: 0.7 }}
-    >
+    <div className="flex flex-col gap-6">
       {/* CTA buttons */}
       <div className="flex flex-wrap gap-4">
         <MagneticButton>
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+          <RippleButton
+            as="button"
             onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-            className="flex items-center gap-2 bg-gradient-to-br from-[#60a5fa] to-[#a78bfa] text-white border-none px-[28px] py-[14px] rounded-[50px] font-[600] text-[15px] cursor-pointer"
+            className="bg-gradient-to-br from-[#60a5fa] to-[#a78bfa] text-white border-none px-[28px] py-[14px] rounded-[50px] font-[600] text-[15px]"
           >
             View My Work
             <ArrowRight size={18} />
-          </motion.button>
+          </RippleButton>
         </MagneticButton>
 
         <MagneticButton>
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+          <RippleButton
+            as="button"
             onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="flex items-center gap-2 bg-transparent border border-[rgba(255,255,255,0.25)] text-white px-[28px] py-[14px] rounded-[50px] font-[600] text-[15px] cursor-pointer"
+            className="bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.18)] text-white px-[28px] py-[14px] rounded-[50px] font-[600] text-[15px] hover:border-[rgba(255,255,255,0.3)] transition-colors duration-200"
           >
             Contact Me
             <Mail size={18} />
-          </motion.button>
+          </RippleButton>
         </MagneticButton>
 
         {profile.resumeUrl && (
           <MagneticButton>
-            <motion.a
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+            <RippleButton
+              as="a"
               href={profile.resumeUrl}
-              className="flex items-center gap-2 bg-transparent text-white px-[20px] py-[14px] rounded-[50px] font-[600] text-[15px] cursor-pointer"
+              className="bg-[rgba(255,255,255,0.03)] text-white border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,255,255,0.18)] px-[20px] py-[14px] rounded-[50px] font-[600] text-[15px] transition-colors duration-200"
             >
               Resume <Download size={18} />
-            </motion.a>
+            </RippleButton>
           </MagneticButton>
         )}
       </div>
@@ -77,26 +112,21 @@ export default function HeroButtons() {
       {/* Social links */}
       <div className="flex items-center gap-3">
         {socials.map((social, i) => (
-          <motion.div
-            key={social.platform}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1.2 + i * 0.08 }}
-          >
-            <MagneticButton>
-              <a
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                className="w-[44px] h-[44px] flex items-center justify-center rounded-full bg-[rgba(255,255,255,0.07)] border border-[rgba(255,255,255,0.1)] text-white hover:bg-[rgba(255,255,255,0.15)] transition-colors duration-200"
-              >
+          <MagneticButton key={social.platform}>
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              className="w-[44px] h-[44px] flex items-center justify-center rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,255,255,0.18)] hover:bg-[rgba(255,255,255,0.1)] text-white transition-colors duration-200"
+            >
+              <div className="hover:scale-110 transition-transform duration-200 relative">
                 {socialIcons[social.platform] ?? null}
-              </a>
-            </MagneticButton>
-          </motion.div>
+              </div>
+            </a>
+          </MagneticButton>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }
