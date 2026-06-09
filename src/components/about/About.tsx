@@ -238,18 +238,28 @@ export default function About() {
         }
 
         @keyframes smoothTravel {
-          0%   { top: 0px; opacity: 0; }
-          5%   { top: 30px; opacity: 1; }
-          22%  { top: 28%; opacity: 1; }
-          28%  { top: 28%; opacity: 1; }
-          55%  { top: 62%; opacity: 1; }
-          61%  { top: 62%; opacity: 1; }
-          100% { top: 92%; opacity: 1; }
+          0%   { top: 0px;   opacity: 0; transform: scale(0.8); }
+          4%   { top: 0px;   opacity: 1; transform: scale(1); }
+
+          22%  { top: 28%;   opacity: 1; transform: scale(1); }
+          28%  { top: 28%;   opacity: 1; transform: scale(1.4); }
+          35%  { top: 28%;   opacity: 1; transform: scale(1); }
+
+          48%  { top: 46%;   opacity: 1; transform: scale(1); }
+          54%  { top: 46%;   opacity: 1; transform: scale(1.4); }
+          61%  { top: 46%;   opacity: 1; transform: scale(1); }
+
+          80%  { top: 83%;   opacity: 1; transform: scale(1); }
+          86%  { top: 83%;   opacity: 1; transform: scale(1.4); }
+          92%  { top: 83%;   opacity: 1; transform: scale(1); }
+
+          100% { top: 96%;   opacity: 0; transform: scale(0.8); }
         }
 
         @keyframes nodeRing {
-          0%, 15%, 45%, 90% { transform: scale(1); opacity: 0; border-width: 1px; }
-          22%, 55%, 100% { transform: scale(2.5); opacity: 0.6; border-width: 0px; }
+          0%, 21%, 47%, 79%  { transform: scale(1);   opacity: 0;   border-width: 1px; }
+          35%, 61%           { transform: scale(2.5); opacity: 0.6; border-width: 0px; }
+          92%, 100%          { transform: scale(2.5); opacity: 0.6; border-width: 0px; }
         }
       `}</style>
       
@@ -432,7 +442,7 @@ export default function About() {
                 filter: "drop-shadow(0 0 6px rgba(100,255,218,0.8))"
               }}
               initial={{ animation: "none" }}
-              whileInView={{ animation: "smoothTravel 4s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards" }}
+              whileInView={{ animation: "smoothTravel 5s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards" }}
               viewport={{ once: true, margin: "-100px" }}
             >
               <div className="bg-[#0d101c] rounded-full p-[4px] relative z-10 flex items-center justify-center">
@@ -442,7 +452,7 @@ export default function About() {
                 className="absolute rounded-full border border-[#64FFDA] opacity-0 z-0" 
                 style={{ width: "24px", height: "24px" }} 
                 initial={{ animation: "none" }}
-                whileInView={{ animation: "nodeRing 4s linear 0.8s forwards" }}
+                whileInView={{ animation: "nodeRing 5s linear 0.8s forwards" }}
                 viewport={{ once: true, margin: "-100px" }}
               />
             </motion.div>
