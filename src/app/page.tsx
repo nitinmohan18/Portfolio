@@ -9,7 +9,7 @@ import ParallaxStarsBackground from "@/components/hero/ParallaxStarsBackground";
 import About from "@/components/about/About";
 import Skills from "@/components/skills/Skills";
 import Projects from "@/components/projects/Projects";
-import Education from "@/components/education/Education";
+
 import Certifications from "@/components/certifications/Certifications";
 import Contact from "@/components/contact/Contact";
 
@@ -48,8 +48,7 @@ export default function Home() {
           <div className="section-divider" />
           <Projects />
           <div className="section-divider" />
-          <Education />
-          <div className="section-divider" />
+
           <Certifications />
           <div className="section-divider" />
           <Contact />
