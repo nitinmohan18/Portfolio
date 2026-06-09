@@ -149,9 +149,9 @@ export default function HeroButtons() {
       <div className="flex flex-wrap gap-4">
         <MagneticButton strength={0.12}>
           <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.5, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 0.5, y: 40, rotateX: 45 }}
+            animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+            transition={{ delay: 1.0, type: "spring", stiffness: 150, damping: 10 }}
             style={{ willChange: "transform, opacity" }}
             onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
             className="btn-primary"
@@ -163,9 +163,9 @@ export default function HeroButtons() {
 
         <MagneticButton strength={0.12}>
           <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 0.5, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 0.5, y: 40, rotateX: 45 }}
+            animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+            transition={{ delay: 1.15, type: "spring", stiffness: 150, damping: 10 }}
             style={{ willChange: "transform, opacity" }}
             onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
             className="btn-secondary"
@@ -178,9 +178,9 @@ export default function HeroButtons() {
         {profile.resumeUrl && (
           <MagneticButton strength={0.12}>
             <motion.a
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5, duration: 0.5, ease: "easeOut" }}
+              initial={{ opacity: 0, scale: 0.5, y: 40, rotateX: 45 }}
+              animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+              transition={{ delay: 1.3, type: "spring", stiffness: 150, damping: 10 }}
               style={{ willChange: "transform, opacity" }}
               href={profile.resumeUrl}
               className="btn-secondary"
@@ -199,15 +199,15 @@ export default function HeroButtons() {
         animate="visible"
         variants={{
           hidden: {},
-          visible: { transition: { staggerChildren: 0.12, delayChildren: 1.6 } }
+          visible: { transition: { staggerChildren: 0.12, delayChildren: 1.4 } }
         }}
       >
         {socials.map((social) => (
           <MagneticButton key={social.platform}>
             <motion.a
               variants={{
-                hidden: { opacity: 0, y: -30 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.34, 1.56, 0.64, 1] } }
+                hidden: { opacity: 0, scale: 0, rotate: -45 },
+                visible: { opacity: 1, scale: 1, rotate: 0, transition: { type: "spring", stiffness: 300, damping: 12 } }
               }}
               style={{ willChange: "transform, opacity" }}
               href={social.url}

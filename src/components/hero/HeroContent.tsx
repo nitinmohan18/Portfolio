@@ -55,9 +55,9 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
       {/* Eyebrow */}
       <motion.div 
         className="hey-label"
-        initial={{ opacity: 0 }}
-        animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut", delay: 0 }}
+        initial={{ opacity: 0, y: -20, scale: 0.8 }}
+        animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.6, type: "spring", bounce: 0.5 }}
         style={{ willChange: "opacity" }}
       >
         <span className="hey-line-left" />
@@ -142,22 +142,7 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           color: #64FFDA;
           margin-left: 0.3em;
         }
-        .hero-name {
-          opacity: 0;
-          animation: fadeSlideUp 0.7s ease forwards;
-          animation-delay: 0.2s;
-          animation-fill-mode: both;
-        }
-        .hero-bio {
-          opacity: 0;
-          animation: fadeSlideUp 0.7s ease forwards;
-          animation-delay: 0.9s;
-          animation-fill-mode: both;
-        }
-        @keyframes fadeSlideUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
+        /* Removed hero-name and hero-bio to rely on framer-motion */
         .stat-card-wrapper {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -289,11 +274,11 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
       
       {/* Name */}
       <motion.h1
-        className="font-display font-[800] text-white tracking-tight flex flex-wrap hero-name"
-        style={{ fontSize: "clamp(32px, 4.5vw, 60px)", marginBottom: "8px" }}
-        initial={{ opacity: 0, y: 30 }}
-        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-        transition={{ duration: 0.7, delay: 0.2 }}
+        className="font-display font-[800] text-white tracking-tight flex flex-wrap"
+        style={{ fontSize: "clamp(32px, 4.5vw, 60px)", marginBottom: "8px", perspective: "1000px" }}
+        initial={{ opacity: 0, rotateX: 60, y: 40, scale: 0.9 }}
+        animate={isVisible ? { opacity: 1, rotateX: 0, y: 0, scale: 1 } : { opacity: 0 }}
+        transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.2 }}
       >
         <span className="name-first">{profile.firstName}</span>
         <span className="name-second">{profile.lastName}</span>
@@ -301,9 +286,9 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
 
       {/* Role typing / Subtitle shimmer */}
       <motion.div 
-        initial={{ opacity: 0, y: 48, filter: "blur(12px)", scale: 0.94 }}
-        animate={isVisible ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 } : {}}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        initial={{ opacity: 0, x: -40, filter: "blur(10px)" }}
+        animate={isVisible ? { opacity: 1, x: 0, filter: "blur(0px)" } : {}}
+        transition={{ type: "spring", stiffness: 120, damping: 14, delay: 0.4 }}
         style={{ willChange: "transform", fontSize: "clamp(16px, 2vw, 28px)" }}
         className="font-display font-[600] text-white min-h-[40px] relative" 
       >
@@ -313,10 +298,10 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
 
       {/* Bio */}
       <motion.div 
-        className="bio-text hero-bio"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.7, delay: 0.9 }}
+        className="bio-text"
+        initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
+        animate={isVisible ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+        transition={{ type: "spring", stiffness: 100, damping: 12, delay: 0.6 }}
         style={{ willChange: "transform, opacity" }}
       >
         Building scalable web applications,{" "}
@@ -352,12 +337,13 @@ function StatCardItem({ stat, index, isVisible }: { stat: typeof STAT_CARDS[0], 
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.95 }}
+      initial={{ opacity: 0, y: 40, scale: 0.8, rotate: index % 2 === 0 ? -4 : 4 }}
+      animate={isVisible ? { opacity: 1, y: 0, scale: 1, rotate: 0 } : { opacity: 0 }}
       transition={{ 
-        duration: 0.6, 
-        delay: index * 0.15 + 1.9,
-        ease: [0.22, 1, 0.36, 1]
+        type: "spring", 
+        stiffness: 150, 
+        damping: 12, 
+        delay: index * 0.15 + 0.8
       }}
       onAnimationComplete={() => setWillChange("auto")}
       className="stat-card"
