@@ -241,9 +241,9 @@ export default function About() {
           0%   { top: 0px;  opacity: 0; transform: scale(0.8); }
           4%   { top: 0px;  opacity: 1; transform: scale(1); }
 
-          20%  { top: 20%;  opacity: 1; transform: scale(1); }
-          26%  { top: 20%;  opacity: 1; transform: scale(1.4); }
-          33%  { top: 20%;  opacity: 1; transform: scale(1); }
+          20%  { top: 18%;  opacity: 1; transform: scale(1); }
+          26%  { top: 18%;  opacity: 1; transform: scale(1.4); }
+          33%  { top: 18%;  opacity: 1; transform: scale(1); }
 
           48%  { top: 46%;  opacity: 1; transform: scale(1); }
           54%  { top: 46%;  opacity: 1; transform: scale(1.4); }
