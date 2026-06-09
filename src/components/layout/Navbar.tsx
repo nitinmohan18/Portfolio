@@ -78,6 +78,10 @@ export default function Navbar() {
         .nav-link-hover.active::after, .nav-link-hover:hover::after {
           transform: scaleX(1);
         }
+        .nav-link-hover.active::after {
+          box-shadow: 0 0 12px rgba(125,211,252,0.8);
+          background: #7DD3FC;
+        }
         .nav-social-icons {
           display: flex;
           gap: 10px;
@@ -318,7 +322,10 @@ export default function Navbar() {
                     isActive ? "active text-[#7DD3FC]" : "text-[rgba(180,195,220,0.75)]"
                   )}
                   style={{ 
-                    ...(isActive ? { textShadow: '0 0 16px rgba(125,211,252,0.6)' } : {}),
+                    ...(isActive ? { 
+                      textShadow: '0 0 12px rgba(125,211,252,0.8), 0 0 24px rgba(125,211,252,0.4)',
+                      fontWeight: 700
+                    } : {}),
                     fontSize: "clamp(10px, 0.85vw, 13px)"
                   }}
                 >
@@ -417,7 +424,7 @@ export default function Navbar() {
                   className={cn(
                     "text-[24px] font-[600] tracking-[3px] uppercase transition-all duration-300",
                     isActive
-                      ? "text-[#64FFDA] drop-shadow-[0_0_20px_rgba(100,255,218,0.4)]"
+                      ? "text-[#7DD3FC] drop-shadow-[0_0_16px_rgba(125,211,252,0.8)] scale-105"
                       : "text-[rgba(180,195,220,0.8)] hover:text-[#64FFDA] hover:drop-shadow-[0_0_20px_rgba(100,255,218,0.4)]"
                   )}
                 >

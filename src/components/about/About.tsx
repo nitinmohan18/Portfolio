@@ -280,10 +280,10 @@ export default function About() {
       <motion.div 
         className="absolute w-full text-center z-10"
         style={{ top: "-80px", left: 0 }}
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: -50, scale: 0.8, filter: "blur(8px)" }}
+        whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 1, ease: "easeOut", type: "spring", bounce: 0.4 }}
       >
         <h3 
           style={{ 
@@ -309,11 +309,11 @@ export default function About() {
         <div className="flex flex-col pt-0">
           
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            style={{ marginBottom: "32px" }}
+            initial={{ opacity: 0, y: 50, rotateX: -40, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ type: "spring", stiffness: 100, damping: 12, delay: 0.2 }}
+            style={{ marginBottom: "32px", perspective: "1000px" }}
           >
             <h2 
               style={{ 
@@ -332,10 +332,10 @@ export default function About() {
           {/* Bio paragraphs */}
           <div className="flex flex-col gap-0 text-[rgba(255,255,255,0.65)] text-[16px] leading-[1.75]">
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -40, filter: "blur(4px)" }}
+              whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.3, type: "spring", stiffness: 120 }}
               style={{ marginBottom: "16px" }}
             >
               <p>
@@ -343,10 +343,10 @@ export default function About() {
               </p>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -40, filter: "blur(4px)" }}
+              whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.5 }}
+              transition={{ duration: 0.6, delay: 0.4, type: "spring", stiffness: 120 }}
               style={{ marginBottom: "16px" }}
             >
               <p>
@@ -355,10 +355,10 @@ export default function About() {
               </p>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -40, filter: "blur(4px)" }}
+              whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.5, type: "spring", stiffness: 120 }}
               style={{ marginBottom: "28px" }}
             >
               <p>
@@ -375,10 +375,10 @@ export default function About() {
               {primaryBadges.map((badge, idx) => (
                 <motion.div
                   key={badge.title}
-                  initial={{ opacity: 0, y: 16, scale: 0.9 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  initial={{ opacity: 0, y: 30, scale: 0.5, rotate: -5 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx === 0 ? 0.6 : 0.75, ease: [0.34, 1.56, 0.64, 1] }}
+                  transition={{ type: "spring", stiffness: 200, damping: 12, delay: 0.6 + idx * 0.15 }}
                   className="flex items-center gap-[6px] badge-primary cursor-default"
                 >
                   <span style={{ display: "flex", color: "rgba(100,255,218,0.9)" }}>{badge.icon}</span>
@@ -392,10 +392,10 @@ export default function About() {
               {skillBadges.map((badge, idx) => (
                 <motion.div
                   key={badge.title}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 20, scale: 0.8, rotate: 5 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.8 + idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ type: "spring", stiffness: 250, damping: 15, delay: 0.8 + idx * 0.1 }}
                   className="badge-dark cursor-default"
                   style={{ 
                     "--badge-rgb": badge.colorRGB,
@@ -416,10 +416,10 @@ export default function About() {
 
           <motion.div 
             className="w-full flex justify-center mb-10"
-            initial={{ opacity: 0, y: -20, scale: 0.9 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            initial={{ opacity: 0, y: -40, scale: 0.8, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.4, type: "spring", stiffness: 100 }}
+            transition={{ duration: 0.8, delay: 0.3, type: "spring", bounce: 0.5 }}
           >
             <motion.div 
               whileHover={{ 
@@ -550,16 +550,18 @@ export default function About() {
                 />
 
                 <motion.div
-                  initial={{ opacity: 0, y: 20, scale: 0.98 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true }}
+                  initial={{ opacity: 0, x: 60, scale: 0.9, rotateY: 15 }}
+                  whileInView={{ opacity: 1, x: 0, scale: 1, rotateY: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
                   transition={{
-                    duration: 0.55,
-                    delay: cardDelay,
-                    ease: [0.22, 1, 0.36, 1]
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 14,
+                    delay: cardDelay
                   }}
                   className="flex items-start w-full relative group cursor-default"
                   style={{ 
+                    perspective: "1000px",
                     "--card-rgb": item.colorRGB,
                     "--card-color": item.color
                   } as React.CSSProperties}
