@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 
 interface PagePreloaderProps {
@@ -8,14 +8,19 @@ interface PagePreloaderProps {
 
 export default function PagePreloader({ onComplete }: PagePreloaderProps) {
   const [phase, setPhase] = useState<0 | 1 | 2>(0);
+  const onCompleteRef = useRef(onComplete);
+
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useEffect(() => {
     // Phase 1→2 (warp): after 1600ms
     const t1 = setTimeout(() => setPhase(1), 1600);
     // Phase 2→done: after 1600+700=2300ms, call onComplete + setPhase(2)
-    const t2 = setTimeout(() => { onComplete(); setPhase(2); }, 2300);
+    const t2 = setTimeout(() => { onCompleteRef.current(); setPhase(2); }, 2300);
     return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [onComplete]);
+  }, []);
 
   return (
     <motion.div
