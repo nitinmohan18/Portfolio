@@ -48,9 +48,10 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
 
   return (
     <div
-      className="flex flex-col gap-7 max-w-2xl"
+      className="flex flex-col gap-8 max-w-2xl"
       style={{ perspective: "1400px", perspectiveOrigin: "50% 30%" }}
     >
+      <div className="flex flex-col" style={{ gap: "4px" }}>
       {/* Eyebrow */}
       <motion.div 
         className="hey-label"
@@ -71,7 +72,7 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           display: flex;
           align-items: center;
           gap: 8px;
-          margin-bottom: 16px;
+          margin-bottom: 0px;
         }
         .hey-text {
           font-size: clamp(9px, 0.9vw, 11px);
@@ -175,9 +176,14 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           }
         }
         .stat-card:hover {
-          transform: translateY(-6px) scale(1.02);
+          transform: translateY(-4px) scale(1.015);
           border-color: var(--hover-border);
-          box-shadow: 0 16px 40px rgba(0,0,0,0.3), 0 0 20px var(--hover-glow);
+          box-shadow: 0 12px 32px rgba(0,0,0,0.25), 0 0 16px var(--hover-glow);
+          transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .stat-card:active {
+          transform: translateY(-2px) scale(0.99);
+          transition: all 0.15s ease;
         }
         .stat-card-top-line {
           position: absolute;
@@ -193,6 +199,7 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         .stat-card:hover .stat-card-top-line {
           transform: scaleX(1);
           opacity: 1;
+          transition: all 0.4s ease;
         }
         .stat-card-inner-glow {
           position: absolute;
@@ -217,7 +224,8 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         .stat-card:hover .stat-card-icon-box {
           background: var(--icon-bg-hover);
           border-color: var(--icon-border-hover);
-          transform: scale(1.1) rotate(-5deg);
+          transform: scale(1.08) rotate(-4deg);
+          transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
         }
         .stat-card-label {
           font-size: 8px;
@@ -266,7 +274,7 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
       {/* Name */}
       <h1
         className="font-display font-[800] text-white tracking-tight flex flex-wrap"
-        style={{ fontSize: "clamp(32px, 4.5vw, 60px)", marginBottom: "12px", marginTop: "-10px" }}
+        style={{ fontSize: "clamp(32px, 4.5vw, 60px)", marginBottom: "8px" }}
       >
         <motion.span
           className="name-first"
@@ -293,11 +301,12 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         initial={{ opacity: 0, y: 48, filter: "blur(12px)", scale: 0.94 }}
         animate={isVisible ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 } : {}}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        style={{ willChange: "transform", fontSize: "clamp(16px, 2vw, 28px)", marginBottom: "16px" }}
+        style={{ willChange: "transform", fontSize: "clamp(16px, 2vw, 28px)" }}
         className="font-display font-[600] text-white min-h-[40px] relative" 
       >
         <TypingText />
       </motion.div>
+      </div>
 
       {/* Bio */}
       <motion.div 

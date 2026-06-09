@@ -50,6 +50,7 @@ export default function HeroButtons() {
           background-size: 200%;
           background-position: right center;
           box-shadow: 0 0 24px rgba(99,102,241,0.45);
+          transform: translateY(-3px);
         }
         .btn-primary .arrow-icon {
           transition: transform 0.3s ease;
@@ -58,7 +59,7 @@ export default function HeroButtons() {
           transform: translateX(4px);
         }
         .btn-primary:active {
-          transform: scale(0.97);
+          transform: translateY(-1px) scale(0.98);
         }
 
         .btn-secondary {
@@ -80,6 +81,7 @@ export default function HeroButtons() {
           background: rgba(100,255,218,0.07);
           border-color: rgba(100,255,218,0.7);
           box-shadow: 0 0 16px rgba(100,255,218,0.15);
+          transform: translateY(-3px);
         }
         .btn-secondary .mail-icon {
           transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -88,7 +90,7 @@ export default function HeroButtons() {
           transform: rotate(15deg);
         }
         .btn-secondary:active {
-          transform: scale(0.97);
+          transform: translateY(-1px) scale(0.98);
         }
 
         .social-icon-btn {
@@ -143,7 +145,7 @@ export default function HeroButtons() {
 
       {/* CTA buttons */}
       <div className="flex flex-wrap gap-4">
-        <MagneticButton>
+        <MagneticButton strength={0.18}>
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -157,7 +159,7 @@ export default function HeroButtons() {
           </motion.button>
         </MagneticButton>
 
-        <MagneticButton>
+        <MagneticButton strength={0.18}>
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -172,7 +174,7 @@ export default function HeroButtons() {
         </MagneticButton>
 
         {profile.resumeUrl && (
-          <MagneticButton>
+          <MagneticButton strength={0.18}>
             <motion.a
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
