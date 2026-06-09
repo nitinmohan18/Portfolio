@@ -238,28 +238,29 @@ export default function About() {
         }
 
         @keyframes smoothTravel {
-          0%   { top: 0px;   opacity: 0; transform: scale(0.8); }
-          4%   { top: 0px;   opacity: 1; transform: scale(1); }
+          0%   { top: 0px;  opacity: 0; transform: scale(0.8); }
+          4%   { top: 0px;  opacity: 1; transform: scale(1); }
 
-          22%  { top: 28%;   opacity: 1; transform: scale(1); }
-          28%  { top: 28%;   opacity: 1; transform: scale(1.4); }
-          35%  { top: 28%;   opacity: 1; transform: scale(1); }
+          20%  { top: 20%;  opacity: 1; transform: scale(1); }
+          26%  { top: 20%;  opacity: 1; transform: scale(1.4); }
+          33%  { top: 20%;  opacity: 1; transform: scale(1); }
 
-          48%  { top: 46%;   opacity: 1; transform: scale(1); }
-          54%  { top: 46%;   opacity: 1; transform: scale(1.4); }
-          61%  { top: 46%;   opacity: 1; transform: scale(1); }
+          48%  { top: 46%;  opacity: 1; transform: scale(1); }
+          54%  { top: 46%;  opacity: 1; transform: scale(1.4); }
+          61%  { top: 46%;  opacity: 1; transform: scale(1); }
 
-          80%  { top: 83%;   opacity: 1; transform: scale(1); }
-          86%  { top: 83%;   opacity: 1; transform: scale(1.4); }
-          92%  { top: 83%;   opacity: 1; transform: scale(1); }
+          80%  { top: 83%;  opacity: 1; transform: scale(1); }
+          86%  { top: 83%;  opacity: 1; transform: scale(1.4); }
+          93%  { top: 83%;  opacity: 1; transform: scale(1); }
 
-          100% { top: 96%;   opacity: 0; transform: scale(0.8); }
+          100% { top: 92%;  opacity: 1; transform: scale(1); }
         }
 
         @keyframes nodeRing {
-          0%, 21%, 47%, 79%  { transform: scale(1);   opacity: 0;   border-width: 1px; }
-          35%, 61%           { transform: scale(2.5); opacity: 0.6; border-width: 0px; }
-          92%, 100%          { transform: scale(2.5); opacity: 0.6; border-width: 0px; }
+          0%, 19%, 47%, 79%  { transform: scale(1);   opacity: 0;   border-width: 1px; }
+          33%                { transform: scale(2.5); opacity: 0.6; border-width: 0px; }
+          61%                { transform: scale(2.5); opacity: 0.6; border-width: 0px; }
+          93%, 100%          { transform: scale(2.5); opacity: 0.6; border-width: 0px; }
         }
       `}</style>
       
