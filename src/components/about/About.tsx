@@ -14,7 +14,7 @@ const skillBadges = [
   { title: "Python", color: "#f59e0b", colorRGB: "245, 158, 11" },
   { title: "Deep Learning", color: "#818cf8", colorRGB: "129, 140, 248" },
   { title: "React", color: "#38bdf8", colorRGB: "56, 189, 248" },
-  { title: "Problem Solver", color: "#f472b6", colorRGB: "244, 114, 182" },
+  { title: "Generative AI", color: "#f472b6", colorRGB: "244, 114, 182" },
   { title: "Collaborative Builder", color: "#34d399", colorRGB: "52, 211, 153" }
 ];
 
@@ -202,39 +202,46 @@ export default function About() {
         }
 
         .badge-dark {
-          background: rgba(15,18,30,0.8);
-          border: 1px solid rgba(255,255,255,0.1);
-          color: rgba(180,195,220,0.8);
-          padding: 7px 14px;
+          background: rgba(13,16,28,0.6);
+          border: 1px solid rgba(var(--badge-rgb), 0.15);
+          color: rgba(220,230,255,0.85);
+          padding: 8px 16px;
           border-radius: 20px;
           font-size: 11px;
-          font-weight: 500;
+          font-weight: 600;
           display: inline-flex;
           align-items: center;
-          gap: 6px;
+          gap: 8px;
           position: relative;
           overflow: hidden;
-          transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+          backdrop-filter: blur(8px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2), inset 0 0 10px rgba(var(--badge-rgb), 0.03);
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .badge-dark:hover {
-          border-color: rgba(var(--badge-rgb), 0.4);
-          background: rgba(var(--badge-rgb), 0.06);
-          box-shadow: 0 0 12px rgba(var(--badge-rgb), 0.15);
-          transform: translateY(-2px);
+          border-color: rgba(var(--badge-rgb), 0.5);
+          background: rgba(var(--badge-rgb), 0.08);
+          color: #ffffff;
+          box-shadow: 0 0 20px rgba(var(--badge-rgb), 0.2), inset 0 0 15px rgba(var(--badge-rgb), 0.08);
+          transform: translateY(-3px) scale(1.02);
         }
 
         .badge-dark:active {
           transform: scale(0.97);
         }
 
-        .badge-accent {
-          width: 2px;
-          height: 60%;
-          border-radius: 1px;
-          position: absolute;
-          left: 0;
-          top: 20%;
+        .badge-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          box-shadow: 0 0 8px var(--card-color), 0 0 12px var(--card-color);
+          animation: pulseDot 3s infinite alternate;
+        }
+
+        @keyframes pulseDot {
+          0% { opacity: 0.6; transform: scale(0.85); }
+          100% { opacity: 1; transform: scale(1.15); }
         }
 
         @keyframes smoothTravel {
@@ -314,8 +321,7 @@ export default function About() {
               style={{ marginBottom: "16px" }}
             >
               <p>
-                AI & ML engineering student at SIRT Bhopal (RGPV), building 
-                production-ready intelligent systems and full-stack web applications.
+                AI & Machine Learning student at SIRT Bhopal focused on computer vision, intelligent automation, and scalable web applications.
               </p>
             </motion.div>
             <motion.div
@@ -364,7 +370,7 @@ export default function About() {
             </div>
 
             {/* Skill Badges Row */}
-            <div className="flex flex-wrap" style={{ gap: "8px" }}>
+            <div className="flex flex-wrap" style={{ gap: "10px" }}>
               {skillBadges.map((badge, idx) => (
                 <motion.div
                   key={badge.title}
@@ -373,9 +379,12 @@ export default function About() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.8 + idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
                   className="badge-dark cursor-default"
-                  style={{ "--badge-rgb": badge.colorRGB } as React.CSSProperties}
+                  style={{ 
+                    "--badge-rgb": badge.colorRGB,
+                    "--card-color": badge.color 
+                  } as React.CSSProperties}
                 >
-                  <div className="badge-accent" style={{ background: badge.color }} />
+                  <div className="badge-dot" style={{ background: badge.color }} />
                   {badge.title}
                 </motion.div>
               ))}
