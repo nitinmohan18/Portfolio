@@ -146,7 +146,7 @@ export default function HeroButtons() {
       `}</style>
 
       {/* CTA buttons */}
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-4 hero-buttons">
         <MagneticButton strength={0.12}>
           <motion.button
             initial={{ opacity: 0, scale: 0.5, y: 40, rotateX: 45 }}

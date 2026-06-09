@@ -278,8 +278,7 @@ export default function About() {
       `}</style>
       
       <motion.div 
-        className="absolute w-full text-center z-10"
-        style={{ top: "-80px", left: 0 }}
+        className="absolute w-full text-center z-10 -top-[40px] md:-top-[80px] left-0"
         initial={{ opacity: 0, y: -50, scale: 0.8, filter: "blur(8px)" }}
         whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true }}
