@@ -316,10 +316,10 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         transition={{ duration: 0.7, ease: "easeOut", delay: 0.9 }}
         style={{ willChange: "transform, opacity" }}
       >
-        Building <span className="bio-highlight">scalable</span> web applications,{" "}
-        <span className="bio-highlight">intelligent systems</span>, and impactful digital experiences through{" "}
+        Building scalable web applications,{" "}
+        intelligent systems, and impactful digital experiences through{" "}
         <span className="bio-highlight">AI</span>, innovation, and{" "}
-        <span className="bio-highlight">open-source</span> contributions.
+        <span className="bio-highlight">open-source contributions</span>.
       </motion.div>
 
       {/* CTA Buttons + Socials */}
@@ -384,7 +384,7 @@ function StatCardItem({ stat, index, isVisible }: { stat: typeof STAT_CARDS[0], 
       {stat.special && (
         <div className="stat-card-special">
           <div className="stat-card-special-dot" />
-          <span className="stat-card-special-text">Available now</span>
+          <span className="stat-card-special-text">Available</span>
         </div>
       )}
     </motion.div>

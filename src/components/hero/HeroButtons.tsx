@@ -94,6 +94,8 @@ export default function HeroButtons() {
         }
 
         .social-icon-btn {
+          position: relative;
+          overflow: visible;
           background: rgba(255,255,255,0.04);
           border: 1px solid rgba(255,255,255,0.1);
           border-radius: 50%;
@@ -145,7 +147,7 @@ export default function HeroButtons() {
 
       {/* CTA buttons */}
       <div className="flex flex-wrap gap-4">
-        <MagneticButton strength={0.18}>
+        <MagneticButton strength={0.12}>
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -154,12 +156,12 @@ export default function HeroButtons() {
             onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
             className="btn-primary"
           >
-            View My Work
+            Explore Projects
             <ArrowRight size={18} className="arrow-icon" />
           </motion.button>
         </MagneticButton>
 
-        <MagneticButton strength={0.18}>
+        <MagneticButton strength={0.12}>
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -174,7 +176,7 @@ export default function HeroButtons() {
         </MagneticButton>
 
         {profile.resumeUrl && (
-          <MagneticButton strength={0.18}>
+          <MagneticButton strength={0.12}>
             <motion.a
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
