@@ -25,6 +25,9 @@ export const skillGroups: SkillGroup[] = [
     category: "frontend",
     label: "Frontend",
     skills: [
+      { name: "HTML5", icon: "html5", color: "#E34F26" },
+      { name: "CSS3", icon: "css", color: "#1572B6" },
+      { name: "JavaScript", icon: "javascript", color: "#F7DF1E" },
       { name: "Next.js", icon: "nextdotjs", color: "#000000" },
     ],
   },
@@ -61,14 +64,13 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    category: "devops",
-    label: "DevOps",
+    category: "tools",
+    label: "Tools",
     skills: [
       { name: "Git", icon: "git", color: "#F05032" },
       { name: "GitHub", icon: "github", color: "#181717" },
       { name: "Vercel", icon: "vercel", color: "#000000" },
       { name: "Render", icon: "render", color: "#46E3B7" },
-      { name: "Canva", icon: "canva", color: "#00C4CC" },
     ],
   },
 ];
