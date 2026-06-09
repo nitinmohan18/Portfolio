@@ -77,34 +77,25 @@ export default function About() {
         }
 
         @keyframes smoothTravel {
-          0%   { top: 20px; opacity: 0; transform: scale(0.6); }
-          3%   { opacity: 1; transform: scale(1); }
+          0%   { top: 0%; opacity: 0; transform: scale(0.6); }
+          5%   { top: 8%; opacity: 1; transform: scale(1); }
           
-          /* Pause at Card 1 (14%) */
-          10%  { top: 14%; transform: scale(1.3); }
-          25%  { top: 14%; transform: scale(1); }
+          /* Pause at Card 1 */
+          15%  { top: 16%; transform: scale(1.3); }
+          25%  { top: 16%; transform: scale(1); }
           
-          /* Pause at Card 2 (45%) */
-          45%  { top: 45%; transform: scale(1.3); }
-          60%  { top: 45%; transform: scale(1); }
+          /* Pause at Card 2 */
+          45%  { top: 43%; transform: scale(1.3); }
+          60%  { top: 43%; transform: scale(1); }
           
-          /* Pause at Card 3 and stop permanently (81%) */
-          85%  { top: 81%; transform: scale(1.3); opacity: 1; }
-          100% { top: 81%; transform: scale(1.3); opacity: 1; }
+          /* Pause at Card 3 and stop permanently */
+          85%  { top: 83%; transform: scale(1.3); opacity: 1; }
+          100% { top: 83%; transform: scale(1.3); opacity: 1; }
         }
 
         @keyframes nodeRing {
-          0%, 9%  { transform: scale(1); opacity: 0; }
-          10%     { transform: scale(1); opacity: 0.8; }
-          25%     { transform: scale(2.5); opacity: 0; }
-          
-          44%     { transform: scale(1); opacity: 0; }
-          45%     { transform: scale(1); opacity: 0.8; }
-          60%     { transform: scale(2.5); opacity: 0; }
-          
-          84%     { transform: scale(1); opacity: 0; }
-          85%     { transform: scale(1); opacity: 0.8; }
-          100%    { transform: scale(2.5); opacity: 0; }
+          0%, 14%, 44%, 84% { transform: scale(1); opacity: 0; border-width: 1px; }
+          25%, 60%, 100% { transform: scale(2.5); opacity: 0.6; border-width: 0px; }
         }
 
         @keyframes nodePulse {
@@ -383,31 +374,6 @@ export default function About() {
 
         {/* Right — Timeline Cards */}
         <div className="flex flex-col items-stretch relative w-full self-center" style={{ maxWidth: "480px" }}>
-          
-          {/* Traveling Cap Icon */}
-          <motion.div
-            className="absolute z-20 flex items-center justify-center opacity-0"
-            style={{ 
-              left: "50%",
-              marginLeft: "-10px", // Center 20px
-              color: "#64FFDA",
-              filter: "drop-shadow(0 0 6px rgba(100,255,218,0.8))"
-            }}
-            initial={{ animation: "none" }}
-            whileInView={{ animation: "smoothTravel 4s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards" }}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <div className="bg-[#0d101c] rounded-full p-[4px] relative z-10 flex items-center justify-center">
-              <School size={16} />
-            </div>
-            <motion.div 
-              className="absolute rounded-full border border-[#64FFDA] opacity-0 z-0" 
-              style={{ width: "24px", height: "24px" }} 
-              initial={{ animation: "none" }}
-              whileInView={{ animation: "nodeRing 4s linear 0.8s forwards" }}
-              viewport={{ once: true, margin: "-100px" }}
-            />
-          </motion.div>
 
           <motion.div 
             className="w-full text-center"
@@ -434,7 +400,53 @@ export default function About() {
             </div>
           </motion.div>
 
-          {educationData.map((item, index) => {
+          {/* Wrapper for exactly the timeline threads and cards */}
+          <div className="relative w-full flex flex-col items-stretch">
+            
+            {/* Continuous Left Timeline Line */}
+            <motion.div 
+              className="absolute z-0"
+              style={{
+                left: "-30px", // 30px left of the cards
+                width: "2px",
+                top: "0px", // Starts exactly at the first thread
+                bottom: "0px", // Ends exactly at the bottom of the last card
+                background: "linear-gradient(180deg, rgba(52,211,153,0.6) 0%, rgba(56,189,248,0.6) 40%, rgba(129,140,248,0.6) 80%, transparent 100%)",
+                boxShadow: "0 0 8px rgba(100,255,218,0.2)",
+                transformOrigin: "top"
+              }}
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+            />
+
+            {/* Traveling Cap Icon on the Left Line */}
+            <motion.div
+              className="absolute z-20 flex items-center justify-center opacity-0"
+              style={{ 
+                left: "-37px", 
+                marginTop: "-12px", // Center on coordinate
+                color: "#64FFDA",
+                filter: "drop-shadow(0 0 6px rgba(100,255,218,0.8))"
+              }}
+              initial={{ animation: "none" }}
+              whileInView={{ animation: "smoothTravel 4s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards" }}
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <div className="bg-[#0d101c] rounded-full p-[4px] relative z-10 flex items-center justify-center">
+                <School size={16} />
+              </div>
+              <motion.div 
+                className="absolute rounded-full border border-[#64FFDA] opacity-0 z-0" 
+                style={{ width: "24px", height: "24px" }} 
+                initial={{ animation: "none" }}
+                whileInView={{ animation: "nodeRing 4s linear 0.8s forwards" }}
+                viewport={{ once: true, margin: "-100px" }}
+              />
+            </motion.div>
+
+            {educationData.map((item, index) => {
             const isHero = item.active;
             const cardDelay = 0.5 + index * 0.2; // 0.5, 0.7, 0.9
 
@@ -481,6 +493,31 @@ export default function About() {
                     "--card-color": item.color
                   } as React.CSSProperties}
                 >
+                  {/* Left Side Dot Wrapper */}
+                  <div 
+                    className="absolute z-10 flex items-center justify-center" 
+                    style={{ 
+                      left: "-34px", // -30px + 1px center - 5px radius wrapper
+                      top: "50%", 
+                      transform: "translateY(-50%)", 
+                      width: "10px", 
+                      height: "10px" 
+                    }}
+                  >
+                    <motion.div 
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ type: "spring", stiffness: 400, damping: 15, delay: cardDelay }}
+                      className="w-[8px] h-[8px] rounded-full edu-dot"
+                      style={{
+                        background: item.color,
+                        border: `2px solid rgba(${item.colorRGB}, 0.3)`,
+                        animationDelay: `${index * 0.4}s`
+                      }}
+                    />
+                  </div>
+
                   {/* Content Card */}
                   <div 
                     className={`flex-1 flex flex-col relative edu-card ${isHero ? 'card-3-glow' : ''}`}
@@ -670,6 +707,7 @@ export default function About() {
               </React.Fragment>
             );
           })}
+          </div>
         </div>
       </div>
     </SectionWrapper>
