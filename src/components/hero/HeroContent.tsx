@@ -74,7 +74,7 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           margin-bottom: 16px;
         }
         .hey-text {
-          font-size: 13px;
+          font-size: clamp(9px, 0.9vw, 11px);
           font-weight: 700;
           letter-spacing: 5px;
           text-transform: uppercase;
@@ -104,10 +104,10 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           background: linear-gradient(90deg, rgba(100,255,218,0.35), transparent);
         }
         .bio-text {
-          font-size: 15px;
+          font-size: clamp(13px, 1.1vw, 15px);
           line-height: 1.85;
           color: rgba(148, 163, 184, 0.85);
-          max-width: 460px;
+          max-width: 480px;
           font-weight: 400;
           letter-spacing: 0.2px;
         }
@@ -161,8 +161,8 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         .stat-card {
           background: rgba(13, 16, 28, 0.85);
           border: 1px solid rgba(255,255,255,0.06);
-          border-radius: 16px;
-          padding: 20px 18px;
+          border-radius: 14px;
+          padding: 14px 14px;
           backdrop-filter: blur(12px);
           position: relative;
           overflow: hidden;
@@ -205,10 +205,10 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           pointer-events: none;
         }
         .stat-card-icon-box {
-          width: 36px; height: 36px;
+          width: 30px; height: 30px;
           border-radius: 10px;
           display: flex; align-items: center; justify-content: center;
-          margin-bottom: 14px;
+          margin-bottom: 10px;
           background: var(--icon-bg);
           border: 1px solid var(--icon-border);
           color: var(--icon-color);
@@ -220,7 +220,7 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           transform: scale(1.1) rotate(-5deg);
         }
         .stat-card-label {
-          font-size: 9px;
+          font-size: 8px;
           font-weight: 700;
           letter-spacing: 2.5px;
           text-transform: uppercase;
@@ -229,14 +229,14 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           margin-bottom: 8px;
         }
         .stat-card-title {
-          font-size: 13px;
+          font-size: clamp(11px, 1vw, 14px);
           font-weight: 600;
           color: rgba(220, 235, 255, 0.92);
           line-height: 1.4;
           margin-bottom: 5px;
         }
         .stat-card-subtitle {
-          font-size: 11px;
+          font-size: 10px;
           font-weight: 400;
           color: rgba(148, 163, 184, 0.65);
           line-height: 1.5;
@@ -266,7 +266,7 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
       {/* Name */}
       <h1
         className="font-display font-[800] text-white tracking-tight flex flex-wrap"
-        style={{ fontSize: "clamp(36px, 5vw, 56px)" }}
+        style={{ fontSize: "clamp(32px, 4.5vw, 60px)", marginBottom: "12px", marginTop: "-10px" }}
       >
         <motion.span
           className="name-first"
@@ -293,8 +293,8 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         initial={{ opacity: 0, y: 48, filter: "blur(12px)", scale: 0.94 }}
         animate={isVisible ? { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 } : {}}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        style={{ willChange: "transform", fontSize: "clamp(20px, 3vw, 28px)" }}
-        className="font-display font-[600] text-white min-h-[52px] relative" 
+        style={{ willChange: "transform", fontSize: "clamp(16px, 2vw, 28px)", marginBottom: "16px" }}
+        className="font-display font-[600] text-white min-h-[40px] relative" 
       >
         <TypingText />
       </motion.div>

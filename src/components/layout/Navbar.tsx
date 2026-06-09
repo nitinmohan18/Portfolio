@@ -303,7 +303,7 @@ export default function Navbar() {
           </MagneticButton>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-[36px]" aria-label="Primary navigation">
+          <nav className="hidden md:flex items-center gap-[36px]" aria-label="Primary navigation">
             {NAV_ITEMS.map((item, i) => {
               const isActive = activeSection === item.id;
               return (
@@ -317,7 +317,10 @@ export default function Navbar() {
                     "nav-link-hover relative border border-transparent",
                     isActive ? "active text-[#7DD3FC]" : "text-[rgba(180,195,220,0.75)]"
                   )}
-                  style={isActive ? { textShadow: '0 0 16px rgba(125,211,252,0.6)' } : {}}
+                  style={{ 
+                    ...(isActive ? { textShadow: '0 0 16px rgba(125,211,252,0.6)' } : {}),
+                    fontSize: "clamp(10px, 0.85vw, 13px)"
+                  }}
                 >
                   {item.label}
                 </motion.button>
@@ -380,11 +383,11 @@ export default function Navbar() {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileOpen((v) => !v)}
-              className="lg:hidden p-2 text-[rgba(255,255,255,0.65)] hover:text-white transition-colors"
+              className="md:hidden p-2 text-[rgba(100,255,218,0.7)] hover:text-[#64FFDA] transition-all duration-300 z-[1000] relative"
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
             >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
@@ -395,53 +398,54 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10, filter: "blur(12px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -10, filter: "blur(12px)" }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            style={{ willChange: "transform" }}
-            className="fixed inset-x-0 top-[72px] z-40 bg-[rgba(5,10,20,0.75)] backdrop-blur-[12px] border-b border-[rgba(255,255,255,0.08)] px-6 py-6 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[999] bg-[rgba(8,10,20,0.97)] backdrop-blur-[20px] flex flex-col items-center justify-center gap-[32px] md:hidden"
           >
-            <div className="flex flex-col gap-1 mb-6">
-              {NAV_ITEMS.map((item, i) => {
-                const isActive = activeSection === item.id;
-                return (
-                  <motion.button
-                    key={item.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ willChange: "transform" }}
-                    onClick={() => handleNav(item.href)}
-                    className={cn(
-                      "text-left px-4 py-3 text-[14px] rounded-[12px] transition-all duration-200",
-                      isActive
-                        ? "text-white font-[600] bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.18)]"
-                        : "text-[rgba(255,255,255,0.65)] font-[500] hover:text-white hover:bg-[rgba(255,255,255,0.05)]"
-                    )}
-                  >
-                    <span className="text-[#60a5fa]/60 mr-2 font-mono text-xs">
-                      0{i + 1}.
-                    </span>
-                    {item.label}
-                  </motion.button>
-                );
-              })}
-            </div>
-            <div className="flex items-center gap-3 pt-4 border-t border-[rgba(255,255,255,0.08)]">
+            {NAV_ITEMS.map((item, i) => {
+              const isActive = activeSection === item.id;
+              return (
+                <motion.button
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ delay: i * 0.08, duration: 0.3 }}
+                  onClick={() => handleNav(item.href)}
+                  className={cn(
+                    "text-[24px] font-[600] tracking-[3px] uppercase transition-all duration-300",
+                    isActive
+                      ? "text-[#64FFDA] drop-shadow-[0_0_20px_rgba(100,255,218,0.4)]"
+                      : "text-[rgba(180,195,220,0.8)] hover:text-[#64FFDA] hover:drop-shadow-[0_0_20px_rgba(100,255,218,0.4)]"
+                  )}
+                >
+                  {item.label}
+                </motion.button>
+              );
+            })}
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ delay: NAV_ITEMS.length * 0.08, duration: 0.3 }}
+              className="flex items-center gap-6 mt-4"
+            >
               {profile.socials.slice(0, 4).map((social) => (
                 <a
                   key={social.platform}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 text-[rgba(255,255,255,0.65)] hover:text-white transition-all duration-200 hover:-translate-y-[1.5px] hover:translate-x-[1.5px]"
+                  className="text-[rgba(180,195,220,0.8)] hover:text-[#64FFDA] transition-colors duration-300"
                   aria-label={social.label}
                 >
                   <SocialIcon platform={social.platform} />
                 </a>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
