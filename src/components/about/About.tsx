@@ -269,6 +269,11 @@ export default function About() {
           61%                { transform: scale(2.5); opacity: 0.6; border-width: 0px; }
           93%, 100%          { transform: scale(2.5); opacity: 0.6; border-width: 0px; }
         }
+
+        @keyframes endPulseRing {
+          0%   { transform: scale(1); opacity: 0.8; border-width: 1px; }
+          100% { transform: scale(2.5); opacity: 0; border-width: 0px; }
+        }
       `}</style>
       
       <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center w-full">
@@ -307,7 +312,7 @@ export default function About() {
                 color: "white" 
               }}
             >
-              Building the Future with <span style={{ color: "#64FFDA" }}>AI</span>
+              AI & ML Student | <span style={{ color: "#64FFDA" }}>Full-Stack Developer</span>
             </h2>
           </motion.div>
 
@@ -321,7 +326,7 @@ export default function About() {
               style={{ marginBottom: "16px" }}
             >
               <p>
-                AI & Machine Learning student at SIRT Bhopal focused on computer vision, intelligent automation, and scalable web applications.
+                AI & Machine Learning student at SIRT Bhopal focused on generative AI, machine learning, intelligent automation, and scalable web applications.
               </p>
             </motion.div>
             <motion.div
@@ -332,7 +337,7 @@ export default function About() {
               style={{ marginBottom: "16px" }}
             >
               <p>
-                Strong foundation in Python, deep learning, and modern web 
+                Strong foundation in Python, machine learning, deep learning, and modern web 
                 frameworks — focused on work that is precise, scalable, and impactful.
               </p>
             </motion.div>
@@ -488,6 +493,13 @@ export default function About() {
                 style={{ width: "24px", height: "24px" }} 
                 initial={{ animation: "none" }}
                 whileInView={{ animation: "nodeRing 5s linear 0.8s forwards" }}
+                viewport={{ once: true, margin: "-100px" }}
+              />
+              <motion.div 
+                className="absolute rounded-full border border-[#64FFDA] opacity-0 z-0" 
+                style={{ width: "24px", height: "24px" }} 
+                initial={{ animation: "none" }}
+                whileInView={{ animation: "endPulseRing 2s ease-out 5.8s infinite" }}
                 viewport={{ once: true, margin: "-100px" }}
               />
             </motion.div>
