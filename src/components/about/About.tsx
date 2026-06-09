@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Brain, Code2, School, Book, Cpu, Star, Check } from "lucide-react";
+import { Brain, Code2, School, Book, Cpu, Star, Check, Sparkles } from "lucide-react";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 
 const primaryBadges = [
@@ -388,28 +388,53 @@ export default function About() {
         <div className="flex flex-col items-stretch relative w-full self-center" style={{ maxWidth: "480px" }}>
 
           <motion.div 
-            className="w-full text-center"
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="w-full flex justify-center mb-10"
+            initial={{ opacity: 0, y: -20, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.7, delay: 0.4, type: "spring", stiffness: 100 }}
           >
-            <div 
+            <motion.div 
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 0 24px rgba(100,255,218,0.4), inset 0 0 12px rgba(100,255,218,0.1)",
+                borderColor: "rgba(100,255,218,0.8)"
+              }}
+              className="relative overflow-hidden cursor-default group flex items-center gap-3"
               style={{
-                background: "rgba(13,16,28,0.9)",
-                border: "1px solid rgba(100,255,218,0.2)",
-                borderRadius: "8px",
-                padding: "5px 14px",
-                fontSize: "9px",
-                letterSpacing: "2.5px",
-                color: "rgba(100,255,218,0.6)",
-                fontFamily: "monospace",
-                display: "inline-block",
-                margin: "0 auto"
+                background: "linear-gradient(90deg, rgba(13,16,28,0.95), rgba(20,25,40,0.95))",
+                border: "1px solid rgba(100,255,218,0.3)",
+                borderRadius: "12px",
+                padding: "10px 24px",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+                backdropFilter: "blur(12px)",
+                transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)"
               }}
             >
-              ACADEMIC JOURNEY
-            </div>
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                style={{
+                  background: "linear-gradient(90deg, transparent, rgba(100,255,218,0.1), transparent)",
+                  transform: "skewX(-20deg)",
+                  animation: "shimmer 2s infinite"
+                }}
+              />
+              
+              <Sparkles size={16} className="text-[#64FFDA]" style={{ filter: "drop-shadow(0 0 8px rgba(100,255,218,0.8))" }} />
+              
+              <span 
+                style={{
+                  fontSize: "13px",
+                  letterSpacing: "3.5px",
+                  color: "#64FFDA",
+                  fontWeight: 700,
+                  fontFamily: "monospace",
+                  textShadow: "0 0 10px rgba(100,255,218,0.5)"
+                }}
+              >
+                ACADEMIC JOURNEY
+              </span>
+            </motion.div>
           </motion.div>
 
           {/* Wrapper for exactly the timeline threads and cards */}
