@@ -77,25 +77,26 @@ export default function About() {
         }
 
         @keyframes smoothTravel {
-          0%   { top: 0%; opacity: 0; transform: scale(0.6); }
-          5%   { top: 8%; opacity: 1; transform: scale(1); }
+          0%   { top: 0%;   opacity: 0; transform: scale(0.6); }
+          8%   { top: 0%;   opacity: 1; transform: scale(1); }
           
-          /* Pause at Card 1 */
-          15%  { top: 16%; transform: scale(1.3); }
-          25%  { top: 16%; transform: scale(1); }
+          /* Stop exactly at Card 1 node */
+          30%  { top: 16%;  transform: scale(1.3); }
+          40%  { top: 16%;  transform: scale(1); }
           
-          /* Pause at Card 2 */
-          45%  { top: 43%; transform: scale(1.3); }
-          60%  { top: 43%; transform: scale(1); }
+          /* Stop exactly at Card 2 node */
+          62%  { top: 46%;  transform: scale(1.3); }
+          72%  { top: 46%;  transform: scale(1); }
           
-          /* Pause at Card 3 and stop permanently */
-          85%  { top: 83%; transform: scale(1.3); opacity: 1; }
-          100% { top: 83%; transform: scale(1.3); opacity: 1; }
+          /* Stop at Card 3 node */
+          90%  { top: 83%;  transform: scale(1.3); opacity: 1; }
+          95%  { top: 83%;  transform: scale(1); }
+          100% { top: 83%;  opacity: 0; }
         }
 
         @keyframes nodeRing {
-          0%, 14%, 44%, 84% { transform: scale(1); opacity: 0; border-width: 1px; }
-          25%, 60%, 100% { transform: scale(2.5); opacity: 0.6; border-width: 0px; }
+          0%, 29%, 61%, 89% { transform: scale(1); opacity: 0; border-width: 1px; }
+          40%, 72%, 100% { transform: scale(2.5); opacity: 0.6; border-width: 0px; }
         }
 
         @keyframes nodePulse {
