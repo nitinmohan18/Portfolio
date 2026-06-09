@@ -67,7 +67,8 @@ export default function About() {
         flexDirection: "column",
         justifyContent: "center",
         minHeight: "100vh",
-        padding: "100px 80px 60px"
+        padding: "100px 80px 60px",
+        position: "relative"
       }}
     >
       <style>{`
@@ -276,7 +277,33 @@ export default function About() {
         }
       `}</style>
       
-      <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center w-full">
+      <motion.div 
+        className="absolute w-full text-center z-10"
+        style={{ top: "-80px", left: 0 }}
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <h3 
+          style={{ 
+            fontSize: "22px",
+            letterSpacing: "8px",
+            color: "#ffffff",
+            fontWeight: 900,
+            textTransform: "uppercase",
+            fontFamily: "monospace",
+            margin: 0,
+            display: "inline-block",
+            position: "relative",
+            textShadow: "0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2)"
+          }}
+        >
+          ABOUT ME
+        </h3>
+      </motion.div>
+
+      <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center w-full mt-8">
         
         {/* Left — text */}
         <div className="flex flex-col pt-0">
@@ -288,20 +315,6 @@ export default function About() {
             transition={{ duration: 0.7, delay: 0.3 }}
             style={{ marginBottom: "32px" }}
           >
-            <div 
-              style={{ 
-                marginTop: "-40px",
-                marginBottom: "16px",
-                fontSize: "13px",
-                letterSpacing: "4px",
-                color: "rgba(100,255,218,0.5)",
-                fontWeight: 700,
-                textTransform: "uppercase",
-                fontFamily: "monospace"
-              }}
-            >
-              ABOUT ME
-            </div>
             <h2 
               style={{ 
                 margin: 0, 
