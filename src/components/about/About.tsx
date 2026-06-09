@@ -278,28 +278,30 @@ export default function About() {
       `}</style>
       
       <motion.div 
-        className="absolute w-full text-center z-10 -top-[40px] md:-top-[80px] left-0"
+        className="absolute w-full text-center z-10 -top-[40px] md:-top-[80px] left-0 flex items-center justify-center gap-4"
         initial={{ opacity: 0, y: -50, scale: 0.8, filter: "blur(8px)" }}
         whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true }}
         transition={{ duration: 1, ease: "easeOut", type: "spring", bounce: 0.4 }}
       >
+        <span className="h-[2px] w-12 md:w-24 bg-gradient-to-r from-transparent to-blue-500 opacity-80" />
         <h3 
+          className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500"
           style={{ 
-            fontSize: "22px",
-            letterSpacing: "8px",
-            color: "#ffffff",
+            fontSize: "24px",
+            letterSpacing: "10px",
             fontWeight: 900,
             textTransform: "uppercase",
             fontFamily: "monospace",
             margin: 0,
             display: "inline-block",
             position: "relative",
-            textShadow: "0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2)"
+            filter: "drop-shadow(0 0 15px rgba(56,189,248,0.6))"
           }}
         >
           ABOUT ME
         </h3>
+        <span className="h-[2px] w-12 md:w-24 bg-gradient-to-l from-transparent to-blue-500 opacity-80" />
       </motion.div>
 
       <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center w-full mt-8">

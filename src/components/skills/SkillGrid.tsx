@@ -6,10 +6,12 @@ import Image from "next/image";
 
 export default function SkillGrid() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 w-full max-w-[1050px] mx-auto perspective-1000">
-      {skillGroups.map((group, i) => (
-        <SkillCard key={group.category} group={group} index={i} />
-      ))}
+    <div className="w-full flex justify-center items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 w-full max-w-[1100px] perspective-1000">
+        {skillGroups.map((group, i) => (
+          <SkillCard key={group.category} group={group} index={i} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -46,14 +48,15 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 50, scale: 0.9, filter: "blur(10px)" }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+      transition={{ type: "spring", stiffness: 100, damping: 15, delay: index * 0.1 }}
       style={{
         rotateX,
         rotateY,
         transformStyle: "preserve-3d",
+        willChange: "transform, opacity, filter"
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -112,12 +115,12 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: any; ind
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3, delay: index * 0.05 }}
+      initial={{ opacity: 0, scale: 0.8, y: 20, filter: "blur(5px)" }}
+      whileInView={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ type: "spring", stiffness: 120, damping: 14, delay: index * 0.05 }}
       whileHover={{ y: -2, scale: 1.02 }}
       className={`relative flex items-center gap-3 p-2.5 rounded-[10px] bg-[#161d2d] border border-white/[0.08] hover:bg-[#1c2538] hover:border-white/[0.2] transition-all duration-300 group/skill cursor-default shadow-sm hover:shadow-[0_5px_15px_rgba(0,0,0,0.4)] ${isSingle ? 'py-5 justify-center' : ''} ${className}`}
-      style={{ transformStyle: "preserve-3d" }}
+      style={{ transformStyle: "preserve-3d", willChange: "transform, opacity, filter" }}
     >
       {/* Skill specific hover glow behind the chip */}
       <div 
