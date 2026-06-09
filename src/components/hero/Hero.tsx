@@ -9,10 +9,10 @@ interface HeroProps {
 }
 
 export default function Hero({ isVisible = true }: HeroProps) {
-  const [mounted, setMounted] = useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
 
   useEffect(() => {
-    setMounted(true);
+    setAnimationKey(prev => prev + 1);
   }, []);
 
   return (
@@ -21,9 +21,8 @@ export default function Hero({ isVisible = true }: HeroProps) {
       className="relative z-10 w-full isolate"
     >
       <AnimatePresence mode="wait">
-        {mounted && (
-          <motion.div
-            key="hero"
+        <motion.div
+          key={animationKey}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="relative z-10 w-full h-full flex flex-col justify-center"
@@ -84,7 +83,6 @@ export default function Hero({ isVisible = true }: HeroProps) {
               </div>
             </motion.div>
           </motion.div>
-        )}
       </AnimatePresence>
     </section>
   );

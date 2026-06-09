@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 import TypingText from "./TypingText";
 import HeroButtons from "./HeroButtons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Code2, GitBranch, Target, Sparkles } from "lucide-react";
 
 interface HeroContentProps {
@@ -142,6 +142,22 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           color: #64FFDA;
           margin-left: 0.3em;
         }
+        .hero-name {
+          opacity: 0;
+          animation: fadeSlideUp 0.7s ease forwards;
+          animation-delay: 0.2s;
+          animation-fill-mode: both;
+        }
+        .hero-bio {
+          opacity: 0;
+          animation: fadeSlideUp 0.7s ease forwards;
+          animation-delay: 0.9s;
+          animation-fill-mode: both;
+        }
+        @keyframes fadeSlideUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
         .stat-card-wrapper {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -272,29 +288,16 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
       `}</style>
       
       {/* Name */}
-      <h1
-        className="font-display font-[800] text-white tracking-tight flex flex-wrap"
+      <motion.h1
+        className="font-display font-[800] text-white tracking-tight flex flex-wrap hero-name"
         style={{ fontSize: "clamp(32px, 4.5vw, 60px)", marginBottom: "8px" }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
       >
-        <motion.span
-          className="name-first"
-          initial={{ opacity: 0, x: -40 }}
-          animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-          style={{ willChange: "transform, opacity" }}
-        >
-          {profile.firstName}
-        </motion.span>
-        <motion.span
-          className="name-second"
-          initial={{ opacity: 0, x: 40 }}
-          animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-          style={{ willChange: "transform, opacity" }}
-        >
-          {profile.lastName}
-        </motion.span>
-      </h1>
+        <span className="name-first">{profile.firstName}</span>
+        <span className="name-second">{profile.lastName}</span>
+      </motion.h1>
 
       {/* Role typing / Subtitle shimmer */}
       <motion.div 
@@ -310,10 +313,10 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
 
       {/* Bio */}
       <motion.div 
-        className="bio-text"
-        initial={{ opacity: 0, y: 8 }}
-        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-        transition={{ duration: 0.7, ease: "easeOut", delay: 0.9 }}
+        className="bio-text hero-bio"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.7, delay: 0.9 }}
         style={{ willChange: "transform, opacity" }}
       >
         Building scalable web applications,{" "}
