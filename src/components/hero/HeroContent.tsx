@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 import TypingText from "./TypingText";
 import HeroButtons from "./HeroButtons";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Code2, GitBranch, Target, Sparkles } from "lucide-react";
 
 interface HeroContentProps {
@@ -44,8 +44,6 @@ const STAT_CARDS = [
 ];
 
 export default function HeroContent({ isVisible = true }: HeroContentProps) {
-  const nameLetters = (profile.firstName + " " + profile.lastName).split("");
-
   return (
     <div
       className="flex flex-col gap-8 max-w-2xl"

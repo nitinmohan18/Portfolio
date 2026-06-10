@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Download, Menu, X } from "lucide-react";
 import { Github, Linkedin } from "@/components/ui/Icons";

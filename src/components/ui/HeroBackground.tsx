@@ -14,6 +14,7 @@ export default function HeroBackground() {
   }>>([]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setParticles(
       Array.from({ length: 30 }).map((_, i) => ({
         id: i,

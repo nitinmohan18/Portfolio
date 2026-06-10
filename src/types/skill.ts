@@ -9,7 +9,7 @@ export type SkillCategory =
 export interface Skill {
   name: string;
   icon: string;
-  level: number; // 0-100
+  level?: number; // 0-100
   color: string;
 }
 

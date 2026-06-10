@@ -15,6 +15,7 @@ interface RevealProps extends Omit<HTMLMotionProps<"div">, "variants"> {
   staggerDelay?: number;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const variantsMap: Record<RevealVariant, any> = {
   "slide-up": {
     hidden: { opacity: 0, y: 48, filter: "blur(12px)", scale: 0.94 },

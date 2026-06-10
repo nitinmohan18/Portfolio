@@ -12,6 +12,7 @@ export default function Hero({ isVisible = true }: HeroProps) {
   const [animationKey, setAnimationKey] = useState(0);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setAnimationKey(prev => prev + 1);
   }, []);
 

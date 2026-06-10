@@ -20,6 +20,7 @@ export default function Home() {
   useEffect(() => {
     // Skip on subsequent visits this session
     if (sessionStorage.getItem("visited") === "1") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowPreloader(false);
       setShowContent(true);
     }

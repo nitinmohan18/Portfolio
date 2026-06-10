@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { skillGroups } from "@/data/skills";
+import type { Skill } from "@/types/skill";
 import Image from "next/image";
 
 export default function SkillGrid() {
@@ -108,7 +109,7 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
   );
 }
 
-function SkillChip({ skill, index, isSingle, className = "" }: { skill: any; index: number; isSingle: boolean; className?: string }) {
+function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; index: number; isSingle: boolean; className?: string }) {
   // Map pure black or very dark colors to white so the glowing animation is visible against dark backgrounds
   const isDark = ["#000000", "#181717"].includes(skill.color);
   const glowColor = isDark ? "#ffffff" : skill.color;
