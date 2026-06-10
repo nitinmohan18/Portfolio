@@ -43,15 +43,40 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
     mouseY.set(e.clientY - r.top);
   };
 
+  const rotatePeak = index % 3 === 0 ? -6 : index % 3 === 1 ? 0 : 6;
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      x: 0,
+      y: 60,
+      rotate: 0,
+      scale: 0.85,
+    },
+    show: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      rotate: [0, rotatePeak, 0],
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 80,
+        damping: 14,
+        rotate: {
+          type: "keyframes",
+          duration: 0.8,
+          ease: "easeOut"
+        }
+      },
+    },
+  };
+
   return (
     <motion.div
       ref={cardRef}
       onMouseMove={handleMove}
       onMouseLeave={() => { x.set(0); y.set(0); }}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      variants={cardVariants}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       className="group relative flex flex-col rounded-2xl overflow-hidden cursor-default"
     >

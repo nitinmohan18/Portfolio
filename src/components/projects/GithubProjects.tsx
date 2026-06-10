@@ -45,7 +45,19 @@ export default function GithubProjects() {
     <div className="flex flex-col items-center gap-12 w-full">
 
       {/* Grid */}
-      <div
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              staggerChildren: 0.12,
+              delayChildren: 0.9,
+            },
+          },
+        }}
         className="grid w-full gap-8"
         style={{
           gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 420px), 1fr))",
@@ -55,7 +67,7 @@ export default function GithubProjects() {
         {filtered.slice(0, 8).map((repo, i) => (
           <ProjectCard key={repo.id} repo={repo} index={i} />
         ))}
-      </div>
+      </motion.div>
 
       {/* CTA */}
       <motion.div
