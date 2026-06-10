@@ -136,19 +136,25 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
 
         {/* Description */}
         <p
-          className="text-[14px] leading-relaxed flex-1 mb-6"
+          className="text-[14px] leading-relaxed"
           style={{ color: "rgba(180,195,220,0.65)", letterSpacing: "0.015em", transform: "translateZ(15px)" }}
         >
           {repo.description ?? "No description provided."}
         </p>
 
-        {/* Language tag */}
+        {/* Language tag — separator + padded block for clear visual separation */}
         {repo.language && (
-          <div className="flex flex-wrap gap-2.5 mb-5" style={{ transform: "translateZ(15px)" }}>
+          <div
+            className="flex flex-wrap gap-2 pt-4 mt-4 mb-4"
+            style={{
+              transform: "translateZ(15px)",
+              borderTop: `1px solid rgba(${cat.rgb}, 0.12)`,
+            }}
+          >
             <motion.span
               whileHover={{ scale: 1.08, y: -3, boxShadow: `0 8px 20px -4px rgba(${cat.rgb}, 0.4)` }}
               whileTap={{ scale: 0.95 }}
-              className="relative overflow-hidden px-3.5 py-1.5 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
+              className="relative overflow-hidden px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
               style={{
                 background: `linear-gradient(135deg, rgba(${cat.rgb}, 0.15), rgba(${cat.rgb}, 0.05))`,
                 borderColor: `rgba(${cat.rgb}, 0.3)`,
@@ -164,7 +170,7 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
                 <motion.span
                   whileHover={{ scale: 1.08, y: -3, boxShadow: "0 8px 20px -4px rgba(227, 79, 38, 0.4)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative overflow-hidden px-3.5 py-1.5 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
+                  className="relative overflow-hidden px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
                   style={{
                     background: "linear-gradient(135deg, rgba(227, 79, 38, 0.15), rgba(227, 79, 38, 0.05))",
                     borderColor: "rgba(227, 79, 38, 0.3)",
@@ -177,7 +183,7 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
                 <motion.span
                   whileHover={{ scale: 1.08, y: -3, boxShadow: "0 8px 20px -4px rgba(38, 77, 228, 0.4)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative overflow-hidden px-3.5 py-1.5 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
+                  className="relative overflow-hidden px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
                   style={{
                     background: "linear-gradient(135deg, rgba(38, 77, 228, 0.15), rgba(38, 77, 228, 0.05))",
                     borderColor: "rgba(38, 77, 228, 0.3)",
@@ -195,7 +201,7 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
                 whileHover={{ scale: 1.08, y: -3, boxShadow: "0 8px 20px -4px rgba(255,255,255, 0.15)" }}
                 whileTap={{ scale: 0.95 }}
                 key={t}
-                className="relative overflow-hidden px-3.5 py-1.5 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
+                className="relative overflow-hidden px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
                 style={{
                   background: "linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01))",
                   borderColor: "rgba(255,255,255,0.12)",
@@ -211,8 +217,8 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
 
         {/* Stats row */}
         <div
-          className="flex items-center gap-4 mb-5 text-[12px] font-mono"
-          style={{ color: "rgba(150,165,185,0.5)", transform: "translateZ(15px)" }}
+          className="flex items-center gap-4 pt-4 mb-5 text-[12px] font-mono"
+          style={{ color: "rgba(150,165,185,0.5)", transform: "translateZ(15px)", borderTop: "1px solid rgba(255,255,255,0.06)" }}
         >
           <span className="flex items-center gap-1.5">
             <Star size={11} /> {repo.stargazers_count}

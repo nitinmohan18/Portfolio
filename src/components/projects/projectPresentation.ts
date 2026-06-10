@@ -171,11 +171,15 @@ export function getProjectPresentation(repo: GithubRepo): ProjectPresentation {
   const profile = getProfile(repo);
   const stack = buildStack(repo);
 
+  let description = repo.description ?? "A focused engineering build from GitHub with source code available for review.";
+
+  if (repo.name.toLowerCase() === "windly-backend" || description === "windly weather app backend code") {
+    description = "Python backend powering weather intelligence through FastAPI services, Random Forest prediction models, and real-time forecast processing.";
+  }
+
   return {
     title: formatRepoTitle(repo.name),
-    description:
-      repo.description ??
-      "A focused engineering build from GitHub with source code available for review.",
+    description,
     profile,
     status: getStatus(repo),
     stack,

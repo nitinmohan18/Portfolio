@@ -160,6 +160,8 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
             height={isSingle ? 22 : 16}
             className={`object-contain drop-shadow-sm`}
             unoptimized
+            priority
+            loading="eager"
           />
         </motion.div>
       </div>

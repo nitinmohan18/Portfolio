@@ -30,7 +30,19 @@ export async function getGithubRepos(): Promise<GithubRepo[]> {
       { headers, next: { revalidate: 3600 } }
     );
     if (!res.ok) return [];
-    const repos: GithubRepo[] = await res.json();
+    let repos: GithubRepo[] = await res.json();
+    
+    // Apply overrides for specific projects
+    repos = repos.map(repo => {
+      if (repo.name.toLowerCase() === "windly-backend" || repo.description === "windly weather app backend code") {
+        return {
+          ...repo,
+          description: "Python backend powering weather intelligence through FastAPI services, Random Forest prediction models, and real-time forecast processing."
+        };
+      }
+      return repo;
+    });
+
     return repos.filter((r) => !r.fork).sort(
       (a, b) => b.stargazers_count - a.stargazers_count
     );
