@@ -57,8 +57,9 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
     >
       {/* Glass body */}
       <div
-        className="relative flex flex-col flex-1 p-10 sm:p-12 md:p-14 rounded-2xl border transition-all duration-300"
+        className="relative flex flex-col flex-1 rounded-2xl border transition-all duration-300"
         style={{
+          padding: "clamp(2rem, 5%, 3rem)",
           background: "rgba(8, 12, 24, 0.8)",
           borderColor: `rgba(${cat.rgb}, 0.15)`,
           backdropFilter: "blur(16px)",
@@ -127,23 +128,23 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
 
         {/* Title */}
         <h3
-          className="font-display font-bold text-white mb-3 px-1 sm:px-2 transition-colors duration-300 group-hover:text-[#e2e8ff] capitalize"
-          style={{ fontSize: "clamp(18px, 1.5vw, 22px)", transform: "translateZ(25px)" }}
+          className="font-display font-bold text-white mb-3 transition-colors duration-300 group-hover:text-[#e2e8ff] capitalize"
+          style={{ fontSize: "clamp(18px, 1.5vw, 22px)", letterSpacing: "0.02em", transform: "translateZ(25px)" }}
         >
           {repo.name.replace(/-/g, " ")}
         </h3>
 
         {/* Description */}
         <p
-          className="text-[14px] leading-relaxed flex-1 mb-6 px-1 sm:px-2"
-          style={{ color: "rgba(180,195,220,0.65)", transform: "translateZ(15px)" }}
+          className="text-[14px] leading-relaxed flex-1 mb-6"
+          style={{ color: "rgba(180,195,220,0.65)", letterSpacing: "0.015em", transform: "translateZ(15px)" }}
         >
           {repo.description ?? "No description provided."}
         </p>
 
         {/* Language tag */}
         {repo.language && (
-          <div className="flex flex-wrap gap-2.5 mb-5 px-1 sm:px-2" style={{ transform: "translateZ(15px)" }}>
+          <div className="flex flex-wrap gap-2.5 mb-5" style={{ transform: "translateZ(15px)" }}>
             <motion.span
               whileHover={{ scale: 1.08, y: -3, boxShadow: `0 8px 20px -4px rgba(${cat.rgb}, 0.4)` }}
               whileTap={{ scale: 0.95 }}
@@ -210,7 +211,7 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
 
         {/* Stats row */}
         <div
-          className="flex items-center gap-4 mb-5 px-1 sm:px-2 text-[12px] font-mono"
+          className="flex items-center gap-4 mb-5 text-[12px] font-mono"
           style={{ color: "rgba(150,165,185,0.5)", transform: "translateZ(15px)" }}
         >
           <span className="flex items-center gap-1.5">
@@ -222,7 +223,7 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
         </div>
 
         {/* Action buttons */}
-        <div className="flex gap-4 mt-auto px-1 sm:px-2" style={{ transform: "translateZ(30px)" }}>
+        <div className="flex gap-4 mt-auto" style={{ transform: "translateZ(30px)" }}>
           <motion.a
             whileHover={{ scale: 1.05, y: -3, boxShadow: "0 10px 25px -5px rgba(255,255,255,0.15)" }}
             whileTap={{ scale: 0.95 }}
