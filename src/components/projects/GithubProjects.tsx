@@ -64,21 +64,27 @@ export default function GithubProjects() {
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <a
+        <motion.a
+          whileHover={{ scale: 1.05, y: -3, boxShadow: "0 15px 40px -10px rgba(255, 255, 255, 0.1)" }}
+          whileTap={{ scale: 0.95 }}
           href="https://github.com/nitinmohan18"
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-3 px-8 py-4 rounded-2xl border font-semibold text-[15px] text-white transition-all duration-300 hover:border-[rgba(96,165,250,0.4)] hover:bg-[rgba(96,165,250,0.05)] hover:shadow-[0_0_30px_rgba(96,165,250,0.1)]"
+          className="group relative flex items-center gap-3 px-8 py-4 rounded-full font-bold text-[15px] text-white overflow-hidden transition-shadow"
           style={{
-            background: "rgba(8,12,24,0.7)",
-            borderColor: "rgba(255,255,255,0.1)",
+            background: "linear-gradient(135deg, #111318 0%, #000000 100%)",
+            border: "1px solid rgba(255,255,255,0.15)",
             backdropFilter: "blur(12px)",
+            boxShadow: "0 10px 30px -10px rgba(0,0,0,0.8)",
           }}
         >
-          <Github size={18} />
-          Explore All Repositories
-          <GitBranch size={15} className="opacity-50 group-hover:opacity-100 transition-opacity" />
-        </a>
+          {/* Animated shine effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.3)] to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out" />
+          
+          <Github size={20} className="relative z-10 transition-transform group-hover:rotate-12 duration-300" />
+          <span className="relative z-10 tracking-wider">Explore All Repositories</span>
+          <GitBranch size={16} className="relative z-10 opacity-70 group-hover:opacity-100 transition-opacity" />
+        </motion.a>
       </motion.div>
     </div>
   );
