@@ -57,7 +57,7 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
     >
       {/* Glass body */}
       <div
-        className="relative flex flex-col flex-1 p-6 rounded-2xl border transition-all duration-300"
+        className="relative flex flex-col flex-1 p-8 rounded-2xl border transition-all duration-300"
         style={{
           background: "rgba(8, 12, 24, 0.8)",
           borderColor: `rgba(${cat.rgb}, 0.15)`,
@@ -127,15 +127,15 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
 
         {/* Title */}
         <h3
-          className="font-display font-bold text-white mb-2 transition-colors duration-300 group-hover:text-[#e2e8ff] capitalize"
-          style={{ fontSize: "clamp(17px, 1.4vw, 20px)", transform: "translateZ(25px)" }}
+          className="font-display font-bold text-white mb-3 transition-colors duration-300 group-hover:text-[#e2e8ff] capitalize"
+          style={{ fontSize: "clamp(18px, 1.5vw, 22px)", transform: "translateZ(25px)" }}
         >
           {repo.name.replace(/-/g, " ")}
         </h3>
 
         {/* Description */}
         <p
-          className="text-[13px] leading-relaxed flex-1 mb-5"
+          className="text-[14px] leading-relaxed flex-1 mb-6"
           style={{ color: "rgba(180,195,220,0.65)", transform: "translateZ(15px)" }}
         >
           {repo.description ?? "No description provided."}

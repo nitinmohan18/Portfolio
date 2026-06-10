@@ -46,9 +46,9 @@ export default function GithubProjects() {
 
       {/* Grid */}
       <div
-        className="grid w-full gap-5"
+        className="grid w-full gap-8"
         style={{
-          gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 360px), 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 420px), 1fr))",
           perspective: "1200px",
         }}
       >
