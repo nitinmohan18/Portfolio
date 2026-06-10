@@ -1,123 +1,184 @@
 "use client";
 
-import { useRef, MouseEvent } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ExternalLink, Award, Calendar } from "lucide-react";
+import type { CSSProperties, MouseEvent } from "react";
+import {
+  Award,
+  BadgeCheck,
+  CalendarDays,
+  ExternalLink,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import type { Certification } from "@/data/certifications";
-import MagneticButton from "@/components/ui/MagneticButton";
 
 interface CertificationCardProps {
   cert: Certification;
   index: number;
+  featured?: boolean;
 }
 
-const categoryColors: Record<string, string> = {
-  "ai-ml": "text-[#60a5fa] border-[#60a5fa]/20 bg-[#60a5fa]/10",
-  cloud: "text-sky-400 border-sky-500/20 bg-sky-500/10",
-  web: "text-violet-400 border-violet-500/20 bg-violet-500/10",
-  data: "text-amber-400 border-amber-500/20 bg-amber-500/10",
-  other: "text-slate-400 border-white/10 bg-white/5",
+const categoryMeta: Record<Certification["category"], { label: string; accent: string; accentRgb: string }> = {
+  "ai-ml": { label: "AI/ML", accent: "#60a5fa", accentRgb: "96, 165, 250" },
+  cloud: { label: "Cloud", accent: "#38bdf8", accentRgb: "56, 189, 248" },
+  web: { label: "Web", accent: "#a78bfa", accentRgb: "167, 139, 250" },
+  data: { label: "Data", accent: "#f59e0b", accentRgb: "245, 158, 11" },
+  other: { label: "Credential", accent: "#34d399", accentRgb: "52, 211, 153" },
 };
 
-export default function CertificationCard({ cert, index }: CertificationCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+function getIssuerMark(issuer: string) {
+  return issuer
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0]?.toUpperCase())
+    .join("");
+}
 
-  // Smooth springs for 3D tilt
-  const springConfig = { damping: 20, stiffness: 100 };
-  const springX = useSpring(x, springConfig);
-  const springY = useSpring(y, springConfig);
+export default function CertificationCard({ cert, index, featured = false }: CertificationCardProps) {
+  const meta = categoryMeta[cert.category] ?? categoryMeta.other;
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const springX = useSpring(tiltX, { stiffness: 120, damping: 18 });
+  const springY = useSpring(tiltY, { stiffness: 120, damping: 18 });
+  const rotateX = useTransform(springY, [-0.5, 0.5], [7, -7]);
+  const rotateY = useTransform(springX, [-0.5, 0.5], [-7, 7]);
+  const spotlight = useMotionTemplate`radial-gradient(460px circle at ${mouseX}px ${mouseY}px, rgba(${meta.accentRgb}, 0.18), transparent 52%)`;
 
-  // Map to rotate limits (-10 to 10 deg)
-  const rotateX = useTransform(springY, [-0.5, 0.5], [10, -10]);
-  const rotateY = useTransform(springX, [-0.5, 0.5], [-10, 10]);
+  function handleMouseMove(event: MouseEvent<HTMLElement>) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const localX = event.clientX - rect.left;
+    const localY = event.clientY - rect.top;
 
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    x.set((e.clientX - cx) / rect.width);
-    y.set((e.clientY - cy) / rect.height);
-  };
+    mouseX.set(localX);
+    mouseY.set(localY);
+    tiltX.set((localX - rect.width / 2) / rect.width);
+    tiltY.set((localY - rect.height / 2) / rect.height);
+  }
 
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+  function handleMouseLeave() {
+    tiltX.set(0);
+    tiltY.set(0);
+  }
 
   return (
-    <motion.div
-      ref={cardRef}
+    <motion.article
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, y: 48, filter: "blur(12px)", scale: 0.94 }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+      initial={{ opacity: 0, y: 42, scale: 0.95, filter: "blur(12px)" }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.68, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
       style={{
         rotateX,
         rotateY,
         transformStyle: "preserve-3d",
-        willChange: "transform"
-      }}
-      className="group relative p-[24px] flex flex-col gap-4 bg-[rgba(5,10,20,0.75)] backdrop-blur-[20px] border border-[rgba(255,255,255,0.08)] rounded-[14px] cursor-pointer"
+        "--cert-accent": meta.accent,
+        "--cert-accent-rgb": meta.accentRgb,
+      } as CSSProperties}
+      className={`group relative flex min-h-[390px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[rgba(5,10,20,0.74)] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.32)] backdrop-blur-2xl ${
+        featured ? "lg:col-span-2 lg:p-7" : ""
+      }`}
     >
-      {/* 3D hover border glow */}
-      <div className="absolute inset-0 rounded-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none border border-[rgba(255,255,255,0.18)]" style={{ transform: "translateZ(1px)" }} />
-      
-      <div className="flex items-start justify-between gap-2" style={{ transform: "translateZ(20px)" }}>
-        {/* Logo: grayscale to full color + brightness burst */}
-        <div className="w-12 h-12 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-white filter grayscale group-hover:grayscale-0 group-hover:brightness-125 transition-all duration-500">
-          <Award size={22} className="group-hover:text-[#60a5fa] transition-colors duration-500" />
-        </div>
-        <span className={`text-[10px] px-[8px] py-[3px] rounded-full border font-mono tracking-widest ${categoryColors[cert.category] || categoryColors.other}`}>
-          {cert.category.toUpperCase()}
-        </span>
-      </div>
+      <motion.div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{ background: spotlight }}
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(145deg,rgba(255,255,255,0.09),transparent_38%,rgba(var(--cert-accent-rgb),0.08))]" />
+      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[var(--cert-accent)] to-transparent opacity-55" />
 
-      <div style={{ transform: "translateZ(25px)" }} className="mt-2">
-        <h3 className="font-display font-[700] text-[18px] text-white group-hover:text-[#60a5fa] transition-colors duration-300">
-          {cert.title}
-        </h3>
-        <p className="text-[rgba(255,255,255,0.65)] text-[14px] mt-[4px]">{cert.issuer}</p>
-      </div>
-
-      {/* Date badge: magnetic pull on hover */}
-      <div style={{ transform: "translateZ(30px)" }}>
-        <MagneticButton strength={0.3}>
-          <div className="flex items-center gap-2 text-[12px] text-[rgba(255,255,255,0.45)] font-mono w-max px-2 py-1.5 rounded-md bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.05)]">
-            <Calendar size={12} />
-            {cert.date}
+      <div className="relative z-10 flex h-full flex-col" style={{ transform: "translateZ(28px)" }}>
+        <div className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.035] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-[var(--cert-accent)] to-transparent opacity-70" />
+          <div className="absolute -right-8 -top-8 flex h-24 w-24 items-center justify-center rounded-full border border-white/10 bg-white/[0.035] text-[var(--cert-accent)] opacity-60">
+            <Award size={44} />
           </div>
-        </MagneticButton>
-      </div>
 
-      {cert.skills.length > 0 && (
-        <div className="flex flex-wrap gap-[6px] mt-2" style={{ transform: "translateZ(15px)" }}>
-          {cert.skills.map((skill) => (
-            <span key={skill} className="text-[10px] px-[10px] py-[4px] rounded-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] text-[rgba(255,255,255,0.65)] font-mono tracking-tight">
-              {skill}
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[rgba(var(--cert-accent-rgb),0.24)] bg-[rgba(var(--cert-accent-rgb),0.1)] font-display text-lg font-extrabold text-white">
+              {cert.issuerLogo ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={cert.issuerLogo} alt="" className="h-8 w-8 object-contain" />
+              ) : (
+                getIssuerMark(cert.issuer)
+              )}
+            </div>
+            <span className="rounded-full border border-[rgba(var(--cert-accent-rgb),0.25)] bg-[rgba(var(--cert-accent-rgb),0.09)] px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/75">
+              {meta.label}
             </span>
-          ))}
-        </div>
-      )}
+          </div>
 
-      {cert.credentialUrl && (
-        <div className="mt-auto pt-4" style={{ transform: "translateZ(30px)" }}>
-          <a
-            href={cert.credentialUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[12px] text-[#60a5fa] hover:text-white transition-colors font-[600] group/link"
-          >
-            <ExternalLink size={12} className="group-hover/link:translate-x-[1px] group-hover/link:-translate-y-[1px] transition-transform" />
-            Verify Credential
-          </a>
+          <div className="mt-8">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-white/36">
+              Verified credential
+            </p>
+            <h3 className="mt-2 font-display text-2xl font-bold leading-tight text-white">
+              {cert.title}
+            </h3>
+            <p className="mt-3 text-sm font-semibold text-white/58">{cert.issuer}</p>
+          </div>
         </div>
-      )}
-    </motion.div>
+
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          <div className="rounded-xl border border-white/[0.08] bg-white/[0.035] p-3">
+            <div className="flex items-center gap-2 text-white/38">
+              <CalendarDays size={14} />
+              <span className="font-mono text-[10px] uppercase tracking-[0.18em]">Issued</span>
+            </div>
+            <p className="mt-1 text-sm font-bold text-white">{cert.date}</p>
+          </div>
+          <div className="rounded-xl border border-white/[0.08] bg-white/[0.035] p-3">
+            <div className="flex items-center gap-2 text-white/38">
+              <ShieldCheck size={14} />
+              <span className="font-mono text-[10px] uppercase tracking-[0.18em]">Status</span>
+            </div>
+            <p className="mt-1 text-sm font-bold text-white">
+              {cert.expiryDate ? `Valid until ${cert.expiryDate}` : "No expiry listed"}
+            </p>
+          </div>
+        </div>
+
+        {cert.skills.length > 0 && (
+          <div className="mt-5 flex flex-wrap gap-2">
+            {cert.skills.map((skill) => (
+              <span
+                key={skill}
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-white/65"
+              >
+                <Sparkles size={12} className="text-[var(--cert-accent)]" />
+                {skill}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-auto pt-6">
+          <div className="mb-4 flex items-center gap-2 rounded-xl border border-white/[0.08] bg-black/15 px-3 py-2 text-sm text-white/58">
+            <BadgeCheck size={16} className="text-[var(--cert-accent)]" />
+            <span>{cert.credentialId ? `Credential ID ${cert.credentialId}` : "Issuer verification ready"}</span>
+          </div>
+
+          {cert.credentialUrl && (
+            <a
+              href={cert.credentialUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/link inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[rgba(var(--cert-accent-rgb),0.32)] bg-[rgba(var(--cert-accent-rgb),0.12)] px-4 py-3 text-sm font-bold text-white transition duration-300 hover:-translate-y-0.5 hover:border-[rgba(var(--cert-accent-rgb),0.5)] hover:bg-[rgba(var(--cert-accent-rgb),0.18)]"
+            >
+              Verify credential
+              <ExternalLink size={16} className="transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.article>
   );
 }

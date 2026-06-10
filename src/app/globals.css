@@ -233,7 +233,7 @@ section {
   position: relative;
 }
 
-#projects, #skills {
+#projects, #skills, #certifications, #contact {
   min-height: 100vh;
   height: auto;
   max-height: none;

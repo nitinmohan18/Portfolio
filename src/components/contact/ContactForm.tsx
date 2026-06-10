@@ -1,17 +1,83 @@
 "use client";
 
-import { useState, FormEvent } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Send, Loader2, Check, AlertCircle } from "lucide-react";
-import MagneticButton from "@/components/ui/MagneticButton";
+import type { ComponentType, FormEvent, ReactNode } from "react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  AlertCircle,
+  AtSign,
+  Check,
+  Loader2,
+  MessageSquareText,
+  Send,
+  ShieldCheck,
+  TextCursorInput,
+  User,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { profile } from "@/data/profile";
 
 type FormState = "idle" | "loading" | "success" | "error";
+type FieldName = keyof FormData;
 
 interface FormData {
   name: string;
   email: string;
   subject: string;
   message: string;
+}
+
+interface FieldFrameProps {
+  id: string;
+  label: string;
+  error?: string;
+  icon: ComponentType<{ size?: number; className?: string }>;
+  children: ReactNode;
+}
+
+function FieldFrame({ id, label, error, icon: Icon, children }: FieldFrameProps) {
+  return (
+    <div className="group flex flex-col gap-2">
+      <label
+        className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-white/42 transition-colors duration-300 group-focus-within:text-emerald-300/90"
+        htmlFor={id}
+      >
+        {label}
+      </label>
+
+      <div
+        className={cn(
+          "relative overflow-hidden rounded-2xl border bg-white/[0.035] transition duration-300",
+          "border-white/10 focus-within:border-emerald-300/40 focus-within:bg-white/[0.055] focus-within:ring-4 focus-within:ring-emerald-300/10",
+          error && "border-red-400/45 bg-red-400/[0.055] focus-within:border-red-300/55 focus-within:ring-red-400/10"
+        )}
+      >
+        <div className="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent opacity-0 transition-opacity duration-300 group-focus-within:opacity-100" />
+        <Icon
+          size={18}
+          className={cn(
+            "pointer-events-none absolute left-4 top-[18px] text-white/30 transition-colors duration-300 group-focus-within:text-emerald-300",
+            error && "text-red-300/80"
+          )}
+        />
+        {children}
+      </div>
+
+      <AnimatePresence initial={false}>
+        {error && (
+          <motion.p
+            id={`${id}-error`}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            className="font-mono text-[11px] font-semibold text-red-300"
+          >
+            {error}
+          </motion.p>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 }
 
 export default function ContactForm() {
@@ -23,6 +89,20 @@ export default function ContactForm() {
     message: "",
   });
   const [errors, setErrors] = useState<Partial<FormData>>({});
+
+  const disabled = state === "loading" || state === "success";
+
+  function updateField(field: FieldName, value: string) {
+    setForm((current) => ({ ...current, [field]: value }));
+    setErrors((current) => {
+      if (!current[field]) return current;
+      const next = { ...current };
+      delete next[field];
+      return next;
+    });
+
+    if (state === "error") setState("idle");
+  }
 
   function validate(): boolean {
     const newErrors: Partial<FormData> = {};
@@ -60,152 +140,169 @@ export default function ContactForm() {
           },
           EMAILJS_CONFIG.publicKey
         );
-        setState("success");
-        setTimeout(() => {
-           setForm({ name: "", email: "", subject: "", message: "" });
-           setState("idle");
-        }, 3000);
       } else {
         window.open(
-          `mailto:mohannitin494@gmail.com?subject=${encodeURIComponent(form.subject)}&body=${encodeURIComponent(`From: ${form.name}\nEmail: ${form.email}\n\n${form.message}`)}`
+          `mailto:${profile.email}?subject=${encodeURIComponent(form.subject)}&body=${encodeURIComponent(`From: ${form.name}\nEmail: ${form.email}\n\n${form.message}`)}`
         );
-        setState("success");
-        setTimeout(() => setState("idle"), 3000);
       }
+
+      setState("success");
+      setErrors({});
+      setTimeout(() => {
+        setForm({ name: "", email: "", subject: "", message: "" });
+        setState("idle");
+      }, 2600);
     } catch {
       setState("error");
     }
   }
 
   const inputClass =
-    "w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-[12px] px-[16px] py-[14px] text-[14px] text-white placeholder-[rgba(255,255,255,0.3)] focus:outline-none focus:border-[#60a5fa] focus:bg-[rgba(255,255,255,0.06)] focus:ring-4 focus:ring-[#60a5fa]/20 transition-all duration-300";
-
-  const labelClass = "text-[12px] text-[rgba(255,255,255,0.65)] font-[600] font-mono tracking-widest uppercase mb-[8px] block";
+    "w-full border-0 bg-transparent py-4 pl-12 pr-4 text-[15px] font-medium text-white placeholder:text-white/28 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60";
+  const textareaClass = `${inputClass} min-h-[156px] resize-y leading-7`;
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
-      <div className="grid sm:grid-cols-2 gap-5">
-        <div className="flex flex-col">
-          <label className={labelClass} htmlFor="contact-name">Your Name</label>
+    <form onSubmit={handleSubmit} noValidate className="relative z-10 flex flex-col gap-5">
+      <div className="grid gap-5 sm:grid-cols-2">
+        <FieldFrame id="contact-name" label="Your name" icon={User} error={errors.name}>
           <input
             id="contact-name"
             type="text"
-            placeholder="John Doe"
+            autoComplete="name"
+            placeholder="Nitin Mohan"
             value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            onChange={(e) => updateField("name", e.target.value)}
             className={inputClass}
-            disabled={state === "loading" || state === "success"}
+            disabled={disabled}
+            aria-invalid={Boolean(errors.name)}
+            aria-describedby={errors.name ? "contact-name-error" : undefined}
           />
-          {errors.name && <p className="text-[11px] font-mono text-red-400 mt-1">{errors.name}</p>}
-        </div>
+        </FieldFrame>
 
-        <div className="flex flex-col">
-          <label className={labelClass} htmlFor="contact-email">Your Email</label>
+        <FieldFrame id="contact-email" label="Email" icon={AtSign} error={errors.email}>
           <input
             id="contact-email"
             type="email"
-            placeholder="john@example.com"
+            autoComplete="email"
+            placeholder="you@company.com"
             value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            onChange={(e) => updateField("email", e.target.value)}
             className={inputClass}
-            disabled={state === "loading" || state === "success"}
+            disabled={disabled}
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "contact-email-error" : undefined}
           />
-          {errors.email && <p className="text-[11px] font-mono text-red-400 mt-1">{errors.email}</p>}
-        </div>
+        </FieldFrame>
       </div>
 
-      <div className="flex flex-col">
-        <label className={labelClass} htmlFor="contact-subject">Subject</label>
+      <FieldFrame id="contact-subject" label="Subject" icon={TextCursorInput} error={errors.subject}>
         <input
           id="contact-subject"
           type="text"
-          placeholder="What's this about?"
+          placeholder="Internship opportunity, AI build, collaboration..."
           value={form.subject}
-          onChange={(e) => setForm({ ...form, subject: e.target.value })}
+          onChange={(e) => updateField("subject", e.target.value)}
           className={inputClass}
-          disabled={state === "loading" || state === "success"}
+          disabled={disabled}
+          aria-invalid={Boolean(errors.subject)}
+          aria-describedby={errors.subject ? "contact-subject-error" : undefined}
         />
-        {errors.subject && <p className="text-[11px] font-mono text-red-400 mt-1">{errors.subject}</p>}
-      </div>
+      </FieldFrame>
 
-      <div className="flex flex-col">
-        <label className={labelClass} htmlFor="contact-message">Message</label>
+      <FieldFrame id="contact-message" label="Message" icon={MessageSquareText} error={errors.message}>
         <textarea
           id="contact-message"
-          placeholder="Tell me about your project or opportunity…"
+          placeholder="Tell me what you are building, what role you have in mind, and any useful context."
           value={form.message}
-          onChange={(e) => setForm({ ...form, message: e.target.value })}
-          className={`${inputClass} min-h-[140px] resize-y`}
-          disabled={state === "loading" || state === "success"}
+          onChange={(e) => updateField("message", e.target.value)}
+          className={textareaClass}
+          disabled={disabled}
+          aria-invalid={Boolean(errors.message)}
+          aria-describedby={errors.message ? "contact-message-error" : undefined}
         />
-        {errors.message && <p className="text-[11px] font-mono text-red-400 mt-1">{errors.message}</p>}
-      </div>
+      </FieldFrame>
 
       <AnimatePresence mode="wait">
         {state === "error" && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className="flex items-center gap-2 text-red-400 text-[13px] font-mono px-4 py-3 rounded-[12px] bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.2)]"
+            key="error"
+            initial={{ opacity: 0, y: -8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
+            className="flex items-start gap-3 rounded-2xl border border-red-400/22 bg-red-400/[0.09] px-4 py-3 text-sm font-semibold leading-6 text-red-100"
           >
-            <AlertCircle size={16} /> Something went wrong. Please try again or email me directly.
+            <AlertCircle size={18} className="mt-0.5 shrink-0 text-red-300" />
+            Something went wrong. Please try again or email me directly.
+          </motion.div>
+        )}
+
+        {state === "success" && (
+          <motion.div
+            key="success"
+            initial={{ opacity: 0, y: -8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
+            className="flex items-start gap-3 rounded-2xl border border-emerald-300/22 bg-emerald-300/[0.09] px-4 py-3 text-sm font-semibold leading-6 text-emerald-100"
+          >
+            <Check size={18} className="mt-0.5 shrink-0 text-emerald-300" />
+            Message ready. Thanks for reaching out.
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="mt-2 flex justify-start">
-        <MagneticButton>
-          <motion.button
-            type="submit"
-            disabled={state === "loading" || state === "success"}
-            layout
-            initial={false}
-            animate={{
-              width: state === "success" ? "56px" : "180px",
-              backgroundColor: state === "success" ? "#34d399" : "#60a5fa",
-              borderRadius: state === "success" ? "50px" : "12px",
-            }}
-            transition={{ type: "spring", stiffness: 120, damping: 14 }}
-            className="h-[56px] text-white font-[600] text-[15px] border-none flex items-center justify-center gap-2 cursor-pointer disabled:opacity-80 overflow-hidden shadow-[0_8px_20px_-8px_rgba(96,165,250,0.5)]"
-          >
-            <AnimatePresence mode="wait">
-              {state === "idle" || state === "error" ? (
-                <motion.div
-                  key="idle"
-                  initial={{ opacity: 0, y: 20 }}
+      <div className="flex flex-col gap-4 pt-2">
+        <motion.button
+          type="submit"
+          disabled={disabled}
+          whileHover={disabled ? undefined : { y: -2 }}
+          whileTap={disabled ? undefined : { scale: 0.985 }}
+          className="group relative h-[60px] w-full overflow-hidden rounded-2xl border border-emerald-300/24 bg-[linear-gradient(135deg,rgba(52,211,153,0.92),rgba(56,189,248,0.82),rgba(96,165,250,0.86))] px-6 text-[15px] font-extrabold text-white shadow-[0_22px_55px_-28px_rgba(52,211,153,0.9)] transition duration-300 disabled:cursor-not-allowed disabled:opacity-80"
+        >
+          <span className="absolute inset-0 translate-x-[-120%] bg-gradient-to-r from-transparent via-white/24 to-transparent transition-transform duration-700 group-hover:translate-x-[120%]" />
+          <span className="relative z-10 flex items-center justify-center gap-2">
+            <AnimatePresence mode="wait" initial={false}>
+              {state === "loading" ? (
+                <motion.span
+                  key="loading"
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.2 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="flex items-center gap-2"
+                >
+                  <Loader2 size={19} className="animate-spin" />
+                  Sending
+                </motion.span>
+              ) : state === "success" ? (
+                <motion.span
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.82 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.82 }}
+                  className="flex items-center gap-2"
+                >
+                  <Check size={20} />
+                  Sent
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="idle"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
                   className="flex items-center gap-2"
                 >
                   <Send size={18} />
-                  <span>Send Message</span>
-                </motion.div>
-              ) : state === "loading" ? (
-                <motion.div
-                  key="loading"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  className="flex items-center"
-                >
-                  <Loader2 size={24} className="animate-spin" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.5 }}
-                  className="flex items-center"
-                >
-                  <Check size={28} className="text-white" />
-                </motion.div>
+                  Send message
+                </motion.span>
               )}
             </AnimatePresence>
-          </motion.button>
-        </MagneticButton>
+          </span>
+        </motion.button>
+
+        <div className="flex items-center gap-2 text-xs font-semibold leading-6 text-white/42">
+          <ShieldCheck size={15} className="shrink-0 text-emerald-300/75" />
+          Your message stays focused on the conversation and can fall back to direct email delivery.
+        </div>
       </div>
     </form>
   );

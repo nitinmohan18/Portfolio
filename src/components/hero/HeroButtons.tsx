@@ -181,10 +181,13 @@ export default function HeroButtons() {
               initial={{ opacity: 0, scale: 0.5, y: 40, rotateX: 45 }}
               animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
               transition={{ delay: 1.3, type: "spring", stiffness: 150, damping: 10 }}
-              style={{ willChange: "transform, opacity" }}
               href={profile.resumeUrl}
               className="btn-secondary"
-              style={{ color: "rgba(255,255,255,0.8)", borderColor: "rgba(255,255,255,0.2)" }}
+              style={{
+                willChange: "transform, opacity",
+                color: "rgba(255,255,255,0.8)",
+                borderColor: "rgba(255,255,255,0.2)",
+              }}
             >
               Resume <Download size={18} />
             </motion.a>

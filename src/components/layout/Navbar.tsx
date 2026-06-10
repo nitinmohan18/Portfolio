@@ -258,6 +258,12 @@ export default function Navbar() {
           color: rgba(100,255,218,0.9);
           transform: translateX(0);
         }
+
+        @media (max-width: 767px) {
+          .side-nav {
+            display: none !important;
+          }
+        }
       `}</style>
       {/* Scroll progress bar */}
       <motion.div
