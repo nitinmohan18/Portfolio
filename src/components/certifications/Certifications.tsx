@@ -10,6 +10,7 @@ import {
   CircleDashed,
   CheckCircle2,
   Layers,
+  Award,
 } from "lucide-react";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 
@@ -23,6 +24,7 @@ const certificationsData = [
   {
     id: "fullstack",
     title: "Full Stack Development",
+    issuer: "Udemy",
     description:
       "Modern web development with React, Node.js, APIs, databases, and deployment.",
     status: "completed" as const,
@@ -34,6 +36,7 @@ const certificationsData = [
   {
     id: "dsa",
     title: "Data Structures & Algorithms",
+    issuer: "Udemy",
     description:
       "Problem solving, algorithm design, complexity analysis, and data structures mastery.",
     status: "completed" as const,
@@ -45,6 +48,7 @@ const certificationsData = [
   {
     id: "aiml",
     title: "AI/ML Certification",
+    issuer: "Udemy",
     description:
       "Deep learning, machine learning models, NLP, and real-world AI applications.",
     status: "in-progress" as const,
@@ -89,8 +93,8 @@ const colorMap: Record<
     cardBg:
       "bg-gradient-to-br from-[#04101e] via-[#030d1e] to-[#020918] border-blue-500/[0.08]",
     cardHover:
-      "hover:border-blue-400/20 hover:shadow-[0_8px_48px_rgba(59,130,246,0.06),0_0_0_1px_rgba(59,130,246,0.06)]",
-    badge: "bg-blue-500/10 text-blue-400 border-blue-500/22",
+      "hover:-translate-y-1 hover:border-blue-400/40 hover:shadow-[0_16px_60px_rgba(59,130,246,0.2),inset_0_0_20px_rgba(59,130,246,0.05)]",
+    badge: "bg-blue-500/[0.08] text-blue-300 border-blue-500/20",
     arrowRing:
       "border-blue-400/40 shadow-[0_0_16px_rgba(59,130,246,0.3),inset_0_0_10px_rgba(59,130,246,0.08)] bg-blue-500/6 hover:bg-blue-500/12 hover:border-blue-400/60 hover:shadow-[0_0_28px_rgba(59,130,246,0.5)]",
     arrowText: "text-blue-300",
@@ -111,8 +115,8 @@ const colorMap: Record<
     cardBg:
       "bg-gradient-to-br from-[#0e0425] via-[#0a031c] to-[#060214] border-purple-500/[0.08]",
     cardHover:
-      "hover:border-purple-400/20 hover:shadow-[0_8px_48px_rgba(168,85,247,0.06),0_0_0_1px_rgba(168,85,247,0.06)]",
-    badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/22",
+      "hover:-translate-y-1 hover:border-purple-400/40 hover:shadow-[0_16px_60px_rgba(168,85,247,0.2),inset_0_0_20px_rgba(168,85,247,0.05)]",
+    badge: "bg-purple-500/[0.08] text-purple-300 border-purple-500/20",
     arrowRing:
       "border-purple-400/40 shadow-[0_0_16px_rgba(168,85,247,0.3),inset_0_0_10px_rgba(168,85,247,0.08)] bg-purple-500/6 hover:bg-purple-500/12 hover:border-purple-400/60 hover:shadow-[0_0_28px_rgba(168,85,247,0.5)]",
     arrowText: "text-purple-300",
@@ -133,8 +137,8 @@ const colorMap: Record<
     cardBg:
       "bg-gradient-to-br from-[#021315] via-[#021012] to-[#010c0f] border-cyan-500/[0.08]",
     cardHover:
-      "hover:border-cyan-400/20 hover:shadow-[0_8px_48px_rgba(6,182,212,0.06),0_0_0_1px_rgba(6,182,212,0.06)]",
-    badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/22",
+      "hover:-translate-y-1 hover:border-cyan-400/40 hover:shadow-[0_16px_60px_rgba(6,182,212,0.2),inset_0_0_20px_rgba(6,182,212,0.05)]",
+    badge: "bg-cyan-500/[0.08] text-cyan-300 border-cyan-500/20",
     arrowRing:
       "border-cyan-400/40 shadow-[0_0_16px_rgba(6,182,212,0.3),inset_0_0_10px_rgba(6,182,212,0.08)] bg-cyan-500/6 hover:bg-cyan-500/12 hover:border-cyan-400/60 hover:shadow-[0_0_28px_rgba(6,182,212,0.5)]",
     arrowText: "text-cyan-300",
@@ -241,7 +245,7 @@ const ArrowBtn = ({ color }: { color: ColorKey }) => {
       <ArrowRight
         size={18}
         className={`relative z-10 ${c.arrowText} drop-shadow-[0_0_8px_currentColor]
-          group-hover:translate-x-[2px] transition-transform duration-300`}
+          group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:-rotate-45 transition-all duration-300`}
       />
     </motion.button>
   );
@@ -352,6 +356,10 @@ export default function Certifications() {
     return c.status === filter;
   });
 
+  const totalCerts = certificationsData.length;
+  const completedCerts = certificationsData.filter((c) => c.status === "completed").length;
+  const ongoingCerts = certificationsData.filter((c) => c.status === "in-progress").length;
+
   return (
     <SectionWrapper id="certifications" className="!py-16 lg:!py-24 w-full">
       <div ref={sectionRef} className="w-full flex flex-col items-center px-4">
@@ -401,11 +409,22 @@ export default function Certifications() {
           {/* Subtext */}
           <motion.p
             variants={fadeBlur}
-            className="max-w-[440px] text-[15px] text-white/48 leading-relaxed mb-12 relative -translate-y-10"
+            className="max-w-[440px] text-[15px] text-white/50 leading-relaxed mb-6 relative -translate-y-10"
           >
-            Each certification represents a commitment to growth,
-            problem-solving, and real-world impact.
+            Validated expertise in software engineering, problem solving, and emerging technologies.
           </motion.p>
+
+          {/* Subtle Counter */}
+          <motion.div
+            variants={fadeBlur}
+            className="flex flex-wrap items-center justify-center gap-3 text-[13px] font-medium text-white/40 relative -translate-y-10 mb-12"
+          >
+            <span>{totalCerts} Certifications</span>
+            <span className="w-1 h-1 rounded-full bg-white/20" />
+            <span className="text-emerald-400/80">{completedCerts} Completed</span>
+            <span className="w-1 h-1 rounded-full bg-white/20" />
+            <span className="text-blue-400/80">{ongoingCerts} In Progress</span>
+          </motion.div>
 
           {/* Filter tabs */}
           <FilterTabs active={filter} onChange={setFilter} />
@@ -425,9 +444,11 @@ export default function Certifications() {
           className="relative w-full max-w-[840px] flex flex-col gap-6 mt-16 mx-auto"
         >
           {/* Vertical Timeline */}
-          <div className="absolute left-[-14px] md:left-[-24px] top-8 bottom-8 w-[2px] hidden md:block overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-blue-500/12 via-purple-500/10 to-cyan-500/12 rounded-full" />
-            <TimelinePulse />
+          <div className="absolute left-[-14px] md:left-[-24px] top-8 bottom-8 w-[2px] hidden md:block">
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-500/20 via-purple-500/15 to-cyan-500/10 rounded-full shadow-[0_0_12px_rgba(99,102,241,0.25)]" />
+            <div className="absolute inset-0 overflow-hidden">
+              <TimelinePulse />
+            </div>
           </div>
 
           <AnimatePresence mode="popLayout">
@@ -452,24 +473,26 @@ export default function Certifications() {
                   {/* Timeline Node */}
                   <motion.div
                     variants={popIn}
-                    className="absolute left-[-21px] md:left-[-31px] top-1/2 -translate-y-1/2 hidden md:flex
+                    className={`absolute left-[-21px] md:left-[-31px] top-1/2 -translate-y-1/2 hidden md:flex
                       items-center justify-center w-[16px] h-[16px] rounded-full
-                      bg-[#020610] border-2 border-white/[0.08] z-10
-                      shadow-[0_0_12px_rgba(0,0,0,0.4)]"
+                      bg-[#020610] z-10 border-2
+                      ${isCompleted ? "border-white/20 shadow-[0_0_12px_rgba(255,255,255,0.1)]" : "border-white/[0.05] shadow-[0_0_12px_rgba(0,0,0,0.4)]"}`}
                   >
                     <div
-                      className={`w-[6px] h-[6px] rounded-full shrink-0 ${c.dotClass} ${c.dotGlow}`}
+                      className={`w-[6px] h-[6px] rounded-full shrink-0 ${c.dotClass} ${isCompleted ? c.dotGlow : "opacity-60"}`}
                     />
-                    <motion.div
-                      className={`absolute inset-[-4px] rounded-full ${c.pulseColor}`}
-                      initial={{ opacity: 0.5, scale: 1 }}
-                      animate={{ opacity: 0, scale: 2 }}
-                      transition={{
-                        duration: 2.5,
-                        repeat: Infinity,
-                        delay: i * 0.5,
-                      }}
-                    />
+                    {!isCompleted && (
+                      <motion.div
+                        className={`absolute inset-[-4px] rounded-full ${c.pulseColor}`}
+                        initial={{ opacity: 0.6, scale: 1 }}
+                        animate={{ opacity: 0, scale: 2.2 }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          delay: i * 0.4,
+                        }}
+                      />
+                    )}
                   </motion.div>
 
                   {/* Card */}
@@ -487,7 +510,7 @@ export default function Certifications() {
                     className={`group w-full relative flex flex-col md:flex-row items-center
                       backdrop-blur-xl border rounded-[22px]
                       transition-all duration-500 cursor-pointer
-                      p-6 md:py-7 md:pl-7 md:pr-10 gap-6 md:gap-7
+                      p-8 md:py-10 md:pl-8 md:pr-12 gap-8 md:gap-10
                       ${c.cardBg} ${c.cardHover}`}
                   >
                     {/* Top-edge highlight */}
@@ -501,60 +524,40 @@ export default function Certifications() {
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 flex flex-col min-w-0 gap-[6px] justify-center">
+                    <div className="flex-1 flex flex-col min-w-0 gap-3 justify-center">
                       {/* Status badge */}
                       <motion.div
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`inline-flex self-start items-center px-[10px] py-[4px]
-                          rounded-full text-[9.5px] font-bold tracking-[0.16em] border cursor-pointer
-                          transition-all duration-300 ${c.badge}`}
+                        className={`inline-flex self-start items-center gap-1.5 px-3 py-[4px]
+                          rounded-full text-[11px] font-medium tracking-wide border cursor-pointer
+                          transition-all duration-300 ${c.badge} mb-1`}
                       >
-                        {isCompleted ? "COMPLETED" : "ONGOING"}
+                        {isCompleted ? "✓ Completed" : "↻ In Progress"}
                       </motion.div>
 
                       {/* Title */}
                       <h3
-                        className="font-display text-[21px] font-semibold text-white tracking-wide leading-snug
+                        className="font-display text-[22px] font-semibold text-white tracking-wide leading-snug
                           group-hover:text-white transition-colors duration-300"
                       >
                         {cert.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-white/42 text-[13.5px] leading-[1.68] group-hover:text-white/55 transition-colors duration-500">
+                      <p className="text-white/50 text-[14px] leading-relaxed group-hover:text-white/70 transition-colors duration-500 mb-2">
                         {cert.description}
                       </p>
 
                       {/* Footer */}
                       <div className="flex items-center gap-[7px] mt-1">
-                        {!isCompleted ? (
-                          <>
-                            <CircleDashed
-                              size={16}
-                              className="text-blue-400 shrink-0 animate-[spin_3s_linear_infinite]"
-                            />
-                            <span className="text-[13px] text-white/36">
-                              Status ·{" "}
-                              <span className="text-blue-400/80 font-medium tracking-wide">
-                                In Progress
-                              </span>
-                            </span>
-                          </>
-                        ) : (
-                          <>
-                            <CheckCircle2
-                              size={16}
-                              className="text-emerald-400 shrink-0"
-                            />
-                            <span className="text-[13px] text-white/36">
-                              Issued ·{" "}
-                              <span className="text-white/56 font-medium tracking-wide">
-                                {cert.issuedDate}
-                              </span>
-                            </span>
-                          </>
-                        )}
+                        <Award size={16} className={`${c.iconText} shrink-0 opacity-80`} />
+                        <span className="text-[13px] text-white/40">
+                          {isCompleted ? "Certified by" : "Provided by"} ·{" "}
+                          <span className="text-white/60 font-medium tracking-wide">
+                            {cert.issuer}
+                          </span>
+                        </span>
                       </div>
                     </div>
 
