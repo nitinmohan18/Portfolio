@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Brain, Code, Braces, ArrowRight, ShieldCheck } from "lucide-react";
+import { Brain, Code, Braces, ArrowRight, ShieldCheck, CircleDashed, CheckCircle2 } from "lucide-react";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 
 /* ─────────────────────────────────────────────
@@ -206,21 +206,25 @@ const FilterTabs = ({
   active: FilterType;
   onChange: (v: FilterType) => void;
 }) => (
-  <div className="flex items-center bg-white/[0.04] border border-white/10 rounded-full p-[5px] gap-1">
+  <div className="flex items-center bg-[#060a14]/80 backdrop-blur-xl border border-white/10 rounded-full p-1.5 gap-1 shadow-[inset_0_0_20px_rgba(255,255,255,0.02)]">
     {TABS.map((tab) => {
       const isActive = active === tab.id;
       return (
         <button
           key={tab.id}
           onClick={() => onChange(tab.id)}
-          className={`relative flex items-center gap-[7px] px-5 py-[9px] rounded-full
+          className={`relative flex items-center gap-[7px] px-6 py-2.5 rounded-full
             text-[13px] font-medium tracking-wide transition-all duration-300
-            ${
-              isActive
-                ? "bg-blue-600 text-white shadow-[0_0_22px_rgba(59,130,246,0.45),0_2px_10px_rgba(0,0,0,0.45)]"
-                : "text-white/40 hover:text-white/70"
-            }`}
+            ${isActive ? "text-white" : "text-white/40 hover:text-white/70"}`}
         >
+          {isActive && (
+            <motion.div
+              layoutId="filter-active-pill"
+              className="absolute inset-0 bg-blue-600 rounded-full shadow-[0_0_22px_rgba(59,130,246,0.45),0_2px_10px_rgba(0,0,0,0.45)]"
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            />
+          )}
+          <span className="relative z-10 flex items-center gap-[7px]">
           {/* Progress spinner icon */}
           {tab.type === "progress" && (
             <svg
@@ -262,6 +266,7 @@ const FilterTabs = ({
             </svg>
           )}
           {tab.label}
+          </span>
         </button>
       );
     })}
@@ -319,13 +324,15 @@ export default function Certifications() {
         </motion.div>
 
         {/* ── Cards ── */}
-        <div className="w-full max-w-[880px] flex flex-col gap-[14px] mt-7">
+        <div className="relative w-full max-w-[840px] flex flex-col gap-8 mt-12 mx-auto">
+          {/* Vertical Timeline Line */}
+          <div className="absolute left-[-20px] md:left-[-40px] top-16 bottom-16 w-[2px] bg-gradient-to-b from-blue-500/20 via-purple-500/20 to-cyan-500/20 hidden md:block" />
+
           <AnimatePresence mode="popLayout">
             {filtered.map((cert, i) => {
               const Icon = cert.icon;
               const isCompleted = cert.status === "completed";
               const c = colorMap[cert.color];
-              const statusLabel = isCompleted ? "COMPLETED" : "IN PROGRESS";
 
               return (
                 <motion.div
@@ -339,26 +346,21 @@ export default function Certifications() {
                     ease: [0.16, 1, 0.3, 1],
                     delay: i * 0.07,
                   }}
-                  className="flex items-center gap-4"
+                  className="relative w-full"
                 >
-                  {/* ── Left status label (desktop only) ── */}
-                  <div className="w-[104px] hidden lg:flex items-center justify-end gap-[7px] shrink-0">
+                  {/* ── Timeline Node (desktop only) ── */}
+                  <div className="absolute left-[-27px] md:left-[-47px] top-1/2 -translate-y-1/2 hidden md:flex items-center justify-center w-[16px] h-[16px] rounded-full bg-[#020610] border-2 border-white/10 z-10">
                     <div
                       className={`w-[6px] h-[6px] rounded-full shrink-0 ${c.dotClass} ${c.dotGlow}`}
                     />
-                    <span
-                      className={`text-[9.5px] font-bold tracking-[0.16em] ${c.statusText}`}
-                    >
-                      {statusLabel}
-                    </span>
                   </div>
 
                   {/* ── Card ── */}
                   <div
-                    className={`group flex-1 relative flex flex-row items-center
+                    className={`group w-full relative flex flex-col md:flex-row items-center
                       bg-gradient-to-r backdrop-blur-xl border rounded-[24px]
                       transition-all duration-500 overflow-hidden
-                      px-5 py-5 gap-5 ${c.cardBg}`}
+                      p-6 md:p-8 gap-6 md:gap-8 ${c.cardBg}`}
                   >
                     {/* Floating icon */}
                     <div className="shrink-0">
@@ -368,11 +370,11 @@ export default function Certifications() {
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 flex flex-col min-w-0 gap-[8px]">
+                    <div className="flex-1 flex flex-col min-w-0 gap-[8px] justify-center">
                       {/* Status badge */}
                       <div
-                        className={`inline-flex self-start items-center px-[10px] py-[3.5px]
-                          rounded-full text-[9.5px] font-bold tracking-[0.16em] border ${c.badge}`}
+                        className={`inline-flex self-start items-center px-[10px] py-[4px]
+                          rounded-full text-[9.5px] font-bold tracking-[0.16em] border ${c.badge} mt-2`}
                       >
                         {isCompleted ? "COMPLETED" : "ONGOING"}
                       </div>
@@ -387,79 +389,25 @@ export default function Certifications() {
                         {cert.description}
                       </p>
 
-                      {/* ── In-progress: progress bar ── */}
-                      {!isCompleted && cert.progress !== undefined && (
-                        <div className="flex items-center gap-3 mt-[2px]">
-                          {/* Spinning indicator + label */}
-                          <div
-                            className={`flex items-center gap-[6px] text-[12px] font-medium
-                              ${c.progressText} shrink-0`}
-                          >
-                            <svg
-                              className="w-[13px] h-[13px] animate-spin"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                            >
-                              <circle
-                                cx="12"
-                                cy="12"
-                                r="9"
-                                stroke="currentColor"
-                                strokeWidth="2.5"
-                                strokeOpacity="0.28"
-                              />
-                              <path
-                                d="M12 3a9 9 0 0 1 7.79 4.5"
-                                stroke="currentColor"
-                                strokeWidth="2.5"
-                                strokeLinecap="round"
-                              />
-                            </svg>
-                            {cert.progress}% Complete
-                          </div>
-
-                          {/* Track */}
-                          <div className="flex-1 h-[3px] bg-white/8 rounded-full overflow-hidden">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              whileInView={{ width: `${cert.progress}%` }}
-                              viewport={{ once: true }}
-                              transition={{ duration: 1.4, ease: "easeOut", delay: 0.35 }}
-                              className={`h-full bg-gradient-to-r ${c.progressBar} rounded-full`}
-                            />
-                          </div>
-                        </div>
-                      )}
-
-                      {/* ── Completed: issued date ── */}
-                      {isCompleted && cert.issuedDate && (
-                        <div className="flex items-center gap-[7px] mt-[2px]">
-                          <svg
-                            className="w-[14px] h-[14px] text-emerald-400 shrink-0"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                          >
-                            <circle
-                              cx="12"
-                              cy="12"
-                              r="9"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                            />
-                            <path
-                              d="M7.5 12l3 3 6-6"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                          <span className="text-[12.5px] text-white/36">
-                            Issued ·{" "}
-                            <span className="text-white/56">{cert.issuedDate}</span>
-                          </span>
-                        </div>
-                      )}
+                      {/* ── Footer ── */}
+                      <div className="flex items-center gap-[7px] mt-2">
+                        {!isCompleted ? (
+                          <>
+                            <CircleDashed size={16} className="text-blue-400 shrink-0" />
+                            <span className="text-[13px] text-white/36">
+                              Status · <span className="text-blue-400/80 font-medium tracking-wide">In Progress</span>
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
+                            <span className="text-[13px] text-white/36">
+                              Issued ·{" "}
+                              <span className="text-white/56 font-medium tracking-wide">{cert.issuedDate}</span>
+                            </span>
+                          </>
+                        )}
+                      </div>
                     </div>
 
                     {/* Arrow button */}
