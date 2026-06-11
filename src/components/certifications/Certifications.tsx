@@ -9,6 +9,7 @@ import {
   ArrowRight,
   CircleDashed,
   CheckCircle2,
+  Layers,
 } from "lucide-react";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 
@@ -55,8 +56,7 @@ const certificationsData = [
 ];
 
 /* ─────────────────────────────────────────────
-   Color Token Map — #2 deeper card gradients,
-   layered borders, stronger hover elevation
+   Color Token Map
 ───────────────────────────────────────────── */
 const colorMap: Record<
   ColorKey,
@@ -64,6 +64,7 @@ const colorMap: Record<
     outerRing: string;
     iconBox: string;
     iconGlow: string;
+    iconGlowHover: string;
     iconText: string;
     cardBg: string;
     cardHover: string;
@@ -82,18 +83,20 @@ const colorMap: Record<
       "border-blue-400/38 bg-gradient-to-br from-blue-900/55 via-blue-950/80 to-[#020a18]",
     iconGlow:
       "shadow-[0_0_30px_rgba(59,130,246,0.55),0_0_65px_rgba(59,130,246,0.18)]",
+    iconGlowHover:
+      "group-hover:shadow-[0_0_40px_rgba(59,130,246,0.7),0_0_80px_rgba(59,130,246,0.25)]",
     iconText: "text-blue-400",
     cardBg:
       "bg-gradient-to-br from-[#04101e] via-[#030d1e] to-[#020918] border-blue-500/[0.08]",
     cardHover:
-      "hover:border-blue-400/25 hover:shadow-[0_8px_40px_rgba(59,130,246,0.06),0_0_0_1px_rgba(59,130,246,0.08)]",
+      "hover:border-blue-400/20 hover:shadow-[0_8px_48px_rgba(59,130,246,0.06),0_0_0_1px_rgba(59,130,246,0.06)]",
     badge: "bg-blue-500/10 text-blue-400 border-blue-500/22",
     arrowRing:
-      "border-blue-400/50 shadow-[0_0_20px_rgba(59,130,246,0.4),inset_0_0_12px_rgba(59,130,246,0.1)] bg-blue-500/8 hover:bg-blue-500/15 hover:border-blue-400/70 hover:shadow-[0_0_30px_rgba(59,130,246,0.6)]",
+      "border-blue-400/40 shadow-[0_0_16px_rgba(59,130,246,0.3),inset_0_0_10px_rgba(59,130,246,0.08)] bg-blue-500/6 hover:bg-blue-500/12 hover:border-blue-400/60 hover:shadow-[0_0_28px_rgba(59,130,246,0.5)]",
     arrowText: "text-blue-300",
     dotClass: "bg-blue-400",
-    dotGlow: "shadow-[0_0_8px_3px_rgba(59,130,246,0.7)]",
-    pulseColor: "bg-blue-400/40",
+    dotGlow: "shadow-[0_0_6px_2px_rgba(59,130,246,0.6)]",
+    pulseColor: "bg-blue-400/30",
   },
   purple: {
     outerRing:
@@ -102,18 +105,20 @@ const colorMap: Record<
       "border-purple-400/38 bg-gradient-to-br from-purple-900/55 via-purple-950/80 to-[#060115]",
     iconGlow:
       "shadow-[0_0_30px_rgba(168,85,247,0.55),0_0_65px_rgba(168,85,247,0.18)]",
+    iconGlowHover:
+      "group-hover:shadow-[0_0_40px_rgba(168,85,247,0.7),0_0_80px_rgba(168,85,247,0.25)]",
     iconText: "text-purple-400",
     cardBg:
       "bg-gradient-to-br from-[#0e0425] via-[#0a031c] to-[#060214] border-purple-500/[0.08]",
     cardHover:
-      "hover:border-purple-400/25 hover:shadow-[0_8px_40px_rgba(168,85,247,0.06),0_0_0_1px_rgba(168,85,247,0.08)]",
+      "hover:border-purple-400/20 hover:shadow-[0_8px_48px_rgba(168,85,247,0.06),0_0_0_1px_rgba(168,85,247,0.06)]",
     badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/22",
     arrowRing:
-      "border-purple-400/50 shadow-[0_0_20px_rgba(168,85,247,0.4),inset_0_0_12px_rgba(168,85,247,0.1)] bg-purple-500/8 hover:bg-purple-500/15 hover:border-purple-400/70 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]",
+      "border-purple-400/40 shadow-[0_0_16px_rgba(168,85,247,0.3),inset_0_0_10px_rgba(168,85,247,0.08)] bg-purple-500/6 hover:bg-purple-500/12 hover:border-purple-400/60 hover:shadow-[0_0_28px_rgba(168,85,247,0.5)]",
     arrowText: "text-purple-300",
     dotClass: "bg-emerald-400",
-    dotGlow: "shadow-[0_0_8px_3px_rgba(52,211,153,0.7)]",
-    pulseColor: "bg-emerald-400/40",
+    dotGlow: "shadow-[0_0_6px_2px_rgba(52,211,153,0.6)]",
+    pulseColor: "bg-emerald-400/30",
   },
   cyan: {
     outerRing:
@@ -122,66 +127,67 @@ const colorMap: Record<
       "border-cyan-400/38 bg-gradient-to-br from-cyan-900/55 via-cyan-950/80 to-[#010a0d]",
     iconGlow:
       "shadow-[0_0_30px_rgba(6,182,212,0.55),0_0_65px_rgba(6,182,212,0.18)]",
+    iconGlowHover:
+      "group-hover:shadow-[0_0_40px_rgba(6,182,212,0.7),0_0_80px_rgba(6,182,212,0.25)]",
     iconText: "text-cyan-400",
     cardBg:
       "bg-gradient-to-br from-[#021315] via-[#021012] to-[#010c0f] border-cyan-500/[0.08]",
     cardHover:
-      "hover:border-cyan-400/25 hover:shadow-[0_8px_40px_rgba(6,182,212,0.06),0_0_0_1px_rgba(6,182,212,0.08)]",
+      "hover:border-cyan-400/20 hover:shadow-[0_8px_48px_rgba(6,182,212,0.06),0_0_0_1px_rgba(6,182,212,0.06)]",
     badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/22",
     arrowRing:
-      "border-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.4),inset_0_0_12px_rgba(6,182,212,0.1)] bg-cyan-500/8 hover:bg-cyan-500/15 hover:border-cyan-400/70 hover:shadow-[0_0_30px_rgba(6,182,212,0.6)]",
+      "border-cyan-400/40 shadow-[0_0_16px_rgba(6,182,212,0.3),inset_0_0_10px_rgba(6,182,212,0.08)] bg-cyan-500/6 hover:bg-cyan-500/12 hover:border-cyan-400/60 hover:shadow-[0_0_28px_rgba(6,182,212,0.5)]",
     arrowText: "text-cyan-300",
     dotClass: "bg-emerald-400",
-    dotGlow: "shadow-[0_0_8px_3px_rgba(52,211,153,0.7)]",
-    pulseColor: "bg-emerald-400/40",
+    dotGlow: "shadow-[0_0_6px_2px_rgba(52,211,153,0.6)]",
+    pulseColor: "bg-emerald-400/30",
   },
 };
 
 /* ─────────────────────────────────────────────
-   Animation Variants — #6 cinematic staggered
-   reveals with GPU-accelerated transforms
+   Animation Variants
 ───────────────────────────────────────────── */
-const EASE_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1];
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
-const sectionVariants = {
+const sectionStagger = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.05 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
   },
 };
 
-const fadeUpBlur = {
-  hidden: { opacity: 0, y: 24, filter: "blur(10px)" },
+const fadeBlur = {
+  hidden: { opacity: 0, y: 22, filter: "blur(8px)" },
   visible: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.8, ease: EASE_EXPO },
+    transition: { duration: 0.75, ease: EASE },
   },
 };
 
-const cardReveal = {
-  hidden: { opacity: 0, y: 36, scale: 0.97 },
+const cardUp = {
+  hidden: { opacity: 0, y: 32, scale: 0.975 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.65, ease: EASE_EXPO },
+    transition: { duration: 0.6, ease: EASE },
   },
 };
 
-const scaleIn = {
+const popIn = {
   hidden: { scale: 0, opacity: 0 },
   visible: {
     scale: 1,
     opacity: 1,
-    transition: { type: "spring" as const, stiffness: 500, damping: 20 },
+    transition: { type: "spring" as const, stiffness: 500, damping: 22 },
   },
 };
 
 /* ─────────────────────────────────────────────
-   Floating Icon — #7 polished hover/focus/tap
+   Floating Icon
 ───────────────────────────────────────────── */
 const FloatingIcon = ({
   children,
@@ -200,8 +206,8 @@ const FloatingIcon = ({
     >
       <div
         className={`w-[92px] h-[92px] rounded-[15px] flex items-center justify-center
-          border relative overflow-hidden ${c.iconBox} ${c.iconGlow}
-          group-hover:scale-[1.04] transition-transform duration-600`}
+          border relative overflow-hidden transition-shadow duration-500
+          ${c.iconBox} ${c.iconGlow} ${c.iconGlowHover}`}
       >
         <span className="absolute top-0 left-0 w-[15px] h-[15px] border-t-[1.5px] border-l-[1.5px] border-white/28 rounded-tl-[15px]" />
         <span className="absolute bottom-0 right-0 w-[15px] h-[15px] border-b-[1.5px] border-r-[1.5px] border-white/10 rounded-br-[15px]" />
@@ -218,7 +224,7 @@ const FloatingIcon = ({
 };
 
 /* ─────────────────────────────────────────────
-   Arrow Button — #7 consistent motion design
+   Arrow Button
 ───────────────────────────────────────────── */
 const ArrowBtn = ({ color }: { color: ColorKey }) => {
   const c = colorMap[color];
@@ -229,8 +235,7 @@ const ArrowBtn = ({ color }: { color: ColorKey }) => {
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
       className={`relative w-[52px] h-[52px] rounded-full border-2 flex items-center
         justify-center shrink-0 overflow-hidden cursor-pointer
-        transition-all duration-300
-        ${c.arrowRing}`}
+        transition-all duration-300 ${c.arrowRing}`}
     >
       <span className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent" />
       <ArrowRight
@@ -243,18 +248,79 @@ const ArrowBtn = ({ color }: { color: ColorKey }) => {
 };
 
 /* ─────────────────────────────────────────────
-   Filter Tabs — #1 glassmorphism segmented
-   control with animated active state
+   Premium Filter Tabs — glassmorphism segmented
+   control, wider, gradient border, inner glow
 ───────────────────────────────────────────── */
 const TABS: {
   id: FilterType;
   label: string;
-  type: "all" | "progress" | "check";
+  icon: "layers" | "progress" | "check";
 }[] = [
-  { id: "all", label: "All", type: "all" },
-  { id: "in-progress", label: "In Progress", type: "progress" },
-  { id: "completed", label: "Completed", type: "check" },
+  { id: "all", label: "All", icon: "layers" },
+  { id: "in-progress", label: "In Progress", icon: "progress" },
+  { id: "completed", label: "Completed", icon: "check" },
 ];
+
+const TabIcon = ({
+  type,
+  isActive,
+}: {
+  type: "layers" | "progress" | "check";
+  isActive: boolean;
+}) => {
+  if (type === "layers") {
+    return (
+      <Layers
+        size={20}
+        className={`shrink-0 transition-colors duration-300 ${
+          isActive ? "text-white" : "text-white/35"
+        }`}
+      />
+    );
+  }
+  if (type === "progress") {
+    return (
+      <svg
+        className={`w-[20px] h-[20px] shrink-0 ${
+          isActive ? "animate-[spin_2s_linear_infinite]" : ""
+        }`}
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <circle
+          cx="12"
+          cy="12"
+          r="9"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeOpacity="0.3"
+        />
+        <path
+          d="M12 3a9 9 0 0 1 7.79 4.5"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+      </svg>
+    );
+  }
+  return (
+    <svg
+      className="w-[20px] h-[20px] shrink-0"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.5" />
+      <path
+        d="M7.5 12l3 3 6-6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
 
 const FilterTabs = ({
   active,
@@ -264,102 +330,81 @@ const FilterTabs = ({
   onChange: (v: FilterType) => void;
 }) => (
   <motion.div
-    variants={fadeUpBlur}
-    className="relative flex items-center rounded-full p-[5px] gap-[4px]
-      bg-white/[0.03] backdrop-blur-2xl
-      border border-white/[0.07]
-      shadow-[0_4px_32px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.04),inset_0_-1px_0_rgba(0,0,0,0.2)]
-      before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-white/[0.03] before:to-transparent before:pointer-events-none"
+    variants={fadeBlur}
+    className="relative isolate -translate-y-6"
   >
-    {TABS.map((tab) => {
-      const isActive = active === tab.id;
-      return (
-        <motion.button
-          key={tab.id}
-          onClick={() => onChange(tab.id)}
-          whileHover={isActive ? {} : { scale: 1.03, backgroundColor: "rgba(255,255,255,0.04)" }}
-          whileTap={{ scale: 0.96 }}
-          className={`relative flex items-center gap-[7px] px-7 py-[11px] rounded-full
-            text-[13px] font-semibold tracking-wide
-            transition-colors duration-300 outline-none
-            focus-visible:ring-2 focus-visible:ring-blue-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020610]
-            ${isActive ? "text-white" : "text-white/35 hover:text-white/60"}`}
-        >
-          {isActive && (
-            <motion.div
-              layoutId="filter-active-pill"
-              className="absolute inset-0 rounded-full
-                bg-gradient-to-b from-blue-500 via-blue-600 to-blue-700
-                shadow-[0_0_24px_rgba(59,130,246,0.45),0_4px_16px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.18),inset_0_-1px_0_rgba(0,0,0,0.15)]"
-              transition={{ type: "spring", stiffness: 380, damping: 30 }}
-            />
-          )}
-          <span className="relative z-10 flex items-center gap-[7px]">
-            {tab.type === "progress" && (
-              <svg
-                className={`w-[14px] h-[14px] shrink-0 ${
-                  isActive ? "animate-[spin_2s_linear_infinite]" : ""
-                }`}
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="9"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeOpacity="0.3"
-                />
-                <path
-                  d="M12 3a9 9 0 0 1 7.79 4.5"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                />
-              </svg>
+    {/* Multi-layer outer glow — gives a vivid neon border aura */}
+    <div className="absolute -inset-[3px] rounded-full bg-gradient-to-r from-blue-500/30 via-indigo-500/15 to-purple-500/30 blur-[4px] pointer-events-none" />
+    <div className="absolute -inset-[1px] rounded-full bg-gradient-to-r from-blue-400/20 via-indigo-400/10 to-purple-400/20 pointer-events-none" />
+
+    {/* Main container */}
+    <div
+      className="relative flex items-center rounded-full p-[8px] gap-[6px]
+        bg-[#050810]/90 backdrop-blur-3xl
+        border border-white/[0.05]
+        shadow-[0_8px_40px_rgba(0,0,0,0.6),0_0_60px_rgba(59,130,246,0.04),inset_0_1px_0_rgba(255,255,255,0.05),inset_0_-1px_0_rgba(0,0,0,0.4)]"
+    >
+      {/* Top highlight line */}
+      <div className="absolute inset-x-6 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.1] to-transparent pointer-events-none" />
+      {/* Bottom shadow line */}
+      <div className="absolute inset-x-6 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-black/30 to-transparent pointer-events-none" />
+
+      {TABS.map((tab) => {
+        const isActive = active === tab.id;
+        return (
+          <motion.button
+            key={tab.id}
+            onClick={() => onChange(tab.id)}
+            whileHover={
+              isActive
+                ? {}
+                : { backgroundColor: "rgba(255,255,255,0.05)", scale: 1.02 }
+            }
+            whileTap={{ scale: 0.96 }}
+            className={`relative flex items-center gap-[10px] px-14 py-[18px] rounded-full
+              text-[16px] font-semibold tracking-[0.02em]
+              transition-colors duration-300 outline-none select-none
+              focus-visible:ring-2 focus-visible:ring-blue-400/40
+              ${
+                isActive
+                  ? "text-white"
+                  : "text-white/30 hover:text-white/55"
+              }`}
+          >
+            {isActive && (
+              <motion.div
+                layoutId="cert-filter-pill"
+                className="absolute inset-0 rounded-full
+                  bg-gradient-to-b from-blue-400 via-blue-600 to-blue-700
+                  shadow-[0_0_32px_rgba(59,130,246,0.6),0_0_70px_rgba(59,130,246,0.25),0_4px_20px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.25),inset_0_-1px_0_rgba(0,0,0,0.2)]"
+                transition={{
+                  type: "spring",
+                  stiffness: 380,
+                  damping: 30,
+                }}
+              />
             )}
-            {tab.type === "check" && (
-              <svg
-                className="w-[14px] h-[14px] shrink-0"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="9"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                />
-                <path
-                  d="M7.5 12l3 3 6-6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            )}
-            {tab.label}
-          </span>
-        </motion.button>
-      );
-    })}
+            <span className="relative z-10 flex items-center gap-[10px]">
+              <TabIcon type={tab.icon} isActive={isActive} />
+              {tab.label}
+            </span>
+          </motion.button>
+        );
+      })}
+    </div>
   </motion.div>
 );
 
 /* ─────────────────────────────────────────────
-   Timeline Pulse — #3 animated energy traveling
-   through the timeline
+   Timeline Pulse
 ───────────────────────────────────────────── */
 const TimelinePulse = () => (
   <motion.div
-    className="absolute left-0 w-full h-[40px] bg-gradient-to-b from-transparent via-indigo-400/30 to-transparent rounded-full blur-[3px]"
-    initial={{ top: "0%" }}
-    animate={{ top: "100%" }}
+    className="absolute left-0 w-full h-[36px] bg-gradient-to-b from-transparent via-indigo-400/25 to-transparent rounded-full blur-[2px]"
+    initial={{ top: "-10%" }}
+    animate={{ top: "110%" }}
     transition={{
-      duration: 3,
+      duration: 3.5,
       repeat: Infinity,
       ease: "linear",
     }}
@@ -386,19 +431,19 @@ export default function Certifications() {
         <motion.div
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          variants={sectionVariants}
-          className="flex flex-col items-center text-center w-full mb-4"
+          variants={sectionStagger}
+          className="flex flex-col items-center text-center w-full mb-10"
         >
-          {/* Section label — #4 stronger glow + gradient shimmer */}
+          {/* Section label */}
           <motion.div
-            variants={fadeUpBlur}
-            className="flex items-center gap-4 mb-4"
+            variants={fadeBlur}
+            className="flex items-center gap-4 mb-4 relative -translate-y-10"
           >
             <motion.div
               className="h-[1px] w-14 bg-gradient-to-r from-transparent via-indigo-400/40 to-indigo-500/60"
               initial={{ scaleX: 0, originX: 0 }}
               animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: EASE_EXPO }}
+              transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
             />
             <span
               className="font-mono text-[14px] font-bold uppercase tracking-[0.35em]
@@ -412,25 +457,23 @@ export default function Certifications() {
               className="h-[1px] w-14 bg-gradient-to-l from-transparent via-indigo-400/40 to-indigo-500/60"
               initial={{ scaleX: 0, originX: 1 }}
               animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: EASE_EXPO }}
+              transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
             />
           </motion.div>
 
-          {/* Headline — #4 gradient shimmer effect via background-size animation */}
+          {/* Headline */}
           <motion.h2
-            variants={fadeUpBlur}
+            variants={fadeBlur}
             className="font-display text-[clamp(2.8rem,5.5vw,4.6rem)] font-bold leading-[1.08] text-white mb-3 tracking-tight
-              drop-shadow-[0_0_40px_rgba(255,255,255,0.06)]"
+              drop-shadow-[0_0_40px_rgba(255,255,255,0.06)] relative -translate-y-10"
           >
             Milestones{" "}
             <span
               className="font-serif italic font-medium bg-clip-text text-transparent
-                bg-[length:200%_auto] bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400
-                animate-[shimmer_6s_ease-in-out_infinite]
-                drop-shadow-[0_0_24px_rgba(99,102,241,0.4)]"
-              style={{
-                backgroundSize: "200% auto",
-              }}
+                bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400
+                drop-shadow-[0_0_24px_rgba(99,102,241,0.4)]
+                animate-[certShimmer_6s_ease-in-out_infinite]"
+              style={{ backgroundSize: "200% auto" }}
             >
               that matter.
             </span>
@@ -438,8 +481,8 @@ export default function Certifications() {
 
           {/* Subtext */}
           <motion.p
-            variants={fadeUpBlur}
-            className="max-w-[440px] text-[15px] text-white/48 leading-relaxed mb-8"
+            variants={fadeBlur}
+            className="max-w-[440px] text-[15px] text-white/48 leading-relaxed mb-12 relative -translate-y-10"
           >
             Each certification represents a commitment to growth,
             problem-solving, and real-world impact.
@@ -449,7 +492,7 @@ export default function Certifications() {
           <FilterTabs active={filter} onChange={setFilter} />
         </motion.div>
 
-        {/* ── Cards ── #5 tighter bottom spacing */}
+        {/* ── Cards ── */}
         <motion.div
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -457,16 +500,14 @@ export default function Certifications() {
             hidden: { opacity: 0 },
             visible: {
               opacity: 1,
-              transition: { staggerChildren: 0.18, delayChildren: 0.5 },
+              transition: { staggerChildren: 0.16, delayChildren: 0.45 },
             },
           }}
-          className="relative w-full max-w-[840px] flex flex-col gap-6 mt-12 mx-auto"
+          className="relative w-full max-w-[840px] flex flex-col gap-6 mt-16 mx-auto"
         >
-          {/* #3 Vertical Timeline — tighter to cards (left-[-24px]) */}
+          {/* Vertical Timeline */}
           <div className="absolute left-[-14px] md:left-[-24px] top-8 bottom-8 w-[2px] hidden md:block overflow-hidden">
-            {/* Static gradient line */}
-            <div className="absolute inset-0 bg-gradient-to-b from-blue-500/15 via-purple-500/12 to-cyan-500/15 rounded-full" />
-            {/* Animated energy pulse */}
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-500/12 via-purple-500/10 to-cyan-500/12 rounded-full" />
             <TimelinePulse />
           </div>
 
@@ -480,7 +521,7 @@ export default function Certifications() {
                 <motion.div
                   key={cert.id}
                   layout
-                  variants={cardReveal}
+                  variants={cardUp}
                   exit={{
                     opacity: 0,
                     scale: 0.96,
@@ -489,9 +530,9 @@ export default function Certifications() {
                   }}
                   className="relative w-full"
                 >
-                  {/* #3 Timeline Node — tighter alignment */}
+                  {/* Timeline Node */}
                   <motion.div
-                    variants={scaleIn}
+                    variants={popIn}
                     className="absolute left-[-21px] md:left-[-31px] top-1/2 -translate-y-1/2 hidden md:flex
                       items-center justify-center w-[16px] h-[16px] rounded-full
                       bg-[#020610] border-2 border-white/[0.08] z-10
@@ -500,39 +541,38 @@ export default function Certifications() {
                     <div
                       className={`w-[6px] h-[6px] rounded-full shrink-0 ${c.dotClass} ${c.dotGlow}`}
                     />
-                    {/* Pulse ring animation */}
                     <motion.div
                       className={`absolute inset-[-4px] rounded-full ${c.pulseColor}`}
-                      initial={{ opacity: 0.6, scale: 1 }}
-                      animate={{ opacity: 0, scale: 2.2 }}
+                      initial={{ opacity: 0.5, scale: 1 }}
+                      animate={{ opacity: 0, scale: 2 }}
                       transition={{
-                        duration: 2,
+                        duration: 2.5,
                         repeat: Infinity,
-                        delay: i * 0.4,
+                        delay: i * 0.5,
                       }}
                     />
                   </motion.div>
 
-                  {/* ── Card — #2 deeper gradients, subtle elevation, mouse-responsive ── */}
+                  {/* Card */}
                   <motion.div
                     whileHover={{
-                      scale: 1.02,
-                      y: -5,
+                      scale: 1.015,
+                      y: -4,
                       transition: {
                         type: "spring",
                         stiffness: 300,
                         damping: 22,
                       },
                     }}
-                    whileTap={{ scale: 0.985 }}
+                    whileTap={{ scale: 0.99 }}
                     className={`group w-full relative flex flex-col md:flex-row items-center
                       backdrop-blur-xl border rounded-[22px]
                       transition-all duration-500 cursor-pointer
                       p-6 md:py-7 md:pl-7 md:pr-10 gap-6 md:gap-7
                       ${c.cardBg} ${c.cardHover}`}
                   >
-                    {/* Subtle top-edge highlight line */}
-                    <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent rounded-t-[22px]" />
+                    {/* Top-edge highlight */}
+                    <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.05] to-transparent rounded-t-[22px]" />
 
                     {/* Floating icon */}
                     <div className="shrink-0">
@@ -555,8 +595,10 @@ export default function Certifications() {
                       </motion.div>
 
                       {/* Title */}
-                      <h3 className="font-display text-[21px] font-semibold text-white tracking-wide leading-snug
-                        group-hover:text-white transition-colors duration-300">
+                      <h3
+                        className="font-display text-[21px] font-semibold text-white tracking-wide leading-snug
+                          group-hover:text-white transition-colors duration-300"
+                      >
                         {cert.title}
                       </h3>
 
@@ -619,14 +661,6 @@ export default function Certifications() {
           )}
         </motion.div>
       </div>
-
-      {/* #4 Shimmer keyframe */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes shimmer {
-          0%, 100% { background-position: 0% center; }
-          50% { background-position: 100% center; }
-        }
-      ` }} />
     </SectionWrapper>
   );
 }

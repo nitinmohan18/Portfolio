@@ -138,3 +138,9 @@
 .animate-cursor {
   animation: blink 1s step-end infinite;
 }
+
+/* ─── Certifications heading shimmer ─── */
+@keyframes certShimmer {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
