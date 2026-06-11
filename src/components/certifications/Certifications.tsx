@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
   Brain,
   Code,
@@ -55,7 +55,8 @@ const certificationsData = [
 ];
 
 /* ─────────────────────────────────────────────
-   Color Token Map
+   Color Token Map — #2 deeper card gradients,
+   layered borders, stronger hover elevation
 ───────────────────────────────────────────── */
 const colorMap: Record<
   ColorKey,
@@ -65,12 +66,13 @@ const colorMap: Record<
     iconGlow: string;
     iconText: string;
     cardBg: string;
+    cardHover: string;
     badge: string;
     arrowRing: string;
     arrowText: string;
     dotClass: string;
     dotGlow: string;
-    hoverGlow: string;
+    pulseColor: string;
   }
 > = {
   blue: {
@@ -82,14 +84,16 @@ const colorMap: Record<
       "shadow-[0_0_30px_rgba(59,130,246,0.55),0_0_65px_rgba(59,130,246,0.18)]",
     iconText: "text-blue-400",
     cardBg:
-      "from-[#04101e]/97 to-[#030c1c]/99 border-blue-500/12 hover:border-blue-400/35",
+      "bg-gradient-to-br from-[#04101e] via-[#030d1e] to-[#020918] border-blue-500/[0.08]",
+    cardHover:
+      "hover:border-blue-400/25 hover:shadow-[0_8px_40px_rgba(59,130,246,0.06),0_0_0_1px_rgba(59,130,246,0.08)]",
     badge: "bg-blue-500/10 text-blue-400 border-blue-500/22",
     arrowRing:
-      "border-blue-400/65 shadow-[0_0_24px_rgba(59,130,246,0.55),inset_0_0_14px_rgba(59,130,246,0.14)] bg-blue-500/10",
+      "border-blue-400/50 shadow-[0_0_20px_rgba(59,130,246,0.4),inset_0_0_12px_rgba(59,130,246,0.1)] bg-blue-500/8 hover:bg-blue-500/15 hover:border-blue-400/70 hover:shadow-[0_0_30px_rgba(59,130,246,0.6)]",
     arrowText: "text-blue-300",
     dotClass: "bg-blue-400",
     dotGlow: "shadow-[0_0_8px_3px_rgba(59,130,246,0.7)]",
-    hoverGlow: "hover:shadow-[0_0_40px_rgba(59,130,246,0.08)]",
+    pulseColor: "bg-blue-400/40",
   },
   purple: {
     outerRing:
@@ -100,14 +104,16 @@ const colorMap: Record<
       "shadow-[0_0_30px_rgba(168,85,247,0.55),0_0_65px_rgba(168,85,247,0.18)]",
     iconText: "text-purple-400",
     cardBg:
-      "from-[#0e0425]/97 to-[#090318]/99 border-purple-500/12 hover:border-purple-400/35",
+      "bg-gradient-to-br from-[#0e0425] via-[#0a031c] to-[#060214] border-purple-500/[0.08]",
+    cardHover:
+      "hover:border-purple-400/25 hover:shadow-[0_8px_40px_rgba(168,85,247,0.06),0_0_0_1px_rgba(168,85,247,0.08)]",
     badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/22",
     arrowRing:
-      "border-purple-400/65 shadow-[0_0_24px_rgba(168,85,247,0.55),inset_0_0_14px_rgba(168,85,247,0.14)] bg-purple-500/10",
+      "border-purple-400/50 shadow-[0_0_20px_rgba(168,85,247,0.4),inset_0_0_12px_rgba(168,85,247,0.1)] bg-purple-500/8 hover:bg-purple-500/15 hover:border-purple-400/70 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]",
     arrowText: "text-purple-300",
     dotClass: "bg-emerald-400",
     dotGlow: "shadow-[0_0_8px_3px_rgba(52,211,153,0.7)]",
-    hoverGlow: "hover:shadow-[0_0_40px_rgba(168,85,247,0.08)]",
+    pulseColor: "bg-emerald-400/40",
   },
   cyan: {
     outerRing:
@@ -118,59 +124,64 @@ const colorMap: Record<
       "shadow-[0_0_30px_rgba(6,182,212,0.55),0_0_65px_rgba(6,182,212,0.18)]",
     iconText: "text-cyan-400",
     cardBg:
-      "from-[#021315]/97 to-[#020f12]/99 border-cyan-500/12 hover:border-cyan-400/35",
+      "bg-gradient-to-br from-[#021315] via-[#021012] to-[#010c0f] border-cyan-500/[0.08]",
+    cardHover:
+      "hover:border-cyan-400/25 hover:shadow-[0_8px_40px_rgba(6,182,212,0.06),0_0_0_1px_rgba(6,182,212,0.08)]",
     badge: "bg-emerald-500/10 text-emerald-400 border-emerald-500/22",
     arrowRing:
-      "border-cyan-400/65 shadow-[0_0_24px_rgba(6,182,212,0.55),inset_0_0_14px_rgba(6,182,212,0.14)] bg-cyan-500/10",
+      "border-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.4),inset_0_0_12px_rgba(6,182,212,0.1)] bg-cyan-500/8 hover:bg-cyan-500/15 hover:border-cyan-400/70 hover:shadow-[0_0_30px_rgba(6,182,212,0.6)]",
     arrowText: "text-cyan-300",
     dotClass: "bg-emerald-400",
     dotGlow: "shadow-[0_0_8px_3px_rgba(52,211,153,0.7)]",
-    hoverGlow: "hover:shadow-[0_0_40px_rgba(6,182,212,0.08)]",
+    pulseColor: "bg-emerald-400/40",
   },
 };
 
 /* ─────────────────────────────────────────────
-   Stagger animation variants
+   Animation Variants — #6 cinematic staggered
+   reveals with GPU-accelerated transforms
 ───────────────────────────────────────────── */
-const containerVariants = {
+const EASE_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+const sectionVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.12, delayChildren: 0.05 },
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.97 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-    },
-  },
-};
-
-const headerWordVariants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
+const fadeUpBlur = {
+  hidden: { opacity: 0, y: 24, filter: "blur(10px)" },
   visible: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: {
-      duration: 0.7,
-      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-    },
+    transition: { duration: 0.8, ease: EASE_EXPO },
+  },
+};
+
+const cardReveal = {
+  hidden: { opacity: 0, y: 36, scale: 0.97 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.65, ease: EASE_EXPO },
+  },
+};
+
+const scaleIn = {
+  hidden: { scale: 0, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: { type: "spring" as const, stiffness: 500, damping: 20 },
   },
 };
 
 /* ─────────────────────────────────────────────
-   Floating Icon
+   Floating Icon — #7 polished hover/focus/tap
 ───────────────────────────────────────────── */
 const FloatingIcon = ({
   children,
@@ -182,15 +193,15 @@ const FloatingIcon = ({
   const c = colorMap[color];
   return (
     <motion.div
-      whileHover={{ scale: 1.06, rotate: 2 }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 400, damping: 15 }}
+      whileHover={{ scale: 1.06, rotate: 1.5 }}
+      whileTap={{ scale: 0.94 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
       className={`p-[5px] rounded-[20px] border cursor-pointer ${c.outerRing}`}
     >
       <div
         className={`w-[92px] h-[92px] rounded-[15px] flex items-center justify-center
           border relative overflow-hidden ${c.iconBox} ${c.iconGlow}
-          group-hover:scale-[1.04] transition-transform duration-500`}
+          group-hover:scale-[1.04] transition-transform duration-600`}
       >
         <span className="absolute top-0 left-0 w-[15px] h-[15px] border-t-[1.5px] border-l-[1.5px] border-white/28 rounded-tl-[15px]" />
         <span className="absolute bottom-0 right-0 w-[15px] h-[15px] border-b-[1.5px] border-r-[1.5px] border-white/10 rounded-br-[15px]" />
@@ -207,30 +218,33 @@ const FloatingIcon = ({
 };
 
 /* ─────────────────────────────────────────────
-   Arrow Button — with hover + tap animations
+   Arrow Button — #7 consistent motion design
 ───────────────────────────────────────────── */
 const ArrowBtn = ({ color }: { color: ColorKey }) => {
   const c = colorMap[color];
   return (
     <motion.button
-      whileHover={{ scale: 1.15, x: 2 }}
-      whileTap={{ scale: 0.9 }}
-      transition={{ type: "spring", stiffness: 400, damping: 15 }}
+      whileHover={{ scale: 1.12, x: 2 }}
+      whileTap={{ scale: 0.92 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
       className={`relative w-[52px] h-[52px] rounded-full border-2 flex items-center
         justify-center shrink-0 overflow-hidden cursor-pointer
+        transition-all duration-300
         ${c.arrowRing}`}
     >
-      <span className="absolute inset-0 rounded-full bg-gradient-to-br from-white/12 to-transparent" />
+      <span className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent" />
       <ArrowRight
         size={18}
-        className={`relative z-10 ${c.arrowText} drop-shadow-[0_0_8px_currentColor]`}
+        className={`relative z-10 ${c.arrowText} drop-shadow-[0_0_8px_currentColor]
+          group-hover:translate-x-[2px] transition-transform duration-300`}
       />
     </motion.button>
   );
 };
 
 /* ─────────────────────────────────────────────
-   Filter Tabs — premium glass pill with spring anim
+   Filter Tabs — #1 glassmorphism segmented
+   control with animated active state
 ───────────────────────────────────────────── */
 const TABS: {
   id: FilterType;
@@ -250,13 +264,12 @@ const FilterTabs = ({
   onChange: (v: FilterType) => void;
 }) => (
   <motion.div
-    initial={{ opacity: 0, y: 12 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay: 0.4 }}
-    className="flex items-center bg-[#060a14]/90 backdrop-blur-2xl border border-white/[0.08]
-      rounded-full p-[6px] gap-[6px]
-      shadow-[0_4px_30px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.04)]"
+    variants={fadeUpBlur}
+    className="relative flex items-center rounded-full p-[5px] gap-[4px]
+      bg-white/[0.03] backdrop-blur-2xl
+      border border-white/[0.07]
+      shadow-[0_4px_32px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.04),inset_0_-1px_0_rgba(0,0,0,0.2)]
+      before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-white/[0.03] before:to-transparent before:pointer-events-none"
   >
     {TABS.map((tab) => {
       const isActive = active === tab.id;
@@ -264,26 +277,28 @@ const FilterTabs = ({
         <motion.button
           key={tab.id}
           onClick={() => onChange(tab.id)}
-          whileHover={{ scale: isActive ? 1 : 1.04 }}
+          whileHover={isActive ? {} : { scale: 1.03, backgroundColor: "rgba(255,255,255,0.04)" }}
           whileTap={{ scale: 0.96 }}
           className={`relative flex items-center gap-[7px] px-7 py-[11px] rounded-full
-            text-[13px] font-semibold tracking-wide transition-colors duration-300
-            ${isActive ? "text-white" : "text-white/35 hover:text-white/65"}`}
+            text-[13px] font-semibold tracking-wide
+            transition-colors duration-300 outline-none
+            focus-visible:ring-2 focus-visible:ring-blue-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020610]
+            ${isActive ? "text-white" : "text-white/35 hover:text-white/60"}`}
         >
           {isActive && (
             <motion.div
               layoutId="filter-active-pill"
               className="absolute inset-0 rounded-full
-                bg-gradient-to-b from-blue-500 to-blue-700
-                shadow-[0_0_28px_rgba(59,130,246,0.5),0_4px_14px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.15)]"
-              transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                bg-gradient-to-b from-blue-500 via-blue-600 to-blue-700
+                shadow-[0_0_24px_rgba(59,130,246,0.45),0_4px_16px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.18),inset_0_-1px_0_rgba(0,0,0,0.15)]"
+              transition={{ type: "spring", stiffness: 380, damping: 30 }}
             />
           )}
           <span className="relative z-10 flex items-center gap-[7px]">
             {tab.type === "progress" && (
               <svg
                 className={`w-[14px] h-[14px] shrink-0 ${
-                  isActive ? "animate-spin" : ""
+                  isActive ? "animate-[spin_2s_linear_infinite]" : ""
                 }`}
                 viewBox="0 0 24 24"
                 fill="none"
@@ -335,10 +350,29 @@ const FilterTabs = ({
 );
 
 /* ─────────────────────────────────────────────
+   Timeline Pulse — #3 animated energy traveling
+   through the timeline
+───────────────────────────────────────────── */
+const TimelinePulse = () => (
+  <motion.div
+    className="absolute left-0 w-full h-[40px] bg-gradient-to-b from-transparent via-indigo-400/30 to-transparent rounded-full blur-[3px]"
+    initial={{ top: "0%" }}
+    animate={{ top: "100%" }}
+    transition={{
+      duration: 3,
+      repeat: Infinity,
+      ease: "linear",
+    }}
+  />
+);
+
+/* ─────────────────────────────────────────────
    Main Section
 ───────────────────────────────────────────── */
 export default function Certifications() {
   const [filter, setFilter] = useState<FilterType>("all");
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   const filtered = certificationsData.filter((c) => {
     if (filter === "all") return true;
@@ -347,39 +381,56 @@ export default function Certifications() {
 
   return (
     <SectionWrapper id="certifications" className="!py-16 lg:!py-24 w-full">
-      <div className="w-full flex flex-col items-center px-4">
+      <div ref={sectionRef} className="w-full flex flex-col items-center px-4">
         {/* ── Header ── */}
         <motion.div
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={containerVariants}
+          animate={isInView ? "visible" : "hidden"}
+          variants={sectionVariants}
           className="flex flex-col items-center text-center w-full mb-4"
         >
-          {/* Section label — FIX 4: 20% bigger + stronger glow */}
+          {/* Section label — #4 stronger glow + gradient shimmer */}
           <motion.div
-            variants={headerWordVariants}
+            variants={fadeUpBlur}
             className="flex items-center gap-4 mb-4"
           >
-            <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-indigo-500/60" />
+            <motion.div
+              className="h-[1px] w-14 bg-gradient-to-r from-transparent via-indigo-400/40 to-indigo-500/60"
+              initial={{ scaleX: 0, originX: 0 }}
+              animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: EASE_EXPO }}
+            />
             <span
               className="font-mono text-[14px] font-bold uppercase tracking-[0.35em]
-                text-indigo-400 drop-shadow-[0_0_18px_rgba(99,102,241,0.9)]"
+                text-indigo-400
+                drop-shadow-[0_0_20px_rgba(99,102,241,0.9)]
+                [text-shadow:0_0_30px_rgba(99,102,241,0.5),0_0_60px_rgba(99,102,241,0.2)]"
             >
               CERTIFICATIONS
             </span>
-            <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-indigo-500/60" />
+            <motion.div
+              className="h-[1px] w-14 bg-gradient-to-l from-transparent via-indigo-400/40 to-indigo-500/60"
+              initial={{ scaleX: 0, originX: 1 }}
+              animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: EASE_EXPO }}
+            />
           </motion.div>
 
-          {/* Headline — FIX 3: moved up slightly via tighter mb */}
+          {/* Headline — #4 gradient shimmer effect via background-size animation */}
           <motion.h2
-            variants={headerWordVariants}
-            className="font-display text-[clamp(2.8rem,5.5vw,4.6rem)] font-bold leading-[1.08] text-white mb-3 tracking-tight"
+            variants={fadeUpBlur}
+            className="font-display text-[clamp(2.8rem,5.5vw,4.6rem)] font-bold leading-[1.08] text-white mb-3 tracking-tight
+              drop-shadow-[0_0_40px_rgba(255,255,255,0.06)]"
           >
             Milestones{" "}
             <span
-              className="font-serif italic font-medium bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400
-                bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(99,102,241,0.35)]"
+              className="font-serif italic font-medium bg-clip-text text-transparent
+                bg-[length:200%_auto] bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400
+                animate-[shimmer_6s_ease-in-out_infinite]
+                drop-shadow-[0_0_24px_rgba(99,102,241,0.4)]"
+              style={{
+                backgroundSize: "200% auto",
+              }}
             >
               that matter.
             </span>
@@ -387,27 +438,37 @@ export default function Certifications() {
 
           {/* Subtext */}
           <motion.p
-            variants={headerWordVariants}
+            variants={fadeUpBlur}
             className="max-w-[440px] text-[15px] text-white/48 leading-relaxed mb-8"
           >
             Each certification represents a commitment to growth,
             problem-solving, and real-world impact.
           </motion.p>
 
-          {/* Filter tabs — FIX 3: mb-0 so gap comes from cards mt */}
+          {/* Filter tabs */}
           <FilterTabs active={filter} onChange={setFilter} />
         </motion.div>
 
-        {/* ── Cards ── FIX 3: mt-14 gives generous gap between tabs and first card */}
+        {/* ── Cards ── #5 tighter bottom spacing */}
         <motion.div
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-30px" }}
-          variants={containerVariants}
-          className="relative w-full max-w-[840px] flex flex-col gap-7 mt-14 mx-auto"
+          animate={isInView ? "visible" : "hidden"}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.18, delayChildren: 0.5 },
+            },
+          }}
+          className="relative w-full max-w-[840px] flex flex-col gap-6 mt-12 mx-auto"
         >
-          {/* Vertical Timeline Line */}
-          <div className="absolute left-[-20px] md:left-[-40px] top-16 bottom-16 w-[2px] bg-gradient-to-b from-blue-500/20 via-purple-500/20 to-cyan-500/20 hidden md:block" />
+          {/* #3 Vertical Timeline — tighter to cards (left-[-24px]) */}
+          <div className="absolute left-[-14px] md:left-[-24px] top-8 bottom-8 w-[2px] hidden md:block overflow-hidden">
+            {/* Static gradient line */}
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-500/15 via-purple-500/12 to-cyan-500/15 rounded-full" />
+            {/* Animated energy pulse */}
+            <TimelinePulse />
+          </div>
 
           <AnimatePresence mode="popLayout">
             {filtered.map((cert, i) => {
@@ -419,47 +480,60 @@ export default function Certifications() {
                 <motion.div
                   key={cert.id}
                   layout
-                  variants={itemVariants}
+                  variants={cardReveal}
                   exit={{
                     opacity: 0,
                     scale: 0.96,
-                    filter: "blur(4px)",
-                    transition: { duration: 0.3 },
+                    filter: "blur(6px)",
+                    transition: { duration: 0.25 },
                   }}
                   className="relative w-full"
                 >
-                  {/* ── Timeline Node (desktop only) ── */}
+                  {/* #3 Timeline Node — tighter alignment */}
                   <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 400,
-                      damping: 15,
-                      delay: i * 0.12,
-                    }}
-                    className="absolute left-[-27px] md:left-[-47px] top-1/2 -translate-y-1/2 hidden md:flex items-center justify-center w-[16px] h-[16px] rounded-full bg-[#020610] border-2 border-white/10 z-10"
+                    variants={scaleIn}
+                    className="absolute left-[-21px] md:left-[-31px] top-1/2 -translate-y-1/2 hidden md:flex
+                      items-center justify-center w-[16px] h-[16px] rounded-full
+                      bg-[#020610] border-2 border-white/[0.08] z-10
+                      shadow-[0_0_12px_rgba(0,0,0,0.4)]"
                   >
                     <div
                       className={`w-[6px] h-[6px] rounded-full shrink-0 ${c.dotClass} ${c.dotGlow}`}
                     />
+                    {/* Pulse ring animation */}
+                    <motion.div
+                      className={`absolute inset-[-4px] rounded-full ${c.pulseColor}`}
+                      initial={{ opacity: 0.6, scale: 1 }}
+                      animate={{ opacity: 0, scale: 2.2 }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: i * 0.4,
+                      }}
+                    />
                   </motion.div>
 
-                  {/* ── Card ── FIX 2: pr-10 md:pr-12 moves arrow away from right edge */}
+                  {/* ── Card — #2 deeper gradients, subtle elevation, mouse-responsive ── */}
                   <motion.div
                     whileHover={{
-                      scale: 1.012,
-                      y: -2,
-                      transition: { type: "spring", stiffness: 300, damping: 20 },
+                      scale: 1.02,
+                      y: -5,
+                      transition: {
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 22,
+                      },
                     }}
-                    whileTap={{ scale: 0.995 }}
+                    whileTap={{ scale: 0.985 }}
                     className={`group w-full relative flex flex-col md:flex-row items-center
-                      bg-gradient-to-r backdrop-blur-xl border rounded-[24px]
-                      transition-all duration-500 overflow-hidden cursor-pointer
-                      p-6 md:py-8 md:pl-8 md:pr-12 gap-6 md:gap-8
-                      ${c.cardBg} ${c.hoverGlow}`}
+                      backdrop-blur-xl border rounded-[22px]
+                      transition-all duration-500 cursor-pointer
+                      p-6 md:py-7 md:pl-7 md:pr-10 gap-6 md:gap-7
+                      ${c.cardBg} ${c.cardHover}`}
                   >
+                    {/* Subtle top-edge highlight line */}
+                    <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent rounded-t-[22px]" />
+
                     {/* Floating icon */}
                     <div className="shrink-0">
                       <FloatingIcon color={cert.color}>
@@ -469,31 +543,29 @@ export default function Certifications() {
 
                     {/* Content */}
                     <div className="flex-1 flex flex-col min-w-0 gap-[6px] justify-center">
-                      {/* Status badge — with tap animation */}
+                      {/* Status badge */}
                       <motion.div
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className={`inline-flex self-start items-center px-[10px] py-[4px]
                           rounded-full text-[9.5px] font-bold tracking-[0.16em] border cursor-pointer
-                          transition-colors duration-300 ${c.badge}`}
+                          transition-all duration-300 ${c.badge}`}
                       >
                         {isCompleted ? "COMPLETED" : "ONGOING"}
                       </motion.div>
 
-                      {/* Title — with subtle hover effect */}
-                      <motion.h3
-                        className="font-display text-[21px] font-semibold text-white tracking-wide leading-snug
-                          group-hover:text-white transition-colors duration-300"
-                      >
+                      {/* Title */}
+                      <h3 className="font-display text-[21px] font-semibold text-white tracking-wide leading-snug
+                        group-hover:text-white transition-colors duration-300">
                         {cert.title}
-                      </motion.h3>
+                      </h3>
 
                       {/* Description */}
                       <p className="text-white/42 text-[13.5px] leading-[1.68] group-hover:text-white/55 transition-colors duration-500">
                         {cert.description}
                       </p>
 
-                      {/* ── Footer ── */}
+                      {/* Footer */}
                       <div className="flex items-center gap-[7px] mt-1">
                         {!isCompleted ? (
                           <>
@@ -525,7 +597,7 @@ export default function Certifications() {
                       </div>
                     </div>
 
-                    {/* Arrow button — FIX 2: already padded via card pr-12 */}
+                    {/* Arrow button */}
                     <div className="shrink-0">
                       <ArrowBtn color={cert.color} />
                     </div>
@@ -546,9 +618,15 @@ export default function Certifications() {
             </motion.div>
           )}
         </motion.div>
-
-        {/* FIX 1: Bottom "verified" text removed entirely */}
       </div>
+
+      {/* #4 Shimmer keyframe */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes shimmer {
+          0%, 100% { background-position: 0% center; }
+          50% { background-position: 100% center; }
+        }
+      ` }} />
     </SectionWrapper>
   );
 }
