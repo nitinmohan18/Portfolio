@@ -40,12 +40,30 @@ export async function getGithubRepos(): Promise<GithubRepo[]> {
           description: "Python backend powering weather intelligence through FastAPI services, Random Forest prediction models, and real-time forecast processing."
         };
       }
+      if (repo.name.toLowerCase() === "windly-frontend") {
+        return {
+          ...repo,
+          homepage: "https://windly-weather.vercel.app"
+        } as unknown as GithubRepo;
+      }
       return repo;
     });
 
-    return repos.filter((r) => !r.fork).sort(
+    let sortedRepos = repos.filter((r) => !r.fork).sort(
       (a, b) => b.stargazers_count - a.stargazers_count
     );
+
+    // Swap windly-frontend and windly-backend if both exist
+    const frontendIndex = sortedRepos.findIndex(r => r.name.toLowerCase() === "windly-frontend");
+    const backendIndex = sortedRepos.findIndex(r => r.name.toLowerCase() === "windly-backend");
+    
+    if (frontendIndex !== -1 && backendIndex !== -1) {
+      const temp = sortedRepos[frontendIndex];
+      sortedRepos[frontendIndex] = sortedRepos[backendIndex];
+      sortedRepos[backendIndex] = temp;
+    }
+
+    return sortedRepos;
   } catch {
     return [];
   }

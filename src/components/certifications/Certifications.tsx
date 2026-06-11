@@ -25,6 +25,8 @@ const certificationsData = [
     id: "fullstack",
     title: "Full Stack Development",
     issuer: "Udemy",
+    link: undefined,
+    image: "/images/fullstack-cert.png",
     description:
       "Modern web development with React, Node.js, APIs, databases, and deployment.",
     status: "completed" as const,
@@ -37,6 +39,8 @@ const certificationsData = [
     id: "dsa",
     title: "Data Structures & Algorithms",
     issuer: "Udemy",
+    link: "https://ude.my/UC-62a624e7-6492-4535-a90e-bcfff9399c83",
+    image: undefined,
     description:
       "Problem solving, algorithm design, complexity analysis, and data structures mastery.",
     status: "completed" as const,
@@ -49,6 +53,8 @@ const certificationsData = [
     id: "aiml",
     title: "AI/ML Certification",
     issuer: "Udemy",
+    link: undefined,
+    image: undefined,
     description:
       "Deep learning, machine learning models, NLP, and real-world AI applications.",
     status: "in-progress" as const,
@@ -526,6 +532,10 @@ export default function Certifications() {
 
                   {/* Card */}
                   <motion.div
+                    onClick={() => {
+                      if (cert.link) window.open(cert.link, "_blank");
+                      else if (cert.image) window.open(cert.image, "_blank");
+                    }}
                     whileHover={{
                       scale: 1.015,
                       y: -4,
@@ -538,7 +548,7 @@ export default function Certifications() {
                     whileTap={{ scale: 0.99 }}
                     className={`group w-full relative flex flex-col md:flex-row items-center
                       backdrop-blur-xl border rounded-[22px]
-                      transition-all duration-500 cursor-pointer
+                      transition-all duration-500 ${cert.link || cert.image ? "cursor-pointer" : "cursor-default"}
                       p-8 md:py-10 md:pl-8 md:pr-12 gap-8 md:gap-10
                       ${c.cardBg} ${c.cardHover}`}
                   >
