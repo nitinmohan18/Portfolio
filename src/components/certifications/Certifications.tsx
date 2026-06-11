@@ -82,9 +82,9 @@ const colorMap: Record<
     iconBox:
       "border-blue-400/38 bg-gradient-to-br from-blue-900/55 via-blue-950/80 to-[#020a18]",
     iconGlow:
-      "shadow-[0_0_30px_rgba(59,130,246,0.55),0_0_65px_rgba(59,130,246,0.18)]",
+      "shadow-[0_0_30px_rgba(59,130,246,0.38),0_0_65px_rgba(59,130,246,0.12)]",
     iconGlowHover:
-      "group-hover:shadow-[0_0_40px_rgba(59,130,246,0.7),0_0_80px_rgba(59,130,246,0.25)]",
+      "group-hover:shadow-[0_0_40px_rgba(59,130,246,0.5),0_0_80px_rgba(59,130,246,0.17)]",
     iconText: "text-blue-400",
     cardBg:
       "bg-gradient-to-br from-[#04101e] via-[#030d1e] to-[#020918] border-blue-500/[0.08]",
@@ -104,9 +104,9 @@ const colorMap: Record<
     iconBox:
       "border-purple-400/38 bg-gradient-to-br from-purple-900/55 via-purple-950/80 to-[#060115]",
     iconGlow:
-      "shadow-[0_0_30px_rgba(168,85,247,0.55),0_0_65px_rgba(168,85,247,0.18)]",
+      "shadow-[0_0_30px_rgba(168,85,247,0.38),0_0_65px_rgba(168,85,247,0.12)]",
     iconGlowHover:
-      "group-hover:shadow-[0_0_40px_rgba(168,85,247,0.7),0_0_80px_rgba(168,85,247,0.25)]",
+      "group-hover:shadow-[0_0_40px_rgba(168,85,247,0.5),0_0_80px_rgba(168,85,247,0.17)]",
     iconText: "text-purple-400",
     cardBg:
       "bg-gradient-to-br from-[#0e0425] via-[#0a031c] to-[#060214] border-purple-500/[0.08]",
@@ -126,9 +126,9 @@ const colorMap: Record<
     iconBox:
       "border-cyan-400/38 bg-gradient-to-br from-cyan-900/55 via-cyan-950/80 to-[#010a0d]",
     iconGlow:
-      "shadow-[0_0_30px_rgba(6,182,212,0.55),0_0_65px_rgba(6,182,212,0.18)]",
+      "shadow-[0_0_30px_rgba(6,182,212,0.38),0_0_65px_rgba(6,182,212,0.12)]",
     iconGlowHover:
-      "group-hover:shadow-[0_0_40px_rgba(6,182,212,0.7),0_0_80px_rgba(6,182,212,0.25)]",
+      "group-hover:shadow-[0_0_40px_rgba(6,182,212,0.5),0_0_80px_rgba(6,182,212,0.17)]",
     iconText: "text-cyan-400",
     cardBg:
       "bg-gradient-to-br from-[#021315] via-[#021012] to-[#010c0f] border-cyan-500/[0.08]",
@@ -205,15 +205,15 @@ const FloatingIcon = ({
       className={`p-[5px] rounded-[20px] border cursor-pointer ${c.outerRing}`}
     >
       <div
-        className={`w-[92px] h-[92px] rounded-[15px] flex items-center justify-center
+        className={`w-[74px] h-[74px] rounded-[14px] flex items-center justify-center
           border relative overflow-hidden transition-shadow duration-500
           ${c.iconBox} ${c.iconGlow} ${c.iconGlowHover}`}
       >
-        <span className="absolute top-0 left-0 w-[15px] h-[15px] border-t-[1.5px] border-l-[1.5px] border-white/28 rounded-tl-[15px]" />
-        <span className="absolute bottom-0 right-0 w-[15px] h-[15px] border-b-[1.5px] border-r-[1.5px] border-white/10 rounded-br-[15px]" />
+        <span className="absolute top-0 left-0 w-[12px] h-[12px] border-t-[1.5px] border-l-[1.5px] border-white/28 rounded-tl-[14px]" />
+        <span className="absolute bottom-0 right-0 w-[12px] h-[12px] border-b-[1.5px] border-r-[1.5px] border-white/10 rounded-br-[14px]" />
         <span className="absolute inset-0 bg-gradient-to-br from-white/6 via-transparent to-transparent" />
         <div
-          className={`relative z-10 ${c.iconText} drop-shadow-[0_0_20px_currentColor]
+          className={`relative z-10 ${c.iconText} drop-shadow-[0_0_14px_currentColor]
             group-hover:scale-110 transition-transform duration-500`}
         >
           {children}
@@ -576,9 +576,9 @@ export default function Certifications() {
                     <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.05] to-transparent rounded-t-[22px]" />
 
                     {/* Floating icon */}
-                    <div className="shrink-0">
+                    <div className="shrink-0 relative translate-x-[16px]">
                       <FloatingIcon color={cert.color}>
-                        <Icon size={40} strokeWidth={1.25} />
+                        <Icon size={32} strokeWidth={1.25} />
                       </FloatingIcon>
                     </div>
 
