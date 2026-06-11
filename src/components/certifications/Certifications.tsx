@@ -256,9 +256,9 @@ const TABS: {
   label: string;
   icon: "layers" | "progress" | "check";
 }[] = [
-  { id: "all", label: "All", icon: "layers" },
-  { id: "in-progress", label: "In Progress", icon: "progress" },
-  { id: "completed", label: "Completed", icon: "check" },
+  { id: "all", label: "ALL", icon: "layers" },
+  { id: "in-progress", label: "IN PROGRESS", icon: "progress" },
+  { id: "completed", label: "COMPLETED", icon: "check" },
 ];
 
 const TabIcon = ({
@@ -271,9 +271,9 @@ const TabIcon = ({
   if (type === "layers") {
     return (
       <Layers
-        size={20}
+        size={22}
         className={`shrink-0 transition-colors duration-300 ${
-          isActive ? "text-white" : "text-white/35"
+          isActive ? "text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]" : "text-white/35"
         }`}
       />
     );
@@ -281,8 +281,8 @@ const TabIcon = ({
   if (type === "progress") {
     return (
       <svg
-        className={`w-[20px] h-[20px] shrink-0 ${
-          isActive ? "animate-[spin_2s_linear_infinite]" : ""
+        className={`w-[22px] h-[22px] shrink-0 ${
+          isActive ? "animate-[spin_2s_linear_infinite] text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]" : ""
         }`}
         viewBox="0 0 24 24"
         fill="none"
@@ -306,7 +306,7 @@ const TabIcon = ({
   }
   return (
     <svg
-      className="w-[20px] h-[20px] shrink-0"
+      className={`w-[22px] h-[22px] shrink-0 ${isActive ? "text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]" : ""}`}
       viewBox="0 0 24 24"
       fill="none"
     >
@@ -331,23 +331,23 @@ const FilterTabs = ({
 }) => (
   <motion.div
     variants={fadeBlur}
-    className="relative isolate -translate-y-6"
+    className="relative isolate -translate-y-6 z-10"
   >
-    {/* Multi-layer outer glow — gives a vivid neon border aura */}
-    <div className="absolute -inset-[3px] rounded-full bg-gradient-to-r from-blue-500/30 via-indigo-500/15 to-purple-500/30 blur-[4px] pointer-events-none" />
-    <div className="absolute -inset-[1px] rounded-full bg-gradient-to-r from-blue-400/20 via-indigo-400/10 to-purple-400/20 pointer-events-none" />
+    {/* Massive Futuristic Outer Glows - reduced by 10% */}
+    <div className="absolute -inset-[5px] rounded-full bg-gradient-to-r from-blue-500/40 via-cyan-400/25 to-indigo-500/40 blur-[8px] pointer-events-none" />
+    <div className="absolute -inset-[1.5px] rounded-full bg-gradient-to-r from-cyan-400/30 via-blue-500/25 to-purple-500/30 pointer-events-none" />
 
     {/* Main container */}
     <div
-      className="relative flex items-center rounded-full p-[8px] gap-[6px]
-        bg-[#050810]/90 backdrop-blur-3xl
-        border border-white/[0.05]
-        shadow-[0_8px_40px_rgba(0,0,0,0.6),0_0_60px_rgba(59,130,246,0.04),inset_0_1px_0_rgba(255,255,255,0.05),inset_0_-1px_0_rgba(0,0,0,0.4)]"
+      className="relative flex items-center rounded-full p-[8px] gap-[8px]
+        bg-gradient-to-b from-[#060a16]/95 to-[#02050c]/95 backdrop-blur-3xl
+        border border-white/[0.08]
+        shadow-[0_12px_48px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1),inset_0_-2px_6px_rgba(0,0,0,0.5)]"
     >
-      {/* Top highlight line */}
-      <div className="absolute inset-x-6 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.1] to-transparent pointer-events-none" />
-      {/* Bottom shadow line */}
-      <div className="absolute inset-x-6 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-black/30 to-transparent pointer-events-none" />
+      {/* Intense top highlight line */}
+      <div className="absolute inset-x-12 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-300/40 to-transparent pointer-events-none" />
+      {/* Bottom ambient reflection */}
+      <div className="absolute inset-x-8 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500/15 to-transparent pointer-events-none blur-[1px]" />
 
       {TABS.map((tab) => {
         const isActive = active === tab.id;
@@ -358,33 +358,34 @@ const FilterTabs = ({
             whileHover={
               isActive
                 ? {}
-                : { backgroundColor: "rgba(255,255,255,0.05)", scale: 1.02 }
+                : { backgroundColor: "rgba(255,255,255,0.06)", scale: 1.03 }
             }
-            whileTap={{ scale: 0.96 }}
-            className={`relative flex items-center gap-[10px] px-14 py-[18px] rounded-full
-              text-[16px] font-semibold tracking-[0.02em]
-              transition-colors duration-300 outline-none select-none
-              focus-visible:ring-2 focus-visible:ring-blue-400/40
+            whileTap={{ scale: 0.95 }}
+            className={`relative flex items-center gap-[12px] px-16 py-[20px] rounded-full
+              text-[17px] font-bold tracking-[0.05em]
+              transition-all duration-300 outline-none select-none
+              focus-visible:ring-2 focus-visible:ring-cyan-400/50
               ${
                 isActive
                   ? "text-white"
-                  : "text-white/30 hover:text-white/55"
+                  : "text-white/40 hover:text-white/75"
               }`}
           >
             {isActive && (
               <motion.div
-                layoutId="cert-filter-pill"
+                layoutId="cert-filter-pill-futuristic"
                 className="absolute inset-0 rounded-full
-                  bg-gradient-to-b from-blue-400 via-blue-600 to-blue-700
-                  shadow-[0_0_32px_rgba(59,130,246,0.6),0_0_70px_rgba(59,130,246,0.25),0_4px_20px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.25),inset_0_-1px_0_rgba(0,0,0,0.2)]"
+                  bg-gradient-to-b from-cyan-400 via-blue-600 to-indigo-800
+                  border-[1.5px] border-cyan-300/30
+                  shadow-[0_0_32px_rgba(34,211,238,0.4),0_8px_16px_rgba(0,0,0,0.6),inset_0_2px_6px_rgba(255,255,255,0.3)]"
                 transition={{
                   type: "spring",
-                  stiffness: 380,
-                  damping: 30,
+                  stiffness: 400,
+                  damping: 25,
                 }}
               />
             )}
-            <span className="relative z-10 flex items-center gap-[10px]">
+            <span className="relative z-10 flex items-center gap-[12px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
               <TabIcon type={tab.icon} isActive={isActive} />
               {tab.label}
             </span>
