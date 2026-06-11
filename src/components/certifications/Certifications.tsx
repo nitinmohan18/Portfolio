@@ -21,17 +21,6 @@ type ColorKey = "blue" | "purple" | "cyan";
 
 const certificationsData = [
   {
-    id: "aiml",
-    title: "AI/ML Certification",
-    description:
-      "Deep learning, machine learning models, NLP, and real-world AI applications.",
-    status: "in-progress" as const,
-    icon: Brain,
-    color: "blue" as ColorKey,
-    progress: 60,
-    issuedDate: null as string | null,
-  },
-  {
     id: "fullstack",
     title: "Full Stack Development",
     description:
@@ -52,6 +41,17 @@ const certificationsData = [
     color: "cyan" as ColorKey,
     progress: 100,
     issuedDate: "Mar 2024",
+  },
+  {
+    id: "aiml",
+    title: "AI/ML Certification",
+    description:
+      "Deep learning, machine learning models, NLP, and real-world AI applications.",
+    status: "in-progress" as const,
+    icon: Brain,
+    color: "blue" as ColorKey,
+    progress: 60,
+    issuedDate: null as string | null,
   },
 ];
 
@@ -641,7 +641,7 @@ export default function Certifications() {
                     </div>
 
                     {/* Arrow button */}
-                    <div className="shrink-0">
+                    <div className="shrink-0 mt-4 md:mt-0 relative -translate-x-[16px]">
                       <ArrowBtn color={cert.color} />
                     </div>
                   </motion.div>
