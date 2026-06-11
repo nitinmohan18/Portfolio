@@ -388,16 +388,7 @@ export default function Certifications() {
             className="font-display text-[clamp(2.8rem,5.5vw,4.6rem)] font-bold leading-[1.08] text-white mb-3 tracking-tight
               drop-shadow-[0_0_40px_rgba(255,255,255,0.06)] relative -translate-y-10"
           >
-            Milestones{" "}
-            <span
-              className="font-serif italic font-medium bg-clip-text text-transparent
-                bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400
-                drop-shadow-[0_0_24px_rgba(99,102,241,0.4)]
-                animate-[certShimmer_6s_ease-in-out_infinite]"
-              style={{ backgroundSize: "200% auto" }}
-            >
-              that matter.
-            </span>
+            Pursuit of <span className="font-serif italic font-medium bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 drop-shadow-[0_0_24px_rgba(99,102,241,0.4)] animate-[certShimmer_6s_ease-in-out_infinite]" style={{ backgroundSize: "200% auto" }}>Excellence</span>
           </motion.h2>
 
           {/* Subtext */}
