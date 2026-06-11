@@ -256,9 +256,9 @@ const TABS: {
   label: string;
   icon: "layers" | "progress" | "check";
 }[] = [
-  { id: "all", label: "ALL", icon: "layers" },
-  { id: "in-progress", label: "IN PROGRESS", icon: "progress" },
-  { id: "completed", label: "COMPLETED", icon: "check" },
+  { id: "all", label: "All", icon: "layers" },
+  { id: "in-progress", label: "In Progress", icon: "progress" },
+  { id: "completed", label: "Completed", icon: "check" },
 ];
 
 const TabIcon = ({
@@ -268,21 +268,22 @@ const TabIcon = ({
   type: "layers" | "progress" | "check";
   isActive: boolean;
 }) => {
-  const baseClasses = `shrink-0 transition-colors duration-300 ${
-    isActive ? "text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]" : "text-white/35"
+  const baseClasses = `shrink-0 transition-all duration-300 ${
+    isActive ? "text-indigo-300 drop-shadow-[0_0_8px_rgba(99,102,241,0.6)]" : "text-white/35 group-hover:text-white/60"
   }`;
 
   if (type === "layers") {
-    return <Layers size={22} className={baseClasses} />;
+    return <Layers size={18} className={baseClasses} strokeWidth={isActive ? 2.5 : 2} />;
   }
   if (type === "progress") {
-    return <CircleDashed size={22} className={baseClasses} />;
+    return <CircleDashed size={18} className={baseClasses} strokeWidth={isActive ? 2.5 : 2} />;
   }
   if (type === "check") {
-    return <CheckCircle2 size={22} className={baseClasses} />;
+    return <CheckCircle2 size={18} className={baseClasses} strokeWidth={isActive ? 2.5 : 2} />;
   }
   return null;
 };
+
 const FilterTabs = ({
   active,
   onChange,
@@ -290,29 +291,35 @@ const FilterTabs = ({
   active: FilterType;
   onChange: (v: FilterType) => void;
 }) => (
-  <motion.div variants={fadeBlur} className="relative isolate -translate-y-6 z-10">
-    {/* Premium glassmorphism container */}
-    <div className="relative flex items-center rounded-full p-[6px] gap-[6px] bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
-      {TABS.map((tab) => {
-        const isActive = active === tab.id;
-        return (
-          <motion.button
-            key={tab.id}
-            onClick={() => onChange(tab.id)}
-            whileHover={isActive ? {} : { scale: 1.04 }}
-            whileTap={{ scale: 0.95 }}
-            className={`relative flex items-center gap-[8px] px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 outline-none select-none focus-visible:ring-2 focus-visible:ring-white/30 ${
-              isActive
-                ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
-                : "text-white/70 hover:bg-white/10"
-            }`}
-          >
-            <TabIcon type={tab.icon} isActive={isActive} />
-            {tab.label}
-          </motion.button>
-        );
-      })}
-    </div>
+  <motion.div variants={fadeBlur} className="relative isolate -translate-y-2 z-10 w-full max-w-xl mx-auto mb-14 flex items-center justify-center gap-6 sm:gap-12">
+    {TABS.map((tab) => {
+      const isActive = active === tab.id;
+      return (
+        <button
+          key={tab.id}
+          onClick={() => onChange(tab.id)}
+          className={`relative flex items-center justify-center gap-2.5 px-2 py-4 text-[15px] sm:text-[17px] font-medium transition-colors duration-300 outline-none select-none group ${
+            isActive
+              ? "text-white"
+              : "text-white/40 hover:text-white/80"
+          }`}
+        >
+          <TabIcon type={tab.icon} isActive={isActive} />
+          <span className="tracking-wide">{tab.label}</span>
+
+          {isActive && (
+            <motion.div
+              layoutId="activeFilterUnderline"
+              className="absolute left-0 right-0 bottom-0 h-[2px] rounded-full bg-gradient-to-r from-transparent via-indigo-400 to-transparent"
+              initial={false}
+              transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+            >
+              <div className="absolute inset-0 bg-indigo-400 blur-[4px] opacity-80" />
+            </motion.div>
+          )}
+        </button>
+      );
+    })}
   </motion.div>
 );
 
