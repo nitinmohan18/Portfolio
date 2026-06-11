@@ -157,7 +157,7 @@ const sectionStagger = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
   },
 };
 
@@ -171,13 +171,23 @@ const fadeBlur = {
   },
 };
 
+const timelineDraw = {
+  hidden: { scaleY: 0, opacity: 0 },
+  visible: {
+    scaleY: 1,
+    opacity: 1,
+    transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  },
+};
+
 const cardUp = {
-  hidden: { opacity: 0, y: 32, scale: 0.975 },
+  hidden: { opacity: 0, y: 40, scale: 0.96, filter: "blur(8px)" },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.6, ease: EASE },
+    filter: "blur(0px)",
+    transition: { duration: 0.8, ease: EASE },
   },
 };
 
@@ -186,7 +196,7 @@ const popIn = {
   visible: {
     scale: 1,
     opacity: 1,
-    transition: { type: "spring" as const, stiffness: 500, damping: 22 },
+    transition: { type: "spring" as const, stiffness: 400, damping: 20 },
   },
 };
 
@@ -273,17 +283,17 @@ const TabIcon = ({
   isActive: boolean;
 }) => {
   const baseClasses = `shrink-0 transition-all duration-300 ${
-    isActive ? "text-indigo-300 drop-shadow-[0_0_8px_rgba(99,102,241,0.6)]" : "text-white/40 group-hover:text-white/70"
+    isActive ? "text-indigo-300 drop-shadow-[0_0_12px_rgba(99,102,241,0.8)]" : "text-white/40 group-hover:text-white/70"
   }`;
 
   if (type === "layers") {
-    return <Layers size={16} className={baseClasses} strokeWidth={isActive ? 2.5 : 2} />;
+    return <Layers size={20} className={baseClasses} strokeWidth={isActive ? 2.5 : 2} />;
   }
   if (type === "progress") {
-    return <CircleDashed size={16} className={baseClasses} strokeWidth={isActive ? 2.5 : 2} />;
+    return <CircleDashed size={20} className={baseClasses} strokeWidth={isActive ? 2.5 : 2} />;
   }
   if (type === "check") {
-    return <CheckCircle2 size={16} className={baseClasses} strokeWidth={isActive ? 2.5 : 2} />;
+    return <CheckCircle2 size={20} className={baseClasses} strokeWidth={isActive ? 2.5 : 2} />;
   }
   return null;
 };
@@ -295,36 +305,36 @@ const FilterTabs = ({
   active: FilterType;
   onChange: (v: FilterType) => void;
 }) => (
-  <motion.div variants={fadeBlur} className="relative z-10 w-full flex justify-center mb-16 -translate-y-6">
-    <div className="relative inline-flex items-center gap-1 sm:gap-2 p-1.5 sm:p-2 rounded-full bg-[#050508]/40 backdrop-blur-2xl border border-white/[0.08] shadow-[0_16px_40px_-8px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05)] ring-1 ring-white/5 before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-white/[0.04] before:to-transparent before:pointer-events-none">
+  <motion.div variants={fadeBlur} className="relative z-10 w-full flex justify-center mb-24 mt-8 -translate-y-6">
+    <div className="relative inline-flex items-center gap-2 sm:gap-4 p-2 sm:p-2.5 rounded-full bg-[#050508]/60 backdrop-blur-3xl border border-white/[0.12] shadow-[0_24px_50px_-12px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.08)] ring-1 ring-white/10 before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-white/[0.06] before:to-transparent before:pointer-events-none">
       {TABS.map((tab) => {
         const isActive = active === tab.id;
         return (
           <button
             key={tab.id}
             onClick={() => onChange(tab.id)}
-            className={`relative flex items-center justify-center gap-2 sm:gap-2.5 px-4 py-2 sm:px-6 sm:py-2.5 text-[14px] sm:text-[15px] font-medium transition-all duration-300 outline-none select-none rounded-full z-10 group shrink-0 whitespace-nowrap ${
+            className={`relative flex items-center justify-center gap-2.5 sm:gap-3.5 px-6 py-3 sm:px-8 sm:py-3.5 text-[15px] sm:text-[17px] font-semibold transition-all duration-300 outline-none select-none rounded-full z-10 group shrink-0 whitespace-nowrap ${
               isActive
                 ? "text-white"
-                : "text-white/40 hover:text-white/80"
+                : "text-white/40 hover:text-white/90"
             }`}
           >
             {/* Background Hover Effect */}
-            <div className="absolute inset-0 rounded-full bg-white/0 transition-colors duration-300 group-hover:bg-white/[0.03]" />
+            <div className="absolute inset-0 rounded-full bg-white/0 transition-colors duration-300 group-hover:bg-white/[0.04]" />
 
             {isActive && (
               <motion.div
                 layoutId="activeFilterCapsuleBg"
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-white/[0.12] shadow-[0_8px_20px_rgba(0,0,0,0.3)]"
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/25 to-blue-500/25 border border-white/[0.15] shadow-[0_12px_24px_rgba(0,0,0,0.4)]"
                 initial={false}
                 transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
               >
-                <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/[0.08] to-transparent opacity-80" />
-                <div className="absolute bottom-0 inset-x-6 h-[1px] bg-gradient-to-r from-transparent via-blue-400/60 to-transparent blur-[1px] shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/[0.1] to-transparent opacity-80" />
+                <div className="absolute bottom-0 inset-x-6 h-[2px] bg-gradient-to-r from-transparent via-blue-400/80 to-transparent blur-[2px] shadow-[0_0_12px_rgba(59,130,246,1)]" />
               </motion.div>
             )}
             
-            <div className="relative z-10 flex items-center gap-2.5">
+            <div className="relative z-10 flex items-center gap-3">
               <TabIcon type={tab.icon} isActive={isActive} />
               <span className="tracking-wide">{tab.label}</span>
             </div>
@@ -439,23 +449,29 @@ export default function Certifications() {
         </motion.div>
 
         {/* ── Cards ── */}
+        {/* ── Cards ── */}
         <motion.div
           layout
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.16, delayChildren: 0.45 },
-            },
-          }}
           className="w-full max-w-[840px] mt-16 mx-auto min-h-[560px] md:min-h-[480px]"
         >
-          <motion.div layout className="relative flex flex-col gap-6 w-full">
+          <motion.div 
+            layout 
+            className="relative flex flex-col gap-6 w-full"
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.35, delayChildren: 0.2 },
+              },
+            }}
+          >
             {/* Vertical Timeline */}
             <motion.div
               layout
+              variants={timelineDraw}
+              style={{ originY: 0 }}
               className="absolute left-[-14px] md:left-[-24px] top-[40px] bottom-[40px] w-[2px] hidden md:block"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-blue-500/20 via-purple-500/15 to-cyan-500/10 rounded-full shadow-[0_0_12px_rgba(99,102,241,0.25)]" />
@@ -526,6 +542,18 @@ export default function Certifications() {
                       p-8 md:py-10 md:pl-8 md:pr-12 gap-8 md:gap-10
                       ${c.cardBg} ${c.cardHover}`}
                   >
+                    {/* Card Flash Glow on Entry */}
+                    <motion.div
+                      className={`absolute inset-0 ${c.pulseColor} mix-blend-screen pointer-events-none blur-3xl`}
+                      initial={{ opacity: 0 }}
+                      variants={{
+                        visible: {
+                          opacity: [0, 0.8, 0],
+                          transition: { duration: 1.2, times: [0, 0.2, 1], ease: EASE },
+                        }
+                      }}
+                    />
+
                     {/* Top-edge highlight */}
                     <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.05] to-transparent rounded-t-[22px]" />
 
