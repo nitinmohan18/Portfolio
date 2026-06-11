@@ -43,30 +43,34 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
     mouseY.set(e.clientY - r.top);
   };
 
-  const rotatePeak = index % 3 === 0 ? -6 : index % 3 === 1 ? 0 : 6;
+  const isEven = index % 2 === 0;
+  const startAngle = isEven ? -(25 + index * 1.5) : (25 + index * 1.5);
+  
   const cardVariants = {
     hidden: {
       opacity: 0,
-      x: 0,
-      y: 60,
-      rotate: 0,
-      scale: 0.85,
+      x: isEven ? 200 : -200,
+      y: 220,
+      rotateZ: startAngle,
+      rotateX: 50,
+      rotateY: isEven ? 30 : -30,
+      scale: 0.65,
+      z: -200,
+      filter: "blur(12px)",
     },
     show: {
       opacity: 1,
       x: 0,
       y: 0,
-      rotate: [0, rotatePeak, 0],
+      rotateZ: 0,
+      rotateX: 0,
+      rotateY: 0,
       scale: 1,
+      z: 0,
+      filter: "blur(0px)",
       transition: {
-        type: "spring",
-        stiffness: 80,
-        damping: 14,
-        rotate: {
-          type: "keyframes",
-          duration: 0.8,
-          ease: "easeOut"
-        }
+        duration: 1.4,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
       },
     },
   };
