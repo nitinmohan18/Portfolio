@@ -268,60 +268,21 @@ const TabIcon = ({
   type: "layers" | "progress" | "check";
   isActive: boolean;
 }) => {
+  const baseClasses = `shrink-0 transition-colors duration-300 ${
+    isActive ? "text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]" : "text-white/35"
+  }`;
+
   if (type === "layers") {
-    return (
-      <Layers
-        size={22}
-        className={`shrink-0 transition-colors duration-300 ${
-          isActive ? "text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]" : "text-white/35"
-        }`}
-      />
-    );
+    return <Layers size={22} className={baseClasses} />;
   }
   if (type === "progress") {
-    return (
-      <svg
-        className={`w-[22px] h-[22px] shrink-0 ${
-          isActive ? "animate-[spin_2s_linear_infinite] text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]" : ""
-        }`}
-        viewBox="0 0 24 24"
-        fill="none"
-      >
-        <circle
-          cx="12"
-          cy="12"
-          r="9"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeOpacity="0.3"
-        />
-        <path
-          d="M12 3a9 9 0 0 1 7.79 4.5"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    );
+    return <CircleDashed size={22} className={baseClasses} />;
   }
-  return (
-    <svg
-      className={`w-[22px] h-[22px] shrink-0 ${isActive ? "text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]" : ""}`}
-      viewBox="0 0 24 24"
-      fill="none"
-    >
-      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.5" />
-      <path
-        d="M7.5 12l3 3 6-6"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
+  if (type === "check") {
+    return <CheckCircle2 size={22} className={baseClasses} />;
+  }
+  return null;
 };
-
 const FilterTabs = ({
   active,
   onChange,
@@ -329,66 +290,25 @@ const FilterTabs = ({
   active: FilterType;
   onChange: (v: FilterType) => void;
 }) => (
-  <motion.div
-    variants={fadeBlur}
-    className="relative isolate -translate-y-6 z-10"
-  >
-    {/* Massive Futuristic Outer Glows - reduced by 10% */}
-    <div className="absolute -inset-[5px] rounded-full bg-gradient-to-r from-blue-500/40 via-cyan-400/25 to-indigo-500/40 blur-[8px] pointer-events-none" />
-    <div className="absolute -inset-[1.5px] rounded-full bg-gradient-to-r from-cyan-400/30 via-blue-500/25 to-purple-500/30 pointer-events-none" />
-
-    {/* Main container */}
-    <div
-      className="relative flex items-center rounded-full p-[8px] gap-[8px]
-        bg-gradient-to-b from-[#060a16]/95 to-[#02050c]/95 backdrop-blur-3xl
-        border border-white/[0.08]
-        shadow-[0_12px_48px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1),inset_0_-2px_6px_rgba(0,0,0,0.5)]"
-    >
-      {/* Intense top highlight line */}
-      <div className="absolute inset-x-12 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-300/40 to-transparent pointer-events-none" />
-      {/* Bottom ambient reflection */}
-      <div className="absolute inset-x-8 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500/15 to-transparent pointer-events-none blur-[1px]" />
-
+  <motion.div variants={fadeBlur} className="relative isolate -translate-y-6 z-10">
+    {/* Premium glassmorphism container */}
+    <div className="relative flex items-center rounded-full p-[6px] gap-[6px] bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
       {TABS.map((tab) => {
         const isActive = active === tab.id;
         return (
           <motion.button
             key={tab.id}
             onClick={() => onChange(tab.id)}
-            whileHover={
-              isActive
-                ? {}
-                : { backgroundColor: "rgba(255,255,255,0.06)", scale: 1.03 }
-            }
+            whileHover={isActive ? {} : { scale: 1.04 }}
             whileTap={{ scale: 0.95 }}
-            className={`relative flex items-center gap-[12px] px-16 py-[20px] rounded-full
-              text-[17px] font-bold tracking-[0.05em]
-              transition-all duration-300 outline-none select-none
-              focus-visible:ring-2 focus-visible:ring-cyan-400/50
-              ${
-                isActive
-                  ? "text-white"
-                  : "text-white/40 hover:text-white/75"
-              }`}
+            className={`relative flex items-center gap-[8px] px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 outline-none select-none focus-visible:ring-2 focus-visible:ring-white/30 ${
+              isActive
+                ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+                : "text-white/70 hover:bg-white/10"
+            }`}
           >
-            {isActive && (
-              <motion.div
-                layoutId="cert-filter-pill-futuristic"
-                className="absolute inset-0 rounded-full
-                  bg-gradient-to-b from-cyan-400 via-blue-600 to-indigo-800
-                  border-[1.5px] border-cyan-300/30
-                  shadow-[0_0_32px_rgba(34,211,238,0.4),0_8px_16px_rgba(0,0,0,0.6),inset_0_2px_6px_rgba(255,255,255,0.3)]"
-                transition={{
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 25,
-                }}
-              />
-            )}
-            <span className="relative z-10 flex items-center gap-[12px] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
-              <TabIcon type={tab.icon} isActive={isActive} />
-              {tab.label}
-            </span>
+            <TabIcon type={tab.icon} isActive={isActive} />
+            {tab.label}
           </motion.button>
         );
       })}
