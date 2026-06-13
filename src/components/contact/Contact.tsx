@@ -2,11 +2,12 @@
 
 
 import { motion } from "framer-motion";
-import { Briefcase, Clock, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import ContactForm from "./ContactForm";
 import SocialLinks from "./SocialLinks";
 import { profile } from "@/data/profile";
+import { cn } from "@/lib/utils";
 
 /* ═══════════════════════════════════════════════
    Custom Keyframes (contact-scoped)
@@ -34,19 +35,26 @@ const contactKeyframes = `
 const contactInfo = [
   {
     icon: Mail,
-    label: "Email",
-    value: profile.email,
-    href: `mailto:${profile.email}`,
+    label: "EMAIL",
+    value: "mohannitin494@gmail.com",
+    href: `mailto:mohannitin494@gmail.com`,
+    subText: "Drop me an email anytime",
+    iconColorClass: "text-cyan-400 group-hover:text-cyan-300",
+  },
+  {
+    icon: Phone,
+    label: "PHONE",
+    value: "+91 12345 67890",
+    href: "tel:+911234567890",
+    subText: "Mon - Fri, 10AM - 7PM IST",
+    iconColorClass: "text-purple-500 group-hover:text-purple-400",
   },
   {
     icon: MapPin,
-    label: "Location",
-    value: profile.location,
-  },
-  {
-    icon: Briefcase,
-    label: "Currently Available",
-    value: "For New Opportunities",
+    label: "LOCATION",
+    value: "Bhopal, Madhya Pradesh, India",
+    subText: "Available for local & remote work",
+    iconColorClass: "text-cyan-400 group-hover:text-cyan-300",
   },
 ];
 
@@ -70,8 +78,6 @@ const fadeUpItem = {
     transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
   },
 };
-
-
 
 /* ═══════════════════════════════════════════════
    Orbital Element
@@ -176,32 +182,44 @@ interface InfoCardProps {
   icon: typeof Mail;
   label: string;
   value: string;
+  subText?: string;
   href?: string;
+  iconColorClass?: string;
   index: number;
 }
 
-function InfoCard({ icon: Icon, label, value, href, index }: InfoCardProps) {
+function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "text-cyan-400 group-hover:text-cyan-300", index }: InfoCardProps) {
+  const isPurple = iconColorClass.includes("purple");
+  const borderColor = isPurple ? "border-purple-500/25 group-hover:border-purple-500/50" : "border-cyan-400/25 group-hover:border-cyan-400/50";
+  const bgColor = isPurple ? "bg-purple-500/10 group-hover:bg-purple-500/20" : "bg-cyan-400/10 group-hover:bg-cyan-400/20";
+  const shadowColor = isPurple ? "shadow-[0_0_20px_rgba(168,85,247,0.15)] group-hover:shadow-[0_0_35px_rgba(168,85,247,0.35)]" : "shadow-[0_0_20px_rgba(34,211,238,0.15)] group-hover:shadow-[0_0_35px_rgba(34,211,238,0.35)]";
+
   const inner = (
     <div className="flex items-start gap-5">
       {/* Circular glowing icon */}
-      <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-cyan-400/25 bg-cyan-400/10 text-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.15)] transition-all duration-500 group-hover:border-cyan-400/50 group-hover:bg-cyan-400/20 group-hover:shadow-[0_0_35px_rgba(34,211,238,0.35)] group-hover:text-white">
+      <div className={cn("relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border transition-all duration-500 z-10 bg-[rgba(5,8,15,1)]", borderColor, bgColor, shadowColor, iconColorClass)}>
         <Icon size={20} />
       </div>
 
       {/* Text Stack */}
-      <div className="flex flex-col justify-center pt-1">
-        <p className="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-white/40 transition-colors duration-300 group-hover:text-cyan-400/80">
+      <div className="flex flex-col justify-center pt-0.5">
+        <p className="font-mono text-[12px] font-bold tracking-[0.2em] text-white/60 transition-colors duration-300 group-hover:text-white/80">
           {label}
         </p>
-        <p className="mt-1 text-[15px] font-medium text-white/80 transition-colors duration-300 group-hover:text-white">
+        <p className="mt-1 text-[16px] font-medium text-white/90 transition-colors duration-300 group-hover:text-white">
           {value}
         </p>
+        {subText && (
+          <p className="mt-1 text-[14px] text-white/50 transition-colors duration-300 group-hover:text-white/70">
+            {subText}
+          </p>
+        )}
       </div>
     </div>
   );
 
   const sharedClasses =
-    "group flex items-center p-2 -m-2 rounded-2xl transition-all duration-300 hover:bg-white/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50";
+    "group flex items-center transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50";
 
   return (
     <motion.div
@@ -249,56 +267,48 @@ export default function Contact() {
             className="flex flex-col justify-center"
           >
             {/* Section Label */}
-            <div className="relative -top-10 mb-4 flex items-center gap-3">
-              <span className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-400/70 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
-              <span className="font-mono text-[16px] font-extrabold uppercase tracking-[0.3em] text-cyan-300 drop-shadow-[0_0_10px_rgba(34,211,238,0.6)]">
-                Contact
+            <div className="relative mb-3 flex items-center gap-3">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-50" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(34,211,238,0.8)]" />
+              </span>
+              <span className="font-mono text-[14px] font-extrabold uppercase tracking-[0.2em] text-cyan-300 drop-shadow-[0_0_10px_rgba(34,211,238,0.6)]">
+                GET IN TOUCH
               </span>
             </div>
 
             {/* Main Heading */}
-            <h2 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold leading-[0.95] tracking-tight text-white">
-              Ready to turn ideas
+            <h2 className="font-display text-[clamp(1.5rem,3vw,2.7rem)] font-extrabold leading-[1.15] tracking-tight text-white">
+              Let&apos;s build
               <br />
-              into{" "}
-              <span className="bg-gradient-to-r from-cyan-300 via-teal-300 to-blue-400 bg-clip-text text-transparent">
-                real products.
+              something
+              <br />
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                amazing together.
               </span>
             </h2>
 
             {/* Supporting Text */}
-            <p className="mt-8 max-w-lg text-[clamp(16px,1.3vw,19px)] leading-[1.8] text-white/60">
-              Have a project in mind or want to work together?
-              <br className="hidden sm:block" />
-              I&apos;d love to hear from you. Let&apos;s create impactful
-              solutions and bring ideas to life.
+            <p className="mt-5 max-w-lg text-[16px] md:text-[18px] leading-[1.6] text-white/70">
+              I&apos;m always open to discussing new projects, creative ideas or opportunities to be part of your vision.
             </p>
 
             {/* ── Info Cards ── */}
-            <div className="mt-14 flex flex-col gap-8 sm:gap-10">
+            <div className="mt-10 flex flex-col gap-8 relative">
+              {/* Vertical connecting line */}
+              <div className="absolute left-[23.5px] top-6 bottom-6 w-px bg-white/10 z-0" />
+              
               {contactInfo.map((info, index) => (
                 <InfoCard
                   key={info.label}
                   icon={info.icon}
                   label={info.label}
                   value={info.value}
+                  subText={info.subText}
                   href={info.href}
+                  iconColorClass={info.iconColorClass}
                   index={index}
                 />
-              ))}
-            </div>
-
-            {/* ── Trust Indicators ── */}
-            <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-4">
-              {["3+ Projects Completed", "DSA Certified", "Full Stack Developer", "AIML Learning"].map((badge) => (
-                <div key={badge} className="flex items-center gap-2.5">
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-cyan-400/10 text-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.15)]">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="h-3 w-3">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg>
-                  </div>
-                  <span className="text-[14px] font-medium text-white/70">{badge}</span>
-                </div>
               ))}
             </div>
 

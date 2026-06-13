@@ -9,7 +9,6 @@ import {
   Check,
   Loader2,
   Lock,
-  MessageSquareText,
   Send,
   TextCursorInput,
   User,
@@ -35,7 +34,7 @@ interface FieldFrameProps {
   id: string;
   label: string;
   error?: string;
-  icon: ComponentType<{ size?: number; className?: string }>;
+  icon?: ComponentType<{ size?: number; className?: string }>;
   children: ReactNode;
 }
 
@@ -66,13 +65,15 @@ function FieldFrame({ id, label, error, icon: Icon, children }: FieldFrameProps)
         {/* Active state neon dot */}
         <div className="pointer-events-none absolute left-0 top-1/2 h-6 w-1 -translate-x-full -translate-y-1/2 rounded-r-full bg-cyan-400 opacity-0 shadow-[0_0_12px_rgba(34,211,238,0.9)] transition-all duration-300 group-focus-within:translate-x-0 group-focus-within:opacity-100" />
 
-        <Icon
-          size={18}
-          className={cn(
-            "pointer-events-none absolute left-4 top-[18px] text-white/30 transition-colors duration-300 group-focus-within:text-cyan-400",
-            error && "text-red-400/80"
-          )}
-        />
+        {Icon && (
+          <Icon
+            size={18}
+            className={cn(
+              "pointer-events-none absolute left-4 top-[18px] text-white/30 transition-colors duration-300 group-focus-within:text-cyan-400",
+              error && "text-red-400/80"
+            )}
+          />
+        )}
         {children}
       </div>
 
@@ -171,8 +172,11 @@ export default function ContactForm() {
     }
   }
 
-  const inputClass =
-    "w-full border-0 bg-transparent py-4 pl-12 pr-4 text-[16px] font-medium text-white/90 placeholder:text-white/40 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 transition-colors duration-300";
+  const getInputClass = (hasIcon: boolean) =>
+    cn(
+      "w-full border-0 bg-transparent py-4 pr-4 text-[16px] font-medium text-white/90 placeholder:text-white/40 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 transition-colors duration-300",
+      hasIcon ? "pl-12" : "pl-4"
+    );
 
   return (
     <div className="relative">
@@ -232,7 +236,7 @@ export default function ContactForm() {
                   placeholder="Nitin Mohan"
                   value={form.name}
                   onChange={(e) => updateField("name", e.target.value)}
-                  className={inputClass}
+                  className={getInputClass(true)}
                   disabled={disabled}
                   aria-invalid={Boolean(errors.name)}
                   aria-describedby={
@@ -254,7 +258,7 @@ export default function ContactForm() {
                   placeholder="you@company.com"
                   value={form.email}
                   onChange={(e) => updateField("email", e.target.value)}
-                  className={inputClass}
+                  className={getInputClass(true)}
                   disabled={disabled}
                   aria-invalid={Boolean(errors.email)}
                   aria-describedby={
@@ -277,7 +281,7 @@ export default function ContactForm() {
                 placeholder="Project Collaboration"
                 value={form.subject}
                 onChange={(e) => updateField("subject", e.target.value)}
-                className={inputClass}
+                className={getInputClass(true)}
                 disabled={disabled}
                 aria-invalid={Boolean(errors.subject)}
                 aria-describedby={
@@ -290,7 +294,6 @@ export default function ContactForm() {
             <FieldFrame
               id="contact-message"
               label="Message"
-              icon={MessageSquareText}
               error={errors.message}
             >
               <textarea
@@ -298,7 +301,7 @@ export default function ContactForm() {
                 placeholder="Tell me about your project, idea, or how we can work together..."
                 value={form.message}
                 onChange={(e) => updateField("message", e.target.value)}
-                className={cn(inputClass, "min-h-[220px] resize-y pb-10 leading-7")}
+                className={cn(getInputClass(false), "min-h-[220px] resize-y pb-10 leading-7")}
                 disabled={disabled}
                 aria-invalid={Boolean(errors.message)}
                 aria-describedby={
@@ -357,7 +360,7 @@ export default function ContactForm() {
                     : { y: -2, boxShadow: "0 28px 60px -20px rgba(34,211,238,0.45)" }
                 }
                 whileTap={disabled ? undefined : { scale: 0.985 }}
-                className="group relative h-[60px] w-full cursor-pointer overflow-hidden rounded-2xl border border-cyan-400/20 bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 px-6 text-[15px] font-extrabold text-white shadow-[0_20px_50px_-24px_rgba(34,211,238,0.6)] transition-all duration-300 hover:border-cyan-300/30 hover:shadow-[0_24px_60px_-20px_rgba(34,211,238,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030712] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
+                className="group relative h-[60px] w-full cursor-pointer overflow-hidden rounded-2xl border border-cyan-400/20 bg-gradient-to-r from-cyan-400 to-blue-500 px-6 text-[15px] font-extrabold text-white shadow-[0_20px_50px_-24px_rgba(34,211,238,0.6)] transition-all duration-300 hover:border-cyan-300/30 hover:shadow-[0_24px_60px_-20px_rgba(34,211,238,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030712] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {/* Shine sweep animation */}
                 <span className="absolute inset-0 translate-x-[-120%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-[120%]" />
