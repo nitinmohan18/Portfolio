@@ -285,14 +285,29 @@ export default function Contact() {
             className="flex flex-col justify-center"
           >
             {/* Section Label */}
-            <div className="relative mb-3 flex items-center gap-3">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-50" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(34,211,238,0.8)]" />
-              </span>
-              <span className="font-mono text-[14px] font-extrabold uppercase tracking-[0.2em] text-cyan-300 drop-shadow-[0_0_10px_rgba(34,211,238,0.6)]">
+            <div className="relative mb-3 flex items-center gap-4" style={{ transform: "translate(-40px, -80px)" }}>
+              {/* Left Line & Dot */}
+              <div className="flex items-center gap-2 shrink-0">
+                <div className="h-[1px] w-6 sm:w-8 bg-gradient-to-r from-transparent via-cyan-400/40 to-cyan-400/80 rounded-full shadow-[0_0_4px_rgba(34,211,238,0.3)]" />
+                <span className="relative flex h-1.5 w-1.5 shrink-0">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-40" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_4px_rgba(34,211,238,0.5)]" />
+                </span>
+              </div>
+              
+              {/* Text */}
+              <span className="shrink-0 font-mono text-[15px] font-bold uppercase tracking-[0.25em] text-cyan-300 drop-shadow-[0_0_4px_rgba(34,211,238,0.4)]">
                 GET IN TOUCH
               </span>
+              
+              {/* Right Dot & Line */}
+              <div className="flex items-center gap-2 shrink-0">
+                <span className="relative flex h-1.5 w-1.5 shrink-0">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-40" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_4px_rgba(34,211,238,0.5)]" />
+                </span>
+                <div className="h-[1px] w-6 sm:w-8 bg-gradient-to-l from-transparent via-cyan-400/40 to-cyan-400/80 rounded-full shadow-[0_0_4px_rgba(34,211,238,0.3)]" />
+              </div>
             </div>
 
             {/* Main Heading */}
