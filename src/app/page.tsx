@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import PagePreloader from "@/components/ui/PagePreloader";
 import Navbar from "@/components/layout/Navbar";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 
 import Hero from "@/components/hero/Hero";
 import ParallaxStarsBackground from "@/components/hero/ParallaxStarsBackground";
@@ -55,6 +56,7 @@ export default function Home() {
           <Contact />
         </main>
       </div>
+      <ScrollToTop />
     </>
   );
 }

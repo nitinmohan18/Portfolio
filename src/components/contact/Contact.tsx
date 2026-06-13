@@ -249,9 +249,9 @@ export default function Contact() {
             className="flex flex-col justify-center"
           >
             {/* Section Label */}
-            <div className="mb-5 flex items-center gap-3">
-              <span className="h-px w-10 bg-gradient-to-r from-transparent to-cyan-400/60" />
-              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.4)]">
+            <div className="relative -top-10 mb-4 flex items-center gap-3">
+              <span className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-400/70 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
+              <span className="font-mono text-[16px] font-extrabold uppercase tracking-[0.3em] text-cyan-300 drop-shadow-[0_0_10px_rgba(34,211,238,0.6)]">
                 Contact
               </span>
             </div>
