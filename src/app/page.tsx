@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import PagePreloader from "@/components/ui/PagePreloader";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+
 import Hero from "@/components/hero/Hero";
 import ParallaxStarsBackground from "@/components/hero/ParallaxStarsBackground";
 import About from "@/components/about/About";
@@ -54,7 +54,6 @@ export default function Home() {
           <div className="section-divider" />
           <Contact />
         </main>
-        <Footer />
       </div>
     </>
   );

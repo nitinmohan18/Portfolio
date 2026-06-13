@@ -11,7 +11,6 @@ import {
   Lock,
   MessageSquareText,
   Send,
-  ShieldCheck,
   TextCursorInput,
   User,
 } from "lucide-react";
@@ -56,13 +55,16 @@ function FieldFrame({ id, label, error, icon: Icon, children }: FieldFrameProps)
           "relative overflow-hidden rounded-[14px] border bg-white/[0.03] transition-all duration-500",
           "border-white/[0.15] shadow-[inset_0_2px_8px_rgba(0,0,0,0.3)]",
           "hover:border-cyan-400/30 hover:bg-white/[0.05] hover:shadow-[0_0_15px_rgba(34,211,238,0.05),inset_0_2px_8px_rgba(0,0,0,0.3)]",
-          "focus-within:!border-cyan-400/60 focus-within:bg-cyan-400/[0.04] focus-within:shadow-[0_0_25px_rgba(34,211,238,0.2),inset_0_1px_4px_rgba(34,211,238,0.1)]",
+          "focus-within:!border-cyan-400/70 focus-within:bg-cyan-400/[0.05] focus-within:shadow-[0_0_30px_rgba(34,211,238,0.25),inset_0_1px_4px_rgba(34,211,238,0.15)]",
           error &&
             "border-red-400/50 bg-red-400/[0.04] focus-within:!border-red-400/60 focus-within:shadow-[0_0_20px_rgba(248,113,113,0.12)]"
         )}
       >
-        {/* Focus highlight line */}
-        <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent opacity-0 transition-opacity duration-300 group-focus-within:opacity-100" />
+        {/* Animated top border tracing effect */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] -translate-x-[100%] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 transition-all duration-700 ease-out group-focus-within:translate-x-0 group-focus-within:opacity-100" />
+        
+        {/* Active state neon dot */}
+        <div className="pointer-events-none absolute left-0 top-1/2 h-6 w-1 -translate-x-full -translate-y-1/2 rounded-r-full bg-cyan-400 opacity-0 shadow-[0_0_12px_rgba(34,211,238,0.9)] transition-all duration-300 group-focus-within:translate-x-0 group-focus-within:opacity-100" />
 
         <Icon
           size={18}
@@ -197,15 +199,14 @@ export default function ContactForm() {
               </p>
             </div>
 
-            {/* 100% Secure Badge */}
-            <div className="hidden shrink-0 items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/[0.06] px-3.5 py-1.5 sm:flex">
+            {/* Authentic Availability Badge */}
+            <div className="hidden shrink-0 items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-3.5 py-1.5 sm:flex">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-50" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-50" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(34,211,238,0.8)]" />
               </span>
-              <ShieldCheck size={14} className="text-emerald-400" />
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-300/90">
-                100% Secure
+              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-300/90">
+                Usually replies in 24h
               </span>
             </div>
           </div>

@@ -44,14 +44,9 @@ const contactInfo = [
     value: profile.location,
   },
   {
-    icon: Clock,
-    label: "Response Time",
-    value: "Within 24 hours",
-  },
-  {
     icon: Briefcase,
-    label: "Availability",
-    value: "Open for opportunities",
+    label: "Currently Available",
+    value: "For New Opportunities",
   },
 ];
 
@@ -244,7 +239,7 @@ export default function Contact() {
 
 
         {/* ── Two-Column Layout ── */}
-        <div className="relative z-10 grid gap-12 lg:grid-cols-[2fr_3fr] lg:gap-20 xl:gap-28">
+        <div className="relative z-10 grid gap-12 lg:grid-cols-[45fr_55fr] lg:gap-20 xl:gap-28">
           {/* ═══ Left Column ═══ */}
           <motion.div
             initial={{ opacity: 0, x: -32, filter: "blur(10px)" }}
@@ -263,11 +258,11 @@ export default function Contact() {
 
             {/* Main Heading */}
             <h2 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold leading-[0.95] tracking-tight text-white">
-              Let&apos;s build
+              Ready to turn ideas
               <br />
-              something{" "}
+              into{" "}
               <span className="bg-gradient-to-r from-cyan-300 via-teal-300 to-blue-400 bg-clip-text text-transparent">
-                extraordinary.
+                real products.
               </span>
             </h2>
 
@@ -291,6 +286,27 @@ export default function Contact() {
                   index={index}
                 />
               ))}
+            </div>
+
+            {/* ── Trust Indicators ── */}
+            <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-4">
+              {["3+ Projects Completed", "DSA Certified", "Full Stack Developer", "AIML Learning"].map((badge) => (
+                <div key={badge} className="flex items-center gap-2.5">
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-cyan-400/10 text-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.15)]">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="h-3 w-3">
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                  </div>
+                  <span className="text-[14px] font-medium text-white/70">{badge}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Subtle left-side visual element */}
+            <div className="absolute -left-20 top-20 -z-10 hidden opacity-30 blur-[2px] lg:block">
+              <div className="h-[200px] w-[200px] rounded-full border border-cyan-400/20" />
+              <div className="absolute inset-4 rounded-full border border-blue-400/20 border-dashed" />
+              <div className="absolute inset-8 rounded-full border border-teal-400/10" />
             </div>
           </motion.div>
 
