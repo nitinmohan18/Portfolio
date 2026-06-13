@@ -5,7 +5,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   AlertCircle,
-  AtSign,
+  Mail,
   Check,
   Loader2,
   Lock,
@@ -41,9 +41,9 @@ interface FieldFrameProps {
 /* ─── Field Frame ─── */
 function FieldFrame({ id, label, error, icon: Icon, children }: FieldFrameProps) {
   return (
-    <div className="group flex flex-col gap-2">
+    <div className="group flex flex-col" style={{ gap: "6px" }}>
       <label
-        className="font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-white/42 transition-colors duration-300 group-focus-within:text-cyan-300/90"
+        className="text-[13px] font-medium text-white/70 transition-colors duration-300 group-focus-within:text-cyan-400"
         htmlFor={id}
       >
         {label}
@@ -51,27 +51,29 @@ function FieldFrame({ id, label, error, icon: Icon, children }: FieldFrameProps)
 
       <div
         className={cn(
-          "relative overflow-hidden rounded-[14px] border bg-white/[0.03] transition-all duration-500",
+          "relative overflow-hidden border bg-white/[0.03] transition-all duration-500",
           "border-white/[0.15] shadow-[inset_0_2px_8px_rgba(0,0,0,0.3)]",
           "hover:border-cyan-400/30 hover:bg-white/[0.05] hover:shadow-[0_0_15px_rgba(34,211,238,0.05),inset_0_2px_8px_rgba(0,0,0,0.3)]",
           "focus-within:!border-cyan-400/70 focus-within:bg-cyan-400/[0.05] focus-within:shadow-[0_0_30px_rgba(34,211,238,0.25),inset_0_1px_4px_rgba(34,211,238,0.15)]",
           error &&
             "border-red-400/50 bg-red-400/[0.04] focus-within:!border-red-400/60 focus-within:shadow-[0_0_20px_rgba(248,113,113,0.12)]"
         )}
+        style={{ borderRadius: "14px" }}
       >
         {/* Animated top border tracing effect */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] -translate-x-[100%] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 transition-all duration-700 ease-out group-focus-within:translate-x-0 group-focus-within:opacity-100" />
         
         {/* Active state neon dot */}
-        <div className="pointer-events-none absolute left-0 top-1/2 h-6 w-1 -translate-x-full -translate-y-1/2 rounded-r-full bg-cyan-400 opacity-0 shadow-[0_0_12px_rgba(34,211,238,0.9)] transition-all duration-300 group-focus-within:translate-x-0 group-focus-within:opacity-100" />
+        <div className="pointer-events-none absolute left-0 top-1/2 h-5 w-[3px] -translate-x-full -translate-y-1/2 rounded-r-full bg-cyan-400 opacity-0 shadow-[0_0_12px_rgba(34,211,238,0.9)] transition-all duration-300 group-focus-within:translate-x-0 group-focus-within:opacity-100" />
 
         {Icon && (
           <Icon
-            size={18}
+            size={16}
             className={cn(
-              "pointer-events-none absolute left-4 top-[18px] text-white/30 transition-colors duration-300 group-focus-within:text-cyan-400",
+              "pointer-events-none absolute text-white/30 transition-colors duration-300 group-focus-within:text-cyan-400",
               error && "text-red-400/80"
             )}
+            style={{ left: "14px", top: "50%", transform: "translateY(-50%)" }}
           />
         )}
         {children}
@@ -172,10 +174,9 @@ export default function ContactForm() {
     }
   }
 
-  const getInputClass = (hasIcon: boolean) =>
+  const getInputClass = () =>
     cn(
-      "w-full border-0 bg-transparent py-4 pr-4 text-[16px] font-medium text-white/90 placeholder:text-white/40 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 transition-colors duration-300",
-      hasIcon ? "pl-12" : "pl-4"
+      "w-full border-0 bg-transparent text-[13px] font-medium text-white/90 placeholder:text-white/30 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 transition-colors duration-300"
     );
 
   return (
@@ -184,48 +185,37 @@ export default function ContactForm() {
       <div className="absolute -inset-[1px] rounded-[30px] bg-gradient-to-b from-cyan-400/40 via-cyan-400/5 to-transparent blur-2xl opacity-70" />
 
       {/* Card */}
-      <div className="relative overflow-hidden rounded-[28px] border border-white/[0.08] bg-[rgba(5,8,15,0.75)] shadow-[0_40px_100px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1),inset_0_2px_12px_rgba(34,211,238,0.05)] backdrop-blur-3xl">
+      <div className="relative overflow-hidden rounded-[28px] border border-white/[0.12] bg-[rgba(5,8,15,0.75)] shadow-[0_40px_100px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1),inset_0_2px_12px_rgba(34,211,238,0.05)] backdrop-blur-3xl">
         {/* Premium Top edge highlight */}
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
 
         {/* Decorative corner circle */}
-        <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full border border-white/[0.04] bg-white/[0.012]" />
+        <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full border border-white/[0.04] bg-white/[0.012]" />
 
-        <div className="relative z-10 p-5 sm:p-7 md:p-9">
+        <div className="relative z-10 w-full" style={{ padding: "1.5rem", boxSizing: "border-box" }}>
           {/* ── Card Header ── */}
-          <div className="mb-7 flex items-start justify-between gap-4">
-            <div>
-              <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-cyan-400/80">
-                Send a message
-              </h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-white/48">
-                Fill out the form and I&apos;ll get back to you soon.
-              </p>
-            </div>
-
-            {/* Authentic Availability Badge */}
-            <div className="hidden shrink-0 items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-3.5 py-1.5 sm:flex">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-50" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(34,211,238,0.8)]" />
-              </span>
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-300/90">
-                Usually replies in 24h
-              </span>
-            </div>
+          <div className="flex items-center gap-2" style={{ marginBottom: "1.5rem" }}>
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-50" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(34,211,238,0.8)]" />
+            </span>
+            <h3 className="font-mono text-[13px] font-bold uppercase tracking-widest text-cyan-300 drop-shadow-[0_0_10px_rgba(34,211,238,0.6)]">
+              SEND ME A MESSAGE
+            </h3>
           </div>
 
           {/* ── Form ── */}
           <form
             onSubmit={handleSubmit}
             noValidate
-            className="relative z-10 flex flex-col gap-5"
+            className="relative z-10 flex flex-col"
+            style={{ gap: "1.25rem" }}
           >
             {/* Row 1: Name + Email */}
-            <div className="grid gap-5 sm:grid-cols-2">
+            <div className="grid sm:grid-cols-2" style={{ gap: "1.25rem" }}>
               <FieldFrame
                 id="contact-name"
-                label="Your name"
+                label="Your Name"
                 icon={User}
                 error={errors.name}
               >
@@ -233,10 +223,11 @@ export default function ContactForm() {
                   id="contact-name"
                   type="text"
                   autoComplete="name"
-                  placeholder="Nitin Mohan"
+                  placeholder="Enter your name"
                   value={form.name}
                   onChange={(e) => updateField("name", e.target.value)}
-                  className={getInputClass(true)}
+                  className={getInputClass()}
+                  style={{ paddingTop: "13px", paddingBottom: "13px", paddingRight: "14px", paddingLeft: "38px" }}
                   disabled={disabled}
                   aria-invalid={Boolean(errors.name)}
                   aria-describedby={
@@ -247,18 +238,19 @@ export default function ContactForm() {
 
               <FieldFrame
                 id="contact-email"
-                label="Your email"
-                icon={AtSign}
+                label="Your Email"
+                icon={Mail}
                 error={errors.email}
               >
                 <input
                   id="contact-email"
                   type="email"
                   autoComplete="email"
-                  placeholder="you@company.com"
+                  placeholder="Enter your email"
                   value={form.email}
                   onChange={(e) => updateField("email", e.target.value)}
-                  className={getInputClass(true)}
+                  className={getInputClass()}
+                  style={{ paddingTop: "13px", paddingBottom: "13px", paddingRight: "14px", paddingLeft: "38px" }}
                   disabled={disabled}
                   aria-invalid={Boolean(errors.email)}
                   aria-describedby={
@@ -278,10 +270,11 @@ export default function ContactForm() {
               <input
                 id="contact-subject"
                 type="text"
-                placeholder="Project Collaboration"
+                placeholder="What's this about?"
                 value={form.subject}
                 onChange={(e) => updateField("subject", e.target.value)}
-                className={getInputClass(true)}
+                className={getInputClass()}
+                style={{ paddingTop: "13px", paddingBottom: "13px", paddingRight: "14px", paddingLeft: "38px" }}
                 disabled={disabled}
                 aria-invalid={Boolean(errors.subject)}
                 aria-describedby={
@@ -301,7 +294,8 @@ export default function ContactForm() {
                 placeholder="Tell me about your project, idea, or how we can work together..."
                 value={form.message}
                 onChange={(e) => updateField("message", e.target.value)}
-                className={cn(getInputClass(false), "min-h-[220px] resize-y pb-10 leading-7")}
+                className={cn(getInputClass(), "resize-y leading-6")}
+                style={{ minHeight: "110px", paddingTop: "13px", paddingBottom: "36px", paddingRight: "14px", paddingLeft: "14px" }}
                 disabled={disabled}
                 aria-invalid={Boolean(errors.message)}
                 aria-describedby={
@@ -309,7 +303,7 @@ export default function ContactForm() {
                 }
               />
               {/* Character counter */}
-              <span className="pointer-events-none absolute bottom-3 right-4 font-mono text-[11px] tabular-nums text-white/22">
+              <span className="pointer-events-none absolute font-mono text-[10px] tabular-nums text-white/22" style={{ bottom: "10px", right: "12px" }}>
                 {form.message.length} / {MAX_MESSAGE_LENGTH}
               </span>
             </FieldFrame>
@@ -350,17 +344,18 @@ export default function ContactForm() {
             </AnimatePresence>
 
             {/* ── Submit Button ── */}
-            <div className="flex flex-col gap-4 pt-1">
+            <div className="flex flex-col pt-2" style={{ gap: "0.75rem" }}>
               <motion.button
                 type="submit"
                 disabled={disabled}
                 whileHover={
                   disabled
                     ? undefined
-                    : { y: -2, boxShadow: "0 28px 60px -20px rgba(34,211,238,0.45)" }
+                    : { y: -2, boxShadow: "0 24px 40px -16px rgba(34,211,238,0.45)" }
                 }
                 whileTap={disabled ? undefined : { scale: 0.985 }}
-                className="group relative h-[60px] w-full cursor-pointer overflow-hidden rounded-2xl border border-cyan-400/20 bg-gradient-to-r from-cyan-400 to-blue-500 px-6 text-[15px] font-extrabold text-white shadow-[0_20px_50px_-24px_rgba(34,211,238,0.6)] transition-all duration-300 hover:border-cyan-300/30 hover:shadow-[0_24px_60px_-20px_rgba(34,211,238,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030712] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
+                className="group relative w-full cursor-pointer overflow-hidden border border-cyan-400/20 bg-gradient-to-r from-cyan-400 to-purple-500 px-6 text-[13px] font-extrabold text-white shadow-[0_20px_50px_-24px_rgba(34,211,238,0.6)] transition-all duration-300 hover:border-cyan-300/30 hover:shadow-[0_24px_60px_-20px_rgba(34,211,238,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030712] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
+                style={{ height: "48px", borderRadius: "14px" }}
               >
                 {/* Shine sweep animation */}
                 <span className="absolute inset-0 translate-x-[-120%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-[120%]" />

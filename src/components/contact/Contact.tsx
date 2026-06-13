@@ -2,7 +2,7 @@
 
 
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, FileText } from "lucide-react";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import ContactForm from "./ContactForm";
 import SocialLinks from "./SocialLinks";
@@ -27,6 +27,12 @@ const contactKeyframes = `
     0%, 100% { opacity: 0.65; }
     50% { opacity: 1; }
   }
+  @keyframes contact-line-flow {
+    0% { top: -100px; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
 `;
 
 /* ═══════════════════════════════════════════════
@@ -34,20 +40,20 @@ const contactKeyframes = `
    ═══════════════════════════════════════════════ */
 const contactInfo = [
   {
+    icon: FileText,
+    label: "RESUME",
+    value: "View My Resume",
+    href: profile.resumeUrl || "/resume.pdf",
+    subText: "Grab a copy of my CV",
+    iconColorClass: "text-purple-500 group-hover:text-purple-400",
+  },
+  {
     icon: Mail,
     label: "EMAIL",
     value: "mohannitin494@gmail.com",
     href: `mailto:mohannitin494@gmail.com`,
     subText: "Drop me an email anytime",
     iconColorClass: "text-cyan-400 group-hover:text-cyan-300",
-  },
-  {
-    icon: Phone,
-    label: "PHONE",
-    value: "+91 12345 67890",
-    href: "tel:+911234567890",
-    subText: "Mon - Fri, 10AM - 7PM IST",
-    iconColorClass: "text-purple-500 group-hover:text-purple-400",
   },
   {
     icon: MapPin,
@@ -190,15 +196,23 @@ interface InfoCardProps {
 
 function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "text-cyan-400 group-hover:text-cyan-300", index }: InfoCardProps) {
   const isPurple = iconColorClass.includes("purple");
-  const borderColor = isPurple ? "border-purple-500/25 group-hover:border-purple-500/50" : "border-cyan-400/25 group-hover:border-cyan-400/50";
+  const borderColor = isPurple ? "border-purple-500/60 group-hover:border-purple-500/90" : "border-cyan-400/60 group-hover:border-cyan-400/90";
   const bgColor = isPurple ? "bg-purple-500/10 group-hover:bg-purple-500/20" : "bg-cyan-400/10 group-hover:bg-cyan-400/20";
-  const shadowColor = isPurple ? "shadow-[0_0_20px_rgba(168,85,247,0.15)] group-hover:shadow-[0_0_35px_rgba(168,85,247,0.35)]" : "shadow-[0_0_20px_rgba(34,211,238,0.15)] group-hover:shadow-[0_0_35px_rgba(34,211,238,0.35)]";
+  
+  // Subtle inline glow
+  const glowColor = isPurple ? "rgba(168,85,247,0.25)" : "rgba(34,211,238,0.25)";
 
   const inner = (
     <div className="flex items-start gap-5">
-      {/* Circular glowing icon */}
-      <div className={cn("relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border transition-all duration-500 z-10 bg-[rgba(5,8,15,1)]", borderColor, bgColor, shadowColor, iconColorClass)}>
-        <Icon size={20} />
+      {/* Circular icon with opaque background to block line */}
+      <div 
+        className={cn("relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-500 z-10", borderColor, bgColor, iconColorClass)} 
+        style={{ 
+          backgroundColor: "rgba(5, 8, 15, 1)", 
+          boxShadow: `0 0 14px ${glowColor}, inset 0 0 8px ${glowColor}`
+        }}
+      >
+        <Icon size={22} strokeWidth={2.5} />
       </div>
 
       {/* Text Stack */}
@@ -210,7 +224,7 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
           {value}
         </p>
         {subText && (
-          <p className="mt-1 text-[14px] text-white/50 transition-colors duration-300 group-hover:text-white/70">
+          <p className="mt-0.5 text-[12px] text-white/40 transition-colors duration-300 group-hover:text-white/60">
             {subText}
           </p>
         )}
@@ -233,7 +247,11 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
       }}
     >
       {href ? (
-        <a href={href} className={sharedClasses}>
+        <a 
+          href={href} 
+          className={sharedClasses}
+          {...(!href.startsWith("mailto:") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        >
           {inner}
         </a>
       ) : (
@@ -296,7 +314,24 @@ export default function Contact() {
             {/* ── Info Cards ── */}
             <div className="mt-10 flex flex-col gap-8 relative">
               {/* Vertical connecting line */}
-              <div className="absolute left-[23.5px] top-6 bottom-6 w-px bg-white/10 z-0" />
+              <div 
+                className="absolute top-10 bottom-10 z-0 w-[2px] overflow-hidden rounded-full" 
+                style={{ 
+                  left: "23px", 
+                  background: "linear-gradient(to bottom, rgba(34,211,238,0.15), rgba(168,85,247,0.15), transparent)" 
+                }}
+              >
+                {/* Moving futuristic data particle */}
+                <div
+                  className="absolute left-0 w-full"
+                  style={{ 
+                    height: "100px", 
+                    background: "linear-gradient(to bottom, transparent, rgba(34,211,238,0.9), rgba(168,85,247,0.6), transparent)",
+                    boxShadow: "0 0 15px 2px rgba(34,211,238,0.6)",
+                    animation: "contact-line-flow 3.5s linear infinite"
+                  }}
+                />
+              </div>
               
               {contactInfo.map((info, index) => (
                 <InfoCard
@@ -337,7 +372,8 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 mt-24 lg:mt-32"
+          className="relative z-10"
+          style={{ marginTop: "60px" }}
         >
           {/* Outer subtle glow */}
           <div className="absolute -inset-1 rounded-[30px] bg-gradient-to-r from-cyan-400/[0.12] via-blue-500/[0.1] to-cyan-400/[0.12] blur-2xl opacity-80" />
