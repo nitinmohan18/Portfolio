@@ -31,35 +31,54 @@ export default function HeroButtons() {
     <div className="flex flex-col gap-6">
       <style>{`
         .btn-primary {
-          background: linear-gradient(135deg, #0ea5e9, #6366f1);
-          background-size: 100%;
-          border: none;
+          position: relative;
+          background: linear-gradient(165deg, #0f172a, #1e293b, #020617);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -2px 6px rgba(0, 0, 0, 0.8), 0 10px 20px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(34, 211, 238, 0.10);
           padding: 14px 28px;
-          border-radius: 8px;
-          transition: all 0.3s ease;
+          border-radius: 12px;
+          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
           color: white;
-          font-weight: 600;
+          font-weight: 700;
           font-size: 15px;
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 10px;
           cursor: pointer;
           user-select: none;
+          overflow: hidden;
+        }
+        .btn-primary::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 12px;
+          background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+          transform: translateX(-150%) skewX(-15deg);
+          transition: transform 0.6s ease;
+          pointer-events: none;
         }
         .btn-primary:hover {
-          background-size: 200%;
-          background-position: right center;
-          box-shadow: 0 0 24px rgba(99,102,241,0.45);
-          transform: translateY(-3px);
+          border-color: rgba(34, 211, 238, 0.40);
+          box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.15), inset 0 -3px 8px rgba(0, 0, 0, 0.8), 0 12px 25px -5px rgba(0, 0, 0, 0.6), 0 0 25px rgba(34, 211, 238, 0.20);
+          transform: translateY(-4px) scale(1.02);
+          text-shadow: 0 0 8px rgba(34, 211, 238, 0.50);
+        }
+        .btn-primary:hover::before {
+          transform: translateX(200%) skewX(-15deg);
         }
         .btn-primary .arrow-icon {
-          transition: transform 0.3s ease;
+          transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+          color: #22d3ee;
+          filter: drop-shadow(0 0 4px rgba(34, 211, 238, 0.45));
         }
         .btn-primary:hover .arrow-icon {
-          transform: translateX(4px);
+          transform: translateX(5px) scale(1.1);
+          filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.75));
         }
         .btn-primary:active {
-          transform: translateY(-1px) scale(0.98);
+          transform: translateY(1px) scale(0.97);
+          box-shadow: inset 0 2px 8px rgba(0,0,0,0.8), inset 0 1px 2px rgba(0,0,0,0.6), 0 0 0 rgba(34,211,238,0);
         }
 
         .btn-secondary {
