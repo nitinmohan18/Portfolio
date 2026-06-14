@@ -290,7 +290,7 @@ export default function About() {
         transition={{ duration: 1, ease: "easeOut", type: "spring", bounce: 0.4 }}
       >
         <span className="h-[2px] w-12 md:w-24 bg-gradient-to-r from-transparent to-blue-500 opacity-80" />
-        <h3 
+        <h2 
           className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500"
           style={{ 
             fontSize: "24px",
@@ -305,7 +305,7 @@ export default function About() {
           }}
         >
           ABOUT ME
-        </h3>
+        </h2>
         <span className="h-[2px] w-12 md:w-24 bg-gradient-to-l from-transparent to-blue-500 opacity-80" />
       </motion.div>
 
@@ -321,7 +321,7 @@ export default function About() {
             transition={{ type: "spring", stiffness: 100, damping: 12, delay: 0.2 }}
             style={{ marginBottom: "32px", perspective: "1000px" }}
           >
-            <h2 
+            <h3 
               style={{ 
                 margin: 0, 
                 fontSize: "clamp(32px, 4vw, 52px)", 
@@ -332,7 +332,7 @@ export default function About() {
               }}
             >
               AI & ML Student | <span style={{ color: "#22d3ee" }}>Full-Stack Developer</span>
-            </h2>
+            </h3>
           </motion.div>
 
           {/* Bio paragraphs */}
@@ -473,7 +473,7 @@ export default function About() {
           </motion.div>
 
           {/* Wrapper for exactly the timeline threads and cards */}
-          <div className="relative w-full flex flex-col items-stretch">
+          <div className="relative w-full flex flex-col items-stretch ml-8 md:ml-10 lg:ml-0">
             
             {/* Continuous Left Timeline Line */}
             <motion.div 
@@ -562,7 +562,8 @@ export default function About() {
                   }}
                 />
 
-                <motion.div
+                <motion.article
+                  aria-label={`Education: ${item.degree} at ${item.school}`}
                   initial={{ opacity: 0, x: 60, scale: 0.9, rotateY: 15 }}
                   whileInView={{ opacity: 1, x: 0, scale: 1, rotateY: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
@@ -789,7 +790,7 @@ export default function About() {
                     </div>
                   )}
                 </div>
-              </motion.div>
+              </motion.article>
               </React.Fragment>
             );
           })}

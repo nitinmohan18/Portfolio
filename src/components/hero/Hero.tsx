@@ -3,12 +3,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import HeroContent from "./HeroContent";
+import { usePreloader } from "@/components/layout/ClientLayout";
 
-interface HeroProps {
-  isVisible?: boolean;
-}
-
-export default function Hero({ isVisible = true }: HeroProps) {
+export default function Hero() {
+  const { showContent: isVisible } = usePreloader();
   const [animationKey, setAnimationKey] = useState(0);
 
   useEffect(() => {

@@ -259,6 +259,8 @@ const ArrowBtn = ({ color }: { color: ColorKey }) => {
   const c = colorMap[color];
   return (
     <motion.button
+      aria-hidden="true"
+      tabIndex={-1}
       whileHover={{ scale: 1.08, x: 2, y: -4 }}
       whileTap={{ scale: 0.92, y: 2 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -330,6 +332,8 @@ const FilterTabs = ({
 }) => (
   <motion.div variants={fadeBlur} className="relative z-10 w-full flex justify-center mb-24 mt-8 -translate-y-6">
     <div 
+      role="tablist"
+      aria-label="Filter certifications"
       className="relative inline-flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-full border border-white/[0.03]"
       style={{
         background: "linear-gradient(180deg, #02040a 0%, #060a12 100%)",
@@ -343,6 +347,9 @@ const FilterTabs = ({
         return (
           <button
             key={tab.id}
+            role="tab"
+            aria-selected={isActive}
+            aria-controls="certifications-panel"
             onClick={() => onChange(tab.id)}
             className={`relative flex items-center justify-center gap-2.5 px-6 py-2.5 sm:px-8 sm:py-3 text-[14px] sm:text-[16px] font-bold transition-all duration-300 outline-none select-none rounded-full z-10 group shrink-0 whitespace-nowrap ${
               isActive
@@ -497,6 +504,7 @@ export default function Certifications() {
           className="w-full max-w-[840px] mt-16 mx-auto min-h-[560px] md:min-h-[480px]"
         >
           <motion.div 
+            id="certifications-panel"
             layout 
             className="relative flex flex-col gap-6 w-full"
             initial="hidden"
@@ -523,7 +531,7 @@ export default function Certifications() {
             </motion.div>
 
             <AnimatePresence mode="popLayout">
-            {filtered.map((cert, i) => {
+            {filtered.map((cert) => {
               const Icon = cert.icon;
               const isCompleted = cert.status === "completed";
               const c = colorMap[cert.color];
@@ -585,9 +593,19 @@ export default function Certifications() {
 
                   {/* Card */}
                   <motion.div
+                    role={cert.link || cert.image ? "link" : "article"}
+                    tabIndex={cert.link || cert.image ? 0 : undefined}
+                    aria-label={`Certification: ${cert.title} by ${cert.issuer}`}
                     onClick={() => {
                       if (cert.link) window.open(cert.link, "_blank");
                       else if (cert.image) window.open(cert.image, "_blank");
+                    }}
+                    onKeyDown={(e: React.KeyboardEvent) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        if (cert.link) window.open(cert.link, "_blank");
+                        else if (cert.image) window.open(cert.image, "_blank");
+                      }
                     }}
                     whileHover={{
                       scale: 1.015,

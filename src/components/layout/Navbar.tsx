@@ -325,6 +325,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 2.6 + i * 0.06, duration: 0.4 }}
                   onClick={() => handleNav(item.href)}
+                  aria-current={isActive ? "page" : undefined}
                   className={cn(
                     "nav-link-hover relative border border-transparent",
                     isActive ? "active text-[#7DD3FC]" : "text-[rgba(180,195,220,0.75)]"
@@ -429,6 +430,7 @@ export default function Navbar() {
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ delay: i * 0.08, duration: 0.3 }}
                   onClick={() => handleNav(item.href)}
+                  aria-current={isActive ? "page" : undefined}
                   className={cn(
                     "text-[24px] font-[600] tracking-[3px] uppercase transition-all duration-300",
                     isActive
@@ -471,8 +473,18 @@ export default function Navbar() {
         {sectionIds.map((section) => (
           <div
             key={section}
+            role="button"
+            tabIndex={0}
+            aria-label={`Navigate to ${section}`}
+            aria-current={activeSection === section ? "page" : undefined}
             className={`side-nav-item ${activeSection === section ? 'active' : ''}`}
             onClick={() => handleNav(`#${section}`)}
+            onKeyDown={(e: React.KeyboardEvent) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleNav(`#${section}`);
+              }
+            }}
           >
             <span className="side-nav-label">{section}</span>
             <div className="side-nav-dot">

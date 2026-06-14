@@ -49,7 +49,7 @@ export async function getGithubRepos(): Promise<GithubRepo[]> {
       return repo;
     });
 
-    let sortedRepos = repos.filter((r) => !r.fork).sort(
+    const sortedRepos = repos.filter((r) => !r.fork).sort(
       (a, b) => b.stargazers_count - a.stargazers_count
     );
 

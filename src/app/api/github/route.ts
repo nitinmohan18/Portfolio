@@ -9,7 +9,7 @@ export async function GET() {
     ]);
     
     return NextResponse.json({ user, repos });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch GitHub data" },
       { status: 500 }

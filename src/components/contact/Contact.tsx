@@ -38,7 +38,7 @@ const contactKeyframes = `
    Contact Info Data
    ═══════════════════════════════════════════════ */
 const contactInfo: Array<{
-  icon: any;
+  icon: React.ElementType;
   label: string;
   value: string;
   href?: string;
@@ -70,23 +70,6 @@ const contactInfo: Array<{
 /* ═══════════════════════════════════════════════
    Framer Motion Variants
    ═══════════════════════════════════════════════ */
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
-};
-
-const fadeUpItem = {
-  hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
-  },
-};
 
 /* ═══════════════════════════════════════════════
    Orbital Element
@@ -189,7 +172,7 @@ function OrbitalElement() {
    Info Card Sub-Component
    ═══════════════════════════════════════════════ */
 interface InfoCardProps {
-  icon: typeof Mail;
+  icon: React.ElementType;
   label: string;
   value: string;
   subText?: string;
@@ -201,11 +184,6 @@ interface InfoCardProps {
 function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "text-cyan-400 group-hover:text-cyan-300", index }: InfoCardProps) {
   const [copied, setCopied] = useState(false);
   const isPurple = iconColorClass.includes("purple");
-  const borderColor = isPurple ? "border-purple-500/60 group-hover:border-purple-500/90" : "border-cyan-400/60 group-hover:border-cyan-400/90";
-  const bgColor = isPurple ? "bg-purple-500/10 group-hover:bg-purple-500/20" : "bg-cyan-400/10 group-hover:bg-cyan-400/20";
-  
-  // Subtle inline glow
-  const glowColor = isPurple ? "rgba(168,85,247,0.25)" : "rgba(34,211,238,0.25)";
 
   const handleCopy = (e: React.MouseEvent) => {
     if (label === "EMAIL") {
@@ -307,7 +285,7 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
   );
 
   const sharedClasses =
-    "block w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 rounded-2xl cursor-pointer";
+    "block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 rounded-2xl cursor-pointer";
 
   return (
     <motion.div
@@ -335,14 +313,25 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
       className="rounded-2xl"
     >
       {href ? (
-        <a 
-          href={href} 
-          onClick={handleCopy}
-          className={sharedClasses}
-          {...(!href.startsWith("mailto:") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-        >
-          {inner}
-        </a>
+        href.startsWith("mailto:") ? (
+          <button 
+            onClick={handleCopy}
+            className={sharedClasses}
+            aria-label={`Copy ${label} to clipboard`}
+          >
+            {inner}
+          </button>
+        ) : (
+          <a 
+            href={href} 
+            onClick={handleCopy}
+            className={sharedClasses}
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            {inner}
+          </a>
+        )
       ) : (
         <div className={sharedClasses}>{inner}</div>
       )}
@@ -368,7 +357,7 @@ export default function Contact() {
           {/* ═══ Left Column ═══ */}
           <div className="flex flex-col justify-center">
             {/* Section Label */}
-            <div style={{ transform: "translate(-60px, -100px)", perspective: 800 }}>
+            <div className="-translate-x-4 -translate-y-6 md:-translate-x-[60px] md:-translate-y-[100px]" style={{ perspective: 800 }}>
               <motion.div 
                 initial={{ opacity: 0, z: -100, rotateX: 45, filter: "blur(10px)" }}
                 whileInView={{ opacity: 1, z: 0, rotateX: 0, filter: "blur(0px)" }}
@@ -413,7 +402,7 @@ export default function Contact() {
             </div>
 
             {/* Main Heading */}
-            <div style={{ transform: "translateY(-76px)", perspective: 1200 }}>
+            <div className="-translate-y-8 md:-translate-y-[76px]" style={{ perspective: 1200 }}>
               <h2 className="font-display text-[clamp(1.5rem,3vw,2.7rem)] font-extrabold leading-[1.15] tracking-tight text-white flex flex-col items-start">
                 <motion.span
                   initial={{ opacity: 0, rotateX: 90, y: 40, filter: "blur(12px)", scale: 0.9 }}
@@ -424,7 +413,7 @@ export default function Contact() {
                 >
                   Let&apos;s build something
                 </motion.span>
-                <div style={{ transform: "translateY(-5px)", display: "inline-block", perspective: 1200 }}>
+                <div className="-translate-y-1 inline-block" style={{ perspective: 1200 }}>
                   <motion.span 
                     initial={{ opacity: 0, rotateX: -90, y: -40, filter: "blur(12px) brightness(2) drop-shadow(0 0 20px rgba(168,85,247,0.8))", scale: 1.1 }}
                     whileInView={{ opacity: 1, rotateX: 0, y: 0, filter: "blur(0px) brightness(1.2) drop-shadow(0 0 8px rgba(168,85,247,0.3))", scale: 1 }}
@@ -439,7 +428,7 @@ export default function Contact() {
             </div>
 
             {/* Supporting Text & Badges */}
-            <div className="mt-5 flex flex-col gap-5" style={{ transform: "translateY(-60px)", perspective: 800 }}>
+            <div className="mt-5 flex flex-col gap-5 -translate-y-6 md:-translate-y-[60px]" style={{ perspective: 800 }}>
               <motion.p 
                 initial={{ opacity: 0, z: -50, rotateX: -30, filter: "blur(8px)" }}
                 whileInView={{ opacity: 1, z: 0, rotateX: 0, filter: "blur(0px)" }}
@@ -502,7 +491,7 @@ export default function Contact() {
             </div>
 
             {/* ── Info Cards ── */}
-            <div className="relative mt-10 flex flex-col gap-5" style={{ transform: "translateY(-10px)" }}>
+            <div className="relative mt-10 flex flex-col gap-5 -translate-y-2">
               
               {/* ── Structured Futuristic Connecting Line ── */}
               <div 

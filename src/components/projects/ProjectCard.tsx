@@ -1,8 +1,7 @@
 "use client";
-
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from "framer-motion";
-import { ExternalLink, Star, GitFork, Circle } from "lucide-react";
+import { ExternalLink, Star, GitFork } from "lucide-react";
 import { Github } from "@/components/ui/Icons";
 import type { GithubRepo } from "@/types/project";
 
@@ -33,7 +32,7 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
   const mouseY = useMotionValue(0);
   const spotlight = useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, rgba(${cat.rgb}, 0.15), transparent 80%)`;
 
-  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMove = React.useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const r = cardRef.current.getBoundingClientRect();
     x.set((e.clientX - r.left - r.width / 2) / r.width);
@@ -41,45 +40,52 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
     
     mouseX.set(e.clientX - r.left);
     mouseY.set(e.clientY - r.top);
-  };
+  }, [x, y, mouseX, mouseY]);
 
-  const isEven = index % 2 === 0;
-  const startAngle = isEven ? -(25 + index * 1.5) : (25 + index * 1.5);
-  
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      x: isEven ? 200 : -200,
-      y: 220,
-      rotateZ: startAngle,
-      rotateX: 50,
-      rotateY: isEven ? 30 : -30,
-      scale: 0.65,
-      z: -200,
-      filter: "blur(12px)",
-    },
-    show: {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      rotateZ: 0,
-      rotateX: 0,
-      rotateY: 0,
-      scale: 1,
-      z: 0,
-      filter: "blur(0px)",
-      transition: {
-        duration: 1.4,
-        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+  const handleMouseLeave = React.useCallback(() => {
+    x.set(0); 
+    y.set(0);
+  }, [x, y]);
+
+  const cardVariants = React.useMemo(() => {
+    const isEven = index % 2 === 0;
+    const startAngle = isEven ? -(25 + index * 1.5) : (25 + index * 1.5);
+    
+    return {
+      hidden: {
+        opacity: 0,
+        x: isEven ? 200 : -200,
+        y: 220,
+        rotateZ: startAngle,
+        rotateX: 50,
+        rotateY: isEven ? 30 : -30,
+        scale: 0.65,
+        z: -200,
+        filter: "blur(12px)",
       },
-    },
-  };
+      show: {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        rotateZ: 0,
+        rotateX: 0,
+        rotateY: 0,
+        scale: 1,
+        z: 0,
+        filter: "blur(0px)",
+        transition: {
+          duration: 1.4,
+          ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+        },
+      },
+    };
+  }, [index]);
 
   return (
     <motion.div
       ref={cardRef}
       onMouseMove={handleMove}
-      onMouseLeave={() => { x.set(0); y.set(0); }}
+      onMouseLeave={handleMouseLeave}
       variants={cardVariants}
       whileHover={{ scale: 1.02, y: -5 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -90,7 +96,7 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
       <div
         className="relative flex flex-col flex-1 rounded-[24px] border transition-all duration-500 group-hover:border-opacity-100"
         style={{
-          padding: "3rem",
+          padding: "clamp(1.5rem, 5vw, 3rem)",
           background: "linear-gradient(165deg, #131824 0%, #05070a 100%)", // Fully solid matte dark finish
           borderColor: `rgba(${cat.rgb}, 0.25)`,
           boxShadow: `inset 0 2px 2px rgba(255, 255, 255, 0.05), inset 0 -4px 12px rgba(0, 0, 0, 0.8), 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 40px rgba(${cat.rgb}, 0.1)`,

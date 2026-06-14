@@ -1,10 +1,6 @@
-"use client";
-import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import PagePreloader from "@/components/ui/PagePreloader";
 import Navbar from "@/components/layout/Navbar";
 import ScrollToTop from "@/components/ui/ScrollToTop";
-
+import FooterBorder from "@/components/layout/FooterBorder";
 import Hero from "@/components/hero/Hero";
 import ParallaxStarsBackground from "@/components/hero/ParallaxStarsBackground";
 import About from "@/components/about/About";
@@ -13,36 +9,16 @@ import Projects from "@/components/projects/Projects";
 
 import Certifications from "@/components/certifications/Certifications";
 import Contact from "@/components/contact/Contact";
+import ClientLayout from "@/components/layout/ClientLayout";
 
 export default function Home() {
-  const [showContent, setShowContent] = useState(false);
-  const [showPreloader, setShowPreloader] = useState(true);
-
-  useEffect(() => {
-    // Skip on subsequent visits this session
-    if (sessionStorage.getItem("visited") === "1") {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setShowPreloader(false);
-      setShowContent(true);
-    }
-  }, []);
-
-  const handlePreloaderComplete = () => {
-    sessionStorage.setItem("visited", "1");
-    setShowContent(true);
-    setTimeout(() => setShowPreloader(false), 500); // let overlay fade
-  };
-
   return (
-    <>
-      <AnimatePresence>
-        {showPreloader && <PagePreloader onComplete={handlePreloaderComplete} />}
-      </AnimatePresence>
+    <ClientLayout>
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
         <main className="relative z-[1] flex-1 w-full flex flex-col gap-0">
           <ParallaxStarsBackground />
-          <Hero isVisible={showContent} />
+          <Hero />
           <div className="section-divider" />
           <About />
           <div className="section-divider" />
@@ -53,23 +29,15 @@ export default function Home() {
 
           <Certifications />
           <div className="section-divider" />
-          <div className="pb-16 pb-24">
+          <div className="pb-24">
             <Contact />
           </div>
 
           {/* Absolute Bottom Footer Border */}
-          <motion.div 
-            animate={{ backgroundPosition: ["0% center", "200% center"] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            style={{
-              background: "linear-gradient(90deg, transparent 0%, rgba(34,211,238,0.8) 50%, transparent 100%)",
-              backgroundSize: "200% auto"
-            }}
-            className="absolute bottom-0 left-0 right-0 h-[2px] shadow-[0_-2px_15px_rgba(34,211,238,0.6)]"
-          />
+          <FooterBorder />
         </main>
       </div>
       <ScrollToTop />
-    </>
+    </ClientLayout>
   );
 }

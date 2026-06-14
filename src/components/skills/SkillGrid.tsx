@@ -1,8 +1,8 @@
 "use client";
-
+import React from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { skillGroups } from "@/data/skills";
-import type { Skill } from "@/types/skill";
+import type { Skill } from "@/data/skills";
 import Image from "next/image";
 
 export default function SkillGrid() {
@@ -30,7 +30,7 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["6deg", "-6deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-6deg", "6deg"]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleMouseMove = React.useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -40,14 +40,14 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
     const yPct = mouseY / height - 0.5;
     x.set(xPct);
     y.set(yPct);
-  };
+  }, [x, y]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = React.useCallback(() => {
     x.set(0);
     y.set(0);
-  };
+  }, [x, y]);
 
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+  const handleTouchMove = React.useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -58,7 +58,7 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
     const yPct = touchY / height - 0.5;
     x.set(xPct);
     y.set(yPct);
-  };
+  }, [x, y]);
 
   return (
     <motion.div
@@ -72,7 +72,6 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
         rotateX,
         rotateY,
         transformStyle: "preserve-3d",
-        willChange: "transform, opacity, filter",
         background: "linear-gradient(180deg, #1e2536 0%, #070a12 100%)",
         boxShadow: "0 12px 24px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.6), inset 0 2px 2px rgba(255,255,255,0.15), inset 0 -4px 8px rgba(0,0,0,0.9)",
       }}
@@ -146,7 +145,6 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
       className={`relative flex items-center gap-3 p-2.5 rounded-[12px] border transition-all duration-300 group/skill cursor-pointer hover:border-[${glowColor}]/50 ${isSingle ? 'py-5 justify-center' : ''} ${className}`}
       style={{ 
         transformStyle: "preserve-3d", 
-        willChange: "transform, opacity, filter",
         background: "linear-gradient(145deg, rgba(16, 22, 38, 0.7), rgba(8, 10, 16, 0.95))",
         borderColor: "rgba(255,255,255,0.1)",
         boxShadow: "inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -2px 4px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.3)"
