@@ -1,8 +1,9 @@
 "use client";
 
 
-import { motion } from "framer-motion";
-import { Mail, MapPin, FileText } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, MapPin, FileText, Check } from "lucide-react";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import ContactForm from "./ContactForm";
 import SocialLinks from "./SocialLinks";
@@ -42,9 +43,8 @@ const contactInfo = [
   {
     icon: FileText,
     label: "RESUME",
-    value: "View My Resume",
+    value: "Professional Highlights",
     href: profile.resumeUrl || "/resume.pdf",
-    subText: "Grab a copy of my CV",
     iconColorClass: "text-purple-500 group-hover:text-purple-400",
   },
   {
@@ -52,14 +52,12 @@ const contactInfo = [
     label: "EMAIL",
     value: "mohannitin494@gmail.com",
     href: `mailto:mohannitin494@gmail.com`,
-    subText: "Drop me an email anytime",
     iconColorClass: "text-cyan-400 group-hover:text-cyan-300",
   },
   {
     icon: MapPin,
     label: "LOCATION",
     value: "Bhopal, Madhya Pradesh, India",
-    subText: "Available for local & remote work",
     iconColorClass: "text-cyan-400 group-hover:text-cyan-300",
   },
 ];
@@ -195,6 +193,7 @@ interface InfoCardProps {
 }
 
 function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "text-cyan-400 group-hover:text-cyan-300", index }: InfoCardProps) {
+  const [copied, setCopied] = useState(false);
   const isPurple = iconColorClass.includes("purple");
   const borderColor = isPurple ? "border-purple-500/60 group-hover:border-purple-500/90" : "border-cyan-400/60 group-hover:border-cyan-400/90";
   const bgColor = isPurple ? "bg-purple-500/10 group-hover:bg-purple-500/20" : "bg-cyan-400/10 group-hover:bg-cyan-400/20";
@@ -202,38 +201,97 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
   // Subtle inline glow
   const glowColor = isPurple ? "rgba(168,85,247,0.25)" : "rgba(34,211,238,0.25)";
 
+  const handleCopy = (e: React.MouseEvent) => {
+    if (label === "EMAIL") {
+      e.preventDefault();
+      navigator.clipboard.writeText(value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
   const inner = (
-    <div className="flex items-start gap-5">
-      {/* Circular icon with opaque background to block line */}
+    <div className="relative group/card flex items-center gap-6 w-full">
+      {/* Futuristic Icon Container (The Node) */}
       <div 
-        className={cn("relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-500 z-10", borderColor, bgColor, iconColorClass)} 
-        style={{ 
-          backgroundColor: "rgba(5, 8, 15, 1)", 
-          boxShadow: `0 0 14px ${glowColor}, inset 0 0 8px ${glowColor}`
-        }}
+        className={cn(
+          "relative flex h-14 w-14 shrink-0 items-center justify-center rounded-[14px] border transition-all duration-500 z-10 shadow-lg",
+          isPurple ? "border-purple-500/30 bg-[#05080F] shadow-[0_0_20px_rgba(168,85,247,0.2),inset_0_0_10px_rgba(168,85,247,0.1)] group-hover/card:border-purple-500/60 group-hover/card:shadow-[0_0_30px_rgba(168,85,247,0.3),inset_0_0_15px_rgba(168,85,247,0.2)]" : "border-cyan-400/30 bg-[#05080F] shadow-[0_0_20px_rgba(34,211,238,0.2),inset_0_0_10px_rgba(34,211,238,0.1)] group-hover/card:border-cyan-400/60 group-hover/card:shadow-[0_0_30px_rgba(34,211,238,0.3),inset_0_0_15px_rgba(34,211,238,0.2)]",
+          iconColorClass.replace("group-hover:", "group-hover/card:")
+        )} 
       >
-        <Icon size={22} strokeWidth={2.5} />
+        <AnimatePresence mode="wait">
+          {copied ? (
+            <motion.div
+              key="check"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              className="text-emerald-400"
+            >
+              <Check size={24} strokeWidth={3} />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="icon"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+            >
+              <Icon size={24} strokeWidth={2.5} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
-      {/* Text Stack */}
-      <div className="flex flex-col justify-center pt-0.5">
-        <p className="font-mono text-[12px] font-bold tracking-[0.2em] text-white/60 transition-colors duration-300 group-hover:text-white/80">
-          {label}
-        </p>
-        <p className="mt-1 text-[16px] font-medium text-white/90 transition-colors duration-300 group-hover:text-white">
-          {value}
-        </p>
-        {subText && (
-          <p className="mt-0.5 text-[12px] text-white/40 transition-colors duration-300 group-hover:text-white/60">
-            {subText}
+      {/* Glassmorphic Text Panel */}
+      <div className={cn(
+        "flex-1 relative overflow-hidden rounded-2xl border py-5 px-6 sm:px-8 transition-all duration-500 flex flex-col justify-center",
+        isPurple 
+          ? "border-purple-500/10 bg-purple-500/[0.02] group-hover/card:border-purple-500/30 group-hover/card:bg-purple-500/[0.05] group-hover/card:shadow-[0_0_30px_rgba(168,85,247,0.15),inset_0_1px_3px_rgba(255,255,255,0.05)]" 
+          : "border-cyan-400/10 bg-cyan-400/[0.02] group-hover/card:border-cyan-400/30 group-hover/card:bg-cyan-400/[0.05] group-hover/card:shadow-[0_0_30px_rgba(34,211,238,0.15),inset_0_1px_3px_rgba(255,255,255,0.05)]"
+      )}>
+        {/* Animated gradient background sweep on hover */}
+        <div 
+          className={cn(
+            "absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/card:opacity-100 pointer-events-none",
+            isPurple ? "bg-[radial-gradient(400px_circle_at_0%_50%,rgba(168,85,247,0.08),transparent)]" : "bg-[radial-gradient(400px_circle_at_0%_50%,rgba(34,211,238,0.08),transparent)]"
+          )} 
+        />
+
+        {/* Text Stack */}
+        <div className="relative z-10 w-full pr-8">
+          <div className="flex items-center gap-3">
+            <p className="font-mono text-[11px] sm:text-[12px] font-bold tracking-[0.2em] text-white/50 transition-colors duration-300 group-hover/card:text-white/80 uppercase">
+              {label}
+            </p>
+            {copied && (
+              <span className="text-[11px] font-semibold text-emerald-400 uppercase tracking-wider drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]">Copied!</span>
+            )}
+          </div>
+          <p className="mt-1.5 text-[16px] sm:text-[17px] font-semibold text-white/90 transition-colors duration-300 group-hover/card:text-white">
+            {value}
           </p>
-        )}
+          {subText && (
+            <p className="mt-1.5 text-[13px] text-white/50 transition-colors duration-300 group-hover/card:text-white/70 leading-relaxed">
+              {subText}
+            </p>
+          )}
+        </div>
+        
+        {/* Decorative trailing arrow on hover */}
+        <div className={cn(
+          "absolute right-6 top-1/2 -translate-y-1/2 opacity-0 translate-x-4 transition-all duration-500 group-hover/card:opacity-100 group-hover/card:translate-x-0 hidden sm:block",
+          isPurple ? "text-purple-400/50" : "text-cyan-400/50"
+        )}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </div>
       </div>
     </div>
   );
 
   const sharedClasses =
-    "group flex items-center transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50";
+    "block w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 rounded-2xl cursor-pointer";
 
   return (
     <motion.div
@@ -249,6 +307,7 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
       {href ? (
         <a 
           href={href} 
+          onClick={handleCopy}
           className={sharedClasses}
           {...(!href.startsWith("mailto:") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         >
@@ -318,33 +377,68 @@ export default function Contact() {
               </span>
             </h2>
 
-            {/* Supporting Text */}
-            <p className="mt-5 max-w-lg text-[16px] md:text-[18px] leading-[1.6] text-white/70" style={{ transform: "translateY(-60px)" }}>
-              Open to internships, freelance projects, and full-time roles — bringing full-stack development skills with a growing foundation in AI/ML.
-            </p>
+            {/* Supporting Text & Badges */}
+            <div className="mt-5 flex flex-col gap-5" style={{ transform: "translateY(-40px)" }}>
+              <p className="max-w-lg text-[16px] md:text-[18px] leading-[1.6] text-white/70">
+                Open to internships, freelance projects, and full-time roles.
+              </p>
+              
+              <div className="flex flex-wrap gap-4 mt-2">
+                {/* Full-Stack Developer Badge */}
+                <div className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-cyan-400/20 bg-[rgba(8,12,24,0.65)] px-4 py-2 shadow-[inset_0_1px_3px_rgba(34,211,238,0.1),0_0_15px_rgba(34,211,238,0.05)] backdrop-blur-md transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[inset_0_1px_5px_rgba(34,211,238,0.2),0_0_20px_rgba(34,211,238,0.15)] cursor-default">
+                  {/* Glowing dot */}
+                  <span className="relative flex h-2 w-2 shrink-0">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-50" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(34,211,238,0.8)]" />
+                  </span>
+                  <span className="font-mono text-[11px] font-bold tracking-[0.15em] text-cyan-300 uppercase drop-shadow-[0_0_8px_rgba(34,211,238,0.3)]">
+                    Full-Stack Developer
+                  </span>
+                  {/* Hover Sweep */}
+                  <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent transition-transform duration-700 group-hover:translate-x-[150%]" />
+                </div>
+
+                {/* AI/ML Badge */}
+                <div className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-purple-500/20 bg-[rgba(8,12,24,0.65)] px-4 py-2 shadow-[inset_0_1px_3px_rgba(168,85,247,0.1),0_0_15px_rgba(168,85,247,0.05)] backdrop-blur-md transition-all duration-300 hover:border-purple-500/40 hover:shadow-[inset_0_1px_5px_rgba(168,85,247,0.2),0_0_20px_rgba(168,85,247,0.15)] cursor-default">
+                  {/* Glowing dot */}
+                  <span className="relative flex h-2 w-2 shrink-0">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-purple-500 opacity-50" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-purple-500 shadow-[0_0_6px_rgba(168,85,247,0.8)]" />
+                  </span>
+                  <span className="font-mono text-[11px] font-bold tracking-[0.15em] text-purple-300 uppercase drop-shadow-[0_0_8px_rgba(168,85,247,0.3)]">
+                    AI/ML
+                  </span>
+                  {/* Hover Sweep */}
+                  <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-purple-500/10 to-transparent transition-transform duration-700 group-hover:translate-x-[150%]" />
+                </div>
+              </div>
+            </div>
 
             {/* ── Info Cards ── */}
-            <div className="relative mt-10 flex flex-col gap-8" style={{ transform: "translateY(-10px)" }}>
-              {/* Vertical connecting line */}
+            <div className="relative mt-10 flex flex-col gap-5" style={{ transform: "translateY(-10px)" }}>
+              
+              {/* ── Structured Futuristic Connecting Line ── */}
               <div 
-                className="absolute top-10 bottom-10 z-0 w-[2px] overflow-hidden rounded-full" 
+                className="absolute z-0 w-[2px] overflow-hidden rounded-full" 
                 style={{ 
-                  left: "23px", 
-                  background: "linear-gradient(to bottom, rgba(34,211,238,0.15), rgba(168,85,247,0.15), transparent)" 
+                  top: "35px", 
+                  bottom: "35px",
+                  left: "27px", 
+                  background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.06) 10%, rgba(255,255,255,0.06) 90%, transparent)",
                 }}
               >
-                {/* Moving futuristic data particle */}
+                {/* Moving glowing core */}
                 <div
                   className="absolute left-0 w-full"
                   style={{ 
-                    height: "100px", 
-                    background: "linear-gradient(to bottom, transparent, rgba(34,211,238,0.9), rgba(168,85,247,0.6), transparent)",
-                    boxShadow: "0 0 15px 2px rgba(34,211,238,0.6)",
-                    animation: "contact-line-flow 3.5s linear infinite"
+                    height: "80px", 
+                    background: "linear-gradient(to bottom, transparent, rgba(34,211,238,0.8), rgba(168,85,247,0.8), transparent)",
+                    boxShadow: "0 0 10px 2px rgba(34,211,238,0.4)",
+                    animation: "contact-line-flow 4s linear infinite"
                   }}
                 />
               </div>
-              
+
               {contactInfo.map((info, index) => (
                 <InfoCard
                   key={info.label}
@@ -357,13 +451,6 @@ export default function Contact() {
                   index={index}
                 />
               ))}
-            </div>
-
-            {/* Subtle left-side visual element */}
-            <div className="absolute -left-20 top-20 -z-10 hidden opacity-30 blur-[2px] lg:block">
-              <div className="h-[200px] w-[200px] rounded-full border border-cyan-400/20" />
-              <div className="absolute inset-4 rounded-full border border-blue-400/20 border-dashed" />
-              <div className="absolute inset-8 rounded-full border border-teal-400/10" />
             </div>
           </motion.div>
 
