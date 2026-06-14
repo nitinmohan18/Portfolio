@@ -82,85 +82,113 @@ export default function HeroButtons() {
         }
 
         .btn-secondary {
-          border: 1px solid rgba(34,211,238,0.35);
-          color: #22d3ee;
-          background: transparent;
+          position: relative;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(34, 211, 238, 0.25);
+          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), inset 0 -1px 2px rgba(0, 0, 0, 0.3), 0 4px 10px rgba(0, 0, 0, 0.2);
+          backdrop-filter: blur(8px);
           padding: 14px 28px;
-          border-radius: 8px;
-          transition: all 0.3s ease;
-          font-weight: 600;
+          border-radius: 12px;
+          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+          color: #22d3ee;
+          font-weight: 700;
           font-size: 15px;
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 10px;
           cursor: pointer;
           user-select: none;
+          overflow: hidden;
+        }
+        .btn-secondary::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 12px;
+          background: linear-gradient(105deg, transparent, rgba(34, 211, 238, 0.05), transparent);
+          transform: translateX(-150%) skewX(-15deg);
+          transition: transform 0.6s ease;
+          pointer-events: none;
         }
         .btn-secondary:hover {
-          background: rgba(34,211,238,0.07);
-          border-color: rgba(34,211,238,0.7);
-          box-shadow: 0 0 16px rgba(34,211,238,0.15);
-          transform: translateY(-3px);
+          background: rgba(34, 211, 238, 0.06);
+          border-color: rgba(34, 211, 238, 0.6);
+          box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -2px 4px rgba(0, 0, 0, 0.5), 0 10px 20px -5px rgba(0, 0, 0, 0.4), 0 0 20px rgba(34, 211, 238, 0.15);
+          transform: translateY(-4px) scale(1.02);
+          text-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
         }
-        .btn-secondary .mail-icon {
-          transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        .btn-secondary:hover::before {
+          transform: translateX(200%) skewX(-15deg);
         }
-        .btn-secondary:hover .mail-icon {
-          transform: rotate(15deg);
+        .btn-secondary .mail-icon,
+        .btn-secondary svg {
+          transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+          filter: drop-shadow(0 0 2px rgba(34, 211, 238, 0.3));
+        }
+        .btn-secondary:hover .mail-icon,
+        .btn-secondary:hover svg {
+          transform: rotate(15deg) scale(1.1);
+          filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.6));
         }
         .btn-secondary:active {
-          transform: translateY(-1px) scale(0.98);
+          transform: translateY(1px) scale(0.97);
+          box-shadow: inset 0 2px 6px rgba(0,0,0,0.6), inset 0 1px 2px rgba(0,0,0,0.4), 0 0 0 rgba(34,211,238,0);
         }
 
         .social-icon-btn {
           position: relative;
           overflow: visible;
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.1);
+          background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+          border: 1px solid rgba(255,255,255,0.08);
+          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
+          backdrop-filter: blur(8px);
           border-radius: 50%;
           width: 44px;
           height: 44px;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
           color: #fff;
           cursor: pointer;
           user-select: none;
         }
         .social-icon-btn .icon-inner {
-          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .social-icon-btn:hover {
+          transform: translateY(-4px) scale(1.05);
         }
         .social-icon-btn.github:hover {
-          background: rgba(255,255,255,0.05);
+          background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(140, 120, 255, 0.05));
           border-color: rgba(140, 120, 255, 0.5);
-          box-shadow: 0 0 18px rgba(140, 120, 255, 0.25);
+          box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4), 0 0 18px rgba(140, 120, 255, 0.25);
           color: #ffffff;
         }
         .social-icon-btn.linkedin:hover {
-          background: rgba(10,102,194,0.1);
+          background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(10,102,194,0.05));
           border-color: #0A66C2;
-          box-shadow: 0 0 18px rgba(10,102,194,0.3);
+          box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4), 0 0 18px rgba(10,102,194,0.3);
           color: #0A66C2;
         }
         .social-icon-btn.instagram:hover {
-          background: rgba(225,48,108,0.1);
+          background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(225,48,108,0.05));
           border-color: #E1306C;
-          box-shadow: 0 0 18px rgba(225,48,108,0.3);
+          box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4), 0 0 18px rgba(225,48,108,0.3);
           color: #E1306C;
         }
         .social-icon-btn.twitter:hover {
-          background: rgba(15, 15, 15, 0.85);
+          background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(15, 15, 15, 0.85));
           border-color: rgba(255, 255, 255, 0.35);
-          box-shadow: 0 0 18px rgba(255, 255, 255, 0.08), 
-                      0 0 30px rgba(0, 0, 0, 0.6);
+          box-shadow: inset 0 1px 2px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4), 0 0 18px rgba(255, 255, 255, 0.08), 0 0 30px rgba(0, 0, 0, 0.6);
           color: #e7e9ea;
         }
         .social-icon-btn:hover .icon-inner {
           transform: scale(1.18) rotate(-6deg);
         }
         .social-icon-btn:active {
-          transform: scale(0.97);
+          transform: translateY(-1px) scale(0.97);
+          box-shadow: inset 0 2px 4px rgba(0,0,0,0.6), inset 0 1px 2px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.2);
         }
       `}</style>
 

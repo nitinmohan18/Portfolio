@@ -159,7 +159,7 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           }
         }
         .stat-card {
-          background: rgba(13, 16, 28, 0.85);
+          background: linear-gradient(165deg, rgba(18, 22, 38, 0.85), rgba(8, 10, 16, 0.95));
           border: 1px solid rgba(255,255,255,0.06);
           border-radius: 14px;
           padding: 14px 14px;
@@ -167,7 +167,8 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           position: relative;
           overflow: hidden;
           cursor: default;
-          transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), inset 0 -2px 4px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.4);
+          transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
         }
         @media (max-width: 480px) {
           .stat-card {
@@ -175,13 +176,14 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           }
         }
         .stat-card:hover {
-          transform: translateY(-4px) scale(1.015);
+          transform: translateY(-5px) scale(1.02);
           border-color: var(--hover-border);
-          box-shadow: 0 12px 32px rgba(0,0,0,0.25), 0 0 16px var(--hover-glow);
-          transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+          box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.15), inset 0 -3px 6px rgba(0, 0, 0, 0.8), 0 16px 32px -4px rgba(0, 0, 0, 0.6), 0 0 20px var(--hover-glow);
+          transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
         }
         .stat-card:active {
-          transform: translateY(-2px) scale(0.99);
+          transform: translateY(-1px) scale(0.99);
+          box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.7), inset 0 1px 2px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.2);
           transition: all 0.15s ease;
         }
         .stat-card-top-line {
@@ -218,13 +220,15 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           background: var(--icon-bg);
           border: 1px solid var(--icon-border);
           color: var(--icon-color);
-          transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), inset 0 -1px 3px rgba(0, 0, 0, 0.4), 0 3px 6px rgba(0, 0, 0, 0.3);
+          transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
         }
         .stat-card:hover .stat-card-icon-box {
           background: var(--icon-bg-hover);
           border-color: var(--icon-border-hover);
-          transform: scale(1.08) rotate(-4deg);
-          transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+          transform: scale(1.1) rotate(-5deg);
+          box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.25), inset 0 -2px 4px rgba(0, 0, 0, 0.6), 0 6px 12px rgba(0, 0, 0, 0.4);
+          transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
         }
         .stat-card-label {
           font-size: 8px;
