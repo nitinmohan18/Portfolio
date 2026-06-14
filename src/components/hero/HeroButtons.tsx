@@ -63,8 +63,8 @@ export default function HeroButtons() {
         }
 
         .btn-secondary {
-          border: 1px solid rgba(100,255,218,0.35);
-          color: #64FFDA;
+          border: 1px solid rgba(34,211,238,0.35);
+          color: #22d3ee;
           background: transparent;
           padding: 14px 28px;
           border-radius: 8px;
@@ -78,9 +78,9 @@ export default function HeroButtons() {
           user-select: none;
         }
         .btn-secondary:hover {
-          background: rgba(100,255,218,0.07);
-          border-color: rgba(100,255,218,0.7);
-          box-shadow: 0 0 16px rgba(100,255,218,0.15);
+          background: rgba(34,211,238,0.07);
+          border-color: rgba(34,211,238,0.7);
+          box-shadow: 0 0 16px rgba(34,211,238,0.15);
           transform: translateY(-3px);
         }
         .btn-secondary .mail-icon {

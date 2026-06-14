@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function Skills() {
   return (
-    <SectionWrapper id="skills" className="!pt-20 md:!pt-28">
+    <SectionWrapper id="skills" className="w-full">
       <div className="flex flex-col gap-16 md:gap-20">
         
         {/* Custom Massive & Appealing Header */}

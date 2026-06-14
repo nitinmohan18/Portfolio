@@ -48,7 +48,7 @@ export default function Hero({ isVisible = true }: HeroProps) {
                 font-size: 9px;
                 letter-spacing: 4px;
                 text-transform: uppercase;
-                color: rgba(100,255,218,0.35);
+                color: rgba(34,211,238,0.35);
                 font-family: monospace;
                 animation: scrollTextPulse 2.5s ease-in-out infinite;
               }
@@ -57,11 +57,11 @@ export default function Hero({ isVisible = true }: HeroProps) {
                 50%       { opacity: 0.7; }
               }
               .scroll-mouse {
-                border-color: rgba(100,255,218,0.3);
+                border-color: rgba(34,211,238,0.3);
               }
               .scroll-dot {
-                background: #64FFDA;
-                box-shadow: 0 0 6px rgba(100,255,218,0.6);
+                background: #22d3ee;
+                box-shadow: 0 0 6px rgba(34,211,238,0.6);
               }
             `}</style>
             <motion.div

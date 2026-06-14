@@ -66,8 +66,8 @@ export default function About() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        minHeight: "100vh",
-        padding: "100px 80px 60px",
+        minHeight: "auto",
+        padding: "60px 4% 40px",
         position: "relative"
       }}
     >
@@ -167,9 +167,9 @@ export default function About() {
         }
 
         .badge-primary {
-          background: rgba(100,255,218,0.06);
-          border: 1px solid rgba(100,255,218,0.2);
-          color: rgba(100,255,218,0.9);
+          background: rgba(34,211,238,0.06);
+          border: 1px solid rgba(34,211,238,0.2);
+          color: rgba(34,211,238,0.9);
           padding: 8px 18px;
           border-radius: 20px;
           font-size: 12px;
@@ -181,7 +181,7 @@ export default function About() {
 
         .badge-primary::after {
           content: "";
-          background: linear-gradient(90deg, transparent, rgba(100,255,218,0.12), transparent);
+          background: linear-gradient(90deg, transparent, rgba(34,211,238,0.12), transparent);
           width: 60%;
           height: 100%;
           position: absolute;
@@ -191,9 +191,9 @@ export default function About() {
         }
 
         .badge-primary:hover {
-          background: rgba(100,255,218,0.12);
-          border-color: rgba(100,255,218,0.5);
-          box-shadow: 0 0 16px rgba(100,255,218,0.2), inset 0 0 12px rgba(100,255,218,0.05);
+          background: rgba(34,211,238,0.12);
+          border-color: rgba(34,211,238,0.5);
+          box-shadow: 0 0 16px rgba(34,211,238,0.2), inset 0 0 12px rgba(34,211,238,0.05);
           transform: translateY(-2px) scale(1.03);
         }
 
@@ -326,7 +326,7 @@ export default function About() {
                 color: "white" 
               }}
             >
-              AI & ML Student | <span style={{ color: "#64FFDA" }}>Full-Stack Developer</span>
+              AI & ML Student | <span style={{ color: "#22d3ee" }}>Full-Stack Developer</span>
             </h2>
           </motion.div>
 
@@ -382,7 +382,7 @@ export default function About() {
                   transition={{ type: "spring", stiffness: 200, damping: 12, delay: 0.6 + idx * 0.15 }}
                   className="flex items-center gap-[6px] badge-primary cursor-default"
                 >
-                  <span style={{ display: "flex", color: "rgba(100,255,218,0.9)" }}>{badge.icon}</span>
+                  <span style={{ display: "flex", color: "rgba(34,211,238,0.9)" }}>{badge.icon}</span>
                   {badge.title}
                 </motion.div>
               ))}
@@ -425,13 +425,13 @@ export default function About() {
             <motion.div 
               whileHover={{ 
                 scale: 1.05,
-                boxShadow: "0 0 24px rgba(100,255,218,0.4), inset 0 0 12px rgba(100,255,218,0.1)",
-                borderColor: "rgba(100,255,218,0.8)"
+                boxShadow: "0 0 24px rgba(34,211,238,0.4), inset 0 0 12px rgba(34,211,238,0.1)",
+                borderColor: "rgba(34,211,238,0.8)"
               }}
               className="relative overflow-hidden cursor-default group flex items-center gap-3"
               style={{
                 background: "linear-gradient(90deg, rgba(13,16,28,0.95), rgba(20,25,40,0.95))",
-                border: "1px solid rgba(100,255,218,0.3)",
+                border: "1px solid rgba(34,211,238,0.3)",
                 borderRadius: "12px",
                 padding: "10px 24px",
                 boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
@@ -442,22 +442,22 @@ export default function About() {
               <div 
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                 style={{
-                  background: "linear-gradient(90deg, transparent, rgba(100,255,218,0.1), transparent)",
+                  background: "linear-gradient(90deg, transparent, rgba(34,211,238,0.1), transparent)",
                   transform: "skewX(-20deg)",
                   animation: "shimmer 2s infinite"
                 }}
               />
               
-              <Sparkles size={16} className="text-[#64FFDA]" style={{ filter: "drop-shadow(0 0 8px rgba(100,255,218,0.8))" }} />
+              <Sparkles size={16} className="text-[#22d3ee]" style={{ filter: "drop-shadow(0 0 8px rgba(34,211,238,0.8))" }} />
               
               <span 
                 style={{
                   fontSize: "13px",
                   letterSpacing: "3.5px",
-                  color: "#64FFDA",
+                  color: "#22d3ee",
                   fontWeight: 700,
                   fontFamily: "monospace",
-                  textShadow: "0 0 10px rgba(100,255,218,0.5)"
+                  textShadow: "0 0 10px rgba(34,211,238,0.5)"
                 }}
               >
                 ACADEMIC JOURNEY
@@ -477,7 +477,7 @@ export default function About() {
                 top: "0px", // Starts exactly at the first thread
                 bottom: "0px", // Ends exactly at the bottom of the last card
                 background: "linear-gradient(180deg, rgba(52,211,153,0.6) 0%, rgba(56,189,248,0.6) 40%, rgba(129,140,248,0.6) 80%, transparent 100%)",
-                boxShadow: "0 0 8px rgba(100,255,218,0.2)",
+                boxShadow: "0 0 8px rgba(34,211,238,0.2)",
                 transformOrigin: "top"
               }}
               initial={{ scaleY: 0 }}
@@ -492,8 +492,8 @@ export default function About() {
               style={{ 
                 left: "-37px", 
                 marginTop: "-12px", // Center on coordinate
-                color: "#64FFDA",
-                filter: "drop-shadow(0 0 6px rgba(100,255,218,0.8))"
+                color: "#22d3ee",
+                filter: "drop-shadow(0 0 6px rgba(34,211,238,0.8))"
               }}
               initial={{ animation: "none" }}
               whileInView={{ animation: "smoothTravel 5s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards" }}
@@ -503,14 +503,14 @@ export default function About() {
                 <School size={16} />
               </div>
               <motion.div 
-                className="absolute rounded-full border border-[#64FFDA] opacity-0 z-0" 
+                className="absolute rounded-full border border-[#22d3ee] opacity-0 z-0" 
                 style={{ width: "24px", height: "24px" }} 
                 initial={{ animation: "none" }}
                 whileInView={{ animation: "nodeRing 5s linear 0.8s forwards" }}
                 viewport={{ once: true, margin: "-100px" }}
               />
               <motion.div 
-                className="absolute rounded-full border border-[#64FFDA] opacity-0 z-0" 
+                className="absolute rounded-full border border-[#22d3ee] opacity-0 z-0" 
                 style={{ width: "24px", height: "24px" }} 
                 initial={{ animation: "none" }}
                 whileInView={{ animation: "endPulseRing 2s ease-out 5.8s infinite" }}
@@ -523,7 +523,7 @@ export default function About() {
             const cardDelay = 0.5 + index * 0.2; // 0.5, 0.7, 0.9
 
             let threadHeight = "20px";
-            let threadGradient = "linear-gradient(180deg, rgba(100,255,218,0.5), rgba(52,211,153,0.3))";
+            let threadGradient = "linear-gradient(180deg, rgba(34,211,238,0.5), rgba(52,211,153,0.3))";
             
             if (index === 1) {
               threadHeight = "16px";

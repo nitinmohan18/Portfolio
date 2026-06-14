@@ -52,7 +52,7 @@ export default function TypingText() {
           width: 4px;
           height: 4px;
           border-radius: 50%;
-          background: #64FFDA;
+          background: #22d3ee;
           will-change: transform, opacity;
         }
         .cursor-dot:nth-child(1) { animation: dotPulse 1.2s ease-in-out infinite 0s; }

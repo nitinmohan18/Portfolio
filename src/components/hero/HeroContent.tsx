@@ -95,12 +95,12 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         .hey-line-left {
           width: 40px;
           height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(100,255,218,0.35));
+          background: linear-gradient(90deg, transparent, rgba(34,211,238,0.35));
         }
         .hey-line-right {
           width: 40px;
           height: 1px;
-          background: linear-gradient(90deg, rgba(100,255,218,0.35), transparent);
+          background: linear-gradient(90deg, rgba(34,211,238,0.35), transparent);
         }
         .bio-text {
           font-size: clamp(13px, 1.1vw, 15px);
@@ -121,11 +121,11 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         @keyframes floatCyan {
           0%, 100% { 
             transform: translateY(0);
-            text-shadow: 0 0 20px rgba(100,255,218,0);
+            text-shadow: 0 0 20px rgba(34,211,238,0);
           }
           50% { 
             transform: translateY(-3px);
-            text-shadow: 0 0 30px rgba(100,255,218,0.35);
+            text-shadow: 0 0 30px rgba(34,211,238,0.35);
           }
         }
         .name-first {
@@ -137,7 +137,7 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           display: inline-block;
           animation: floatCyan 4s ease-in-out infinite;
           animation-delay: 2s;
-          color: #64FFDA;
+          color: #22d3ee;
           margin-left: 0.3em;
         }
         /* Removed hero-name and hero-bio to rely on framer-motion */

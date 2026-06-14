@@ -34,7 +34,7 @@ interface FieldFrameProps {
   id: string;
   label: string;
   error?: string;
-  icon?: ComponentType<{ size?: number; className?: string }>;
+  icon?: ComponentType<{ size?: number; className?: string; style?: React.CSSProperties }>;
   children: ReactNode;
 }
 

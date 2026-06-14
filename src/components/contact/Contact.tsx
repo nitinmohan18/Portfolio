@@ -39,7 +39,14 @@ const contactKeyframes = `
 /* ═══════════════════════════════════════════════
    Contact Info Data
    ═══════════════════════════════════════════════ */
-const contactInfo = [
+const contactInfo: Array<{
+  icon: any;
+  label: string;
+  value: string;
+  href?: string;
+  iconColorClass: string;
+  subText?: string;
+}> = [
   {
     icon: FileText,
     label: "RESUME",

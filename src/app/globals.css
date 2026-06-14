@@ -292,9 +292,9 @@ section {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(100,255,218,0.08) 20%,
-    rgba(100,255,218,0.12) 50%,
-    rgba(100,255,218,0.08) 80%,
+    rgba(34,211,238,0.08) 20%,
+    rgba(34,211,238,0.12) 50%,
+    rgba(34,211,238,0.08) 80%,
     transparent 100%
   );
   margin: 0 auto;

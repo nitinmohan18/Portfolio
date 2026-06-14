@@ -385,7 +385,7 @@ export default function Certifications() {
   const ongoingCerts = certificationsData.filter((c) => c.status === "in-progress").length;
 
   return (
-    <SectionWrapper id="certifications" className="!py-16 lg:!py-24 w-full">
+    <SectionWrapper id="certifications" className="w-full">
       <div ref={sectionRef} className="w-full flex flex-col items-center px-4">
         {/* ── Header ── */}
         <motion.div

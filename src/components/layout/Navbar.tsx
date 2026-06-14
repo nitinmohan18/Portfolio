@@ -31,7 +31,7 @@ export default function Navbar() {
           50% { transform: scale(1.4); opacity: 0.4; }
         }
         .nm-logo {
-          background: linear-gradient(135deg, #64FFDA 0%, #6366f1 60%, #a855f7 100%);
+          background: linear-gradient(135deg, #22d3ee 0%, #6366f1 60%, #a855f7 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -40,14 +40,14 @@ export default function Navbar() {
           position: relative;
         }
         .nm-logo-container {
-          border: 1px solid rgba(100,255,218,0.3);
+          border: 1px solid rgba(34,211,238,0.3);
           border-radius: 6px;
           padding: 4px 8px;
           transition: all 0.3s ease;
         }
         .group:hover .nm-logo-container {
-          border-color: rgba(100,255,218,0.7);
-          box-shadow: 0 0 16px rgba(100,255,218,0.2);
+          border-color: rgba(34,211,238,0.7);
+          box-shadow: 0 0 16px rgba(34,211,238,0.2);
           transform: scale(1.05);
         }
         .nav-link-hover {
@@ -69,7 +69,7 @@ export default function Navbar() {
           left: 15%;
           right: 15%;
           height: 2px;
-          background: linear-gradient(90deg, #64FFDA, #7DD3FC);
+          background: linear-gradient(90deg, #22d3ee, #7DD3FC);
           transform: scaleX(0);
           transform-origin: left;
           transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -87,9 +87,9 @@ export default function Navbar() {
           gap: 10px;
           align-items: center;
           padding: 6px 12px;
-          border: 1px solid rgba(100,255,218,0.12);
+          border: 1px solid rgba(34,211,238,0.12);
           border-radius: 20px;
-          background: rgba(100,255,218,0.03);
+          background: rgba(34,211,238,0.03);
           position: relative;
         }
         .nav-social-icon {
@@ -111,11 +111,11 @@ export default function Navbar() {
           top: calc(100% + 8px);
           right: 0;
           background: rgba(10,12,20,0.95);
-          border: 1px solid rgba(100,255,218,0.2);
+          border: 1px solid rgba(34,211,238,0.2);
           border-radius: 8px;
           padding: 6px 12px;
           font-size: 11px;
-          color: #64FFDA;
+          color: #22d3ee;
           white-space: nowrap;
           opacity: 0;
           transform: translateY(-4px);
@@ -149,8 +149,8 @@ export default function Navbar() {
           background: linear-gradient(
             180deg,
             transparent 0%,
-            rgba(100,255,218,0.2) 20%,
-            rgba(100,255,218,0.2) 80%,
+            rgba(34,211,238,0.2) 20%,
+            rgba(34,211,238,0.2) 80%,
             transparent 100%
           );
           z-index: -1;
@@ -171,7 +171,7 @@ export default function Navbar() {
           font-weight: 600;
           letter-spacing: 2.5px;
           text-transform: uppercase;
-          color: rgba(100,255,218,0.0);
+          color: rgba(34,211,238,0.0);
           transform: translateX(6px);
           transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
           pointer-events: none;
@@ -181,7 +181,7 @@ export default function Navbar() {
         /* Label appears on hover OR active */
         .side-nav-item:hover .side-nav-label,
         .side-nav-item.active .side-nav-label {
-          color: rgba(100,255,218,0.7);
+          color: rgba(34,211,238,0.7);
           transform: translateX(0px);
         }
 
@@ -201,7 +201,7 @@ export default function Navbar() {
           width: 12px;
           height: 12px;
           border-radius: 50%;
-          border: 1px solid rgba(100,255,218,0.0);
+          border: 1px solid rgba(34,211,238,0.0);
           transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
         }
 
@@ -210,18 +210,18 @@ export default function Navbar() {
           width: 5px;
           height: 5px;
           border-radius: 50%;
-          background: rgba(100,255,218,0.25);
+          background: rgba(34,211,238,0.25);
           transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
         }
 
         /* HOVER STATE */
         .side-nav-item:hover .dot-core {
-          background: rgba(100,255,218,0.6);
+          background: rgba(34,211,238,0.6);
           transform: scale(1.2);
         }
 
         .side-nav-item:hover .dot-ring {
-          border-color: rgba(100,255,218,0.4);
+          border-color: rgba(34,211,238,0.4);
           transform: scale(1.3);
         }
 
@@ -229,15 +229,15 @@ export default function Navbar() {
         .side-nav-item.active .dot-core {
           width: 7px;
           height: 7px;
-          background: #64FFDA;
-          box-shadow: 0 0 8px rgba(100,255,218,0.8),
-                      0 0 16px rgba(100,255,218,0.4);
+          background: #22d3ee;
+          box-shadow: 0 0 8px rgba(34,211,238,0.8),
+                      0 0 16px rgba(34,211,238,0.4);
         }
 
         .side-nav-item.active .dot-ring {
           width: 14px;
           height: 14px;
-          border-color: rgba(100,255,218,0.5);
+          border-color: rgba(34,211,238,0.5);
           animation: ringPulse 2s ease-in-out infinite;
         }
 
@@ -255,7 +255,7 @@ export default function Navbar() {
 
         /* Active section label stays permanently visible */
         .side-nav-item.active .side-nav-label {
-          color: rgba(100,255,218,0.9);
+          color: rgba(34,211,238,0.9);
           transform: translateX(0);
         }
 
@@ -396,7 +396,7 @@ export default function Navbar() {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileOpen((v) => !v)}
-              className="md:hidden p-2 text-[rgba(100,255,218,0.7)] hover:text-[#64FFDA] transition-all duration-300 z-[1000] relative"
+              className="md:hidden p-2 text-[rgba(34,211,238,0.7)] hover:text-[#22d3ee] transition-all duration-300 z-[1000] relative"
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
             >
@@ -431,7 +431,7 @@ export default function Navbar() {
                     "text-[24px] font-[600] tracking-[3px] uppercase transition-all duration-300",
                     isActive
                       ? "text-[#7DD3FC] drop-shadow-[0_0_16px_rgba(125,211,252,0.8)] scale-105"
-                      : "text-[rgba(180,195,220,0.8)] hover:text-[#64FFDA] hover:drop-shadow-[0_0_20px_rgba(100,255,218,0.4)]"
+                      : "text-[rgba(180,195,220,0.8)] hover:text-[#22d3ee] hover:drop-shadow-[0_0_20px_rgba(34,211,238,0.4)]"
                   )}
                 >
                   {item.label}
@@ -452,7 +452,7 @@ export default function Navbar() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[rgba(180,195,220,0.8)] hover:text-[#64FFDA] transition-colors duration-300"
+                  className="text-[rgba(180,195,220,0.8)] hover:text-[#22d3ee] transition-colors duration-300"
                   aria-label={social.label}
                 >
                   <SocialIcon platform={social.platform} />
