@@ -7,9 +7,9 @@ import { Github } from "@/components/ui/Icons";
 import type { GithubRepo } from "@/types/project";
 
 const CATEGORY_MAP: Record<string, { label: string; color: string; rgb: string }> = {
-  python: { label: "AI PRODUCT", color: "#818cf8", rgb: "129,140,248" },
-  javascript: { label: "WEB EXPERIENCE", color: "#38bdf8", rgb: "56,189,248" },
-  typescript: { label: "WEB EXPERIENCE", color: "#38bdf8", rgb: "56,189,248" },
+  python: { label: "INTELLIGENT SYSTEMS", color: "#818cf8", rgb: "129,140,248" },
+  javascript: { label: "FULL-STACK APP", color: "#38bdf8", rgb: "56,189,248" },
+  typescript: { label: "FULL-STACK APP", color: "#38bdf8", rgb: "56,189,248" },
   default: { label: "OPEN SOURCE", color: "#34d399", rgb: "52,211,153" },
 };
 
@@ -116,25 +116,30 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
         />
 
         {/* Header row */}
-        <div className="flex items-start justify-between mb-4" style={{ transform: "translateZ(20px)" }}>
+        <div className="flex items-start justify-between mb-8" style={{ transform: "translateZ(20px)" }}>
           {/* Category + icon */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3.5">
             <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border"
+              className="w-10 h-10 rounded-[12px] flex items-center justify-center shrink-0 border relative overflow-hidden group-hover:scale-105 transition-transform duration-500"
               style={{
-                background: `rgba(${cat.rgb}, 0.1)`,
-                borderColor: `rgba(${cat.rgb}, 0.25)`,
+                background: `linear-gradient(145deg, rgba(${cat.rgb}, 0.2), rgba(${cat.rgb}, 0.05))`,
+                borderColor: `rgba(${cat.rgb}, 0.4)`,
                 color: cat.color,
+                boxShadow: `inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.5), 0 4px 12px rgba(${cat.rgb}, 0.3)`
               }}
             >
-              <Github size={16} />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `radial-gradient(circle at center, rgba(${cat.rgb}, 0.4), transparent)` }} />
+              <Github size={18} className="relative z-10" style={{ filter: `drop-shadow(0 0 6px rgba(${cat.rgb}, 0.8))` }} />
             </div>
             <div>
               <div
-                className="font-mono text-[9px] tracking-[3px] uppercase mb-0.5 flex items-center gap-1.5"
-                style={{ color: `rgba(${cat.rgb}, 0.7)` }}
+                className="font-mono text-[11px] font-bold tracking-[2.5px] uppercase mb-0.5 flex items-center gap-2"
+                style={{ color: cat.color, textShadow: `0 0 8px rgba(${cat.rgb}, 0.4)` }}
               >
-                <Circle size={5} fill={cat.color} color={cat.color} className="animate-pulse" />
+                <div 
+                  className="w-1.5 h-1.5 rounded-full" 
+                  style={{ background: cat.color, boxShadow: `0 0 8px ${cat.color}` }} 
+                />
                 {cat.label}
               </div>
             </div>
@@ -159,16 +164,16 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
 
         {/* Title */}
         <h3
-          className="font-display font-bold text-white mb-4 transition-colors duration-300 group-hover:text-[#e2e8ff] capitalize"
-          style={{ fontSize: "clamp(20px, 1.8vw, 24px)", letterSpacing: "0.02em", transform: "translateZ(25px)" }}
+          className="font-display font-bold text-white mb-5 transition-colors duration-300 group-hover:text-[#e2e8ff] capitalize"
+          style={{ fontSize: "clamp(24px, 2.2vw, 28px)", letterSpacing: "0.02em", transform: "translateZ(25px)" }}
         >
-          {repo.name.replace(/-/g, " ")}
+          {repo.name.toLowerCase() === "windly-frontend" ? "Windly" : repo.name.replace(/-/g, " ")}
         </h3>
 
         {/* Description */}
         <p
-          className="text-[15px] leading-relaxed mb-2"
-          style={{ color: "rgba(180,195,220,0.75)", letterSpacing: "0.015em", transform: "translateZ(15px)" }}
+          className="text-[16px] leading-relaxed mb-6"
+          style={{ color: "rgba(200,215,240,0.8)", letterSpacing: "0.02em", transform: "translateZ(15px)" }}
         >
           {repo.description ?? "No description provided."}
         </p>
@@ -176,21 +181,20 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
         {/* Language tag — separator + padded block for clear visual separation */}
         {repo.language && (
           <div
-            className="flex flex-wrap gap-2 pt-4 mt-4 mb-4"
+            className="flex flex-wrap gap-2.5 pt-6 mt-2 mb-6"
             style={{
               transform: "translateZ(15px)",
-              borderTop: `1px solid rgba(${cat.rgb}, 0.12)`,
+              borderTop: `1px solid rgba(${cat.rgb}, 0.15)`,
             }}
           >
             <motion.span
-              whileHover={{ scale: 1.08, y: -3, boxShadow: `inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.5), 0 8px 16px -4px rgba(${cat.rgb}, 0.5)` }}
-              whileTap={{ scale: 0.95, y: 1, boxShadow: `inset 0 2px 4px rgba(0,0,0,0.6)` }}
-              className="relative overflow-hidden px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
+              whileHover={{ y: -2, scale: 1.05, boxShadow: `inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 6px rgba(0,0,0,0.8), 0 8px 20px -4px rgba(${cat.rgb}, 0.5)` }}
+              className="px-4 py-2 rounded-[10px] text-[13px] font-semibold border cursor-default transition-all duration-300"
               style={{
-                background: `linear-gradient(145deg, rgba(${cat.rgb}, 0.2), rgba(${cat.rgb}, 0.05))`,
-                borderColor: `rgba(${cat.rgb}, 0.4)`,
-                color: `rgba(${cat.rgb}, 1)`,
-                boxShadow: `inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -1px 2px rgba(0,0,0,0.4), 0 2px 8px -2px rgba(${cat.rgb}, 0.3)`
+                background: `linear-gradient(145deg, rgba(16, 22, 38, 0.7), rgba(8, 10, 16, 0.95))`,
+                borderColor: `rgba(255,255,255,0.1)`,
+                color: `rgba(230, 240, 255, 0.9)`,
+                boxShadow: `inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -2px 4px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.3)`
               }}
             >
               {repo.language}
@@ -199,27 +203,25 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
             {repo.name.toLowerCase().includes("windly") && repo.name.toLowerCase().includes("frontend") && (
               <>
                 <motion.span
-                  whileHover={{ scale: 1.08, y: -3, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.5), 0 8px 16px -4px rgba(227, 79, 38, 0.5)" }}
-                  whileTap={{ scale: 0.95, y: 1, boxShadow: "inset 0 2px 4px rgba(0,0,0,0.6)" }}
-                  className="relative overflow-hidden px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
+                  whileHover={{ y: -2, scale: 1.05, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 6px rgba(0,0,0,0.8), 0 8px 20px -4px rgba(227, 79, 38, 0.5)" }}
+                  className="px-4 py-2 rounded-[10px] text-[13px] font-semibold border cursor-default transition-all duration-300"
                   style={{
-                    background: "linear-gradient(145deg, rgba(227, 79, 38, 0.2), rgba(227, 79, 38, 0.05))",
-                    borderColor: "rgba(227, 79, 38, 0.4)",
-                    color: "rgba(255, 120, 80, 1)",
-                    boxShadow: "inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -1px 2px rgba(0,0,0,0.4), 0 2px 8px -2px rgba(227, 79, 38, 0.3)"
+                    background: "linear-gradient(145deg, rgba(16, 22, 38, 0.7), rgba(8, 10, 16, 0.95))",
+                    borderColor: "rgba(255,255,255,0.1)",
+                    color: "rgba(255, 120, 80, 0.9)",
+                    boxShadow: "inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -2px 4px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.3)"
                   }}
                 >
                   HTML
                 </motion.span>
                 <motion.span
-                  whileHover={{ scale: 1.08, y: -3, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.5), 0 8px 16px -4px rgba(38, 77, 228, 0.5)" }}
-                  whileTap={{ scale: 0.95, y: 1, boxShadow: "inset 0 2px 4px rgba(0,0,0,0.6)" }}
-                  className="relative overflow-hidden px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
+                  whileHover={{ y: -2, scale: 1.05, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 6px rgba(0,0,0,0.8), 0 8px 20px -4px rgba(38, 77, 228, 0.5)" }}
+                  className="px-4 py-2 rounded-[10px] text-[13px] font-semibold border cursor-default transition-all duration-300"
                   style={{
-                    background: "linear-gradient(145deg, rgba(38, 77, 228, 0.2), rgba(38, 77, 228, 0.05))",
-                    borderColor: "rgba(38, 77, 228, 0.4)",
-                    color: "rgba(100, 150, 255, 1)",
-                    boxShadow: "inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -1px 2px rgba(0,0,0,0.4), 0 2px 8px -2px rgba(38, 77, 228, 0.3)"
+                    background: "linear-gradient(145deg, rgba(16, 22, 38, 0.7), rgba(8, 10, 16, 0.95))",
+                    borderColor: "rgba(255,255,255,0.1)",
+                    color: "rgba(100, 150, 255, 0.9)",
+                    boxShadow: "inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -2px 4px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.3)"
                   }}
                 >
                   CSS
@@ -229,15 +231,14 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
 
             {repo.topics?.slice(0, 2).map((t) => (
               <motion.span
-                whileHover={{ scale: 1.08, y: -3, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.5), 0 8px 16px -4px rgba(255,255,255, 0.2)" }}
-                whileTap={{ scale: 0.95, y: 1, boxShadow: "inset 0 2px 4px rgba(0,0,0,0.6)" }}
+                whileHover={{ y: -2, scale: 1.05, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 6px rgba(0,0,0,0.8), 0 8px 20px -4px rgba(255, 255, 255, 0.3)" }}
                 key={t}
-                className="relative overflow-hidden px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
+                className="px-4 py-2 rounded-[10px] text-[13px] font-semibold border cursor-default transition-all duration-300"
                 style={{
-                  background: "linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
-                  borderColor: "rgba(255,255,255,0.15)",
-                  color: "rgba(200,215,235,0.8)",
-                  boxShadow: "inset 0 1px 1px rgba(255,255,255,0.05), inset 0 -1px 2px rgba(0,0,0,0.3), 0 2px 8px -2px rgba(255,255,255, 0.1)"
+                  background: "linear-gradient(145deg, rgba(16, 22, 38, 0.7), rgba(8, 10, 16, 0.95))",
+                  borderColor: "rgba(255,255,255,0.1)",
+                  color: "rgba(230, 240, 255, 0.9)",
+                  boxShadow: "inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -2px 4px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.3)"
                 }}
               >
                 {t}
@@ -248,26 +249,26 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
 
         {/* Stats row */}
         <div
-          className="flex items-center gap-4 pt-4 mb-5 text-[12px] font-mono"
-          style={{ color: "rgba(150,165,185,0.5)", transform: "translateZ(15px)", borderTop: "1px solid rgba(255,255,255,0.06)" }}
+          className="flex items-center gap-6 pt-5 mb-8 text-[13px] font-mono"
+          style={{ color: "rgba(180,195,220,0.6)", transform: "translateZ(15px)", borderTop: "1px solid rgba(255,255,255,0.08)" }}
         >
-          <span className="flex items-center gap-1.5">
-            <Star size={11} /> {repo.stargazers_count}
+          <span className="flex items-center gap-2">
+            <Star size={14} /> {repo.stargazers_count}
           </span>
-          <span className="flex items-center gap-1.5">
-            <GitFork size={11} /> {repo.forks_count}
+          <span className="flex items-center gap-2">
+            <GitFork size={14} /> {repo.forks_count}
           </span>
         </div>
 
         {/* Action buttons */}
-        <div className="flex gap-4 mt-auto" style={{ transform: "translateZ(30px)" }}>
+        <div className="flex gap-4 mt-auto pt-8" style={{ transform: "translateZ(30px)" }}>
           <motion.a
             whileHover={{ scale: 1.02, y: -4, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.6), 0 10px 20px -5px rgba(0,0,0,0.5), 0 0 15px rgba(255,255,255,0.1)" }}
             whileTap={{ scale: 0.97, y: 1, boxShadow: "inset 0 2px 6px rgba(0,0,0,0.6), inset 0 1px 2px rgba(0,0,0,0.4)" }}
             href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group/btn flex-1 flex items-center justify-center gap-2.5 py-3.5 rounded-xl text-[13px] font-bold overflow-hidden relative transition-all duration-300"
+            className="group/btn flex-1 flex items-center justify-center gap-2.5 py-4 rounded-xl text-[14px] font-bold overflow-hidden relative transition-all duration-300"
             style={{
               background: "rgba(255,255,255,0.02)",
               border: "1px solid rgba(255,255,255,0.15)",
@@ -288,7 +289,7 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
               href={repo.homepage}
               target="_blank"
               rel="noopener noreferrer"
-              className="group/btn flex-1 flex items-center justify-center gap-2.5 py-3.5 rounded-xl text-[13px] font-bold text-white relative overflow-hidden transition-all duration-300"
+              className="group/btn flex-1 flex items-center justify-center gap-2.5 py-4 rounded-xl text-[14px] font-bold text-white relative overflow-hidden transition-all duration-300"
               style={{
                 background: `linear-gradient(135deg, rgba(${cat.rgb}, 0.25), rgba(${cat.rgb}, 0.05))`,
                 border: `1px solid rgba(${cat.rgb}, 0.4)`,
