@@ -241,10 +241,10 @@ export default function ContactForm() {
             {/* Row 1: Name + Email */}
             <div className="grid sm:grid-cols-2" style={{ gap: "1.25rem" }}>
               <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
               >
                 <FieldFrame
                   id="contact-name"
@@ -271,10 +271,10 @@ export default function ContactForm() {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
               >
                 <FieldFrame
                   id="contact-email"
@@ -303,10 +303,10 @@ export default function ContactForm() {
 
             {/* Row 2: Subject */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: 0.86, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
               <FieldFrame
                 id="contact-subject"
@@ -333,10 +333,10 @@ export default function ContactForm() {
 
             {/* Row 3: Message with character counter */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: 0.92, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
             >
               <FieldFrame
                 id="contact-message"
@@ -403,12 +403,12 @@ export default function ContactForm() {
               <motion.button
                 type="submit"
                 disabled={disabled}
-                initial={{ opacity: 0, scale: 0.9, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.05), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 0px rgba(70,150,170,0)" }}
-                whileInView={{ opacity: 1, scale: 1, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.05), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 18px rgba(70,150,170,0.12)" }}
+                initial={{ opacity: 0, scale: 0.9, filter: "blur(8px)", boxShadow: "inset 0 1px 2px rgba(255,255,255,0.05), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 0px rgba(70,150,170,0)" }}
+                whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)", boxShadow: "inset 0 1px 2px rgba(255,255,255,0.05), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 18px rgba(70,150,170,0.12)" }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ 
-                  duration: 0.6, delay: 0.98, ease: [0.16, 1, 0.3, 1],
-                  boxShadow: { delay: 1.1, duration: 0.8, ease: "easeOut" }
+                  duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1],
+                  boxShadow: { delay: 0.85, duration: 0.8, ease: "easeOut" }
                 }}
                 whileHover={disabled ? undefined : { y: -2, boxShadow: "inset 0 1px 3px rgba(255,255,255,0.1), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 25px rgba(70,150,170,0.2)" }}
                 whileTap={disabled ? undefined : { 
@@ -487,7 +487,7 @@ export default function ContactForm() {
               {/* ── Privacy Footer ── */}
               <div className="flex items-center justify-center gap-2 text-[12px] font-medium text-white/32">
                 <Lock size={13} className="shrink-0 text-white/28" />
-                Your information is safe with me. I respect your privacy.
+                Your information will be kept confidential.
               </div>
             </div>
           </form>
