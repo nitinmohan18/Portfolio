@@ -244,18 +244,25 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
         </AnimatePresence>
       </div>
 
-      {/* Glassmorphic Text Panel */}
+      {/* Premium Dark Panel */}
       <div className={cn(
         "flex-1 relative overflow-hidden rounded-2xl border py-5 px-6 sm:px-8 transition-all duration-500 flex flex-col justify-center",
+        "bg-[#0B101E]/70 border-white/[0.05] shadow-[0_8px_30px_rgba(0,0,0,0.5)] backdrop-blur-3xl",
         isPurple 
-          ? "border-purple-500/10 bg-purple-500/[0.02] group-hover/card:border-purple-500/30 group-hover/card:bg-purple-500/[0.05] group-hover/card:shadow-[0_0_30px_rgba(168,85,247,0.15),inset_0_1px_3px_rgba(255,255,255,0.05)]" 
-          : "border-cyan-400/10 bg-cyan-400/[0.02] group-hover/card:border-cyan-400/30 group-hover/card:bg-cyan-400/[0.05] group-hover/card:shadow-[0_0_30px_rgba(34,211,238,0.15),inset_0_1px_3px_rgba(255,255,255,0.05)]"
+          ? "group-hover/card:border-purple-500/40 group-hover/card:bg-[#0E1525]/85 group-hover/card:shadow-[0_8px_30px_rgba(168,85,247,0.15),inset_0_1px_0_rgba(255,255,255,0.05)]" 
+          : "group-hover/card:border-cyan-400/40 group-hover/card:bg-[#0E1525]/85 group-hover/card:shadow-[0_8px_30px_rgba(34,211,238,0.15),inset_0_1px_0_rgba(255,255,255,0.05)]"
       )}>
+        {/* Top Edge Glow */}
+        <div className={cn(
+          "absolute left-0 top-0 h-[2px] w-[100px] transition-all duration-500 opacity-60 group-hover/card:opacity-100 group-hover/card:w-[250px]",
+          isPurple ? "bg-gradient-to-r from-purple-500 to-transparent" : "bg-gradient-to-r from-cyan-400 to-transparent"
+        )} />
+
         {/* Animated gradient background sweep on hover */}
         <div 
           className={cn(
             "absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/card:opacity-100 pointer-events-none",
-            isPurple ? "bg-[radial-gradient(400px_circle_at_0%_50%,rgba(168,85,247,0.08),transparent)]" : "bg-[radial-gradient(400px_circle_at_0%_50%,rgba(34,211,238,0.08),transparent)]"
+            isPurple ? "bg-[radial-gradient(400px_circle_at_0%_0%,rgba(168,85,247,0.12),transparent_70%)]" : "bg-[radial-gradient(400px_circle_at_0%_0%,rgba(34,211,238,0.12),transparent_70%)]"
           )} 
         />
 
