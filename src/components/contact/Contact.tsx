@@ -211,12 +211,12 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
   };
 
   const inner = (
-    <div className="relative group/card flex items-center gap-6 w-full">
+    <div className="relative group/card flex items-center gap-5 w-full">
       {/* Futuristic Icon Container (The Node) */}
       <div 
         className={cn(
-          "relative flex h-14 w-14 shrink-0 items-center justify-center rounded-[14px] border transition-all duration-500 z-10 shadow-lg",
-          isPurple ? "border-purple-500/30 bg-[#05080F] shadow-[0_0_20px_rgba(168,85,247,0.2),inset_0_0_10px_rgba(168,85,247,0.1)] group-hover/card:border-purple-500/60 group-hover/card:shadow-[0_0_30px_rgba(168,85,247,0.3),inset_0_0_15px_rgba(168,85,247,0.2)]" : "border-cyan-400/30 bg-[#05080F] shadow-[0_0_20px_rgba(34,211,238,0.2),inset_0_0_10px_rgba(34,211,238,0.1)] group-hover/card:border-cyan-400/60 group-hover/card:shadow-[0_0_30px_rgba(34,211,238,0.3),inset_0_0_15px_rgba(34,211,238,0.2)]",
+          "relative flex h-[64px] w-[64px] shrink-0 items-center justify-center rounded-2xl border transition-all duration-500 z-10 shadow-xl",
+          isPurple ? "border-purple-500/40 bg-[#060913] shadow-[0_0_20px_rgba(168,85,247,0.2),inset_0_0_10px_rgba(168,85,247,0.1)] group-hover/card:border-purple-500/60 group-hover/card:shadow-[0_0_30px_rgba(168,85,247,0.3),inset_0_0_15px_rgba(168,85,247,0.2)]" : "border-cyan-400/40 bg-[#060913] shadow-[0_0_20px_rgba(34,211,238,0.2),inset_0_0_10px_rgba(34,211,238,0.1)] group-hover/card:border-cyan-400/60 group-hover/card:shadow-[0_0_30px_rgba(34,211,238,0.3),inset_0_0_15px_rgba(34,211,238,0.2)]",
           iconColorClass.replace("group-hover:", "group-hover/card:")
         )} 
       >
@@ -229,7 +229,7 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
               exit={{ opacity: 0, scale: 0.5 }}
               className="text-emerald-400"
             >
-              <Check size={24} strokeWidth={3} />
+              <Check size={28} strokeWidth={3} />
             </motion.div>
           ) : (
             <motion.div
@@ -238,19 +238,19 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
             >
-              <Icon size={24} strokeWidth={2.5} />
+              <Icon size={28} strokeWidth={2.5} />
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      {/* Premium Dark Panel */}
+      {/* Sleek Glass Panel */}
       <div className={cn(
-        "flex-1 relative overflow-hidden rounded-2xl border py-5 px-6 sm:px-8 transition-all duration-500 flex flex-col justify-center",
-        "bg-[#0B101E]/70 border-white/[0.05] shadow-[0_8px_30px_rgba(0,0,0,0.5)] backdrop-blur-3xl",
+        "flex-1 relative overflow-hidden rounded-2xl border min-h-[64px] py-3 px-4 sm:px-5 transition-all duration-500 flex flex-col justify-center",
+        "bg-[rgba(8,12,24,0.65)] border-white/[0.08] shadow-[0_20px_60px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1),inset_0_0_20px_rgba(255,255,255,0.02)] backdrop-blur-[24px]",
         isPurple 
-          ? "group-hover/card:border-purple-500/40 group-hover/card:bg-[#0E1525]/85 group-hover/card:shadow-[0_8px_30px_rgba(168,85,247,0.15),inset_0_1px_0_rgba(255,255,255,0.05)]" 
-          : "group-hover/card:border-cyan-400/40 group-hover/card:bg-[#0E1525]/85 group-hover/card:shadow-[0_8px_30px_rgba(34,211,238,0.15),inset_0_1px_0_rgba(255,255,255,0.05)]"
+          ? "group-hover/card:border-purple-500/40 group-hover/card:bg-[rgba(16,22,40,0.8)] group-hover/card:shadow-[0_8px_30px_rgba(168,85,247,0.15),inset_0_1px_0_rgba(255,255,255,0.1)]" 
+          : "group-hover/card:border-cyan-400/40 group-hover/card:bg-[rgba(16,22,40,0.8)] group-hover/card:shadow-[0_8px_30px_rgba(34,211,238,0.15),inset_0_1px_0_rgba(255,255,255,0.1)]"
       )}>
         {/* Top Edge Glow */}
         <div className={cn(
@@ -269,18 +269,18 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
         {/* Text Stack */}
         <div className="relative z-10 w-full pr-8">
           <div className="flex items-center gap-3">
-            <p className="font-mono text-[11px] sm:text-[12px] font-bold tracking-[0.2em] text-white/50 transition-colors duration-300 group-hover/card:text-white/80 uppercase">
+            <p className="font-mono text-[10px] sm:text-[11px] font-bold tracking-[0.2em] text-white/50 transition-colors duration-300 group-hover/card:text-white/80 uppercase">
               {label}
             </p>
             {copied && (
-              <span className="text-[11px] font-semibold text-emerald-400 uppercase tracking-wider drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]">Copied!</span>
+              <span className="text-[10px] font-semibold text-emerald-400 uppercase tracking-wider drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]">Copied!</span>
             )}
           </div>
-          <p className="mt-1.5 text-[16px] sm:text-[17px] font-semibold text-white/90 transition-colors duration-300 group-hover/card:text-white">
+          <p className="mt-1 text-[15px] sm:text-[16px] font-semibold text-white/90 transition-colors duration-300 group-hover/card:text-white">
             {value}
           </p>
           {subText && (
-            <p className="mt-1.5 text-[13px] text-white/50 transition-colors duration-300 group-hover/card:text-white/70 leading-relaxed">
+            <p className="mt-1 text-[12px] text-white/50 transition-colors duration-300 group-hover/card:text-white/70 leading-relaxed">
               {subText}
             </p>
           )}
@@ -428,10 +428,11 @@ export default function Contact() {
               <div 
                 className="absolute z-0 w-[2px] overflow-hidden rounded-full" 
                 style={{ 
-                  top: "35px", 
-                  bottom: "35px",
-                  left: "27px", 
-                  background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.06) 10%, rgba(255,255,255,0.06) 90%, transparent)",
+                  top: "32px", 
+                  bottom: "32px",
+                  left: "31px", 
+                  backgroundColor: "rgba(0,0,0,0.6)",
+                  boxShadow: "inset 0 0 4px rgba(0,0,0,1), 0 0 0 1px rgba(255,255,255,0.04)",
                 }}
               >
                 {/* Moving glowing core */}
