@@ -182,15 +182,18 @@ export default function ContactForm() {
   return (
     <div className="relative">
       {/* Soft cyan edge illumination / outer glow */}
-      <div className="absolute -inset-[1px] rounded-[30px] bg-gradient-to-b from-cyan-400/40 via-cyan-400/5 to-transparent blur-2xl opacity-70" />
+      <div className="absolute -inset-[1px] rounded-[30px] bg-gradient-to-br from-cyan-400/40 via-purple-500/10 to-transparent blur-2xl opacity-70" />
 
-      {/* Card */}
-      <div className="relative overflow-hidden rounded-[28px] border border-white/[0.12] bg-[rgba(5,8,15,0.75)] shadow-[0_40px_100px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1),inset_0_2px_12px_rgba(34,211,238,0.05)] backdrop-blur-3xl">
-        {/* Premium Top edge highlight */}
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
+      {/* Card - Premium 3D Metallic Surface */}
+      <div className="group/maincard relative overflow-hidden rounded-[28px] border border-white/[0.18] bg-gradient-to-br from-[#12182B] via-[#0A0F1C] to-[#04060A] shadow-[0_40px_100px_rgba(0,0,0,0.9),inset_0_1px_2px_rgba(255,255,255,0.35),inset_0_-1px_2px_rgba(0,0,0,0.8),inset_0_0_15px_rgba(255,255,255,0.05)] backdrop-blur-3xl transition-all duration-500 hover:shadow-[0_40px_100px_rgba(0,0,0,0.9),inset_0_1px_2px_rgba(255,255,255,0.5),inset_0_-1px_2px_rgba(0,0,0,0.8),inset_0_0_25px_rgba(34,211,238,0.15)] hover:border-cyan-400/40 hover:-translate-y-1">
+        {/* Top Edge Neon Highlight */}
+        <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_1px_10px_2px_rgba(34,211,238,0.6)] opacity-60 transition-opacity duration-500 group-hover/maincard:opacity-100" />
+        
+        {/* Subtle Ambient Radial Glow inside the card */}
+        <div className="pointer-events-none absolute inset-0 opacity-20 bg-[radial-gradient(400px_circle_at_0%_0%,rgba(34,211,238,0.3),transparent_70%)] transition-opacity duration-500 group-hover/maincard:opacity-40" />
 
         {/* Decorative corner circle */}
-        <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full border border-white/[0.04] bg-white/[0.012]" />
+        <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full border border-white/[0.08] bg-white/[0.02]" />
 
         <div className="relative z-10 w-full" style={{ padding: "1.5rem", boxSizing: "border-box" }}>
           {/* ── Card Header ── */}
@@ -294,7 +297,7 @@ export default function ContactForm() {
                 placeholder="Tell me about your project, idea, or how we can work together..."
                 value={form.message}
                 onChange={(e) => updateField("message", e.target.value)}
-                className={cn(getInputClass(), "resize-y leading-6")}
+                className={cn(getInputClass(), "resize-none leading-6")}
                 style={{ minHeight: "110px", paddingTop: "13px", paddingBottom: "36px", paddingRight: "14px", paddingLeft: "14px" }}
                 disabled={disabled}
                 aria-invalid={Boolean(errors.message)}
