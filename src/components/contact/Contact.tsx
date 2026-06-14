@@ -487,21 +487,39 @@ export default function Contact() {
           style={{ marginTop: "60px" }}
         >
           {/* Outer subtle glow */}
-          <div className="absolute -inset-1 rounded-[30px] bg-gradient-to-r from-cyan-400/[0.12] via-blue-500/[0.1] to-cyan-400/[0.12] blur-2xl opacity-80" />
+          <div className="absolute -inset-1 rounded-[32px] bg-gradient-to-r from-cyan-400/[0.08] via-blue-500/[0.06] to-purple-500/[0.08] blur-2xl opacity-80" />
 
-          <div className="relative overflow-hidden rounded-[28px] border border-white/[0.15] bg-[rgba(8,12,24,0.65)] px-8 py-6 shadow-[0_20px_60px_rgba(0,0,0,0.6),inset_0_1px_1px_rgba(255,255,255,0.1),inset_0_0_20px_rgba(255,255,255,0.02)] backdrop-blur-[40px] sm:px-12 md:px-14 md:py-9">
-            {/* Top accent line */}
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
+          <div className="group relative overflow-hidden rounded-[30px] border border-white/[0.1] bg-gradient-to-br from-[#0C1222] to-[#03050A] px-10 py-8 shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.15),inset_0_-1px_1px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(34,211,238,0.03)] backdrop-blur-3xl sm:px-14 md:px-16 md:py-10 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.25),inset_0_-1px_1px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(34,211,238,0.15)] hover:border-cyan-400/30">
+            
+            {/* Top accent line (Neon lip) */}
+            <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent opacity-30 shadow-[0_1px_8px_1px_rgba(34,211,238,0.5)] transition-opacity duration-500 group-hover:opacity-100" />
+            
+            {/* Ambient Gradient Glow */}
+            <div className="pointer-events-none absolute inset-0 opacity-10 bg-[radial-gradient(600px_circle_at_50%_-20%,rgba(34,211,238,0.3),transparent_70%)] transition-opacity duration-500 group-hover:opacity-30" />
 
-            <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-14">
+            <div className="relative z-10 flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
               {/* ── Left: Title ── */}
-              <div className="shrink-0">
-                <h4 className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-cyan-400/70">
+              <div className="shrink-0 text-center lg:text-left pl-3">
+                <h4 
+                  className="font-mono text-[12px] font-bold uppercase tracking-[0.25em] text-cyan-300 drop-shadow-[0_0_6px_rgba(34,211,238,0.4)]"
+                  style={{ transform: "translateX(20px)", display: "inline-block" }}
+                >
                   Let&apos;s Connect
                 </h4>
-                <p className="mt-1 text-[13px] text-white/40">
-                  Find me on these platforms
+                <p className="mt-1.5 text-[14px] font-medium text-white/50">
+                  Connect with me across platforms
                 </p>
+                {/* Quick Response Info for Recruiters */}
+                <div className="mt-6 flex flex-col gap-2 text-[12px] text-white/40 font-medium ml-5">
+                  <div className="flex items-center justify-center lg:justify-start gap-2.5">
+                    <span className="text-[14px]">📍</span> 
+                    <span>Based in Bhopal, India</span>
+                  </div>
+                  <div className="flex items-center justify-center lg:justify-start gap-2.5">
+                    <span className="text-[14px]">🌍</span> 
+                    <span>Available for Remote Work</span>
+                  </div>
+                </div>
               </div>
 
               {/* ── Center: Social Links ── */}
@@ -510,18 +528,18 @@ export default function Contact() {
               {/* ── Right: Availability + Orbital ── */}
               <div className="flex items-center gap-5 lg:gap-6">
                 {/* Availability badge */}
-                <div className="shrink-0">
-                  <p className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/35">
+                <div className="shrink-0 text-center lg:text-right">
+                  <p className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white/40">
                     Available for
                   </p>
-                  <div className="mt-1 flex items-center gap-2">
-                    <span className="text-[13px] font-semibold text-white/65">
-                      Full-time, Freelance, or Contract
+                  <div className="mt-1.5 flex items-center justify-center lg:justify-end gap-2.5">
+                    <span className="text-[13px] font-semibold text-white/80">
+                      Internships <span className="text-cyan-400/50 mx-1">•</span> Freelance <span className="text-cyan-400/50 mx-1">•</span> Full-Time Opportunities
                     </span>
                     {/* Green pulsing indicator */}
-                    <span className="relative flex h-2 w-2 shrink-0">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-50" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.7)]" />
+                    <span className="relative flex h-2.5 w-2.5 shrink-0 ml-1">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
                     </span>
                   </div>
                 </div>

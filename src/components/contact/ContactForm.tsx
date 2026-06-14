@@ -181,6 +181,30 @@ export default function ContactForm() {
 
   return (
     <div className="relative">
+      <style>{`
+        .ripple {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background: radial-gradient(circle, transparent 55%, rgba(130,215,238,0.22) 70%, transparent 78%);
+          transform: translate(-50%, -50%) scale(0);
+          filter: blur(1.5px);
+          animation: rippleOut 6s ease-out infinite;
+        }
+        @keyframes rippleOut {
+          0% { transform: translate(-50%, -50%) scale(0); opacity: 0.7; }
+          60% { opacity: 0.25; }
+          100% { transform: translate(-50%, -50%) scale(20); opacity: 0; }
+        }
+        @keyframes still-shine-sweep {
+          0% { transform: translateX(-150%) skewX(-12deg); }
+          100% { transform: translateX(200%) skewX(-12deg); }
+        }
+      `}</style>
+
       {/* Soft cyan edge illumination / outer glow */}
       <div className="absolute -inset-[1px] rounded-[30px] bg-gradient-to-br from-cyan-400/40 via-purple-500/10 to-transparent blur-2xl opacity-70" />
 
@@ -351,17 +375,36 @@ export default function ContactForm() {
               <motion.button
                 type="submit"
                 disabled={disabled}
-                whileHover={
-                  disabled
-                    ? undefined
-                    : { y: -2, boxShadow: "0 24px 40px -16px rgba(34,211,238,0.45)" }
-                }
-                whileTap={disabled ? undefined : { scale: 0.985 }}
-                className="group relative w-full cursor-pointer overflow-hidden border border-cyan-400/20 bg-gradient-to-r from-cyan-400 to-purple-500 px-6 text-[13px] font-extrabold text-white shadow-[0_20px_50px_-24px_rgba(34,211,238,0.6)] transition-all duration-300 hover:border-cyan-300/30 hover:shadow-[0_24px_60px_-20px_rgba(34,211,238,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030712] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
-                style={{ height: "48px", borderRadius: "14px" }}
+                whileHover={disabled ? undefined : { y: -2, boxShadow: "inset 0 1px 3px rgba(255,255,255,0.1), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 25px rgba(70,150,170,0.2)" }}
+                whileTap={disabled ? undefined : { 
+                  scale: 0.97, 
+                  y: 2, 
+                  boxShadow: "inset 0 4px 12px rgba(0,0,0,0.9), inset 0 2px 4px rgba(0,0,0,0.8), 0 0 0 rgba(70,150,170,0)" 
+                }}
+                className="group relative w-full cursor-pointer overflow-hidden px-6 text-[13px] font-extrabold text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030712] disabled:cursor-not-allowed disabled:opacity-70"
+                style={{ 
+                  height: "48px", 
+                  borderRadius: "14px",
+                  background: "linear-gradient(165deg, #0d1117, #161c24, #0a0e13)",
+                  boxShadow: "inset 0 1px 2px rgba(255,255,255,0.05), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 18px rgba(70,150,170,0.12)",
+                  border: "1px solid rgba(255,255,255,0.05)"
+                }}
               >
-                {/* Shine sweep animation */}
-                <span className="absolute inset-0 translate-x-[-120%] bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-[120%]" />
+                {/* Expanding Concentric Ripple Rings */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="ripple" style={{ animationDelay: "0s" }} />
+                  <div className="ripple" style={{ animationDelay: "2s" }} />
+                  <div className="ripple" style={{ animationDelay: "4s" }} />
+                </div>
+
+                {/* Sunlight Shine Sweep */}
+                <span 
+                  className="absolute inset-0 w-[80%] pointer-events-none mix-blend-screen"
+                  style={{ 
+                    background: "linear-gradient(105deg, transparent, rgba(255,244,222,0.13), rgba(150,225,255,0.08), transparent)",
+                    animation: "still-shine-sweep 5s linear infinite" 
+                  }}
+                />
 
                 <span className="relative z-10 flex items-center justify-center gap-2.5">
                   <AnimatePresence mode="wait" initial={false}>
