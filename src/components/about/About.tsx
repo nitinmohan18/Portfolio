@@ -167,16 +167,18 @@ export default function About() {
         }
 
         .badge-primary {
-          background: rgba(34,211,238,0.06);
-          border: 1px solid rgba(34,211,238,0.2);
-          color: rgba(34,211,238,0.9);
+          background: linear-gradient(165deg, rgba(34,211,238,0.12), rgba(8, 10, 16, 0.8));
+          border: 1px solid rgba(34,211,238,0.25);
+          color: rgba(255,255,255,0.9);
           padding: 8px 18px;
           border-radius: 20px;
           font-size: 12px;
-          font-weight: 600;
+          font-weight: 700;
           position: relative;
           overflow: hidden;
-          transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+          backdrop-filter: blur(12px);
+          box-shadow: inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.8), 0 4px 12px rgba(0,0,0,0.4), 0 0 8px rgba(34,211,238,0.1);
+          transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
         }
 
         .badge-primary::after {
@@ -191,10 +193,12 @@ export default function About() {
         }
 
         .badge-primary:hover {
-          background: rgba(34,211,238,0.12);
-          border-color: rgba(34,211,238,0.5);
-          box-shadow: 0 0 16px rgba(34,211,238,0.2), inset 0 0 12px rgba(34,211,238,0.05);
-          transform: translateY(-2px) scale(1.03);
+          background: linear-gradient(165deg, rgba(34,211,238,0.2), rgba(10, 15, 25, 0.9));
+          border-color: rgba(34,211,238,0.6);
+          color: #ffffff;
+          box-shadow: inset 0 1px 2px rgba(255,255,255,0.25), inset 0 -2px 6px rgba(0,0,0,0.9), 0 8px 20px rgba(0,0,0,0.6), 0 0 16px rgba(34,211,238,0.3);
+          transform: translateY(-3px) scale(1.05);
+          text-shadow: 0 0 8px rgba(34, 211, 238, 0.5);
         }
 
         .badge-primary:active {
@@ -203,29 +207,30 @@ export default function About() {
         }
 
         .badge-dark {
-          background: rgba(13,16,28,0.6);
-          border: 1px solid rgba(var(--badge-rgb), 0.15);
-          color: rgba(220,230,255,0.85);
+          background: linear-gradient(165deg, rgba(var(--badge-rgb), 0.12), rgba(8, 10, 16, 0.8));
+          border: 1px solid rgba(var(--badge-rgb), 0.25);
+          color: rgba(255,255,255,0.9);
           padding: 8px 16px;
           border-radius: 20px;
           font-size: 11px;
-          font-weight: 600;
+          font-weight: 700;
           display: inline-flex;
           align-items: center;
           gap: 8px;
           position: relative;
           overflow: hidden;
-          backdrop-filter: blur(8px);
-          box-shadow: 0 4px 12px rgba(0,0,0,0.2), inset 0 0 10px rgba(var(--badge-rgb), 0.03);
+          backdrop-filter: blur(12px);
+          box-shadow: inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.8), 0 4px 12px rgba(0,0,0,0.4), 0 0 8px rgba(var(--badge-rgb), 0.1);
           transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .badge-dark:hover {
-          border-color: rgba(var(--badge-rgb), 0.5);
-          background: rgba(var(--badge-rgb), 0.08);
+          border-color: rgba(var(--badge-rgb), 0.6);
+          background: linear-gradient(165deg, rgba(var(--badge-rgb), 0.2), rgba(10, 15, 25, 0.9));
           color: #ffffff;
-          box-shadow: 0 0 20px rgba(var(--badge-rgb), 0.2), inset 0 0 15px rgba(var(--badge-rgb), 0.08);
-          transform: translateY(-3px) scale(1.02);
+          box-shadow: inset 0 1px 2px rgba(255,255,255,0.25), inset 0 -2px 6px rgba(0,0,0,0.9), 0 8px 20px rgba(0,0,0,0.6), 0 0 16px rgba(var(--badge-rgb), 0.3);
+          transform: translateY(-3px) scale(1.05);
+          text-shadow: 0 0 8px rgba(var(--badge-rgb), 0.5);
         }
 
         .badge-dark:active {
@@ -425,16 +430,17 @@ export default function About() {
             <motion.div 
               whileHover={{ 
                 scale: 1.05,
-                boxShadow: "0 0 24px rgba(34,211,238,0.4), inset 0 0 12px rgba(34,211,238,0.1)",
-                borderColor: "rgba(34,211,238,0.8)"
+                boxShadow: "inset 0 1px 2px rgba(255,255,255,0.25), inset 0 -2px 6px rgba(0,0,0,0.9), 0 8px 20px rgba(0,0,0,0.6), 0 0 20px rgba(34,211,238,0.4)",
+                borderColor: "rgba(34,211,238,0.6)",
+                background: "linear-gradient(165deg, rgba(34,211,238,0.2), rgba(10, 15, 25, 0.9))"
               }}
               className="relative overflow-hidden cursor-default group flex items-center gap-3"
               style={{
-                background: "linear-gradient(90deg, rgba(13,16,28,0.95), rgba(20,25,40,0.95))",
-                border: "1px solid rgba(34,211,238,0.3)",
-                borderRadius: "12px",
-                padding: "10px 24px",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+                background: "linear-gradient(165deg, rgba(34,211,238,0.12), rgba(8, 10, 16, 0.8))",
+                border: "1px solid rgba(34,211,238,0.25)",
+                borderRadius: "20px",
+                padding: "12px 28px",
+                boxShadow: "inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.8), 0 4px 12px rgba(0,0,0,0.4), 0 0 8px rgba(34,211,238,0.1)",
                 backdropFilter: "blur(12px)",
                 transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)"
               }}
@@ -459,6 +465,7 @@ export default function About() {
                   fontFamily: "monospace",
                   textShadow: "0 0 10px rgba(34,211,238,0.5)"
                 }}
+                className="group-hover:text-white transition-colors duration-300"
               >
                 ACADEMIC JOURNEY
               </span>
@@ -522,15 +529,18 @@ export default function About() {
             const isHero = item.active;
             const cardDelay = 0.5 + index * 0.2; // 0.5, 0.7, 0.9
 
-            let threadHeight = "20px";
-            let threadGradient = "linear-gradient(180deg, rgba(34,211,238,0.5), rgba(52,211,153,0.3))";
+            let threadHeight = "24px";
+            let threadGradient = "linear-gradient(180deg, rgba(34,211,238,0.9), rgba(52,211,153,0.9))";
+            let threadGlow = "0 0 6px rgba(34,211,238,0.3)";
             
             if (index === 1) {
-              threadHeight = "16px";
-              threadGradient = "linear-gradient(180deg, rgba(52,211,153,0.3), rgba(56,189,248,0.3))";
+              threadHeight = "20px";
+              threadGradient = "linear-gradient(180deg, rgba(52,211,153,0.9), rgba(56,189,248,0.9))";
+              threadGlow = "0 0 6px rgba(52,211,153,0.3)";
             } else if (index === 2) {
-              threadHeight = "16px";
-              threadGradient = "linear-gradient(180deg, rgba(56,189,248,0.3), rgba(129,140,248,0.3))";
+              threadHeight = "20px";
+              threadGradient = "linear-gradient(180deg, rgba(56,189,248,0.9), rgba(129,140,248,0.9))";
+              threadGlow = "0 0 6px rgba(56,189,248,0.3)";
             }
 
             return (
@@ -541,9 +551,11 @@ export default function About() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: cardDelay - 0.1 }}
                   style={{
-                    width: "1px",
+                    width: "3px",
                     height: threadHeight,
                     background: threadGradient,
+                    boxShadow: threadGlow,
+                    borderRadius: "2px",
                     alignSelf: "center",
                     flexShrink: 0,
                     transformOrigin: "top"

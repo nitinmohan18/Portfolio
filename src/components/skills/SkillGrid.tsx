@@ -167,7 +167,6 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
             width={isSingle ? 22 : 16}
             height={isSingle ? 22 : 16}
             className={`object-contain drop-shadow-sm`}
-            style={{ width: "auto", height: "auto" }}
             unoptimized
             priority
             loading="eager"
