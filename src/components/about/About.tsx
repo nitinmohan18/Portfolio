@@ -57,7 +57,7 @@ const educationData = [
   }
 ];
 
-export default function About() {
+export default function About() { 
   return (
     <SectionWrapper 
       id="about" 
