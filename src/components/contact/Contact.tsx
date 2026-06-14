@@ -285,7 +285,7 @@ export default function Contact() {
             className="flex flex-col justify-center"
           >
             {/* Section Label */}
-            <div className="relative mb-3 flex items-center gap-4" style={{ transform: "translate(-40px, -80px)" }}>
+            <div className="relative mb-3 flex items-center gap-4" style={{ transform: "translate(-60px, -100px)" }}>
               {/* Left Line & Dot */}
               <div className="flex items-center gap-2 shrink-0">
                 <div className="h-[1px] w-6 sm:w-8 bg-gradient-to-r from-transparent via-cyan-400/40 to-cyan-400/80 rounded-full shadow-[0_0_4px_rgba(34,211,238,0.3)]" />
@@ -311,23 +311,20 @@ export default function Contact() {
             </div>
 
             {/* Main Heading */}
-            <h2 className="font-display text-[clamp(1.5rem,3vw,2.7rem)] font-extrabold leading-[1.15] tracking-tight text-white">
-              Let&apos;s build
-              <br />
-              something
-              <br />
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-                amazing together.
+            <h2 className="font-display text-[clamp(1.5rem,3vw,2.7rem)] font-extrabold leading-[1.15] tracking-tight text-white" style={{ transform: "translateY(-76px)" }}>
+              Let&apos;s build something{" "}
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent" style={{ transform: "translateY(-5px)", display: "inline-block" }}>
+                great together.
               </span>
             </h2>
 
             {/* Supporting Text */}
-            <p className="mt-5 max-w-lg text-[16px] md:text-[18px] leading-[1.6] text-white/70">
-              I&apos;m always open to discussing new projects, creative ideas or opportunities to be part of your vision.
+            <p className="mt-5 max-w-lg text-[16px] md:text-[18px] leading-[1.6] text-white/70" style={{ transform: "translateY(-60px)" }}>
+              Open to internships, freelance projects, and full-time roles — bringing full-stack development skills with a growing foundation in AI/ML.
             </p>
 
             {/* ── Info Cards ── */}
-            <div className="mt-10 flex flex-col gap-8 relative">
+            <div className="relative mt-10 flex flex-col gap-8" style={{ transform: "translateY(-10px)" }}>
               {/* Vertical connecting line */}
               <div 
                 className="absolute top-10 bottom-10 z-0 w-[2px] overflow-hidden rounded-full" 
