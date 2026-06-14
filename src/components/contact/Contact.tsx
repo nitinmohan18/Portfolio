@@ -215,8 +215,8 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
       {/* Futuristic Icon Container (The Node) */}
       <div 
         className={cn(
-          "relative flex h-[64px] w-[64px] shrink-0 items-center justify-center rounded-2xl border transition-all duration-500 z-10 shadow-xl",
-          isPurple ? "border-purple-500/40 bg-[#060913] shadow-[0_0_20px_rgba(168,85,247,0.2),inset_0_0_10px_rgba(168,85,247,0.1)] group-hover/card:border-purple-500/60 group-hover/card:shadow-[0_0_30px_rgba(168,85,247,0.3),inset_0_0_15px_rgba(168,85,247,0.2)]" : "border-cyan-400/40 bg-[#060913] shadow-[0_0_20px_rgba(34,211,238,0.2),inset_0_0_10px_rgba(34,211,238,0.1)] group-hover/card:border-cyan-400/60 group-hover/card:shadow-[0_0_30px_rgba(34,211,238,0.3),inset_0_0_15px_rgba(34,211,238,0.2)]",
+          "relative flex h-[64px] w-[64px] shrink-0 items-center justify-center rounded-2xl border transition-all duration-500 z-10 shadow-lg",
+          isPurple ? "border-purple-500/30 bg-[#060913] shadow-[0_0_15px_rgba(168,85,247,0.15),inset_0_0_8px_rgba(168,85,247,0.08)] group-hover/card:border-purple-500/50 group-hover/card:shadow-[0_0_25px_rgba(168,85,247,0.25),inset_0_0_12px_rgba(168,85,247,0.15)]" : "border-cyan-400/30 bg-[#060913] shadow-[0_0_15px_rgba(34,211,238,0.15),inset_0_0_8px_rgba(34,211,238,0.08)] group-hover/card:border-cyan-400/50 group-hover/card:shadow-[0_0_25px_rgba(34,211,238,0.25),inset_0_0_12px_rgba(34,211,238,0.15)]",
           iconColorClass.replace("group-hover:", "group-hover/card:")
         )} 
       >
@@ -244,25 +244,25 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
         </AnimatePresence>
       </div>
 
-      {/* Sleek Glass Panel */}
+      {/* Premium Solid Dark Panel */}
       <div className={cn(
         "flex-1 relative overflow-hidden rounded-2xl border min-h-[64px] py-3 px-4 sm:px-5 transition-all duration-500 flex flex-col justify-center",
-        "bg-[rgba(8,12,24,0.65)] border-white/[0.08] shadow-[0_20px_60px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.1),inset_0_0_20px_rgba(255,255,255,0.02)] backdrop-blur-[24px]",
+        "bg-gradient-to-br from-[#0A0F1C] via-[#060913] to-[#04060C] border-white/[0.06] shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.08),inset_0_0_20px_rgba(255,255,255,0.02)]",
         isPurple 
-          ? "group-hover/card:border-purple-500/40 group-hover/card:bg-[rgba(16,22,40,0.8)] group-hover/card:shadow-[0_8px_30px_rgba(168,85,247,0.15),inset_0_1px_0_rgba(255,255,255,0.1)]" 
-          : "group-hover/card:border-cyan-400/40 group-hover/card:bg-[rgba(16,22,40,0.8)] group-hover/card:shadow-[0_8px_30px_rgba(34,211,238,0.15),inset_0_1px_0_rgba(255,255,255,0.1)]"
+          ? "group-hover/card:border-purple-500/40 group-hover/card:shadow-[0_8px_30px_rgba(168,85,247,0.15),inset_0_1px_0_rgba(255,255,255,0.15)]" 
+          : "group-hover/card:border-cyan-400/40 group-hover/card:shadow-[0_8px_30px_rgba(34,211,238,0.15),inset_0_1px_0_rgba(255,255,255,0.15)]"
       )}>
-        {/* Top Edge Glow */}
+        {/* Top Edge Glow (Permanent Neon Light) */}
         <div className={cn(
-          "absolute left-0 top-0 h-[2px] w-[100px] transition-all duration-500 opacity-60 group-hover/card:opacity-100 group-hover/card:w-[250px]",
-          isPurple ? "bg-gradient-to-r from-purple-500 to-transparent" : "bg-gradient-to-r from-cyan-400 to-transparent"
+          "absolute left-0 top-0 h-[2px] w-[150px] transition-all duration-500 opacity-60 group-hover/card:opacity-100 group-hover/card:w-[300px]",
+          isPurple ? "bg-gradient-to-r from-purple-400 via-purple-500 to-transparent shadow-[0_1px_8px_1px_rgba(168,85,247,0.4)]" : "bg-gradient-to-r from-cyan-300 via-cyan-400 to-transparent shadow-[0_1px_8px_1px_rgba(34,211,238,0.4)]"
         )} />
 
-        {/* Animated gradient background sweep on hover */}
+        {/* Ambient Gradient Glow (Permanent, intensifies on hover) */}
         <div 
           className={cn(
-            "absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/card:opacity-100 pointer-events-none",
-            isPurple ? "bg-[radial-gradient(400px_circle_at_0%_0%,rgba(168,85,247,0.12),transparent_70%)]" : "bg-[radial-gradient(400px_circle_at_0%_0%,rgba(34,211,238,0.12),transparent_70%)]"
+            "absolute inset-0 transition-opacity duration-500 group-hover/card:opacity-100 pointer-events-none",
+            isPurple ? "opacity-15 bg-[radial-gradient(300px_circle_at_0%_0%,rgba(168,85,247,0.2),transparent_70%)] group-hover/card:bg-[radial-gradient(400px_circle_at_0%_0%,rgba(168,85,247,0.3),transparent_70%)]" : "opacity-15 bg-[radial-gradient(300px_circle_at_0%_0%,rgba(34,211,238,0.2),transparent_70%)] group-hover/card:bg-[radial-gradient(400px_circle_at_0%_0%,rgba(34,211,238,0.3),transparent_70%)]"
           )} 
         />
 
