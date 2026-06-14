@@ -215,8 +215,10 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
       {/* Futuristic Icon Container (The Node) */}
       <div 
         className={cn(
-          "relative flex h-[64px] w-[64px] shrink-0 items-center justify-center rounded-2xl border transition-all duration-500 z-10 shadow-lg",
-          isPurple ? "border-purple-500/30 bg-[#060913] shadow-[0_0_15px_rgba(168,85,247,0.15),inset_0_0_8px_rgba(168,85,247,0.08)] group-hover/card:border-purple-500/50 group-hover/card:shadow-[0_0_25px_rgba(168,85,247,0.25),inset_0_0_12px_rgba(168,85,247,0.15)]" : "border-cyan-400/30 bg-[#060913] shadow-[0_0_15px_rgba(34,211,238,0.15),inset_0_0_8px_rgba(34,211,238,0.08)] group-hover/card:border-cyan-400/50 group-hover/card:shadow-[0_0_25px_rgba(34,211,238,0.25),inset_0_0_12px_rgba(34,211,238,0.15)]",
+          "relative flex h-[64px] w-[64px] shrink-0 items-center justify-center rounded-2xl border transition-all duration-500 z-10",
+          "bg-gradient-to-br from-[#1A2238] via-[#0A0F1C] to-[#04060A] border-white/[0.18]",
+          "shadow-[0_10px_20px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.35),inset_0_-1px_2px_rgba(0,0,0,0.8),inset_0_0_10px_rgba(255,255,255,0.05)]",
+          isPurple ? "group-hover/card:border-purple-400/60 group-hover/card:shadow-[0_0_25px_rgba(168,85,247,0.4),inset_0_1px_2px_rgba(255,255,255,0.5)]" : "group-hover/card:border-cyan-300/60 group-hover/card:shadow-[0_0_25px_rgba(34,211,238,0.4),inset_0_1px_2px_rgba(255,255,255,0.5)]",
           iconColorClass.replace("group-hover:", "group-hover/card:")
         )} 
       >
@@ -246,7 +248,7 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
 
       {/* Premium Solid Dark Panel */}
       <div className={cn(
-        "flex-1 relative overflow-hidden rounded-2xl border min-h-[64px] py-3 px-4 sm:px-5 transition-all duration-500 flex flex-col justify-center",
+        "flex-1 relative overflow-hidden rounded-2xl border min-h-[64px] py-3 pr-4 sm:pr-5 pl-5 sm:pl-6 transition-all duration-500 flex flex-col justify-center",
         "bg-gradient-to-br from-[#0A0F1C] via-[#060913] to-[#04060C] border-white/[0.06] shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.08),inset_0_0_20px_rgba(255,255,255,0.02)]",
         isPurple 
           ? "group-hover/card:border-purple-500/40 group-hover/card:shadow-[0_8px_30px_rgba(168,85,247,0.15),inset_0_1px_0_rgba(255,255,255,0.15)]" 
@@ -267,7 +269,7 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
         />
 
         {/* Text Stack */}
-        <div className="relative z-10 w-full pr-8">
+        <div className="relative z-10 w-full pr-8" style={{ paddingLeft: "16px" }}>
           <div className="flex items-center gap-3">
             <p className="font-mono text-[10px] sm:text-[11px] font-bold tracking-[0.2em] text-white/50 transition-colors duration-300 group-hover/card:text-white/80 uppercase">
               {label}
@@ -362,7 +364,7 @@ export default function Contact() {
               </div>
               
               {/* Text */}
-              <span className="shrink-0 font-mono text-[15px] font-bold uppercase tracking-[0.25em] text-cyan-300 drop-shadow-[0_0_4px_rgba(34,211,238,0.4)]">
+              <span className="shrink-0 font-mono text-[15px] font-bold uppercase tracking-[0.25em] text-cyan-300 drop-shadow-[0_0_6px_rgba(34,211,238,0.45)]">
                 GET IN TOUCH
               </span>
               
@@ -379,13 +381,13 @@ export default function Contact() {
             {/* Main Heading */}
             <h2 className="font-display text-[clamp(1.5rem,3vw,2.7rem)] font-extrabold leading-[1.15] tracking-tight text-white" style={{ transform: "translateY(-76px)" }}>
               Let&apos;s build something{" "}
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent" style={{ transform: "translateY(-5px)", display: "inline-block" }}>
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(168,85,247,0.25)]" style={{ transform: "translateY(-5px)", display: "inline-block" }}>
                 great together.
               </span>
             </h2>
 
             {/* Supporting Text & Badges */}
-            <div className="mt-5 flex flex-col gap-5" style={{ transform: "translateY(-40px)" }}>
+            <div className="mt-5 flex flex-col gap-5" style={{ transform: "translateY(-60px)" }}>
               <p className="max-w-lg text-[16px] md:text-[18px] leading-[1.6] text-white/70">
                 Open to internships, freelance projects, and full-time roles.
               </p>
