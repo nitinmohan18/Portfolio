@@ -274,7 +274,7 @@ export default function Navbar() {
       <motion.nav
         initial={{ opacity: 0, y: -100, filter: "blur(12px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ delay: 1.8, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ delay: 0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         style={{ willChange: "transform", backdropFilter: "none" }}
         className="fixed top-0 left-0 w-full z-[1000] bg-transparent border-b-0 py-3 transition-all duration-400"
       >
