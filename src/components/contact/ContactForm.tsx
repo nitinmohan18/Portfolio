@@ -203,7 +203,7 @@ export default function ContactForm() {
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(34,211,238,0.8)]" />
             </span>
             <h3 className="font-mono text-[13px] font-bold uppercase tracking-widest text-cyan-300 drop-shadow-[0_0_10px_rgba(34,211,238,0.6)]">
-              SEND ME A MESSAGE
+              START A CONVERSATION
             </h3>
           </div>
 
@@ -218,7 +218,7 @@ export default function ContactForm() {
             <div className="grid sm:grid-cols-2" style={{ gap: "1.25rem" }}>
               <FieldFrame
                 id="contact-name"
-                label="Your Name"
+                label="Name"
                 icon={User}
                 error={errors.name}
               >
@@ -226,7 +226,7 @@ export default function ContactForm() {
                   id="contact-name"
                   type="text"
                   autoComplete="name"
-                  placeholder="Enter your name"
+                  placeholder="Your Name"
                   value={form.name}
                   onChange={(e) => updateField("name", e.target.value)}
                   className={getInputClass()}
@@ -241,7 +241,7 @@ export default function ContactForm() {
 
               <FieldFrame
                 id="contact-email"
-                label="Your Email"
+                label="Email"
                 icon={Mail}
                 error={errors.email}
               >
@@ -249,7 +249,7 @@ export default function ContactForm() {
                   id="contact-email"
                   type="email"
                   autoComplete="email"
-                  placeholder="Enter your email"
+                  placeholder="your.email@example.com"
                   value={form.email}
                   onChange={(e) => updateField("email", e.target.value)}
                   className={getInputClass()}
@@ -294,7 +294,7 @@ export default function ContactForm() {
             >
               <textarea
                 id="contact-message"
-                placeholder="Tell me about your project, idea, or how we can work together..."
+                placeholder="Share details about the opportunity or collaboration."
                 value={form.message}
                 onChange={(e) => updateField("message", e.target.value)}
                 className={cn(getInputClass(), "resize-none leading-6")}

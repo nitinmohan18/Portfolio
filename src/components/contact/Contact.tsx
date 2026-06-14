@@ -246,25 +246,26 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
         </AnimatePresence>
       </div>
 
-      {/* Premium Solid Dark Panel */}
+      {/* Premium 3D Metallic Text Panel */}
       <div className={cn(
         "flex-1 relative overflow-hidden rounded-2xl border min-h-[64px] py-3 pr-4 sm:pr-5 pl-5 sm:pl-6 transition-all duration-500 flex flex-col justify-center",
-        "bg-gradient-to-br from-[#0A0F1C] via-[#060913] to-[#04060C] border-white/[0.06] shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.08),inset_0_0_20px_rgba(255,255,255,0.02)]",
+        "bg-gradient-to-br from-[#0C1222] to-[#03050A] border-white/[0.1]",
+        "shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.2),inset_0_-1px_1px_rgba(0,0,0,0.8),inset_0_0_15px_rgba(255,255,255,0.02)]",
         isPurple 
-          ? "group-hover/card:border-purple-500/40 group-hover/card:shadow-[0_8px_30px_rgba(168,85,247,0.15),inset_0_1px_0_rgba(255,255,255,0.15)]" 
-          : "group-hover/card:border-cyan-400/40 group-hover/card:shadow-[0_8px_30px_rgba(34,211,238,0.15),inset_0_1px_0_rgba(255,255,255,0.15)]"
+          ? "group-hover/card:border-purple-400/30 group-hover/card:shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.3),inset_0_-1px_1px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(168,85,247,0.1)]" 
+          : "group-hover/card:border-cyan-400/30 group-hover/card:shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.3),inset_0_-1px_1px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(34,211,238,0.1)]"
       )}>
-        {/* Top Edge Glow (Permanent Neon Light) */}
+        {/* Top Edge Neon Highlight (Matching Main Card) */}
         <div className={cn(
-          "absolute left-0 top-0 h-[2px] w-[150px] transition-all duration-500 opacity-60 group-hover/card:opacity-100 group-hover/card:w-[300px]",
-          isPurple ? "bg-gradient-to-r from-purple-400 via-purple-500 to-transparent shadow-[0_1px_8px_1px_rgba(168,85,247,0.4)]" : "bg-gradient-to-r from-cyan-300 via-cyan-400 to-transparent shadow-[0_1px_8px_1px_rgba(34,211,238,0.4)]"
+          "absolute inset-x-0 top-0 h-[2px] transition-opacity duration-500 opacity-40 group-hover/card:opacity-100",
+          isPurple ? "bg-gradient-to-r from-transparent via-purple-400 to-transparent shadow-[0_1px_8px_1px_rgba(168,85,247,0.5)]" : "bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_1px_8px_1px_rgba(34,211,238,0.5)]"
         )} />
 
-        {/* Ambient Gradient Glow (Permanent, intensifies on hover) */}
+        {/* Ambient Gradient Glow */}
         <div 
           className={cn(
-            "absolute inset-0 transition-opacity duration-500 group-hover/card:opacity-100 pointer-events-none",
-            isPurple ? "opacity-15 bg-[radial-gradient(300px_circle_at_0%_0%,rgba(168,85,247,0.2),transparent_70%)] group-hover/card:bg-[radial-gradient(400px_circle_at_0%_0%,rgba(168,85,247,0.3),transparent_70%)]" : "opacity-15 bg-[radial-gradient(300px_circle_at_0%_0%,rgba(34,211,238,0.2),transparent_70%)] group-hover/card:bg-[radial-gradient(400px_circle_at_0%_0%,rgba(34,211,238,0.3),transparent_70%)]"
+            "pointer-events-none absolute inset-0 transition-opacity duration-500 group-hover/card:opacity-100",
+            isPurple ? "opacity-15 bg-[radial-gradient(250px_circle_at_0%_0%,rgba(168,85,247,0.4),transparent_70%)] group-hover/card:opacity-30" : "opacity-15 bg-[radial-gradient(250px_circle_at_0%_0%,rgba(34,211,238,0.4),transparent_70%)] group-hover/card:opacity-30"
           )} 
         />
 
