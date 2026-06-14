@@ -89,10 +89,10 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
         className="relative flex flex-col flex-1 rounded-2xl border transition-all duration-300"
         style={{
           padding: "clamp(2rem, 5%, 3rem)",
-          background: "rgba(8, 12, 24, 0.8)",
-          borderColor: `rgba(${cat.rgb}, 0.15)`,
+          background: "linear-gradient(165deg, rgba(16, 22, 38, 0.85), rgba(8, 10, 16, 0.95))",
+          borderColor: `rgba(${cat.rgb}, 0.25)`,
           backdropFilter: "blur(16px)",
-          boxShadow: "0 4px 32px rgba(0,0,0,0.4)",
+          boxShadow: "inset 0 1px 1px rgba(255, 255, 255, 0.08), inset 0 -2px 4px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(0, 0, 0, 0.5)",
         }}
       >
         {/* Spotlight overlay */}
@@ -181,14 +181,14 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
             }}
           >
             <motion.span
-              whileHover={{ scale: 1.08, y: -3, boxShadow: `0 8px 20px -4px rgba(${cat.rgb}, 0.4)` }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.08, y: -3, boxShadow: `inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.5), 0 8px 16px -4px rgba(${cat.rgb}, 0.5)` }}
+              whileTap={{ scale: 0.95, y: 1, boxShadow: `inset 0 2px 4px rgba(0,0,0,0.6)` }}
               className="relative overflow-hidden px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
               style={{
-                background: `linear-gradient(135deg, rgba(${cat.rgb}, 0.15), rgba(${cat.rgb}, 0.05))`,
-                borderColor: `rgba(${cat.rgb}, 0.3)`,
+                background: `linear-gradient(145deg, rgba(${cat.rgb}, 0.2), rgba(${cat.rgb}, 0.05))`,
+                borderColor: `rgba(${cat.rgb}, 0.4)`,
                 color: `rgba(${cat.rgb}, 1)`,
-                boxShadow: `0 2px 10px -2px rgba(${cat.rgb}, 0.2)`
+                boxShadow: `inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -1px 2px rgba(0,0,0,0.4), 0 2px 8px -2px rgba(${cat.rgb}, 0.3)`
               }}
             >
               {repo.language}
@@ -197,27 +197,27 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
             {repo.name.toLowerCase().includes("windly") && repo.name.toLowerCase().includes("frontend") && (
               <>
                 <motion.span
-                  whileHover={{ scale: 1.08, y: -3, boxShadow: "0 8px 20px -4px rgba(227, 79, 38, 0.4)" }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.08, y: -3, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.5), 0 8px 16px -4px rgba(227, 79, 38, 0.5)" }}
+                  whileTap={{ scale: 0.95, y: 1, boxShadow: "inset 0 2px 4px rgba(0,0,0,0.6)" }}
                   className="relative overflow-hidden px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
                   style={{
-                    background: "linear-gradient(135deg, rgba(227, 79, 38, 0.15), rgba(227, 79, 38, 0.05))",
-                    borderColor: "rgba(227, 79, 38, 0.3)",
+                    background: "linear-gradient(145deg, rgba(227, 79, 38, 0.2), rgba(227, 79, 38, 0.05))",
+                    borderColor: "rgba(227, 79, 38, 0.4)",
                     color: "rgba(255, 120, 80, 1)",
-                    boxShadow: "0 2px 10px -2px rgba(227, 79, 38, 0.2)"
+                    boxShadow: "inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -1px 2px rgba(0,0,0,0.4), 0 2px 8px -2px rgba(227, 79, 38, 0.3)"
                   }}
                 >
                   HTML
                 </motion.span>
                 <motion.span
-                  whileHover={{ scale: 1.08, y: -3, boxShadow: "0 8px 20px -4px rgba(38, 77, 228, 0.4)" }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.08, y: -3, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.5), 0 8px 16px -4px rgba(38, 77, 228, 0.5)" }}
+                  whileTap={{ scale: 0.95, y: 1, boxShadow: "inset 0 2px 4px rgba(0,0,0,0.6)" }}
                   className="relative overflow-hidden px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
                   style={{
-                    background: "linear-gradient(135deg, rgba(38, 77, 228, 0.15), rgba(38, 77, 228, 0.05))",
-                    borderColor: "rgba(38, 77, 228, 0.3)",
+                    background: "linear-gradient(145deg, rgba(38, 77, 228, 0.2), rgba(38, 77, 228, 0.05))",
+                    borderColor: "rgba(38, 77, 228, 0.4)",
                     color: "rgba(100, 150, 255, 1)",
-                    boxShadow: "0 2px 10px -2px rgba(38, 77, 228, 0.2)"
+                    boxShadow: "inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -1px 2px rgba(0,0,0,0.4), 0 2px 8px -2px rgba(38, 77, 228, 0.3)"
                   }}
                 >
                   CSS
@@ -227,15 +227,15 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
 
             {repo.topics?.slice(0, 2).map((t) => (
               <motion.span
-                whileHover={{ scale: 1.08, y: -3, boxShadow: "0 8px 20px -4px rgba(255,255,255, 0.15)" }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.08, y: -3, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.5), 0 8px 16px -4px rgba(255,255,255, 0.2)" }}
+                whileTap={{ scale: 0.95, y: 1, boxShadow: "inset 0 2px 4px rgba(0,0,0,0.6)" }}
                 key={t}
                 className="relative overflow-hidden px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono border backdrop-blur-md cursor-pointer transition-all"
                 style={{
-                  background: "linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01))",
-                  borderColor: "rgba(255,255,255,0.12)",
+                  background: "linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
+                  borderColor: "rgba(255,255,255,0.15)",
                   color: "rgba(200,215,235,0.8)",
-                  boxShadow: "0 2px 10px -2px rgba(255,255,255, 0.05)"
+                  boxShadow: "inset 0 1px 1px rgba(255,255,255,0.05), inset 0 -1px 2px rgba(0,0,0,0.3), 0 2px 8px -2px rgba(255,255,255, 0.1)"
                 }}
               >
                 {t}
@@ -260,39 +260,42 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
         {/* Action buttons */}
         <div className="flex gap-4 mt-auto" style={{ transform: "translateZ(30px)" }}>
           <motion.a
-            whileHover={{ scale: 1.05, y: -3, boxShadow: "0 10px 25px -5px rgba(255,255,255,0.15)" }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02, y: -4, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.6), 0 10px 20px -5px rgba(0,0,0,0.5), 0 0 15px rgba(255,255,255,0.1)" }}
+            whileTap={{ scale: 0.97, y: 1, boxShadow: "inset 0 2px 6px rgba(0,0,0,0.6), inset 0 1px 2px rgba(0,0,0,0.4)" }}
             href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
             className="group/btn flex-1 flex items-center justify-center gap-2.5 py-3.5 rounded-xl text-[13px] font-bold overflow-hidden relative transition-all duration-300"
             style={{
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.12)",
+              background: "rgba(255,255,255,0.02)",
+              border: "1px solid rgba(255,255,255,0.15)",
               color: "white",
-              backdropFilter: "blur(10px)"
+              backdropFilter: "blur(10px)",
+              boxShadow: "inset 0 1px 1px rgba(255, 255, 255, 0.05), inset 0 -1px 2px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(0, 0, 0, 0.3)"
             }}
           >
             <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-            <Github size={16} className="relative z-10" />
+            <Github size={16} className="relative z-10 transition-transform duration-300 group-hover/btn:rotate-12" />
             <span className="relative z-10 tracking-wide">Source code</span>
           </motion.a>
 
           {repo.homepage && (
             <motion.a
-              whileHover={{ scale: 1.05, y: -3, boxShadow: `0 15px 35px -5px rgba(${cat.rgb}, 0.5)` }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02, y: -4, boxShadow: `inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.6), 0 10px 20px -5px rgba(${cat.rgb},0.5), 0 0 20px rgba(${cat.rgb},0.2)` }}
+              whileTap={{ scale: 0.97, y: 1, boxShadow: "inset 0 2px 6px rgba(0,0,0,0.7), inset 0 1px 2px rgba(0,0,0,0.5)" }}
               href={repo.homepage}
               target="_blank"
               rel="noopener noreferrer"
               className="group/btn flex-1 flex items-center justify-center gap-2.5 py-3.5 rounded-xl text-[13px] font-bold text-white relative overflow-hidden transition-all duration-300"
               style={{
-                background: `linear-gradient(135deg, rgba(${cat.rgb},1), rgba(${cat.rgb},0.7))`,
-                border: `1px solid rgba(255,255,255,0.3)`,
+                background: `linear-gradient(135deg, rgba(${cat.rgb}, 0.25), rgba(${cat.rgb}, 0.05))`,
+                border: `1px solid rgba(${cat.rgb}, 0.4)`,
+                backdropFilter: "blur(10px)",
+                boxShadow: `inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 3px rgba(0, 0, 0, 0.5), 0 4px 10px rgba(0, 0, 0, 0.4)`
               }}
             >
-              <div className="absolute inset-0 bg-white/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-              <ExternalLink size={16} className="relative z-10" />
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+              <ExternalLink size={16} className="relative z-10 transition-transform duration-300 group-hover/btn:scale-110" />
               <span className="relative z-10 tracking-wide">Live demo</span>
             </motion.a>
           )}

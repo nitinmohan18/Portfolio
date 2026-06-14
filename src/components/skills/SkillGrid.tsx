@@ -57,11 +57,14 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
         rotateX,
         rotateY,
         transformStyle: "preserve-3d",
-        willChange: "transform, opacity, filter"
+        willChange: "transform, opacity, filter",
+        background: "linear-gradient(165deg, rgba(16, 22, 38, 0.85), rgba(8, 10, 16, 0.95))",
+        borderColor: "rgba(255,255,255,0.12)",
+        boxShadow: "inset 0 1px 1px rgba(255, 255, 255, 0.08), inset 0 -2px 4px rgba(0, 0, 0, 0.5), 0 8px 30px rgba(0,0,0,0.6)",
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="group relative flex flex-col h-full rounded-[16px] bg-[#0e1320] border border-white/[0.12] hover:border-blue-500/40 transition-colors duration-500 shadow-[0_8px_30px_rgba(0,0,0,0.6)]"
+      className="group relative flex flex-col h-full rounded-[16px] border transition-colors duration-500"
     >
       {/* 3D Depth element - creates an inner glowing shadow */}
       <div 
@@ -119,9 +122,15 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
       initial={{ opacity: 0, scale: 0.8, y: 20, filter: "blur(5px)" }}
       whileInView={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
       transition={{ type: "spring", stiffness: 120, damping: 14, delay: index * 0.05 }}
-      whileHover={{ y: -2, scale: 1.02 }}
-      className={`relative flex items-center gap-3 p-2.5 rounded-[10px] bg-[#161d2d] border border-white/[0.08] hover:bg-[#1c2538] hover:border-white/[0.2] transition-all duration-300 group/skill cursor-default shadow-sm hover:shadow-[0_5px_15px_rgba(0,0,0,0.4)] ${isSingle ? 'py-5 justify-center' : ''} ${className}`}
-      style={{ transformStyle: "preserve-3d", willChange: "transform, opacity, filter" }}
+      whileHover={{ y: -2, scale: 1.02, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.1), inset 0 -2px 4px rgba(0,0,0,0.6), 0 8px 16px -4px rgba(0,0,0,0.5)" }}
+      className={`relative flex items-center gap-3 p-2.5 rounded-[10px] border transition-all duration-300 group/skill cursor-default hover:border-white/[0.2] ${isSingle ? 'py-5 justify-center' : ''} ${className}`}
+      style={{ 
+        transformStyle: "preserve-3d", 
+        willChange: "transform, opacity, filter",
+        background: "linear-gradient(145deg, rgba(22, 29, 45, 0.8), rgba(12, 16, 26, 0.9))",
+        borderColor: "rgba(255,255,255,0.08)",
+        boxShadow: "inset 0 1px 1px rgba(255,255,255,0.05), inset 0 -1px 2px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.2)"
+      }}
     >
       {/* Skill specific hover glow behind the chip */}
       <div 
@@ -147,7 +156,6 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
         {/* Inner dark rectangle to mask the center, leaving border */}
         <div className="absolute inset-[1.5px] rounded-[6.5px] bg-[#0c101a] z-0" />
 
-        {/* Rotatable Skill Icon Container */}
         <motion.div
           whileHover={{ rotate: 360 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -159,6 +167,7 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
             width={isSingle ? 22 : 16}
             height={isSingle ? 22 : 16}
             className={`object-contain drop-shadow-sm`}
+            style={{ width: "auto", height: "auto" }}
             unoptimized
             priority
             loading="eager"

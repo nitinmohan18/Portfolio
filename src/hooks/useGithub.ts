@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getGithubRepos, getGithubUser } from "@/lib/github";
 import type { GithubRepo, GithubUser } from "@/types/project";
 
 interface UseGithubReturn {
@@ -22,13 +21,13 @@ export function useGithub(): UseGithubReturn {
 
     async function fetchData() {
       try {
-        const [userData, reposData] = await Promise.all([
-          getGithubUser(),
-          getGithubRepos(),
-        ]);
+        const res = await fetch("/api/github");
+        if (!res.ok) throw new Error("Failed to fetch");
+        const data = await res.json();
+        
         if (!cancelled) {
-          setUser(userData);
-          setRepos(reposData);
+          setUser(data.user);
+          setRepos(data.repos);
         }
       } catch {
         if (!cancelled) setError("Failed to fetch GitHub data.");

@@ -69,28 +69,33 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         .hey-label {
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 12px;
           margin-bottom: 0px;
         }
         .hey-text {
-          font-size: clamp(9px, 0.9vw, 11px);
-          font-weight: 700;
-          letter-spacing: 5px;
+          font-size: clamp(10px, 1vw, 12px);
+          font-weight: 800;
+          letter-spacing: 6px;
           text-transform: uppercase;
-          color: rgba(100, 255, 218, 0.5);
           font-family: monospace;
+          background: linear-gradient(90deg, #fff 0%, #22d3ee 50%, #818cf8 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.8)) drop-shadow(0px 0px 6px rgba(34,211,238,0.4));
         }
         .hey-diamond {
-          font-size: 10px;
-          color: rgba(100, 255, 218, 0.35);
-          animation: diamondPulse 3s ease-in-out infinite;
+          font-size: 12px;
+          color: #22d3ee;
+          animation: diamondPulse 2s ease-in-out infinite;
+          text-shadow: 0 0 4px rgba(34, 211, 238, 0.2);
         }
         .hey-diamond:last-of-type {
-          animation-delay: 1.5s;
+          animation-delay: 1s;
         }
         @keyframes diamondPulse {
-          0%, 100% { opacity: 0.25; transform: scale(0.8); }
-          50%       { opacity: 0.8;  transform: scale(1.2); }
+          0%, 100% { opacity: 0.3; transform: scale(0.9); filter: drop-shadow(0 0 0px rgba(34,211,238,0)); }
+          50%       { opacity: 0.6;  transform: scale(1.05); filter: drop-shadow(0 0 3px rgba(34,211,238,0.25)); }
         }
         .hey-line-left {
           width: 40px;

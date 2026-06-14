@@ -111,22 +111,22 @@ export default function About() {
         }
 
         .edu-card {
-          background: rgba(13,16,28,0.75);
+          background: linear-gradient(165deg, rgba(16, 22, 38, 0.85), rgba(8, 10, 16, 0.95));
           border: 1px solid rgba(255,255,255,0.07);
           border-radius: 16px;
           padding: 18px 20px;
           position: relative;
           overflow: hidden;
-          backdrop-filter: blur(12px);
+          backdrop-filter: blur(16px);
           transform: translateY(0) scale(1);
-          box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-          transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), inset 0 -2px 4px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(0,0,0,0.4);
+          transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
         }
 
         .group:hover .edu-card {
-          border-color: rgba(var(--card-rgb), 0.35);
-          transform: translateY(-6px) scale(1.01);
-          box-shadow: 0 12px 32px rgba(0,0,0,0.35), inset 0 0 20px rgba(var(--card-rgb),0.03);
+          border-color: rgba(var(--card-rgb), 0.4);
+          transform: translateY(-6px) scale(1.02);
+          box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.15), inset 0 -3px 6px rgba(0, 0, 0, 0.8), 0 16px 32px -4px rgba(0,0,0,0.6), 0 0 20px rgba(var(--card-rgb), 0.2);
         }
 
         .top-accent {

@@ -39,7 +39,7 @@ export default function MagneticButton({
 
   const handleMouseEnter = useCallback(() => {
     if (!wrapperRef.current) return;
-    wrapperRef.current.style.transition = "transform 0.15s ease";
+    wrapperRef.current.style.transition = "transform 0.5s ease-out";
   }, []);
 
   return (

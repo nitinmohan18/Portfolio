@@ -51,10 +51,10 @@ function FieldFrame({ id, label, error, icon: Icon, children }: FieldFrameProps)
 
       <div
         className={cn(
-          "relative overflow-hidden border bg-white/[0.03] transition-all duration-500",
-          "border-white/[0.15] shadow-[inset_0_2px_8px_rgba(0,0,0,0.3)]",
-          "hover:border-cyan-400/30 hover:bg-white/[0.05] hover:shadow-[0_0_15px_rgba(34,211,238,0.05),inset_0_2px_8px_rgba(0,0,0,0.3)]",
-          "focus-within:!border-cyan-400/70 focus-within:bg-cyan-400/[0.05] focus-within:shadow-[0_0_30px_rgba(34,211,238,0.25),inset_0_1px_4px_rgba(34,211,238,0.15)]",
+          "relative overflow-hidden border bg-[#05070c] transition-all duration-500",
+          "border-white/[0.1] shadow-[inset_0_2px_12px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(0,0,0,0.5),0_1px_1px_rgba(255,255,255,0.05)]",
+          "hover:border-cyan-400/30 hover:bg-[#070a12] hover:shadow-[0_0_15px_rgba(34,211,238,0.05),inset_0_2px_12px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(0,0,0,0.5),0_1px_1px_rgba(255,255,255,0.05)]",
+          "focus-within:!border-cyan-400/60 focus-within:bg-[#080b14] focus-within:shadow-[0_0_20px_rgba(34,211,238,0.15),inset_0_2px_12px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(0,0,0,0.5)]",
           error &&
             "border-red-400/50 bg-red-400/[0.04] focus-within:!border-red-400/60 focus-within:shadow-[0_0_20px_rgba(248,113,113,0.12)]"
         )}

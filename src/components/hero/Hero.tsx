@@ -45,43 +45,70 @@ export default function Hero({ isVisible = true }: HeroProps) {
             {/* Scroll indicator */}
             <style>{`
               .scroll-text {
-                font-size: 9px;
-                letter-spacing: 4px;
+                font-size: 10px;
+                font-weight: 800;
+                letter-spacing: 5px;
                 text-transform: uppercase;
-                color: rgba(34,211,238,0.35);
                 font-family: monospace;
-                animation: scrollTextPulse 2.5s ease-in-out infinite;
+                background: linear-gradient(180deg, #fff 0%, #22d3ee 50%, #0891b2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.8)) drop-shadow(0px 0px 8px rgba(34,211,238,0.5));
+                animation: scrollTextPulse 3s ease-in-out infinite;
               }
               @keyframes scrollTextPulse {
-                0%, 100% { opacity: 0.3; }
-                50%       { opacity: 0.7; }
+                0%, 100% { filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.8)) drop-shadow(0px 0px 4px rgba(34,211,238,0.3)); opacity: 0.7; }
+                50%       { filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.8)) drop-shadow(0px 0px 12px rgba(34,211,238,0.8)); opacity: 1; }
               }
               .scroll-mouse {
-                border-color: rgba(34,211,238,0.3);
+                background: linear-gradient(180deg, rgba(10, 15, 25, 0.9), rgba(5, 8, 15, 0.95));
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.15), inset 0 -4px 8px rgba(0, 0, 0, 0.8), 0 5px 15px rgba(0, 0, 0, 0.5), 0 0 20px rgba(34, 211, 238, 0.2);
+                backdrop-filter: blur(12px);
+                position: relative;
+                overflow: hidden;
+              }
+              .scroll-mouse::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 15%; right: 15%;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
               }
               .scroll-dot {
-                background: #22d3ee;
-                box-shadow: 0 0 6px rgba(34,211,238,0.6);
+                background: linear-gradient(180deg, #fff, #22d3ee);
+                box-shadow: 0 0 10px #22d3ee, 0 0 25px #22d3ee;
+                border-radius: 50px;
               }
             `}</style>
             <motion.div
-              className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[5] flex flex-col items-center gap-2"
+              className="absolute bottom-3 left-1/2 -translate-x-1/2 z-[5] flex flex-col items-center gap-3 cursor-pointer"
               initial={{ opacity: 0 }}
               animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
               transition={{ delay: 1.2, duration: 0.8 }}
-              style={{ willChange: "transform, opacity" }}
+              style={{ willChange: "transform, opacity", perspective: "400px" }}
+              onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
             >
-              <span className="scroll-text">
+              <motion.span 
+                className="scroll-text"
+                animate={{ y: [0, -3, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              >
                 Scroll Down
-              </span>
-              <div className="w-5 h-8 border rounded-[50px] flex items-start justify-center p-1 scroll-mouse">
+              </motion.span>
+              <motion.div 
+                className="w-[26px] h-[42px] rounded-[50px] flex items-start justify-center p-[4px] scroll-mouse"
+                whileHover={{ scale: 1.05, boxShadow: "inset 0 2px 4px rgba(255, 255, 255, 0.2), inset 0 -4px 8px rgba(0, 0, 0, 0.8), 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 30px rgba(34, 211, 238, 0.4)" }}
+                style={{ transformStyle: "preserve-3d" }}
+              >
                 <motion.div
-                  className="w-1 h-1.5 rounded-full scroll-dot"
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                  style={{ willChange: "transform" }}
+                  className="w-[4px] h-[8px] scroll-dot"
+                  animate={{ y: [0, 18], opacity: [1, 0], scaleY: [1, 1.5] }}
+                  transition={{ duration: 1.9, repeat: Infinity, ease: "easeOut" }}
+                  style={{ willChange: "transform, opacity" }}
                 />
-              </div>
+              </motion.div>
             </motion.div>
           </motion.div>
       </AnimatePresence>
