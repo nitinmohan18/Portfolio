@@ -81,18 +81,20 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
       onMouseMove={handleMove}
       onMouseLeave={() => { x.set(0); y.set(0); }}
       variants={cardVariants}
+      whileHover={{ scale: 1.02, y: -5 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className="group relative flex flex-col rounded-2xl overflow-hidden cursor-default"
+      className="group relative flex flex-col rounded-[24px] overflow-hidden cursor-default"
     >
       {/* Glass body */}
       <div
-        className="relative flex flex-col flex-1 rounded-2xl border transition-all duration-300"
+        className="relative flex flex-col flex-1 rounded-[24px] border transition-all duration-500 group-hover:border-opacity-100"
         style={{
-          padding: "clamp(2rem, 5%, 3rem)",
-          background: "linear-gradient(165deg, rgba(16, 22, 38, 0.85), rgba(8, 10, 16, 0.95))",
-          borderColor: `rgba(${cat.rgb}, 0.25)`,
-          backdropFilter: "blur(16px)",
-          boxShadow: "inset 0 1px 1px rgba(255, 255, 255, 0.08), inset 0 -2px 4px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(0, 0, 0, 0.5)",
+          padding: "clamp(2.5rem, 6%, 3.5rem)",
+          background: "linear-gradient(165deg, rgba(16, 22, 38, 0.6), rgba(8, 10, 16, 0.9))",
+          borderColor: `rgba(${cat.rgb}, 0.2)`,
+          backdropFilter: "blur(20px)",
+          boxShadow: `inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -2px 6px rgba(0, 0, 0, 0.8), 0 8px 30px rgba(0, 0, 0, 0.6)`,
         }}
       >
         {/* Spotlight overlay */}
@@ -157,16 +159,16 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
 
         {/* Title */}
         <h3
-          className="font-display font-bold text-white mb-3 transition-colors duration-300 group-hover:text-[#e2e8ff] capitalize"
-          style={{ fontSize: "clamp(18px, 1.5vw, 22px)", letterSpacing: "0.02em", transform: "translateZ(25px)" }}
+          className="font-display font-bold text-white mb-4 transition-colors duration-300 group-hover:text-[#e2e8ff] capitalize"
+          style={{ fontSize: "clamp(20px, 1.8vw, 24px)", letterSpacing: "0.02em", transform: "translateZ(25px)" }}
         >
           {repo.name.replace(/-/g, " ")}
         </h3>
 
         {/* Description */}
         <p
-          className="text-[14px] leading-relaxed"
-          style={{ color: "rgba(180,195,220,0.65)", letterSpacing: "0.015em", transform: "translateZ(15px)" }}
+          className="text-[15px] leading-relaxed mb-2"
+          style={{ color: "rgba(180,195,220,0.75)", letterSpacing: "0.015em", transform: "translateZ(15px)" }}
         >
           {repo.description ?? "No description provided."}
         </p>
