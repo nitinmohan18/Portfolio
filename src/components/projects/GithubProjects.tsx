@@ -71,31 +71,54 @@ export default function GithubProjects() {
 
       {/* CTA */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        initial={{ opacity: 0, y: 40, scale: 0.9, filter: "blur(10px)" }}
+        whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ 
+          duration: 0.8, 
+          delay: 0.2, 
+          type: "spring", 
+          stiffness: 100, 
+          damping: 15 
+        }}
+        className="mt-10"
       >
         <motion.a
-          whileHover={{ scale: 1.05, y: -3, boxShadow: "0 15px 40px -10px rgba(255, 255, 255, 0.1)" }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.05, y: -5, boxShadow: "inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -4px 10px rgba(0,0,0,1), 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 50px rgba(255, 255, 255, 0.1)" }}
+          whileTap={{ scale: 0.95, y: 2, boxShadow: "inset 0 4px 8px rgba(0,0,0,1), inset 0 1px 2px rgba(0,0,0,0.8)" }}
           href="https://github.com/nitinmohan18"
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative flex items-center gap-3 px-8 py-4 rounded-full font-bold text-[15px] text-white overflow-hidden transition-shadow"
+          className="group relative flex items-center justify-center gap-5 px-10 py-5 rounded-[20px] font-bold text-[16px] text-white overflow-hidden transition-all duration-300"
           style={{
-            background: "linear-gradient(135deg, #111318 0%, #000000 100%)",
-            border: "1px solid rgba(255,255,255,0.15)",
-            backdropFilter: "blur(12px)",
-            boxShadow: "0 10px 30px -10px rgba(0,0,0,0.8)",
+            background: "linear-gradient(145deg, #111111, #000000)",
+            border: "1px solid rgba(255, 255, 255, 0.05)",
+            boxShadow: "inset 0 2px 4px rgba(255,255,255,0.1), inset 0 -4px 10px rgba(0,0,0,1), 0 10px 30px rgba(0,0,0,0.8), 0 0 30px rgba(255, 255, 255, 0.05)",
           }}
         >
-          {/* Animated shine effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.3)] to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out" />
+          {/* Animated gradient fill that sweeps across (Permanently visible) */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 opacity-100" />
           
-          <Github size={20} className="relative z-10 transition-transform group-hover:rotate-12 duration-300" />
-          <span className="relative z-10 tracking-wider">Explore All Repositories</span>
-          <GitBranch size={16} className="relative z-10 opacity-70 group-hover:opacity-100 transition-opacity" />
+          {/* Shine mask (Still animates on hover) */}
+          <div className="absolute inset-[-100%] bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.05)_50%,transparent_75%,transparent_100%)] bg-[length:250%_250%] opacity-0 group-hover:opacity-100 group-hover:animate-bg-shine transition-opacity duration-300" />
+
+          {/* Icon Box */}
+          <div
+            className="w-12 h-12 rounded-[12px] flex items-center justify-center shrink-0 border relative z-10 transition-transform duration-300 group-hover:scale-110"
+            style={{
+              background: `linear-gradient(135deg, #1a1a1a, #050505)`,
+              borderColor: `rgba(255, 255, 255, 0.15)`,
+              boxShadow: `inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 5px 15px rgba(0,0,0,0.5)`
+            }}
+          >
+            <Github size={22} className="text-white" style={{ filter: `drop-shadow(0 0 8px rgba(255,255,255,0.4))` }} />
+          </div>
+
+          <span className="relative z-10 tracking-[2.5px] uppercase font-mono font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 text-[14px]">
+            Explore All Repositories
+          </span>
+
+          <GitBranch size={22} className="relative z-10 text-white opacity-100 transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110" style={{ filter: `drop-shadow(0 0 8px rgba(255,255,255,0.3))` }} />
         </motion.a>
       </motion.div>
     </div>
