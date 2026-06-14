@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { Mail, Heart, ArrowUp } from "lucide-react";
 import { Github, Linkedin } from "@/components/ui/Icons";
 import { profile } from "@/data/profile";
@@ -25,6 +26,18 @@ const socialIcons: Record<string, React.ReactNode> = {
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    // Hide when scrolling down, show when scrolling up
+    if (latest > previous && latest > 150) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  });
 
   const handleScrollTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -32,6 +45,25 @@ export default function Footer() {
 
   return (
     <footer className="relative z-10 w-full overflow-hidden bg-transparent">
+      {/* Dynamic Fixed Bottom Border (Hides on scroll down, Animated) */}
+      <motion.div 
+        animate={{ 
+          y: hidden ? 10 : 0, 
+          opacity: hidden ? 0 : 1,
+          backgroundPosition: ["0% center", "200% center"]
+        }}
+        transition={{ 
+          y: { duration: 0.3, ease: "easeInOut" },
+          opacity: { duration: 0.3, ease: "easeInOut" },
+          backgroundPosition: { duration: 8, repeat: Infinity, ease: "linear" }
+        }}
+        style={{
+          background: "linear-gradient(90deg, transparent 0%, rgba(34,211,238,0.8) 50%, transparent 100%)",
+          backgroundSize: "200% auto"
+        }}
+        className="fixed bottom-0 left-0 right-0 z-50 h-[2px] shadow-[0_-2px_15px_rgba(34,211,238,0.6)] pointer-events-none"
+      />
+
       {/* Top border: 1px linear gradient with glowing center */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#60a5fa]/50 to-transparent shadow-[0_0_15px_rgba(96,165,250,0.5)]" />
 

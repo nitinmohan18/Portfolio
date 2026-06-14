@@ -305,14 +305,23 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{
-        delay: 0.2 + index * 0.07,
-        duration: 0.55,
-        ease: [0.16, 1, 0.3, 1],
+      initial={{ opacity: 0, x: -30 }}
+      whileInView={{ 
+        opacity: 1, 
+        x: 0,
+        boxShadow: [
+          "0 0 0px rgba(0,0,0,0)", 
+          isPurple ? "0 0 25px rgba(168,85,247,0.3)" : "0 0 25px rgba(34,211,238,0.3)", 
+          "0 0 0px rgba(0,0,0,0)"
+        ]
       }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        opacity: { delay: 0.6 + index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+        x: { delay: 0.6 + index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+        boxShadow: { delay: 0.6 + index * 0.1 + 0.3, duration: 1, ease: "easeOut" }
+      }}
+      className="rounded-2xl"
     >
       {href ? (
         <a 
@@ -346,56 +355,98 @@ export default function Contact() {
         {/* ── Two-Column Layout ── */}
         <div className="relative z-10 grid gap-12 lg:grid-cols-[45fr_55fr] lg:gap-20 xl:gap-28">
           {/* ═══ Left Column ═══ */}
-          <motion.div
-            initial={{ opacity: 0, x: -32, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col justify-center"
-          >
+          <div className="flex flex-col justify-center">
             {/* Section Label */}
-            <div className="relative mb-3 flex items-center gap-4" style={{ transform: "translate(-60px, -100px)" }}>
-              {/* Left Line & Dot */}
-              <div className="flex items-center gap-2 shrink-0">
-                <div className="h-[1px] w-6 sm:w-8 bg-gradient-to-r from-transparent via-cyan-400/40 to-cyan-400/80 rounded-full shadow-[0_0_4px_rgba(34,211,238,0.3)]" />
-                <span className="relative flex h-1.5 w-1.5 shrink-0">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-40" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_4px_rgba(34,211,238,0.5)]" />
+            <div style={{ transform: "translate(-60px, -100px)" }}>
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="relative mb-3 flex items-center gap-4"
+              >
+                {/* Left Line & Dot */}
+                <div className="flex items-center gap-2 shrink-0">
+                  <motion.div 
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="h-[1px] w-6 sm:w-8 bg-gradient-to-r from-transparent via-cyan-400/40 to-cyan-400/80 rounded-full shadow-[0_0_4px_rgba(34,211,238,0.3)] origin-right" 
+                  />
+                  <span className="relative flex h-1.5 w-1.5 shrink-0">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-40" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_4px_rgba(34,211,238,0.5)]" />
+                  </span>
+                </div>
+                
+                {/* Text */}
+                <span className="shrink-0 font-mono text-[15px] font-bold uppercase tracking-[0.25em] text-cyan-300 drop-shadow-[0_0_6px_rgba(34,211,238,0.45)]">
+                  GET IN TOUCH
                 </span>
-              </div>
-              
-              {/* Text */}
-              <span className="shrink-0 font-mono text-[15px] font-bold uppercase tracking-[0.25em] text-cyan-300 drop-shadow-[0_0_6px_rgba(34,211,238,0.45)]">
-                GET IN TOUCH
-              </span>
-              
-              {/* Right Dot & Line */}
-              <div className="flex items-center gap-2 shrink-0">
-                <span className="relative flex h-1.5 w-1.5 shrink-0">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-40" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_4px_rgba(34,211,238,0.5)]" />
-                </span>
-                <div className="h-[1px] w-6 sm:w-8 bg-gradient-to-l from-transparent via-cyan-400/40 to-cyan-400/80 rounded-full shadow-[0_0_4px_rgba(34,211,238,0.3)]" />
-              </div>
+                {/* Right Dot & Line */}
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="relative flex h-1.5 w-1.5 shrink-0">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-40" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_4px_rgba(34,211,238,0.5)]" />
+                  </span>
+                  <motion.div 
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="h-[1px] w-6 sm:w-8 bg-gradient-to-l from-transparent via-cyan-400/40 to-cyan-400/80 rounded-full shadow-[0_0_4px_rgba(34,211,238,0.3)] origin-left" 
+                  />
+                </div>
+              </motion.div>
             </div>
 
             {/* Main Heading */}
-            <h2 className="font-display text-[clamp(1.5rem,3vw,2.7rem)] font-extrabold leading-[1.15] tracking-tight text-white" style={{ transform: "translateY(-76px)" }}>
-              Let&apos;s build something{" "}
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(168,85,247,0.25)]" style={{ transform: "translateY(-5px)", display: "inline-block" }}>
-                great together.
-              </span>
-            </h2>
+            <div style={{ transform: "translateY(-76px)" }}>
+              <h2 className="font-display text-[clamp(1.5rem,3vw,2.7rem)] font-extrabold leading-[1.15] tracking-tight text-white flex flex-col items-start">
+                <motion.span
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  Let&apos;s build something
+                </motion.span>
+                <div style={{ transform: "translateY(-5px)", display: "inline-block" }}>
+                  <motion.span 
+                    initial={{ opacity: 0, y: 20, filter: "brightness(1) drop-shadow(0 0 0px rgba(168,85,247,0))" }}
+                    whileInView={{ opacity: 1, y: 0, filter: "brightness(1.2) drop-shadow(0 0 8px rgba(168,85,247,0.3))" }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent pb-1 inline-block"
+                  >
+                    great together.
+                  </motion.span>
+                </div>
+              </h2>
+            </div>
 
             {/* Supporting Text & Badges */}
             <div className="mt-5 flex flex-col gap-5" style={{ transform: "translateY(-60px)" }}>
-              <p className="max-w-lg text-[16px] md:text-[18px] leading-[1.6] text-white/70">
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="max-w-lg text-[16px] md:text-[18px] leading-[1.6] text-white/70"
+              >
                 Open to internships, freelance projects, and full-time roles.
-              </p>
+              </motion.p>
               
               <div className="flex flex-wrap gap-4 mt-2">
                 {/* Full-Stack Developer Badge */}
-                <div className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-cyan-400/20 bg-[rgba(8,12,24,0.65)] px-4 py-2 shadow-[inset_0_1px_3px_rgba(34,211,238,0.1),0_0_15px_rgba(34,211,238,0.05)] backdrop-blur-md transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[inset_0_1px_5px_rgba(34,211,238,0.2),0_0_20px_rgba(34,211,238,0.15)] cursor-default">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-cyan-400/20 bg-[rgba(8,12,24,0.65)] px-4 py-2 shadow-[inset_0_1px_3px_rgba(34,211,238,0.1),0_0_15px_rgba(34,211,238,0.05)] backdrop-blur-md transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[inset_0_1px_5px_rgba(34,211,238,0.2),0_0_20px_rgba(34,211,238,0.15)] cursor-default"
+                >
                   {/* Glowing dot */}
                   <span className="relative flex h-2 w-2 shrink-0">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-50" />
@@ -406,10 +457,16 @@ export default function Contact() {
                   </span>
                   {/* Hover Sweep */}
                   <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent transition-transform duration-700 group-hover:translate-x-[150%]" />
-                </div>
+                </motion.div>
 
                 {/* AI/ML Badge */}
-                <div className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-purple-500/20 bg-[rgba(8,12,24,0.65)] px-4 py-2 shadow-[inset_0_1px_3px_rgba(168,85,247,0.1),0_0_15px_rgba(168,85,247,0.05)] backdrop-blur-md transition-all duration-300 hover:border-purple-500/40 hover:shadow-[inset_0_1px_5px_rgba(168,85,247,0.2),0_0_20px_rgba(168,85,247,0.15)] cursor-default">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: 0.58, ease: [0.16, 1, 0.3, 1] }}
+                  className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-purple-500/20 bg-[rgba(8,12,24,0.65)] px-4 py-2 shadow-[inset_0_1px_3px_rgba(168,85,247,0.1),0_0_15px_rgba(168,85,247,0.05)] backdrop-blur-md transition-all duration-300 hover:border-purple-500/40 hover:shadow-[inset_0_1px_5px_rgba(168,85,247,0.2),0_0_20px_rgba(168,85,247,0.15)] cursor-default"
+                >
                   {/* Glowing dot */}
                   <span className="relative flex h-2 w-2 shrink-0">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-purple-500 opacity-50" />
@@ -420,7 +477,7 @@ export default function Contact() {
                   </span>
                   {/* Hover Sweep */}
                   <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-purple-500/10 to-transparent transition-transform duration-700 group-hover:translate-x-[150%]" />
-                </div>
+                </motion.div>
               </div>
             </div>
 
@@ -463,14 +520,14 @@ export default function Contact() {
                 />
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* ═══ Right Column ═══ */}
           <motion.div
-            initial={{ opacity: 0, y: 32, scale: 0.97, filter: "blur(12px)" }}
-            whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
             style={{ marginTop: "-50px" }}
           >
             <ContactForm />

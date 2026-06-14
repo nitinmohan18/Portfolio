@@ -240,100 +240,128 @@ export default function ContactForm() {
           >
             {/* Row 1: Name + Email */}
             <div className="grid sm:grid-cols-2" style={{ gap: "1.25rem" }}>
-              <FieldFrame
-                id="contact-name"
-                label="Name"
-                icon={User}
-                error={errors.name}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                <input
+                <FieldFrame
                   id="contact-name"
-                  type="text"
-                  autoComplete="name"
-                  placeholder="Your Name"
-                  value={form.name}
-                  onChange={(e) => updateField("name", e.target.value)}
-                  className={getInputClass()}
-                  style={{ paddingTop: "13px", paddingBottom: "13px", paddingRight: "14px", paddingLeft: "38px" }}
-                  disabled={disabled}
-                  aria-invalid={Boolean(errors.name)}
-                  aria-describedby={
-                    errors.name ? "contact-name-error" : undefined
-                  }
-                />
-              </FieldFrame>
+                  label="Name"
+                  icon={User}
+                  error={errors.name}
+                >
+                  <input
+                    id="contact-name"
+                    type="text"
+                    autoComplete="name"
+                    placeholder="Your Name"
+                    value={form.name}
+                    onChange={(e) => updateField("name", e.target.value)}
+                    className={getInputClass()}
+                    style={{ paddingTop: "13px", paddingBottom: "13px", paddingRight: "14px", paddingLeft: "38px" }}
+                    disabled={disabled}
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={
+                      errors.name ? "contact-name-error" : undefined
+                    }
+                  />
+                </FieldFrame>
+              </motion.div>
 
-              <FieldFrame
-                id="contact-email"
-                label="Email"
-                icon={Mail}
-                error={errors.email}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                <input
+                <FieldFrame
                   id="contact-email"
-                  type="email"
-                  autoComplete="email"
-                  placeholder="your.email@example.com"
-                  value={form.email}
-                  onChange={(e) => updateField("email", e.target.value)}
-                  className={getInputClass()}
-                  style={{ paddingTop: "13px", paddingBottom: "13px", paddingRight: "14px", paddingLeft: "38px" }}
-                  disabled={disabled}
-                  aria-invalid={Boolean(errors.email)}
-                  aria-describedby={
-                    errors.email ? "contact-email-error" : undefined
-                  }
-                />
-              </FieldFrame>
+                  label="Email"
+                  icon={Mail}
+                  error={errors.email}
+                >
+                  <input
+                    id="contact-email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="your.email@example.com"
+                    value={form.email}
+                    onChange={(e) => updateField("email", e.target.value)}
+                    className={getInputClass()}
+                    style={{ paddingTop: "13px", paddingBottom: "13px", paddingRight: "14px", paddingLeft: "38px" }}
+                    disabled={disabled}
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={
+                      errors.email ? "contact-email-error" : undefined
+                    }
+                  />
+                </FieldFrame>
+              </motion.div>
             </div>
 
             {/* Row 2: Subject */}
-            <FieldFrame
-              id="contact-subject"
-              label="Subject"
-              icon={TextCursorInput}
-              error={errors.subject}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.86, ease: [0.16, 1, 0.3, 1] }}
             >
-              <input
+              <FieldFrame
                 id="contact-subject"
-                type="text"
-                placeholder="What's this about?"
-                value={form.subject}
-                onChange={(e) => updateField("subject", e.target.value)}
-                className={getInputClass()}
-                style={{ paddingTop: "13px", paddingBottom: "13px", paddingRight: "14px", paddingLeft: "38px" }}
-                disabled={disabled}
-                aria-invalid={Boolean(errors.subject)}
-                aria-describedby={
-                  errors.subject ? "contact-subject-error" : undefined
-                }
-              />
-            </FieldFrame>
+                label="Subject"
+                icon={TextCursorInput}
+                error={errors.subject}
+              >
+                <input
+                  id="contact-subject"
+                  type="text"
+                  placeholder="What's this about?"
+                  value={form.subject}
+                  onChange={(e) => updateField("subject", e.target.value)}
+                  className={getInputClass()}
+                  style={{ paddingTop: "13px", paddingBottom: "13px", paddingRight: "14px", paddingLeft: "38px" }}
+                  disabled={disabled}
+                  aria-invalid={Boolean(errors.subject)}
+                  aria-describedby={
+                    errors.subject ? "contact-subject-error" : undefined
+                  }
+                />
+              </FieldFrame>
+            </motion.div>
 
             {/* Row 3: Message with character counter */}
-            <FieldFrame
-              id="contact-message"
-              label="Message"
-              error={errors.message}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.92, ease: [0.16, 1, 0.3, 1] }}
             >
-              <textarea
+              <FieldFrame
                 id="contact-message"
-                placeholder="Share details about the opportunity or collaboration."
-                value={form.message}
-                onChange={(e) => updateField("message", e.target.value)}
-                className={cn(getInputClass(), "resize-none leading-6")}
-                style={{ minHeight: "110px", paddingTop: "13px", paddingBottom: "36px", paddingRight: "14px", paddingLeft: "14px" }}
-                disabled={disabled}
-                aria-invalid={Boolean(errors.message)}
-                aria-describedby={
-                  errors.message ? "contact-message-error" : undefined
-                }
-              />
-              {/* Character counter */}
-              <span className="pointer-events-none absolute font-mono text-[10px] tabular-nums text-white/22" style={{ bottom: "10px", right: "12px" }}>
-                {form.message.length} / {MAX_MESSAGE_LENGTH}
-              </span>
-            </FieldFrame>
+                label="Message"
+                error={errors.message}
+              >
+                <textarea
+                  id="contact-message"
+                  placeholder="Share details about the opportunity or collaboration."
+                  value={form.message}
+                  onChange={(e) => updateField("message", e.target.value)}
+                  className={cn(getInputClass(), "resize-none leading-6")}
+                  style={{ minHeight: "110px", paddingTop: "13px", paddingBottom: "36px", paddingRight: "14px", paddingLeft: "14px" }}
+                  disabled={disabled}
+                  aria-invalid={Boolean(errors.message)}
+                  aria-describedby={
+                    errors.message ? "contact-message-error" : undefined
+                  }
+                />
+                {/* Character counter */}
+                <span className="pointer-events-none absolute font-mono text-[10px] tabular-nums text-white/22" style={{ bottom: "10px", right: "12px" }}>
+                  {form.message.length} / {MAX_MESSAGE_LENGTH}
+                </span>
+              </FieldFrame>
+            </motion.div>
 
             {/* ── Error / Success Messages ── */}
             <AnimatePresence mode="wait">
@@ -375,6 +403,13 @@ export default function ContactForm() {
               <motion.button
                 type="submit"
                 disabled={disabled}
+                initial={{ opacity: 0, scale: 0.9, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.05), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 0px rgba(70,150,170,0)" }}
+                whileInView={{ opacity: 1, scale: 1, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.05), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 18px rgba(70,150,170,0.12)" }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ 
+                  duration: 0.6, delay: 0.98, ease: [0.16, 1, 0.3, 1],
+                  boxShadow: { delay: 1.1, duration: 0.8, ease: "easeOut" }
+                }}
                 whileHover={disabled ? undefined : { y: -2, boxShadow: "inset 0 1px 3px rgba(255,255,255,0.1), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 25px rgba(70,150,170,0.2)" }}
                 whileTap={disabled ? undefined : { 
                   scale: 0.97, 
