@@ -47,34 +47,49 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
     y.set(0);
   };
 
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    // Bound the touch coordinates within the element
+    const touchX = Math.max(0, Math.min(e.touches[0].clientX - rect.left, width));
+    const touchY = Math.max(0, Math.min(e.touches[0].clientY - rect.top, height));
+    const xPct = touchX / width - 0.5;
+    const yPct = touchY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50, scale: 0.9, filter: "blur(10px)" }}
       whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+      whileHover={{ y: -6, scale: 1.02 }}
+      whileTap={{ scale: 0.96, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ type: "spring", stiffness: 100, damping: 15, delay: index * 0.1 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20, delay: index * 0.1 }}
       style={{
         rotateX,
         rotateY,
         transformStyle: "preserve-3d",
         willChange: "transform, opacity, filter",
-        background: "linear-gradient(165deg, rgba(16, 22, 38, 0.6), rgba(8, 10, 16, 0.9))",
-        borderColor: "rgba(34,211,238,0.15)",
-        backdropFilter: "blur(12px)",
-        boxShadow: "inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -2px 6px rgba(0, 0, 0, 0.8), 0 8px 30px rgba(0,0,0,0.6)",
+        background: "linear-gradient(180deg, #1e2536 0%, #070a12 100%)",
+        boxShadow: "0 12px 24px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.6), inset 0 2px 2px rgba(255,255,255,0.15), inset 0 -4px 8px rgba(0,0,0,0.9)",
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="group relative flex flex-col h-full rounded-[16px] border transition-all duration-500 hover:border-[#22d3ee]/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)]"
+      onTouchStart={handleTouchMove}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleMouseLeave}
+      className="group relative flex flex-col h-full rounded-[16px] border border-black/80 transition-colors duration-500 cursor-pointer hover:border-[#22d3ee]/50 hover:shadow-[0_15px_30px_rgba(34,211,238,0.2),inset_0_2px_2px_rgba(255,255,255,0.25),inset_0_-4px_8px_rgba(0,0,0,0.9)]"
     >
-      {/* 3D Depth element - creates an inner glowing shadow */}
-      <div 
-        className="absolute inset-0 rounded-[16px] bg-gradient-to-br from-white/[0.04] to-transparent pointer-events-none" 
-        style={{ transform: "translateZ(1px)" }} 
-      />
-      
-      {/* Sharp top edge highlight for premium feel */}
-      <div className="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-[#22d3ee]/40 to-transparent opacity-60" />
+      {/* 3D Inner Casing/Bevel */}
+      <div className="absolute inset-[1px] rounded-[15px] border border-white/[0.04] pointer-events-none" style={{ transform: "translateZ(1px)" }} />
+      <div className="absolute inset-[2px] rounded-[14px] border border-black/40 pointer-events-none" style={{ transform: "translateZ(1px)" }} />
+
+      {/* Realistic Curved Top Glass Reflection */}
+      <div className="absolute inset-x-2 top-1 h-[35%] bg-gradient-to-b from-white/[0.08] to-transparent rounded-t-[14px] opacity-90 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
 
       <div 
         className="p-5 md:p-6 flex flex-col h-full relative z-10 w-full"
@@ -117,14 +132,18 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
   // Map pure black or very dark colors to white so the glowing animation is visible against dark backgrounds
   const isDark = ["#000000", "#181717"].includes(skill.color);
   const glowColor = isDark ? "#ffffff" : skill.color;
+  
+  const isPandasOrDjango = skill.name.toLowerCase() === "pandas" || skill.name.toLowerCase() === "django";
+  const baseY = isPandasOrDjango ? -4 : 0;
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8, y: 20, filter: "blur(5px)" }}
-      whileInView={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+      initial={{ opacity: 0, scale: 0.8, y: baseY + 20, filter: "blur(5px)" }}
+      whileInView={{ opacity: 1, scale: 1, y: baseY, filter: "blur(0px)" }}
       transition={{ type: "spring", stiffness: 120, damping: 14, delay: index * 0.05 }}
-      whileHover={{ y: -2, scale: 1.05, boxShadow: `inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 6px rgba(0,0,0,0.8), 0 8px 20px -4px ${glowColor}40` }}
-      className={`relative flex items-center gap-3 p-2.5 rounded-[12px] border transition-all duration-300 group/skill cursor-default hover:border-[${glowColor}]/50 ${isSingle ? 'py-5 justify-center' : ''} ${className}`}
+      whileHover={{ y: baseY - 2, scale: 1.05, boxShadow: `inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 6px rgba(0,0,0,0.8), 0 8px 20px -4px ${glowColor}40` }}
+      whileTap={{ y: baseY + 2, scale: 0.94, boxShadow: "inset 0 2px 4px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.3)" }}
+      className={`relative flex items-center gap-3 p-2.5 rounded-[12px] border transition-all duration-300 group/skill cursor-pointer hover:border-[${glowColor}]/50 ${isSingle ? 'py-5 justify-center' : ''} ${className}`}
       style={{ 
         transformStyle: "preserve-3d", 
         willChange: "transform, opacity, filter",

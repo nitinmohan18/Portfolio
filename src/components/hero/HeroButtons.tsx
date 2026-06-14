@@ -21,6 +21,43 @@ const socialIcons: Record<string, ReactNode> = {
     </svg>
   ),
 };
+const brandColors: Record<string, { border: string, shadow: string, text: string, topGlow: string, sweep: string }> = {
+  github: {
+    border: "hover:border-[#A371F7]/60",
+    shadow: "hover:shadow-[0_15px_30px_rgba(163,113,247,0.35),0_2px_15px_rgba(163,113,247,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
+    text: "group-hover:text-[#A371F7] group-hover:drop-shadow-[0_0_10px_rgba(163,113,247,0.9)]",
+    topGlow: "shadow-[0_1px_8px_rgba(163,113,247,1)] via-[#A371F7]/90",
+    sweep: "via-[#A371F7]/25"
+  },
+  linkedin: {
+    border: "hover:border-[#0A66C2]/60",
+    shadow: "hover:shadow-[0_15px_30px_rgba(10,102,194,0.35),0_2px_15px_rgba(10,102,194,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
+    text: "group-hover:text-[#0A66C2] group-hover:drop-shadow-[0_0_10px_rgba(10,102,194,0.9)]",
+    topGlow: "shadow-[0_1px_8px_rgba(10,102,194,1)] via-[#0A66C2]/90",
+    sweep: "via-[#0A66C2]/25"
+  },
+  twitter: {
+    border: "hover:border-white/60",
+    shadow: "hover:shadow-[0_15px_30px_rgba(255,255,255,0.25),0_2px_15px_rgba(255,255,255,0.4),inset_0_2px_3px_rgba(255,255,255,0.4),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
+    text: "group-hover:text-white group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]",
+    topGlow: "shadow-[0_1px_8px_rgba(255,255,255,1)] via-white/90",
+    sweep: "via-white/20"
+  },
+  instagram: {
+    border: "hover:border-[#F472B6]/60",
+    shadow: "hover:shadow-[0_15px_30px_rgba(244,114,182,0.35),0_2px_15px_rgba(244,114,182,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
+    text: "group-hover:text-[#F472B6] group-hover:drop-shadow-[0_0_10px_rgba(244,114,182,0.9)]",
+    topGlow: "shadow-[0_1px_8px_rgba(244,114,182,1)] via-[#F472B6]/90",
+    sweep: "via-[#F472B6]/25"
+  },
+  email: {
+    border: "hover:border-[#EA4335]/60",
+    shadow: "hover:shadow-[0_15px_30px_rgba(234,67,53,0.35),0_2px_15px_rgba(234,67,53,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
+    text: "group-hover:text-[#EA4335] group-hover:drop-shadow-[0_0_10px_rgba(234,67,53,0.9)]",
+    topGlow: "shadow-[0_1px_8px_rgba(234,67,53,1)] via-[#EA4335]/90",
+    sweep: "via-[#EA4335]/25"
+  }
+};
 
 export default function HeroButtons() {
   const socials = profile.socials.filter((s) =>
@@ -134,62 +171,6 @@ export default function HeroButtons() {
           transform: translateY(1px) scale(0.97);
           box-shadow: inset 0 2px 6px rgba(0,0,0,0.6), inset 0 1px 2px rgba(0,0,0,0.4), 0 0 0 rgba(34,211,238,0);
         }
-
-        .social-icon-btn {
-          position: relative;
-          overflow: visible;
-          background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
-          border: 1px solid rgba(255,255,255,0.08);
-          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 2px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
-          backdrop-filter: blur(8px);
-          border-radius: 50%;
-          width: 44px;
-          height: 44px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-          color: #fff;
-          cursor: pointer;
-          user-select: none;
-        }
-        .social-icon-btn .icon-inner {
-          transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .social-icon-btn:hover {
-          transform: translateY(-4px) scale(1.05);
-        }
-        .social-icon-btn.github:hover {
-          background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(140, 120, 255, 0.05));
-          border-color: rgba(140, 120, 255, 0.5);
-          box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4), 0 0 18px rgba(140, 120, 255, 0.25);
-          color: #ffffff;
-        }
-        .social-icon-btn.linkedin:hover {
-          background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(10,102,194,0.05));
-          border-color: #0A66C2;
-          box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4), 0 0 18px rgba(10,102,194,0.3);
-          color: #0A66C2;
-        }
-        .social-icon-btn.instagram:hover {
-          background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(225,48,108,0.05));
-          border-color: #E1306C;
-          box-shadow: inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4), 0 0 18px rgba(225,48,108,0.3);
-          color: #E1306C;
-        }
-        .social-icon-btn.twitter:hover {
-          background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(15, 15, 15, 0.85));
-          border-color: rgba(255, 255, 255, 0.35);
-          box-shadow: inset 0 1px 2px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4), 0 0 18px rgba(255, 255, 255, 0.08), 0 0 30px rgba(0, 0, 0, 0.6);
-          color: #e7e9ea;
-        }
-        .social-icon-btn:hover .icon-inner {
-          transform: scale(1.18) rotate(-6deg);
-        }
-        .social-icon-btn:active {
-          transform: translateY(-1px) scale(0.97);
-          box-shadow: inset 0 2px 4px rgba(0,0,0,0.6), inset 0 1px 2px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.2);
-        }
       `}</style>
 
       {/* CTA buttons */}
@@ -252,26 +233,47 @@ export default function HeroButtons() {
           visible: { transition: { staggerChildren: 0.12, delayChildren: 1.4 } }
         }}
       >
-        {socials.map((social) => (
-          <MagneticButton key={social.platform}>
-            <motion.a
-              variants={{
-                hidden: { opacity: 0, scale: 0, rotate: -45 },
-                visible: { opacity: 1, scale: 1, rotate: 0, transition: { type: "spring", stiffness: 300, damping: 12 } }
-              }}
-              style={{ willChange: "transform, opacity" }}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={social.label}
-              className={`social-icon-btn ${social.platform}`}
-            >
-              <div className="icon-inner">
-                {socialIcons[social.platform]}
-              </div>
-            </motion.a>
-          </MagneticButton>
-        ))}
+        {socials.map((social) => {
+          const colors = brandColors[social.platform] || brandColors.github;
+
+          return (
+            <MagneticButton key={social.platform}>
+              <motion.a
+                variants={{
+                  hidden: { opacity: 0, scale: 0, rotate: -45 },
+                  visible: { opacity: 1, scale: 1, rotate: 0, transition: { type: "spring", stiffness: 300, damping: 12 } }
+                }}
+                whileHover={{ y: -6 }}
+                whileTap={{ scale: 0.9, y: 2 }}
+                style={{ willChange: "transform, opacity" }}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className={`group relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-black/80 bg-[linear-gradient(180deg,#1e2536_0%,#070a12_100%)] text-white/70 shadow-[0_10px_20px_rgba(0,0,0,0.8),0_2px_5px_rgba(0,0,0,0.6),inset_0_2px_2px_rgba(255,255,255,0.15),inset_0_-4px_8px_rgba(0,0,0,0.9)] transition-all duration-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 ${colors.border} ${colors.shadow}`}
+              >
+                {/* 3D Inner Casing/Bevel */}
+                <div className="absolute inset-[1px] rounded-full border border-white/[0.04] pointer-events-none" />
+                <div className="absolute inset-[2px] rounded-full border border-black/40 pointer-events-none" />
+
+                {/* Realistic Curved Top Glass Reflection */}
+                <div className="absolute inset-x-2 top-1 h-[35%] bg-gradient-to-b from-white/[0.12] to-transparent rounded-t-full opacity-90 pointer-events-none" />
+                <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+                
+                {/* Top glowing edge on hover */}
+                <div className={`absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${colors.topGlow}`} />
+
+                {/* Ambient glow sweep on hover */}
+                <div className={`absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent to-transparent opacity-0 transition-all duration-500 group-hover:translate-x-full group-hover:opacity-100 ${colors.sweep}`} />
+                
+                {/* Icon Container */}
+                <div className={`relative z-10 transition-colors duration-300 ${colors.text}`}>
+                  {socialIcons[social.platform]}
+                </div>
+              </motion.a>
+            </MagneticButton>
+          );
+        })}
       </motion.div>
     </div>
   );

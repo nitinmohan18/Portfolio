@@ -31,7 +31,7 @@ export default function Navbar() {
           50% { transform: scale(1.4); opacity: 0.4; }
         }
         .nm-logo {
-          background: linear-gradient(135deg, #22d3ee 0%, #6366f1 60%, #a855f7 100%);
+          background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -39,16 +39,11 @@ export default function Navbar() {
           letter-spacing: 2px;
           position: relative;
         }
-        .nm-logo-container {
-          border: 1px solid rgba(34,211,238,0.3);
-          border-radius: 6px;
-          padding: 4px 8px;
-          transition: all 0.3s ease;
-        }
-        .group:hover .nm-logo-container {
-          border-color: rgba(34,211,238,0.7);
-          box-shadow: 0 0 16px rgba(34,211,238,0.2);
-          transform: scale(1.05);
+        .group:hover .nm-logo {
+          background: linear-gradient(135deg, #22d3ee 0%, #6366f1 60%, #a855f7 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
         .nav-link-hover {
           font-size: 13.5px;
@@ -290,10 +285,17 @@ export default function Navbar() {
                 initial={{ rotateY: 90 }}
                 animate={{ rotateY: 0 }}
                 transition={{ delay: 0.1, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
-                className="nm-logo-container flex items-center justify-center relative overflow-hidden"
+                className="relative flex items-center justify-center overflow-hidden rounded-[10px] border border-black/80 bg-[linear-gradient(180deg,#1e2536_0%,#070a12_100%)] shadow-[0_4px_8px_rgba(0,0,0,0.8),inset_0_2px_2px_rgba(255,255,255,0.15),inset_0_-4px_8px_rgba(0,0,0,0.9)] transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-1 group-hover:shadow-[0_8px_20px_rgba(34,211,238,0.25),inset_0_2px_2px_rgba(255,255,255,0.2),inset_0_-4px_8px_rgba(0,0,0,0.9)] px-2.5 py-1.5"
                 style={{ willChange: "transform" }}
               >
-                <div className="flex items-center nm-logo">
+                {/* 3D Inner Casing/Bevel */}
+                <div className="absolute inset-[1px] rounded-[8px] border border-white/[0.04] pointer-events-none" />
+                <div className="absolute inset-[2px] rounded-[6px] border border-black/40 pointer-events-none" />
+
+                {/* Realistic Curved Top Glass Reflection */}
+                <div className="absolute inset-x-1 top-1 h-[35%] bg-gradient-to-b from-white/[0.12] to-transparent rounded-t-[6px] opacity-90 pointer-events-none" />
+                
+                <div className="flex items-center nm-logo drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.6)] transition-all duration-300 relative z-10">
                   <span>{profile.initials[0]}</span>
                   <span>{profile.initials[1]}</span>
                 </div>

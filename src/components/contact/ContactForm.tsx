@@ -403,26 +403,30 @@ export default function ContactForm() {
               <motion.button
                 type="submit"
                 disabled={disabled}
-                initial={{ opacity: 0, scale: 0.9, filter: "blur(8px)", boxShadow: "inset 0 1px 2px rgba(255,255,255,0.05), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 0px rgba(70,150,170,0)" }}
-                whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)", boxShadow: "inset 0 1px 2px rgba(255,255,255,0.05), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 18px rgba(70,150,170,0.12)" }}
+                initial={{ opacity: 0, scale: 0.9, filter: "blur(8px)", boxShadow: "inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -4px 10px rgba(0,0,0,0.8), 0 8px 20px rgba(0,0,0,0.5), 0 0 0px rgba(34,211,238,0)" }}
+                whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)", boxShadow: "inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -4px 10px rgba(0,0,0,0.8), 0 8px 20px rgba(0,0,0,0.5), 0 0 20px rgba(34,211,238,0.1)" }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ 
                   duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1],
-                  boxShadow: { delay: 0.85, duration: 0.8, ease: "easeOut" }
+                  boxShadow: { type: "spring", bounce: 0.4, duration: 0.6 }
                 }}
-                whileHover={disabled ? undefined : { y: -2, boxShadow: "inset 0 1px 3px rgba(255,255,255,0.1), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 25px rgba(70,150,170,0.2)" }}
+                whileHover={disabled ? undefined : { 
+                  y: -2, 
+                  scale: 1.01,
+                  boxShadow: "inset 0 1px 2px rgba(255,255,255,0.25), inset 0 -4px 10px rgba(0,0,0,0.8), 0 12px 25px rgba(0,0,0,0.6), 0 0 25px rgba(34,211,238,0.25)" 
+                }}
                 whileTap={disabled ? undefined : { 
-                  scale: 0.97, 
+                  scale: 0.98, 
                   y: 2, 
-                  boxShadow: "inset 0 4px 12px rgba(0,0,0,0.9), inset 0 2px 4px rgba(0,0,0,0.8), 0 0 0 rgba(70,150,170,0)" 
+                  boxShadow: "inset 0 4px 12px rgba(0,0,0,0.8), inset 0 2px 4px rgba(0,0,0,0.6), 0 4px 10px rgba(0,0,0,0.5), 0 0 10px rgba(34,211,238,0)",
+                  transition: { type: "spring", stiffness: 400, damping: 25, mass: 0.8 }
                 }}
-                className="group relative w-full cursor-pointer overflow-hidden px-6 text-[13px] font-extrabold text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030712] disabled:cursor-not-allowed disabled:opacity-70"
+                className="group relative w-full cursor-pointer overflow-hidden px-6 text-[14px] font-extrabold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030712] disabled:cursor-not-allowed disabled:opacity-70"
                 style={{ 
-                  height: "48px", 
-                  borderRadius: "14px",
-                  background: "linear-gradient(165deg, #0d1117, #161c24, #0a0e13)",
-                  boxShadow: "inset 0 1px 2px rgba(255,255,255,0.05), inset 0 -3px 8px rgba(0,0,0,0.6), 0 0 18px rgba(70,150,170,0.12)",
-                  border: "1px solid rgba(255,255,255,0.05)"
+                  height: "54px", 
+                  borderRadius: "16px",
+                  background: "linear-gradient(180deg, #1e293b, #020617)",
+                  border: "1px solid rgba(255,255,255,0.1)"
                 }}
               >
                 {/* Expanding Concentric Ripple Rings */}

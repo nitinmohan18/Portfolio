@@ -97,12 +97,12 @@ const colorMap: Record<
       "group-hover:shadow-[0_0_40px_rgba(59,130,246,0.5),0_0_80px_rgba(59,130,246,0.17)]",
     iconText: "text-blue-400",
     cardBg:
-      "bg-gradient-to-br from-[#04101e] via-[#030d1e] to-[#020918] border-blue-500/[0.08]",
+      "bg-[linear-gradient(145deg,#0d111a_0%,#02040a_100%)] border-white/[0.05] shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),inset_0_-2px_6px_rgba(0,0,0,0.8),0_10px_30px_rgba(0,0,0,0.8)]",
     cardHover:
-      "hover:-translate-y-1 hover:border-blue-400/40 hover:shadow-[0_16px_60px_rgba(59,130,246,0.2),inset_0_0_20px_rgba(59,130,246,0.05)]",
-    badge: "bg-blue-500/[0.08] text-blue-300 border-blue-500/20",
+      "hover:-translate-y-1 hover:border-white/[0.15] hover:shadow-[inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-4px_10px_rgba(0,0,0,1),0_20px_50px_rgba(59,130,246,0.15),0_0_30px_rgba(59,130,246,0.05)]",
+    badge: "relative bg-[#020612] border-blue-500/20 shadow-[0_4px_12px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05),inset_0_0_20px_rgba(59,130,246,0.15)] text-blue-300",
     arrowRing:
-      "border-blue-400/40 shadow-[0_0_16px_rgba(59,130,246,0.3),inset_0_0_10px_rgba(59,130,246,0.08)] bg-blue-500/6 hover:bg-blue-500/12 hover:border-blue-400/60 hover:shadow-[0_0_28px_rgba(59,130,246,0.5)]",
+      "hover:border-blue-400/60 hover:shadow-[0_10px_25px_rgba(59,130,246,0.4),0_2px_10px_rgba(59,130,246,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
     arrowText: "text-blue-300",
     dotClass: "bg-blue-400",
     dotGlow: "shadow-[0_0_6px_2px_rgba(59,130,246,0.6)]",
@@ -119,12 +119,12 @@ const colorMap: Record<
       "group-hover:shadow-[0_0_40px_rgba(168,85,247,0.5),0_0_80px_rgba(168,85,247,0.17)]",
     iconText: "text-purple-400",
     cardBg:
-      "bg-gradient-to-br from-[#0e0425] via-[#0a031c] to-[#060214] border-purple-500/[0.08]",
+      "bg-[linear-gradient(145deg,#120b1a_0%,#04020a_100%)] border-white/[0.05] shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),inset_0_-2px_6px_rgba(0,0,0,0.8),0_10px_30px_rgba(0,0,0,0.8)]",
     cardHover:
-      "hover:-translate-y-1 hover:border-purple-400/40 hover:shadow-[0_16px_60px_rgba(168,85,247,0.2),inset_0_0_20px_rgba(168,85,247,0.05)]",
-    badge: "bg-purple-500/[0.08] text-purple-300 border-purple-500/20",
+      "hover:-translate-y-1 hover:border-white/[0.15] hover:shadow-[inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-4px_10px_rgba(0,0,0,1),0_20px_50px_rgba(168,85,247,0.15),0_0_30px_rgba(168,85,247,0.05)]",
+    badge: "relative bg-[#050210] border-purple-500/20 shadow-[0_4px_12px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05),inset_0_0_20px_rgba(168,85,247,0.15)] text-purple-300",
     arrowRing:
-      "border-purple-400/40 shadow-[0_0_16px_rgba(168,85,247,0.3),inset_0_0_10px_rgba(168,85,247,0.08)] bg-purple-500/6 hover:bg-purple-500/12 hover:border-purple-400/60 hover:shadow-[0_0_28px_rgba(168,85,247,0.5)]",
+      "hover:border-purple-400/60 hover:shadow-[0_10px_25px_rgba(168,85,247,0.4),0_2px_10px_rgba(168,85,247,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
     arrowText: "text-purple-300",
     dotClass: "bg-emerald-400",
     dotGlow: "shadow-[0_0_6px_2px_rgba(52,211,153,0.6)]",
@@ -141,12 +141,12 @@ const colorMap: Record<
       "group-hover:shadow-[0_0_40px_rgba(6,182,212,0.5),0_0_80px_rgba(6,182,212,0.17)]",
     iconText: "text-cyan-400",
     cardBg:
-      "bg-gradient-to-br from-[#021315] via-[#021012] to-[#010c0f] border-cyan-500/[0.08]",
+      "bg-[linear-gradient(145deg,#0a1518_0%,#02070a_100%)] border-white/[0.05] shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),inset_0_-2px_6px_rgba(0,0,0,0.8),0_10px_30px_rgba(0,0,0,0.8)]",
     cardHover:
-      "hover:-translate-y-1 hover:border-cyan-400/40 hover:shadow-[0_16px_60px_rgba(6,182,212,0.2),inset_0_0_20px_rgba(6,182,212,0.05)]",
-    badge: "bg-cyan-500/[0.08] text-cyan-300 border-cyan-500/20",
+      "hover:-translate-y-1 hover:border-white/[0.15] hover:shadow-[inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-4px_10px_rgba(0,0,0,1),0_20px_50px_rgba(6,182,212,0.15),0_0_30px_rgba(6,182,212,0.05)]",
+    badge: "relative bg-[#01080a] border-cyan-500/20 shadow-[0_4px_12px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05),inset_0_0_20px_rgba(6,182,212,0.15)] text-cyan-300",
     arrowRing:
-      "border-cyan-400/40 shadow-[0_0_16px_rgba(6,182,212,0.3),inset_0_0_10px_rgba(6,182,212,0.08)] bg-cyan-500/6 hover:bg-cyan-500/12 hover:border-cyan-400/60 hover:shadow-[0_0_28px_rgba(6,182,212,0.5)]",
+      "hover:border-cyan-400/60 hover:shadow-[0_10px_25px_rgba(6,182,212,0.4),0_2px_10px_rgba(6,182,212,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
     arrowText: "text-cyan-300",
     dotClass: "bg-emerald-400",
     dotGlow: "shadow-[0_0_6px_2px_rgba(52,211,153,0.6)]",
@@ -219,22 +219,31 @@ const FloatingIcon = ({
   const c = colorMap[color];
   return (
     <motion.div
-      whileHover={{ scale: 1.06, rotate: 1.5 }}
-      whileTap={{ scale: 0.94 }}
+      whileHover={{ scale: 1.06, rotate: 1.5, y: -4 }}
+      whileTap={{ scale: 0.94, y: 2 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
-      className={`p-[5px] rounded-[20px] border cursor-pointer ${c.outerRing}`}
+      className={`relative p-[6px] rounded-[22px] border cursor-pointer shadow-[0_12px_24px_rgba(0,0,0,0.8),0_2px_4px_rgba(0,0,0,0.6),inset_0_2px_2px_rgba(255,255,255,0.1),inset_0_-4px_8px_rgba(0,0,0,0.9)] ${c.outerRing}`}
     >
+      {/* Outer Casing Inner Bevel */}
+      <div className="absolute inset-[1px] rounded-[20px] border border-black/60 pointer-events-none" />
+
       <div
-        className={`w-[74px] h-[74px] rounded-[14px] flex items-center justify-center
-          border relative overflow-hidden transition-shadow duration-500
+        className={`w-[74px] h-[74px] rounded-[16px] flex items-center justify-center
+          border border-black/40 relative overflow-hidden transition-shadow duration-500
+          shadow-[inset_0_2px_3px_rgba(255,255,255,0.2),inset_0_-4px_8px_rgba(0,0,0,0.8)]
           ${c.iconBox} ${c.iconGlow} ${c.iconGlowHover}`}
       >
-        <span className="absolute top-0 left-0 w-[12px] h-[12px] border-t-[1.5px] border-l-[1.5px] border-white/28 rounded-tl-[14px]" />
-        <span className="absolute bottom-0 right-0 w-[12px] h-[12px] border-b-[1.5px] border-r-[1.5px] border-white/10 rounded-br-[14px]" />
-        <span className="absolute inset-0 bg-gradient-to-br from-white/6 via-transparent to-transparent" />
+        {/* Realistic Curved Top Glass Reflection */}
+        <div className="absolute inset-x-2 top-1 h-[35%] bg-gradient-to-b from-white/[0.18] to-transparent rounded-t-[14px] opacity-90 pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+        
+        {/* Metallic Corner Accents */}
+        <span className="absolute top-0 left-0 w-[12px] h-[12px] border-t-[2px] border-l-[2px] border-white/40 rounded-tl-[16px]" />
+        <span className="absolute bottom-0 right-0 w-[12px] h-[12px] border-b-[2px] border-r-[2px] border-white/10 rounded-br-[16px]" />
+        
         <div
-          className={`relative z-10 ${c.iconText} drop-shadow-[0_0_14px_currentColor]
-            group-hover:scale-110 transition-transform duration-500`}
+          className={`relative z-10 ${c.iconText} drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]
+            group-hover:scale-110 group-hover:drop-shadow-[0_0_14px_currentColor] transition-all duration-500`}
         >
           {children}
         </div>
@@ -250,18 +259,26 @@ const ArrowBtn = ({ color }: { color: ColorKey }) => {
   const c = colorMap[color];
   return (
     <motion.button
-      whileHover={{ scale: 1.12, x: 2 }}
-      whileTap={{ scale: 0.92 }}
+      whileHover={{ scale: 1.08, x: 2, y: -4 }}
+      whileTap={{ scale: 0.92, y: 2 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
-      className={`relative w-[52px] h-[52px] rounded-full border-2 flex items-center
-        justify-center shrink-0 overflow-hidden cursor-pointer
-        transition-all duration-300 ${c.arrowRing}`}
+      className={`relative w-[52px] h-[52px] rounded-full border border-black/80 flex items-center
+        justify-center shrink-0 overflow-hidden cursor-pointer bg-[linear-gradient(180deg,#1e2536_0%,#070a12_100%)]
+        shadow-[0_8px_16px_rgba(0,0,0,0.8),0_2px_4px_rgba(0,0,0,0.6),inset_0_2px_2px_rgba(255,255,255,0.15),inset_0_-4px_8px_rgba(0,0,0,0.9)]
+        transition-all duration-150 ${c.arrowRing}`}
     >
-      <span className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent" />
+      {/* 3D Inner Casing/Bevel */}
+      <div className="absolute inset-[1px] rounded-full border border-white/[0.04] pointer-events-none" />
+      <div className="absolute inset-[2px] rounded-full border border-black/40 pointer-events-none" />
+
+      {/* Realistic Curved Top Glass Reflection */}
+      <div className="absolute inset-x-2 top-1 h-[35%] bg-gradient-to-b from-white/[0.12] to-transparent rounded-t-full opacity-90 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+
       <ArrowRight
-        size={18}
-        className={`relative z-10 ${c.arrowText} drop-shadow-[0_0_8px_currentColor]
-          group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:-rotate-45 transition-all duration-300`}
+        size={22}
+        strokeWidth={1.75}
+        className={`relative z-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover:translate-x-1 group-hover:drop-shadow-[0_0_12px_currentColor] ${c.arrowText}`}
       />
     </motion.button>
   );
@@ -312,37 +329,52 @@ const FilterTabs = ({
   onChange: (v: FilterType) => void;
 }) => (
   <motion.div variants={fadeBlur} className="relative z-10 w-full flex justify-center mb-24 mt-8 -translate-y-6">
-    <div className="relative inline-flex items-center gap-2 sm:gap-4 p-2 sm:p-2.5 rounded-full bg-[#050508]/60 backdrop-blur-3xl border border-white/[0.12] shadow-[0_24px_50px_-12px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.08)] ring-1 ring-white/10 before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-white/[0.06] before:to-transparent before:pointer-events-none">
+    <div 
+      className="relative inline-flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-full border border-white/[0.03]"
+      style={{
+        background: "linear-gradient(180deg, #02040a 0%, #060a12 100%)",
+        boxShadow: "inset 0 6px 12px rgba(0,0,0,1), inset 0 2px 4px rgba(0,0,0,0.8), inset 0 -1px 1px rgba(255,255,255,0.05), 0 20px 40px rgba(0,0,0,0.9)"
+      }}
+    >
+      <div className="absolute inset-0 rounded-full border border-black/80 pointer-events-none" />
+      
       {TABS.map((tab) => {
         const isActive = active === tab.id;
         return (
           <button
             key={tab.id}
             onClick={() => onChange(tab.id)}
-            className={`relative flex items-center justify-center gap-2.5 sm:gap-3.5 px-6 py-3 sm:px-8 sm:py-3.5 text-[15px] sm:text-[17px] font-semibold transition-all duration-300 outline-none select-none rounded-full z-10 group shrink-0 whitespace-nowrap ${
+            className={`relative flex items-center justify-center gap-2.5 px-6 py-2.5 sm:px-8 sm:py-3 text-[14px] sm:text-[16px] font-bold transition-all duration-300 outline-none select-none rounded-full z-10 group shrink-0 whitespace-nowrap ${
               isActive
                 ? "text-white"
-                : "text-white/40 hover:text-white/90"
+                : "text-white/30 hover:text-white/70"
             }`}
           >
             {/* Background Hover Effect */}
-            <div className="absolute inset-0 rounded-full bg-white/0 transition-colors duration-300 group-hover:bg-white/[0.04]" />
+            <div className="absolute inset-0 rounded-full bg-white/0 transition-colors duration-300 group-hover:bg-white/[0.02]" />
 
             {isActive && (
               <motion.div
                 layoutId="activeFilterCapsuleBg"
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/25 to-blue-500/25 border border-white/[0.15] shadow-[0_12px_24px_rgba(0,0,0,0.4)]"
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: "linear-gradient(145deg, rgba(20,30,48,1) 0%, rgba(10,15,24,1) 100%)",
+                  boxShadow: "inset 0 1px 1px rgba(255,255,255,0.4), inset 0 -2px 6px rgba(0,0,0,0.9), 0 8px 16px rgba(0,0,0,0.9), 0 0 20px rgba(59,130,246,0.3)"
+                }}
                 initial={false}
-                transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
               >
-                <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/[0.1] to-transparent opacity-80" />
-                <div className="absolute bottom-0 inset-x-6 h-[2px] bg-gradient-to-r from-transparent via-blue-400/80 to-transparent blur-[2px] shadow-[0_0_12px_rgba(59,130,246,1)]" />
+                <div className="absolute inset-[1px] rounded-full border border-white/10" />
+                {/* Stunning Top Highlight */}
+                <div className="absolute inset-x-6 top-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-90 shadow-[0_0_10px_rgba(34,211,238,1)]" />
+                {/* Bottom Core Glow */}
+                <div className="absolute inset-x-8 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent shadow-[0_0_15px_rgba(59,130,246,1)]" />
               </motion.div>
             )}
             
-            <div className="relative z-10 flex items-center gap-3">
+            <div className="relative z-10 flex items-center gap-2.5">
               <TabIcon type={tab.icon} isActive={isActive} />
-              <span className="tracking-wide">{tab.label}</span>
+              <span className="tracking-wide" style={{ textShadow: isActive ? "0 0 15px rgba(255,255,255,0.5)" : "none" }}>{tab.label}</span>
             </div>
           </button>
         );
@@ -356,11 +388,15 @@ const FilterTabs = ({
 ───────────────────────────────────────────── */
 const TimelinePulse = () => (
   <motion.div
-    className="absolute left-0 w-full h-[36px] bg-gradient-to-b from-transparent via-indigo-400/25 to-transparent rounded-full blur-[2px]"
-    initial={{ top: "-10%" }}
-    animate={{ top: "110%" }}
+    className="absolute left-1/2 -translate-x-1/2 w-[2px] h-[120px] rounded-full"
+    style={{
+      background: "linear-gradient(to bottom, transparent, rgba(96, 165, 250, 1), transparent)",
+      boxShadow: "0 0 15px 2px rgba(96, 165, 250, 0.6), 0 0 30px rgba(167, 139, 250, 0.4)"
+    }}
+    initial={{ top: "-20%" }}
+    animate={{ top: "120%" }}
     transition={{
-      duration: 3.5,
+      duration: 3,
       repeat: Infinity,
       ease: "linear",
     }}
@@ -478,10 +514,10 @@ export default function Certifications() {
               layout
               variants={timelineDraw}
               style={{ originY: 0 }}
-              className="absolute left-[-14px] md:left-[-24px] top-[40px] bottom-[40px] w-[2px] hidden md:block"
+              className="absolute left-[-16px] md:left-[-30px] top-[40px] bottom-[40px] w-[6px] hidden md:block z-0"
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-blue-500/20 via-purple-500/15 to-cyan-500/10 rounded-full shadow-[0_0_12px_rgba(99,102,241,0.25)]" />
-              <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute inset-0 bg-[#050810] border border-white/10 shadow-[inset_0_2px_4px_rgba(0,0,0,1)] rounded-full" />
+              <div className="absolute inset-0 overflow-hidden rounded-full">
                 <TimelinePulse />
               </div>
             </motion.div>
@@ -508,25 +544,42 @@ export default function Certifications() {
                   {/* Timeline Node */}
                   <motion.div
                     variants={popIn}
-                    className={`absolute left-[-21px] md:left-[-31px] top-1/2 -translate-y-1/2 hidden md:flex
-                      items-center justify-center w-[16px] h-[16px] rounded-full
-                      bg-[#020610] z-10 border-2
-                      ${isCompleted ? "border-white/20 shadow-[0_0_12px_rgba(255,255,255,0.1)]" : "border-white/[0.05] shadow-[0_0_12px_rgba(0,0,0,0.4)]"}`}
+                    className={`absolute left-[-25px] md:left-[-39px] top-1/2 -translate-y-1/2 hidden md:flex
+                      items-center justify-center w-[24px] h-[24px] rounded-full
+                      bg-[#080d1a] z-10 border border-white/10 shadow-[inset_0_2px_4px_rgba(0,0,0,0.8),0_4px_10px_rgba(0,0,0,0.5)]`}
                   >
+                    <div className="absolute inset-0 rounded-full bg-[linear-gradient(145deg,rgba(255,255,255,0.1)_0%,transparent_100%)] pointer-events-none" />
+                    
                     <div
-                      className={`w-[6px] h-[6px] rounded-full shrink-0 ${c.dotClass} ${isCompleted ? c.dotGlow : "opacity-60"}`}
+                      className={`w-[10px] h-[10px] rounded-full shrink-0 relative z-10 border border-black/40 ${c.dotClass} ${isCompleted ? c.dotGlow : ""}`}
+                      style={{ boxShadow: isCompleted ? "inset 0 1px 2px rgba(255,255,255,0.6)" : "inset 0 1px 1px rgba(255,255,255,0.2), 0 0 10px rgba(255,255,255,0.3)" }}
                     />
+                    
+                    {/* Premium Dual-Ring Sonar Pulse for In Progress */}
                     {!isCompleted && (
-                      <motion.div
-                        className={`absolute inset-[-4px] rounded-full ${c.pulseColor}`}
-                        initial={{ opacity: 0.6, scale: 1 }}
-                        animate={{ opacity: 0, scale: 2.2 }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: i * 0.4,
-                        }}
-                      />
+                      <>
+                        <motion.div
+                          className="absolute inset-[2px] rounded-full border border-white/40"
+                          initial={{ scale: 1, opacity: 0.8 }}
+                          animate={{ scale: 2.5, opacity: 0 }}
+                          transition={{
+                            duration: 2.5,
+                            repeat: Infinity,
+                            ease: "easeOut",
+                          }}
+                        />
+                        <motion.div
+                          className="absolute inset-[2px] rounded-full border border-white/40"
+                          initial={{ scale: 1, opacity: 0.8 }}
+                          animate={{ scale: 2.5, opacity: 0 }}
+                          transition={{
+                            duration: 2.5,
+                            repeat: Infinity,
+                            ease: "easeOut",
+                            delay: 1.25,
+                          }}
+                        />
+                      </>
                     )}
                   </motion.div>
 
@@ -565,7 +618,8 @@ export default function Certifications() {
                     />
 
                     {/* Top-edge highlight */}
-                    <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.05] to-transparent rounded-t-[22px]" />
+                    <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-white/[0.3] to-transparent rounded-t-[22px]" />
+                    <div className="absolute inset-0 rounded-[22px] bg-[linear-gradient(135deg,rgba(255,255,255,0.05)_0%,transparent_100%)] pointer-events-none" />
 
                     {/* Floating icon */}
                     <div className="shrink-0 relative translate-x-[16px]">
@@ -580,11 +634,20 @@ export default function Certifications() {
                       <motion.div
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`inline-flex self-start items-center gap-1.5 px-3 py-[4px]
-                          rounded-full text-[11px] font-medium tracking-wide border cursor-pointer
-                          transition-all duration-300 ${c.badge} mb-1`}
+                        className={`inline-flex self-start items-center gap-2 px-3 py-1.5 translate-y-[10px]
+                          rounded-full text-[10px] font-bold tracking-[0.15em] uppercase border border-white/5 cursor-pointer
+                          transition-all duration-300 overflow-hidden ${c.badge} mb-1`}
                       >
-                        {isCompleted ? "✓ Completed" : "↻ In Progress"}
+                        {/* Glass Reflection */}
+                        <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-80" />
+                        <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(255,255,255,0.05)_0%,transparent_100%)] pointer-events-none" />
+                        
+                        {/* Glowing Dot Indicator */}
+                        <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${isCompleted ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]" : "bg-blue-400 shadow-[0_0_8px_rgba(59,130,246,0.9)] animate-pulse"}`} />
+                        
+                        <span className="relative z-10" style={{ textShadow: "0 2px 4px rgba(0,0,0,0.8)" }}>
+                          {isCompleted ? "COMPLETED" : "IN PROGRESS"}
+                        </span>
                       </motion.div>
 
                       {/* Title */}
@@ -601,7 +664,7 @@ export default function Certifications() {
                       </p>
 
                       {/* Footer */}
-                      <div className="flex items-center gap-[7px] mt-1">
+                      <div className="flex items-center gap-[7px] mt-1 -translate-y-[7px]">
                         <Award size={16} className={`${c.iconText} shrink-0 opacity-80`} />
                         <span className="text-[13px] text-white/40">
                           {isCompleted ? "Certified by" : "Provided by"} ·{" "}

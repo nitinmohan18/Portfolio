@@ -16,23 +16,21 @@ import { cn } from "@/lib/utils";
 const contactKeyframes = `
   @keyframes contact-nucleus {
     0%, 100% {
-      box-shadow: 0 0 6px rgba(34,211,238,0.8), 0 0 20px rgba(34,211,238,0.4), 0 0 40px rgba(34,211,238,0.12);
-      transform: scale(1);
+      transform: scale(1) translateZ(0);
     }
     50% {
-      box-shadow: 0 0 10px rgba(34,211,238,1), 0 0 28px rgba(34,211,238,0.6), 0 0 56px rgba(34,211,238,0.2);
-      transform: scale(1.18);
+      transform: scale(1.25) translateZ(0);
     }
   }
   @keyframes contact-ring-pulse {
-    0%, 100% { opacity: 0.65; }
-    50% { opacity: 1; }
+    0%, 100% { opacity: 0.65; transform: translateZ(0); }
+    50% { opacity: 1; transform: translateZ(0); }
   }
   @keyframes contact-line-flow {
-    0% { top: -100px; opacity: 0; }
+    0% { transform: translateY(-100px) translateZ(0); opacity: 0; }
     10% { opacity: 1; }
     90% { opacity: 1; }
-    100% { top: 100%; opacity: 0; }
+    100% { transform: translateY(1000px) translateZ(0); opacity: 0; }
   }
 `;
 
@@ -162,8 +160,9 @@ function OrbitalElement() {
         <div
           className="h-[8px] w-[8px] rounded-full bg-cyan-300"
           style={{
+            boxShadow: "0 0 6px rgba(34,211,238,0.8), 0 0 20px rgba(34,211,238,0.4), 0 0 40px rgba(34,211,238,0.12)",
             animation: "contact-nucleus 3s ease-in-out infinite",
-            willChange: "transform, box-shadow",
+            willChange: "transform",
           }}
         />
         {/* Inner halo rings */}
@@ -458,14 +457,18 @@ export default function Contact() {
                   whileInView={{ opacity: 1, scale: 1, rotateZ: 0, filter: "blur(0px)" }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.8, delay: 0.5, type: "spring", bounce: 0.6 }}
-                  className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-cyan-400/20 bg-[rgba(8,12,24,0.65)] px-4 py-2 shadow-[inset_0_1px_3px_rgba(34,211,238,0.1),0_0_15px_rgba(34,211,238,0.05)] backdrop-blur-md transition-all duration-300 hover:border-cyan-400/40 hover:shadow-[inset_0_1px_5px_rgba(34,211,238,0.2),0_0_20px_rgba(34,211,238,0.15)] cursor-default"
+                  className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-white/5 bg-[#030610] px-5 py-2.5 shadow-[0_8px_16px_rgba(0,0,0,0.6),inset_0_2px_4px_rgba(0,0,0,0.8),inset_0_0_15px_rgba(34,211,238,0.1)] transition-all duration-300 hover:border-cyan-400/30 hover:shadow-[0_8px_20px_rgba(34,211,238,0.2),inset_0_2px_4px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(34,211,238,0.15)] cursor-default"
                 >
+                  {/* Glass Reflection Highlight */}
+                  <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-300/40 to-transparent opacity-80" />
+                  <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(255,255,255,0.05)_0%,transparent_100%)] pointer-events-none" />
+
                   {/* Glowing dot */}
-                  <span className="relative flex h-2 w-2 shrink-0">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-50" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(34,211,238,0.8)]" />
+                  <span className="relative flex h-2 w-2 shrink-0 z-10">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,1)]" />
                   </span>
-                  <span className="font-mono text-[11px] font-bold tracking-[0.15em] text-cyan-300 uppercase drop-shadow-[0_0_8px_rgba(34,211,238,0.3)]">
+                  <span className="relative z-10 font-mono text-[11px] font-bold tracking-[0.15em] text-cyan-300 uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                     Full-Stack Developer
                   </span>
                   {/* Hover Sweep */}
@@ -478,14 +481,18 @@ export default function Contact() {
                   whileInView={{ opacity: 1, scale: 1, rotateZ: 0, filter: "blur(0px)" }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.8, delay: 0.6, type: "spring", bounce: 0.6 }}
-                  className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-purple-500/20 bg-[rgba(8,12,24,0.65)] px-4 py-2 shadow-[inset_0_1px_3px_rgba(168,85,247,0.1),0_0_15px_rgba(168,85,247,0.05)] backdrop-blur-md transition-all duration-300 hover:border-purple-500/40 hover:shadow-[inset_0_1px_5px_rgba(168,85,247,0.2),0_0_20px_rgba(168,85,247,0.15)] cursor-default"
+                  className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-white/5 bg-[#030610] px-5 py-2.5 shadow-[0_8px_16px_rgba(0,0,0,0.6),inset_0_2px_4px_rgba(0,0,0,0.8),inset_0_0_15px_rgba(168,85,247,0.1)] transition-all duration-300 hover:border-purple-500/30 hover:shadow-[0_8px_20px_rgba(168,85,247,0.2),inset_0_2px_4px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(168,85,247,0.15)] cursor-default"
                 >
+                  {/* Glass Reflection Highlight */}
+                  <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-purple-400/40 to-transparent opacity-80" />
+                  <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(255,255,255,0.05)_0%,transparent_100%)] pointer-events-none" />
+
                   {/* Glowing dot */}
-                  <span className="relative flex h-2 w-2 shrink-0">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-purple-500 opacity-50" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-purple-500 shadow-[0_0_6px_rgba(168,85,247,0.8)]" />
+                  <span className="relative flex h-2 w-2 shrink-0 z-10">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-purple-500 opacity-60" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,1)]" />
                   </span>
-                  <span className="font-mono text-[11px] font-bold tracking-[0.15em] text-purple-300 uppercase drop-shadow-[0_0_8px_rgba(168,85,247,0.3)]">
+                  <span className="relative z-10 font-mono text-[11px] font-bold tracking-[0.15em] text-purple-300 uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                     AI/ML
                   </span>
                   {/* Hover Sweep */}

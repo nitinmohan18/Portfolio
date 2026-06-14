@@ -35,7 +35,7 @@ const educationData = [
     label: "HIGHER SECONDARY",
     icon: <Book size={12} />,
     degree: "Class XII — ISC (PCM)",
-    school: "St. Xavier's College",
+    school: "St. Xavier's College (Intermediate Section)",
     location: "Ranchi, Jharkhand",
     badge: "Completed · 2023",
     scoreText: "71% Score",
