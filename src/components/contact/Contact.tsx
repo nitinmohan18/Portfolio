@@ -373,6 +373,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            style={{ marginTop: "-50px" }}
           >
             <ContactForm />
           </motion.div>
