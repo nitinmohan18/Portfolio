@@ -120,16 +120,23 @@ export default function HeroButtons() {
 
         .btn-secondary {
           position: relative;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(34, 211, 238, 0.25);
-          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), inset 0 -1px 2px rgba(0, 0, 0, 0.3), 0 4px 10px rgba(0, 0, 0, 0.2);
-          backdrop-filter: blur(8px);
+          background: linear-gradient(180deg, rgba(34, 211, 238, 0.08) 0%, rgba(34, 211, 238, 0.01) 100%);
+          border: 1px solid rgba(34, 211, 238, 0.15);
+          border-top: 1px solid rgba(34, 211, 238, 0.4);
+          border-bottom: 2px solid rgba(34, 211, 238, 0.2);
+          box-shadow: 
+            inset 0 1px 1px rgba(255, 255, 255, 0.15), 
+            inset 0 -4px 10px rgba(34, 211, 238, 0.08), 
+            0 8px 16px -4px rgba(0, 0, 0, 0.6),
+            0 0 10px rgba(34, 211, 238, 0.05);
+          backdrop-filter: blur(12px);
           padding: 14px 28px;
           border-radius: 12px;
           transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
           color: #22d3ee;
           font-weight: 700;
           font-size: 15px;
+          text-shadow: 0 1px 2px rgba(0,0,0,0.5);
           display: flex;
           align-items: center;
           gap: 10px;
@@ -137,20 +144,33 @@ export default function HeroButtons() {
           user-select: none;
           overflow: hidden;
         }
+        .btn-secondary::after {
+           content: "";
+           position: absolute;
+           inset: 0;
+           border-radius: 12px;
+           box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+           pointer-events: none;
+        }
         .btn-secondary::before {
           content: "";
           position: absolute;
           inset: 0;
           border-radius: 12px;
-          background: linear-gradient(105deg, transparent, rgba(34, 211, 238, 0.05), transparent);
+          background: linear-gradient(105deg, transparent, rgba(34, 211, 238, 0.08), transparent);
           transform: translateX(-150%) skewX(-15deg);
           transition: transform 0.6s ease;
           pointer-events: none;
+          z-index: 1;
         }
         .btn-secondary:hover {
-          background: rgba(34, 211, 238, 0.06);
-          border-color: rgba(34, 211, 238, 0.6);
-          box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1), inset 0 -2px 4px rgba(0, 0, 0, 0.5), 0 10px 20px -5px rgba(0, 0, 0, 0.4), 0 0 20px rgba(34, 211, 238, 0.15);
+          background: linear-gradient(180deg, rgba(34, 211, 238, 0.12) 0%, rgba(34, 211, 238, 0.04) 100%);
+          border-top: 1px solid rgba(34, 211, 238, 0.6);
+          box-shadow: 
+            inset 0 1px 2px rgba(255, 255, 255, 0.25), 
+            inset 0 -4px 10px rgba(34, 211, 238, 0.15), 
+            0 12px 24px -4px rgba(0, 0, 0, 0.7), 
+            0 0 20px rgba(34, 211, 238, 0.2);
           transform: translateY(-4px) scale(1.02);
           text-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
         }
@@ -168,8 +188,14 @@ export default function HeroButtons() {
           filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.6));
         }
         .btn-secondary:active {
-          transform: translateY(1px) scale(0.97);
-          box-shadow: inset 0 2px 6px rgba(0,0,0,0.6), inset 0 1px 2px rgba(0,0,0,0.4), 0 0 0 rgba(34,211,238,0);
+          transform: translateY(2px) scale(0.98);
+          border-bottom: 1px solid rgba(34, 211, 238, 0.15);
+          border-top: 1px solid rgba(34, 211, 238, 0.2);
+          box-shadow: 
+            inset 0 4px 12px rgba(0, 0, 0, 0.6), 
+            inset 0 1px 2px rgba(0,0,0,0.4), 
+            0 2px 4px rgba(0, 0, 0, 0.4);
+          background: rgba(34, 211, 238, 0.02);
         }
       `}</style>
 
