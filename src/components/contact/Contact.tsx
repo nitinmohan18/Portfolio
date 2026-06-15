@@ -495,23 +495,24 @@ export default function Contact() {
               
               {/* ── Structured Futuristic Connecting Line ── */}
               <div 
-                className="absolute z-0 w-[2px] overflow-hidden rounded-full" 
+                className="absolute z-0 w-[2px] overflow-hidden rounded-full border-l border-white/20" 
                 style={{ 
                   top: "32px", 
                   bottom: "32px",
                   left: "31px", 
-                  backgroundColor: "rgba(0,0,0,0.6)",
-                  boxShadow: "inset 0 0 4px rgba(0,0,0,1), 0 0 0 1px rgba(255,255,255,0.04)",
+                  background: "linear-gradient(180deg, rgba(34,211,238,0.1) 0%, rgba(168,85,247,0.1) 100%)",
+                  boxShadow: "0 0 15px rgba(34,211,238,0.3), inset 0 0 6px rgba(255,255,255,0.2)",
+                  backdropFilter: "blur(4px)"
                 }}
               >
                 {/* Moving glowing core */}
                 <div
                   className="absolute left-0 w-full"
                   style={{ 
-                    height: "80px", 
-                    background: "linear-gradient(to bottom, transparent, rgba(34,211,238,0.8), rgba(168,85,247,0.8), transparent)",
-                    boxShadow: "0 0 10px 2px rgba(34,211,238,0.4)",
-                    animation: "contact-line-flow 4s linear infinite"
+                    height: "120px", 
+                    background: "linear-gradient(to bottom, transparent, rgba(255,255,255,1), rgba(34,211,238,1), rgba(168,85,247,1), transparent)",
+                    boxShadow: "0 0 20px 4px rgba(34,211,238,0.6)",
+                    animation: "contact-line-flow 3s linear infinite"
                   }}
                 />
               </div>

@@ -81,15 +81,19 @@ function FieldFrame({ id, label, error, icon: Icon, children }: FieldFrameProps)
 
       <AnimatePresence initial={false}>
         {error && (
-          <motion.p
+          <motion.div
             id={`${id}-error`}
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            className="font-mono text-[11px] font-semibold text-red-300"
+            initial={{ opacity: 0, y: -4, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -4, filter: "blur(4px)" }}
+            transition={{ duration: 0.3, type: "spring", bounce: 0.4 }}
+            className="flex items-center gap-1.5 mt-1.5 ml-1"
           >
-            {error}
-          </motion.p>
+            <AlertCircle size={14} strokeWidth={2.5} className="text-rose-400" />
+            <p className="font-sans text-[13px] font-medium text-rose-400/90">
+              {error}
+            </p>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
@@ -109,26 +113,34 @@ export default function ContactForm() {
 
   const disabled = state === "loading" || state === "success";
 
+  function getSequentialErrors(currentForm: FormData): Partial<FormData> {
+    const newErrors: Partial<FormData> = {};
+    if (!currentForm.name.trim()) newErrors.name = "Please provide your name to proceed.";
+    else if (!currentForm.email.trim()) newErrors.email = "An email address is required for correspondence.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(currentForm.email))
+      newErrors.email = "The email format provided appears to be invalid.";
+    else if (!currentForm.subject.trim()) newErrors.subject = "Please specify the purpose of your inquiry.";
+    else if (!currentForm.message.trim()) newErrors.message = "Kindly provide the details of your request.";
+    return newErrors;
+  }
+
   function updateField(field: FieldName, value: string) {
     if (field === "message" && value.length > MAX_MESSAGE_LENGTH) return;
-    setForm((current) => ({ ...current, [field]: value }));
-    setErrors((current) => {
-      if (!current[field]) return current;
-      const next = { ...current };
-      delete next[field];
-      return next;
+    setForm((current) => {
+      const nextForm = { ...current, [field]: value };
+      setErrors((currentErrors) => {
+        if (Object.keys(currentErrors).length > 0) {
+          return getSequentialErrors(nextForm);
+        }
+        return currentErrors;
+      });
+      return nextForm;
     });
     if (state === "error") setState("idle");
   }
 
   function validate(): boolean {
-    const newErrors: Partial<FormData> = {};
-    if (!form.name.trim()) newErrors.name = "Name is required.";
-    if (!form.email.trim()) newErrors.email = "Email is required.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-      newErrors.email = "Enter a valid email address.";
-    if (!form.subject.trim()) newErrors.subject = "Subject is required.";
-    if (!form.message.trim()) newErrors.message = "Message is required.";
+    const newErrors = getSequentialErrors(form);
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   }
