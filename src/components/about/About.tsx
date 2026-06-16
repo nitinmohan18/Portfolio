@@ -78,8 +78,8 @@ export default function About() {
         }
 
         @keyframes smoothTravel {
-          0%   { top: 0%;   opacity: 0; transform: scale(0.6); }
-          8%   { top: 0%;   opacity: 1; transform: scale(1); }
+          0%   { top: 20px; opacity: 0; transform: scale(0.6); }
+          8%   { top: 20px; opacity: 1; transform: scale(1); }
           
           /* Stop exactly at Card 1 node */
           30%  { top: 16%;  transform: scale(1.3); }
@@ -111,22 +111,53 @@ export default function About() {
         }
 
         .edu-card {
-          background: linear-gradient(165deg, rgba(16, 22, 38, 0.85), rgba(8, 10, 16, 0.95));
-          border: 1px solid rgba(255,255,255,0.07);
+          background: linear-gradient(165deg, rgba(30, 40, 60, 0.4), rgba(10, 15, 25, 0.8));
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-top: 1px solid rgba(255, 255, 255, 0.15);
+          border-bottom: 2px solid rgba(0, 0, 0, 0.6);
           border-radius: 16px;
           padding: 18px 20px;
           position: relative;
           overflow: hidden;
           backdrop-filter: blur(16px);
           transform: translateY(0) scale(1);
-          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), inset 0 -2px 4px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(0,0,0,0.4);
+          box-shadow: 
+            inset 0 1px 1px rgba(255, 255, 255, 0.1), 
+            inset 0 -5px 15px rgba(0, 0, 0, 0.8), 
+            0 8px 20px -6px rgba(0, 0, 0, 0.7);
           transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+          cursor: pointer;
+        }
+        .edu-card::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 16px;
+          box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+          pointer-events: none;
         }
 
         .group:hover .edu-card {
+          background: linear-gradient(165deg, rgba(40, 50, 80, 0.5), rgba(15, 20, 35, 0.9));
           border-color: rgba(var(--card-rgb), 0.4);
+          border-top: 1px solid rgba(255, 255, 255, 0.25);
           transform: translateY(-6px) scale(1.02);
-          box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.15), inset 0 -3px 6px rgba(0, 0, 0, 0.8), 0 16px 32px -4px rgba(0,0,0,0.6), 0 0 20px rgba(var(--card-rgb), 0.2);
+          box-shadow: 
+            inset 0 1px 2px rgba(255, 255, 255, 0.2), 
+            inset 0 -5px 15px rgba(0, 0, 0, 0.8), 
+            0 16px 32px -6px rgba(0, 0, 0, 0.8), 
+            0 0 25px rgba(var(--card-rgb), 0.3);
+        }
+
+        .group:active .edu-card {
+          transform: translateY(-1px) scale(0.99);
+          border-bottom: 1px solid rgba(0,0,0,0.4);
+          border-top: 1px solid rgba(255,255,255,0.1);
+          box-shadow: 
+            inset 0 4px 12px rgba(0, 0, 0, 0.8), 
+            inset 0 1px 2px rgba(0, 0, 0, 0.5), 
+            0 2px 6px rgba(0, 0, 0, 0.2);
+          transition: all 0.15s ease;
         }
 
         .top-accent {
@@ -481,7 +512,7 @@ export default function About() {
               style={{
                 left: "-30px", // 30px left of the cards
                 width: "2px",
-                top: "0px", // Starts exactly at the first thread
+                top: "20px", // Cut 20px from top
                 bottom: "0px", // Ends exactly at the bottom of the last card
                 background: "linear-gradient(180deg, rgba(52,211,153,0.6) 0%, rgba(56,189,248,0.6) 40%, rgba(129,140,248,0.6) 80%, transparent 100%)",
                 boxShadow: "0 0 8px rgba(34,211,238,0.2)",
