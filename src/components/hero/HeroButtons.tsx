@@ -5,6 +5,7 @@ import { ArrowRight, Mail, Download } from "lucide-react";
 import { Github, Linkedin } from "@/components/ui/Icons";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { profile } from "@/data/profile";
+import { usePreloader } from "@/components/layout/ClientLayout";
 import { ReactNode } from "react";
 
 const socialIcons: Record<string, ReactNode> = {
@@ -60,6 +61,7 @@ const brandColors: Record<string, { border: string, shadow: string, text: string
 };
 
 export default function HeroButtons() {
+  const { showContent: isVisible } = usePreloader();
   const socials = profile.socials.filter((s) =>
     ["github", "linkedin", "instagram", "twitter"].includes(s.platform)
   );
@@ -204,7 +206,7 @@ export default function HeroButtons() {
         <MagneticButton strength={0.12}>
           <motion.button
             initial={{ opacity: 0, scale: 0.5, y: 40, rotateX: 45 }}
-            animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+            animate={isVisible ? { opacity: 1, scale: 1, y: 0, rotateX: 0 } : {}}
             transition={{ delay: 1.0, type: "spring", stiffness: 150, damping: 10 }}
             style={{ willChange: "transform, opacity" }}
             onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
@@ -218,7 +220,7 @@ export default function HeroButtons() {
         <MagneticButton strength={0.12}>
           <motion.button
             initial={{ opacity: 0, scale: 0.5, y: 40, rotateX: 45 }}
-            animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+            animate={isVisible ? { opacity: 1, scale: 1, y: 0, rotateX: 0 } : {}}
             transition={{ delay: 1.15, type: "spring", stiffness: 150, damping: 10 }}
             style={{ willChange: "transform, opacity" }}
             onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
@@ -233,7 +235,7 @@ export default function HeroButtons() {
           <MagneticButton strength={0.12}>
             <motion.a
               initial={{ opacity: 0, scale: 0.5, y: 40, rotateX: 45 }}
-              animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+              animate={isVisible ? { opacity: 1, scale: 1, y: 0, rotateX: 0 } : {}}
               transition={{ delay: 1.3, type: "spring", stiffness: 150, damping: 10 }}
               href={profile.resumeUrl}
               className="btn-secondary"
@@ -253,10 +255,10 @@ export default function HeroButtons() {
       <motion.div 
         className="flex items-center gap-[14px]"
         initial="hidden"
-        animate="visible"
+        animate={isVisible ? "visible" : "hidden"}
         variants={{
           hidden: {},
-          visible: { transition: { staggerChildren: 0.12, delayChildren: 1.4 } }
+          visible: { transition: { staggerChildren: 0.12, delayChildren: 1.2 } }
         }}
       >
         {socials.map((social) => {
