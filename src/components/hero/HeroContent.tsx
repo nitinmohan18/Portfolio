@@ -164,16 +164,29 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           }
         }
         .stat-card {
-          background: linear-gradient(165deg, rgba(18, 22, 38, 0.85), rgba(8, 10, 16, 0.95));
-          border: 1px solid rgba(255,255,255,0.06);
-          border-radius: 14px;
-          padding: 14px 14px;
-          backdrop-filter: blur(12px);
+          background: linear-gradient(165deg, rgba(30, 40, 60, 0.4), rgba(10, 15, 25, 0.8));
+          border: 1px solid rgba(255,255,255,0.05);
+          border-top: 1px solid rgba(255,255,255,0.15);
+          border-bottom: 2px solid rgba(0,0,0,0.6);
+          border-radius: 16px;
+          padding: 16px 14px;
+          backdrop-filter: blur(16px);
           position: relative;
           overflow: hidden;
-          cursor: default;
-          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), inset 0 -2px 4px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.4);
+          cursor: pointer;
+          box-shadow: 
+            inset 0 1px 1px rgba(255, 255, 255, 0.1), 
+            inset 0 -5px 15px rgba(0, 0, 0, 0.8), 
+            0 8px 20px -6px rgba(0, 0, 0, 0.7);
           transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .stat-card::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 16px;
+          box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+          pointer-events: none;
         }
         @media (max-width: 480px) {
           .stat-card {
@@ -181,14 +194,25 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           }
         }
         .stat-card:hover {
-          transform: translateY(-5px) scale(1.02);
+          transform: translateY(-6px) scale(1.02);
+          background: linear-gradient(165deg, rgba(40, 50, 80, 0.5), rgba(15, 20, 35, 0.9));
           border-color: var(--hover-border);
-          box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.15), inset 0 -3px 6px rgba(0, 0, 0, 0.8), 0 16px 32px -4px rgba(0, 0, 0, 0.6), 0 0 20px var(--hover-glow);
+          border-top: 1px solid rgba(255,255,255,0.25);
+          box-shadow: 
+            inset 0 1px 2px rgba(255, 255, 255, 0.2), 
+            inset 0 -5px 15px rgba(0, 0, 0, 0.8), 
+            0 16px 32px -6px rgba(0, 0, 0, 0.8), 
+            0 0 25px var(--hover-glow);
           transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
         }
         .stat-card:active {
           transform: translateY(-1px) scale(0.99);
-          box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.7), inset 0 1px 2px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.2);
+          border-bottom: 1px solid rgba(0,0,0,0.4);
+          border-top: 1px solid rgba(255,255,255,0.1);
+          box-shadow: 
+            inset 0 4px 12px rgba(0, 0, 0, 0.8), 
+            inset 0 1px 2px rgba(0, 0, 0, 0.5), 
+            0 2px 6px rgba(0, 0, 0, 0.2);
           transition: all 0.15s ease;
         }
         .stat-card-top-line {
