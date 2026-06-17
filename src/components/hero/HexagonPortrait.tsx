@@ -103,7 +103,7 @@ export default function HexagonPortrait({ isVisible = true }: HexagonPortraitPro
 
       {/* Floating & Parallax Container */}
       <motion.div
-        className="relative w-full h-full z-10 portrait-float flex items-center justify-center cursor-pointer"
+        className="relative w-full h-full z-10 flex items-center justify-center cursor-pointer"
         style={{
           x: isDesktop ? springX : 0,
           y: isDesktop ? springY : 0,
@@ -148,48 +148,51 @@ export default function HexagonPortrait({ isVisible = true }: HexagonPortraitPro
           mass: 1.2 
         }}
       >
-        {/* Breathing Neon Glow wrapper */}
-        <div className="relative w-full h-full breathing-drop-shadow transition-all duration-500 group-hover:drop-shadow-[0_0_35px_rgba(34,211,238,0.5)]">
-          
-          <div 
-            className="relative w-full h-full overflow-hidden transition-all duration-500 group-hover:contrast-[1.05]" 
-            style={{ 
-              clipPath: "polygon(50% 0%, 92.5% 25%, 92.5% 75%, 50% 100%, 7.5% 75%, 7.5% 25%)",
-              WebkitClipPath: "polygon(50% 0%, 92.5% 25%, 92.5% 75%, 50% 100%, 7.5% 75%, 7.5% 25%)"
-            }}
-          >
-            <Image
-              src="/images/hexagon-portrait.jpg"
-              alt="Hexagon Portrait"
-              fill
-              priority
-              className="object-contain select-none scale-105"
-              sizes="(max-width: 768px) 80vw, (max-width: 1024px) 50vw, 45vw"
-            />
-
-            {/* Premium Vignette Overlay to obscure background text */}
-            <div 
-              className="absolute inset-0 pointer-events-none" 
-              style={{
-                background: "radial-gradient(ellipse at 50% 45%, transparent 35%, rgba(5,10,20,0.75) 75%, rgba(5,10,20,0.95) 100%)"
-              }} 
-            />
-
-            {/* Additional side-shadows to specifically target the text areas */}
-            <div 
-              className="absolute inset-0 pointer-events-none mix-blend-multiply" 
-              style={{
-                background: "linear-gradient(90deg, rgba(5,10,20,0.8) 0%, transparent 25%, transparent 75%, rgba(5,10,20,0.8) 100%)"
-              }} 
-            />
-
-            {/* Edge Highlights */}
-            <div className="absolute inset-0 shadow-[inset_0_0_25px_rgba(34,211,238,0.4)] pointer-events-none mix-blend-overlay" />
+        {/* Continuous Floating CSS Animation Wrapper */}
+        <div className="relative w-full h-full portrait-float">
+          {/* Breathing Neon Glow wrapper */}
+          <div className="relative w-full h-full breathing-drop-shadow transition-all duration-500 group-hover:drop-shadow-[0_0_35px_rgba(34,211,238,0.5)]">
             
-            {/* Glass Reflection Sweep */}
-            <div className="absolute inset-0 pointer-events-none glass-sweep mix-blend-overlay" />
-          </div>
+            <div 
+              className="relative w-full h-full overflow-hidden transition-all duration-500 group-hover:contrast-[1.05]" 
+              style={{ 
+                clipPath: "polygon(50% 0%, 92.5% 25%, 92.5% 75%, 50% 100%, 7.5% 75%, 7.5% 25%)",
+                WebkitClipPath: "polygon(50% 0%, 92.5% 25%, 92.5% 75%, 50% 100%, 7.5% 75%, 7.5% 25%)"
+              }}
+            >
+              <Image
+                src="/images/hexagon-portrait.jpg"
+                alt="Hexagon Portrait"
+                fill
+                priority
+                className="object-contain select-none scale-105"
+                sizes="(max-width: 768px) 80vw, (max-width: 1024px) 50vw, 45vw"
+              />
 
+              {/* Premium Vignette Overlay to obscure background text */}
+              <div 
+                className="absolute inset-0 pointer-events-none" 
+                style={{
+                  background: "radial-gradient(ellipse at 50% 45%, transparent 35%, rgba(5,10,20,0.75) 75%, rgba(5,10,20,0.95) 100%)"
+                }} 
+              />
+
+              {/* Additional side-shadows to specifically target the text areas */}
+              <div 
+                className="absolute inset-0 pointer-events-none mix-blend-multiply" 
+                style={{
+                  background: "linear-gradient(90deg, rgba(5,10,20,0.8) 0%, transparent 25%, transparent 75%, rgba(5,10,20,0.8) 100%)"
+                }} 
+              />
+
+              {/* Edge Highlights */}
+              <div className="absolute inset-0 shadow-[inset_0_0_25px_rgba(34,211,238,0.4)] pointer-events-none mix-blend-overlay" />
+              
+              {/* Glass Reflection Sweep */}
+              <div className="absolute inset-0 pointer-events-none glass-sweep mix-blend-overlay" />
+            </div>
+
+          </div>
         </div>
       </motion.div>
 
