@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import HeroContent from "./HeroContent";
 import HexagonPortrait from "./HexagonPortrait";
+import Signature from "./Signature";
 import { usePreloader } from "@/components/layout/ClientLayout";
 
 export default function Hero() {
@@ -47,6 +48,9 @@ export default function Hero() {
                 {/* Right side portrait */}
                 <div className="w-full lg:w-[45%] xl:w-[50%] flex justify-center items-center relative z-10">
                   <HexagonPortrait isVisible={isVisible} />
+                  <div className="absolute top-[80%] lg:top-[75%] xl:top-[80%] w-full flex justify-center pointer-events-none">
+                    <Signature isVisible={isVisible} />
+                  </div>
                 </div>
               </div>
             </div>
