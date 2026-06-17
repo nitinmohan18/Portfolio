@@ -59,18 +59,18 @@ export default function HexagonPortrait({ isVisible = true }: HexagonPortraitPro
           x: isDesktop ? glowX : 0,
           y: isDesktop ? glowY : 0,
         }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-        transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+        transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
       />
 
       {/* Orbiting Particles */}
       {isVisible && (
         <motion.div 
           className="absolute inset-0 pointer-events-none z-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 0.5 }}
+          initial={{ opacity: 0, scale: 0.2 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 2, delay: 0.6, type: "spring", stiffness: 40, damping: 20 }}
         >
           {PARTICLES.map((p) => (
             <div
@@ -107,9 +107,31 @@ export default function HexagonPortrait({ isVisible = true }: HexagonPortraitPro
         style={{
           x: isDesktop ? springX : 0,
           y: isDesktop ? springY : 0,
+          transformPerspective: 1200,
         }}
-        initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
-        animate={isVisible ? { opacity: 1, scale: 1, filter: "blur(0px)" } : { opacity: 0, scale: 0.8, filter: "blur(10px)" }}
+        initial={{ 
+          opacity: 0, 
+          scale: 0.4, 
+          rotateY: 120, 
+          rotateX: 30, 
+          z: -800,
+          filter: "blur(20px) saturate(0) brightness(2)" 
+        }}
+        animate={isVisible ? { 
+          opacity: 1, 
+          scale: 1, 
+          rotateY: 0, 
+          rotateX: 0, 
+          z: 0,
+          filter: "blur(0px) saturate(1) brightness(1)" 
+        } : { 
+          opacity: 0, 
+          scale: 0.4, 
+          rotateY: 120, 
+          rotateX: 30, 
+          z: -800,
+          filter: "blur(20px) saturate(0) brightness(2)" 
+        }}
         whileHover={{ scale: 1.03, transition: { type: "spring", stiffness: 300, damping: 15 } }}
         whileTap={{ 
           scale: 0.97, 
@@ -118,7 +140,13 @@ export default function HexagonPortrait({ isVisible = true }: HexagonPortraitPro
           filter: "brightness(1.1) saturate(1.1)", 
           transition: { type: "spring", stiffness: 600, damping: 20 } 
         }}
-        transition={{ duration: 1.2, delay: 0.4, type: "spring", stiffness: 50, damping: 20 }}
+        transition={{ 
+          delay: 0.2, 
+          type: "spring", 
+          stiffness: 60, 
+          damping: 18, 
+          mass: 1.2 
+        }}
       >
         {/* Breathing Neon Glow wrapper */}
         <div className="relative w-full h-full breathing-drop-shadow transition-all duration-500 group-hover:drop-shadow-[0_0_35px_rgba(34,211,238,0.5)]">
