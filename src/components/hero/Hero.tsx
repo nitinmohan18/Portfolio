@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import HeroContent from "./HeroContent";
+import HexagonPortrait from "./HexagonPortrait";
 import { usePreloader } from "@/components/layout/ClientLayout";
 
 export default function Hero() {
@@ -17,14 +18,14 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative z-10 w-full isolate"
+      className="relative z-10 w-full isolate flex items-center min-h-[100svh] pt-20 pb-24 lg:pt-0 lg:pb-0 overflow-hidden"
     >
       <AnimatePresence mode="wait">
         <motion.div
           key={animationKey}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="relative z-10 w-full h-full flex flex-col justify-center"
+            className="relative z-10 w-full flex flex-col justify-center h-full"
           >
             {/* Bottom fade into sections */}
             <div
@@ -37,7 +38,17 @@ export default function Hero() {
 
             {/* Content */}
             <div className="container-wide relative z-[5] w-full">
-              <HeroContent isVisible={isVisible} />
+              <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-8 w-full">
+                {/* Left side text content */}
+                <div className="w-full lg:w-[55%] xl:w-[50%] flex-shrink-0 z-10">
+                  <HeroContent isVisible={isVisible} />
+                </div>
+                
+                {/* Right side portrait */}
+                <div className="w-full lg:w-[45%] xl:w-[50%] flex justify-center items-center relative z-10">
+                  <HexagonPortrait isVisible={isVisible} />
+                </div>
+              </div>
             </div>
 
             {/* Scroll indicator */}
