@@ -46,7 +46,7 @@ export default function Hero() {
                 </div>
                 
                 {/* Right side portrait */}
-                <div className="w-full lg:w-[45%] xl:w-[50%] flex justify-center items-center relative z-10">
+                <div className="w-full lg:w-[45%] xl:w-[50%] flex justify-center items-center relative z-10 top-12">
                   <HexagonPortrait isVisible={isVisible} />
                   <div className="absolute top-[80%] lg:top-[75%] xl:top-[80%] w-full flex justify-center pointer-events-none">
                     <Signature isVisible={isVisible} />
