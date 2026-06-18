@@ -140,8 +140,8 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
       whileInView={{ opacity: 1, y: baseY }}
       transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1], delay: 0.4 + (index * 0.05) }}
       whileHover={{ y: baseY - 2, scale: 1.05, boxShadow: `inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 6px rgba(0,0,0,0.8), 0 8px 20px -4px ${glowColor}40` }}
-      whileTap={{ y: baseY + 2, scale: 0.94, boxShadow: "inset 0 2px 4px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.3)" }}
-      className={`relative flex max-sm:flex-col max-sm:justify-center items-center gap-2 sm:gap-2.5 p-2.5 py-3 sm:p-[9px] rounded-[10px] sm:rounded-[12px] border transition-all duration-300 group/skill hover:border-[${glowColor}]/50 ${isSingle ? 'py-4 justify-center' : ''} ${className}`}
+      whileTap={{ y: baseY + 2, scale: 0.94, boxShadow: `inset 0 2px 4px rgba(0,0,0,0.8), 0 4px 15px ${glowColor}60` }}
+      className={`relative flex max-sm:flex-col max-sm:justify-center items-center gap-2 sm:gap-2.5 p-2.5 py-3 sm:p-[9px] rounded-[10px] sm:rounded-[12px] border transition-all duration-300 group/skill hover:border-[${glowColor}]/50 active:border-[${glowColor}]/70 ${isSingle ? 'py-4 justify-center' : ''} ${className}`}
       style={{ 
         transformStyle: "preserve-3d", 
         background: "linear-gradient(145deg, rgba(16, 22, 38, 0.7), rgba(8, 10, 16, 0.95))",
@@ -151,7 +151,7 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
     >
       {/* Skill specific hover glow behind the chip */}
       <div 
-        className="absolute inset-0 rounded-[10px] opacity-0 group-hover/skill:opacity-20 transition-opacity duration-500 pointer-events-none blur-md"
+        className="absolute inset-0 rounded-[10px] opacity-0 group-hover/skill:opacity-20 group-active/skill:opacity-30 transition-opacity duration-300 pointer-events-none blur-md"
         style={{ backgroundColor: glowColor }}
       />
 
@@ -164,7 +164,7 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
         <motion.div 
           animate={{ rotate: 360 }}
           transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-          className="absolute w-[200%] h-[200%] opacity-80 group-hover/skill:opacity-100 transition-opacity duration-300"
+          className="absolute w-[200%] h-[200%] opacity-80 group-hover/skill:opacity-100 group-active/skill:opacity-100 transition-opacity duration-300"
           style={{
              background: `conic-gradient(from 0deg, transparent 0%, transparent 60%, ${glowColor} 100%)`
           }}
@@ -175,6 +175,7 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
 
         <motion.div
           whileHover={{ rotate: 360 }}
+          whileTap={{ scale: 0.9 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
           className="relative z-10 flex items-center justify-center w-full h-full"
         >
@@ -188,7 +189,7 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
       
       {!isSingle && (
         <span 
-          className="text-[10px] sm:text-[12px] md:text-[12.5px] font-semibold text-gray-300 group-hover/skill:text-white transition-colors max-sm:tracking-tight max-sm:text-center max-sm:-mx-1 max-sm:truncate sm:truncate"
+          className="text-[10px] sm:text-[12px] md:text-[12.5px] font-semibold text-gray-300 group-hover/skill:text-white group-active/skill:text-white transition-colors max-sm:tracking-tight max-sm:text-center max-sm:-mx-1 max-sm:truncate sm:truncate"
           style={{ transform: "translateZ(10px)", maxWidth: "100%" }}
         >
           {skill.name}
