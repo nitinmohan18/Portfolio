@@ -440,7 +440,7 @@ export default function Certifications() {
           {/* Section label */}
           <motion.div
             variants={fadeBlur}
-            className="flex items-center gap-4 mb-4 relative -translate-y-10"
+            className="flex items-center gap-4 mb-8 max-sm:!mb-[24px] relative -translate-y-10"
           >
             <motion.div
               className="h-[1px] w-14 bg-gradient-to-r from-transparent via-indigo-400/40 to-indigo-500/60"
@@ -467,7 +467,7 @@ export default function Certifications() {
           {/* Headline */}
           <motion.h2
             variants={fadeBlur}
-            className="font-display text-[clamp(2.8rem,5.5vw,4.6rem)] max-sm:text-[2rem] font-bold leading-[1.08] text-white max-sm:mb-2 mb-3 tracking-tight
+            className="font-display text-[clamp(2.8rem,5.5vw,4.6rem)] max-sm:text-[2rem] font-bold leading-[1.08] text-white max-sm:!mb-[8px] mb-5 tracking-tight
               drop-shadow-[0_0_40px_rgba(255,255,255,0.06)] relative -translate-y-10 max-sm:left-0 -left-[9.6px]"
           >
             Pursuit of <span className="font-serif italic font-medium bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 drop-shadow-[0_0_24px_rgba(99,102,241,0.4)] animate-[certShimmer_6s_ease-in-out_infinite]" style={{ backgroundSize: "200% auto" }}>Excellence</span>

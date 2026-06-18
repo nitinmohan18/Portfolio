@@ -363,7 +363,7 @@ export default function Contact() {
                 whileInView={{ opacity: 1, z: 0, rotateX: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 1, delay: 0.1, type: "spring", bounce: 0.5 }}
-                className="relative mb-3 max-sm:mb-5 flex items-center gap-4 origin-bottom"
+                className="relative mb-3 max-sm:!mb-[20px] flex items-center gap-4 origin-bottom"
               >
                 {/* Left Line & Dot */}
                 <div className="flex items-center gap-2 shrink-0">
@@ -428,7 +428,7 @@ export default function Contact() {
             </div>
 
             {/* Supporting Text & Badges */}
-            <div className="mt-5 flex flex-col gap-5 -translate-y-6 max-sm:mt-3 max-sm:gap-4 max-sm:translate-y-0 md:-translate-y-[60px]" style={{ perspective: 800 }}>
+            <div className="mt-5 flex flex-col gap-5 -translate-y-6 max-sm:!mt-[22px] max-sm:gap-4 max-sm:translate-y-0 md:-translate-y-[60px]" style={{ perspective: 800 }}>
               <motion.p 
                 initial={{ opacity: 0, z: -50, rotateX: -30, filter: "blur(8px)" }}
                 whileInView={{ opacity: 1, z: 0, rotateX: 0, filter: "blur(0px)" }}
@@ -491,7 +491,7 @@ export default function Contact() {
             </div>
 
             {/* ── Info Cards ── */}
-            <div className="relative mt-10 flex flex-col gap-5 max-sm:mt-6 max-sm:gap-4 -translate-y-2">
+            <div className="relative mt-10 flex flex-col gap-5 max-sm:!mt-[34px] max-sm:gap-4 -translate-y-2">
               
               {/* ── Structured Futuristic Connecting Line ── */}
               <div 
