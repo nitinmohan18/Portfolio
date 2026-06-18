@@ -94,7 +94,7 @@ const colorMap: Record<
     iconGlow:
       "shadow-[0_0_30px_rgba(59,130,246,0.38),0_0_65px_rgba(59,130,246,0.12)]",
     iconGlowHover:
-      "group-hover:shadow-[0_0_40px_rgba(59,130,246,0.5),0_0_80px_rgba(59,130,246,0.17)]",
+      "group-hover:shadow-[0_0_40px_rgba(59,130,246,0.5),0_0_80px_rgba(59,130,246,0.17)] group-active:shadow-[0_0_40px_rgba(59,130,246,0.5),0_0_80px_rgba(59,130,246,0.17)]",
     iconText: "text-blue-400",
     cardBg:
       "bg-[linear-gradient(145deg,#0d111a_0%,#02040a_100%)] border-white/[0.05] shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),inset_0_-2px_6px_rgba(0,0,0,0.8),0_10px_30px_rgba(0,0,0,0.8)]",
@@ -116,15 +116,15 @@ const colorMap: Record<
     iconGlow:
       "shadow-[0_0_30px_rgba(168,85,247,0.38),0_0_65px_rgba(168,85,247,0.12)]",
     iconGlowHover:
-      "group-hover:shadow-[0_0_40px_rgba(168,85,247,0.5),0_0_80px_rgba(168,85,247,0.17)]",
+      "group-hover:shadow-[0_0_40px_rgba(168,85,247,0.5),0_0_80px_rgba(168,85,247,0.17)] group-active:shadow-[0_0_40px_rgba(168,85,247,0.5),0_0_80px_rgba(168,85,247,0.17)]",
     iconText: "text-purple-400",
     cardBg:
       "bg-[linear-gradient(145deg,#120b1a_0%,#04020a_100%)] border-white/[0.05] shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),inset_0_-2px_6px_rgba(0,0,0,0.8),0_10px_30px_rgba(0,0,0,0.8)]",
     cardHover:
-      "hover:-translate-y-1 hover:border-white/[0.15] hover:shadow-[inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-4px_10px_rgba(0,0,0,1),0_20px_50px_rgba(168,85,247,0.15),0_0_30px_rgba(168,85,247,0.05)]",
+      "hover:-translate-y-1 hover:border-white/[0.15] hover:shadow-[inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-4px_10px_rgba(0,0,0,1),0_20px_50px_rgba(168,85,247,0.15),0_0_30px_rgba(168,85,247,0.05)] active:-translate-y-1 active:border-white/[0.15] active:shadow-[inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-4px_10px_rgba(0,0,0,1),0_20px_50px_rgba(168,85,247,0.15),0_0_30px_rgba(168,85,247,0.05)]",
     badge: "relative bg-[#050210] border-purple-500/20 shadow-[0_4px_12px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05),inset_0_0_20px_rgba(168,85,247,0.15)] text-purple-300",
     arrowRing:
-      "hover:border-purple-400/60 hover:shadow-[0_10px_25px_rgba(168,85,247,0.4),0_2px_10px_rgba(168,85,247,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
+      "hover:border-purple-400/60 hover:shadow-[0_10px_25px_rgba(168,85,247,0.4),0_2px_10px_rgba(168,85,247,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)] active:border-purple-400/60 active:shadow-[0_10px_25px_rgba(168,85,247,0.4),0_2px_10px_rgba(168,85,247,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
     arrowText: "text-purple-300",
     dotClass: "bg-emerald-400",
     dotGlow: "shadow-[0_0_6px_2px_rgba(52,211,153,0.6)]",
@@ -138,15 +138,15 @@ const colorMap: Record<
     iconGlow:
       "shadow-[0_0_30px_rgba(6,182,212,0.38),0_0_65px_rgba(6,182,212,0.12)]",
     iconGlowHover:
-      "group-hover:shadow-[0_0_40px_rgba(6,182,212,0.5),0_0_80px_rgba(6,182,212,0.17)]",
+      "group-hover:shadow-[0_0_40px_rgba(6,182,212,0.5),0_0_80px_rgba(6,182,212,0.17)] group-active:shadow-[0_0_40px_rgba(6,182,212,0.5),0_0_80px_rgba(6,182,212,0.17)]",
     iconText: "text-cyan-400",
     cardBg:
       "bg-[linear-gradient(145deg,#0a1518_0%,#02070a_100%)] border-white/[0.05] shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),inset_0_-2px_6px_rgba(0,0,0,0.8),0_10px_30px_rgba(0,0,0,0.8)]",
     cardHover:
-      "hover:-translate-y-1 hover:border-white/[0.15] hover:shadow-[inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-4px_10px_rgba(0,0,0,1),0_20px_50px_rgba(6,182,212,0.15),0_0_30px_rgba(6,182,212,0.05)]",
+      "hover:-translate-y-1 hover:border-white/[0.15] hover:shadow-[inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-4px_10px_rgba(0,0,0,1),0_20px_50px_rgba(6,182,212,0.15),0_0_30px_rgba(6,182,212,0.05)] active:-translate-y-1 active:border-white/[0.15] active:shadow-[inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-4px_10px_rgba(0,0,0,1),0_20px_50px_rgba(6,182,212,0.15),0_0_30px_rgba(6,182,212,0.05)]",
     badge: "relative bg-[#01080a] border-cyan-500/20 shadow-[0_4px_12px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.05),inset_0_0_20px_rgba(6,182,212,0.15)] text-cyan-300",
     arrowRing:
-      "hover:border-cyan-400/60 hover:shadow-[0_10px_25px_rgba(6,182,212,0.4),0_2px_10px_rgba(6,182,212,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
+      "hover:border-cyan-400/60 hover:shadow-[0_10px_25px_rgba(6,182,212,0.4),0_2px_10px_rgba(6,182,212,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)] active:border-cyan-400/60 active:shadow-[0_10px_25px_rgba(6,182,212,0.4),0_2px_10px_rgba(6,182,212,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
     arrowText: "text-cyan-300",
     dotClass: "bg-emerald-400",
     dotGlow: "shadow-[0_0_6px_2px_rgba(52,211,153,0.6)]",
@@ -243,7 +243,7 @@ const FloatingIcon = ({
         
         <div
           className={`relative z-10 ${c.iconText} drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]
-            group-hover:scale-110 group-hover:drop-shadow-[0_0_14px_currentColor] transition-all duration-500`}
+            group-hover:scale-110 group-hover:drop-shadow-[0_0_14px_currentColor] group-active:scale-110 group-active:drop-shadow-[0_0_14px_currentColor] transition-all duration-500`}
         >
           {children}
         </div>
@@ -280,7 +280,7 @@ const ArrowBtn = ({ color }: { color: ColorKey }) => {
       <ArrowRight
         size={22}
         strokeWidth={1.75}
-        className={`relative z-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover:translate-x-1 group-hover:drop-shadow-[0_0_12px_currentColor] ${c.arrowText}`}
+        className={`relative z-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover:translate-x-1 group-active:translate-x-1 group-hover:drop-shadow-[0_0_12px_currentColor] group-active:drop-shadow-[0_0_12px_currentColor] ${c.arrowText}`}
       />
     </motion.button>
   );
@@ -428,14 +428,14 @@ export default function Certifications() {
   const ongoingCerts = certificationsData.filter((c) => c.status === "in-progress").length;
 
   return (
-    <SectionWrapper id="certifications" className="w-full">
+    <SectionWrapper id="certifications" className="w-full max-sm:pb-8">
       <div ref={sectionRef} className="w-full flex flex-col items-center px-4">
         {/* ── Header ── */}
         <motion.div
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={sectionStagger}
-          className="flex flex-col items-center text-center w-full mb-10"
+          className="flex flex-col items-center text-center w-full max-sm:mb-4 mb-10"
         >
           {/* Section label */}
           <motion.div
@@ -467,8 +467,8 @@ export default function Certifications() {
           {/* Headline */}
           <motion.h2
             variants={fadeBlur}
-            className="font-display text-[clamp(2.8rem,5.5vw,4.6rem)] font-bold leading-[1.08] text-white mb-3 tracking-tight
-              drop-shadow-[0_0_40px_rgba(255,255,255,0.06)] relative -translate-y-10 -left-[9.6px]"
+            className="font-display text-[clamp(2.8rem,5.5vw,4.6rem)] max-sm:text-[2rem] font-bold leading-[1.08] text-white max-sm:mb-2 mb-3 tracking-tight
+              drop-shadow-[0_0_40px_rgba(255,255,255,0.06)] relative -translate-y-10 max-sm:left-0 -left-[9.6px]"
           >
             Pursuit of <span className="font-serif italic font-medium bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 drop-shadow-[0_0_24px_rgba(99,102,241,0.4)] animate-[certShimmer_6s_ease-in-out_infinite]" style={{ backgroundSize: "200% auto" }}>Excellence</span>
           </motion.h2>
@@ -476,7 +476,7 @@ export default function Certifications() {
           {/* Subtext */}
           <motion.p
             variants={fadeBlur}
-            className="max-w-[440px] text-[15px] text-white/50 leading-relaxed mb-6 relative -translate-y-10"
+            className="max-w-[440px] max-sm:text-[13px] text-[15px] text-white/50 leading-relaxed max-sm:mb-4 mb-6 relative -translate-y-10 max-sm:px-2"
           >
             Validated expertise in software engineering, problem solving, and emerging technologies.
           </motion.p>
@@ -484,12 +484,12 @@ export default function Certifications() {
           {/* Subtle Counter */}
           <motion.div
             variants={fadeBlur}
-            className="flex flex-wrap items-center justify-center gap-3 text-[13px] font-medium text-white/40 relative -translate-y-10 mb-12"
+            className="flex flex-row flex-nowrap items-center justify-center max-sm:gap-1.5 md:gap-3 max-sm:text-[11px] md:text-[13px] font-medium text-white/40 relative -translate-y-10 max-sm:mb-6 mb-12 whitespace-nowrap"
           >
             <span>{totalCerts} Certifications</span>
-            <span className="w-1 h-1 rounded-full bg-white/20" />
+            <span className="w-1 h-1 rounded-full bg-white/20 shrink-0" />
             <span className="text-emerald-400/80">{completedCerts} Completed</span>
-            <span className="w-1 h-1 rounded-full bg-white/20" />
+            <span className="w-1 h-1 rounded-full bg-white/20 shrink-0" />
             <span className="text-blue-400/80">{ongoingCerts} In Progress</span>
           </motion.div>
 
@@ -501,7 +501,7 @@ export default function Certifications() {
         {/* ── Cards ── */}
         <motion.div
           layout
-          className="w-full max-sm:!w-[92vw] max-w-[840px] mt-16 mx-auto min-h-[560px] md:min-h-[480px]"
+          className="w-full max-sm:!w-[86vw] max-sm:translate-x-[4vw] max-w-[840px] max-sm:mt-6 mt-16 mx-auto max-sm:min-h-[300px] min-h-[560px] md:min-h-[480px]"
         >
           <motion.div 
             id="certifications-panel"
@@ -522,7 +522,7 @@ export default function Certifications() {
               layout
               variants={timelineDraw}
               style={{ originY: 0 }}
-              className="absolute left-[-16px] md:left-[-30px] top-[40px] bottom-[40px] w-[6px] hidden md:block z-0"
+              className="absolute left-[-20px] md:left-[-30px] top-[40px] bottom-[40px] w-[6px] block z-0"
             >
               <div className="absolute inset-0 bg-[#050810] border border-white/10 shadow-[inset_0_2px_4px_rgba(0,0,0,1)] rounded-full" />
               <div className="absolute inset-0 overflow-hidden rounded-full">
@@ -552,7 +552,7 @@ export default function Certifications() {
                   {/* Timeline Node */}
                   <motion.div
                     variants={popIn}
-                    className={`absolute left-[-25px] md:left-[-39px] top-1/2 -translate-y-1/2 hidden md:flex
+                    className={`absolute left-[-29px] md:left-[-39px] top-1/2 -translate-y-1/2 flex
                       items-center justify-center w-[24px] h-[24px] rounded-full
                       bg-[#080d1a] z-10 border border-white/10 shadow-[inset_0_2px_4px_rgba(0,0,0,0.8),0_4px_10px_rgba(0,0,0,0.5)]`}
                   >
@@ -600,6 +600,7 @@ export default function Certifications() {
                       if (cert.link) window.open(cert.link, "_blank");
                       else if (cert.image) window.open(cert.image, "_blank");
                     }}
+                    onTouchStart={() => {}} // Enables CSS :active pseudo-class on mobile iOS
                     onKeyDown={(e: React.KeyboardEvent) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
@@ -617,10 +618,10 @@ export default function Certifications() {
                       },
                     }}
                     whileTap={{ scale: 0.99 }}
-                    className={`group w-full relative flex flex-col md:flex-row max-sm:items-start md:items-center
+                    className={`group w-full relative flex max-sm:flex-row flex-col md:flex-row max-sm:items-center items-start md:items-center
                       backdrop-blur-xl border rounded-[22px]
                       transition-all duration-500 ${cert.link || cert.image ? "cursor-pointer" : "cursor-default"}
-                      p-6 sm:p-8 md:py-10 md:pl-8 md:pr-12 gap-5 sm:gap-8 md:gap-10
+                      p-6 sm:p-8 md:py-10 md:pl-8 md:pr-12 gap-5 sm:gap-8 md:gap-10 max-sm:!p-4 max-sm:!gap-3
                       ${c.cardBg} ${c.cardHover}`}
                   >
                     {/* Card Flash Glow on Entry */}
@@ -640,21 +641,21 @@ export default function Certifications() {
                     <div className="absolute inset-0 rounded-[22px] bg-[linear-gradient(135deg,rgba(255,255,255,0.05)_0%,transparent_100%)] pointer-events-none" />
 
                     {/* Floating icon */}
-                    <div className="shrink-0 relative max-sm:scale-75 max-sm:origin-top-left max-sm:self-start max-sm:-mb-2">
+                    <div className="shrink-0 relative translate-x-[16px] max-sm:translate-x-0 max-sm:scale-[0.6] max-sm:-mx-3">
                       <FloatingIcon color={cert.color}>
                         <Icon size={32} strokeWidth={1.25} />
                       </FloatingIcon>
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 flex flex-col min-w-0 max-sm:gap-1.5 md:gap-3 justify-center w-full">
+                    <div className="flex-1 flex flex-col min-w-0 max-sm:gap-1 md:gap-3 justify-center w-full">
                       {/* Status badge */}
                       <motion.div
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`inline-flex self-start items-center gap-2 max-sm:px-2 max-sm:py-1 md:px-3 md:py-1.5 max-sm:translate-y-0 translate-y-[10px]
-                          rounded-full max-sm:text-[9px] md:text-[10px] font-bold tracking-[0.15em] uppercase border border-white/5 cursor-pointer
-                          transition-all duration-300 overflow-hidden ${c.badge} max-sm:mb-0 md:mb-1`}
+                        className={`inline-flex self-start items-center gap-2 max-sm:px-2 max-sm:py-0.5 md:px-3 md:py-1.5 max-sm:translate-y-0 translate-y-[10px]
+                          rounded-full max-sm:text-[8px] md:text-[10px] font-bold tracking-[0.15em] uppercase border border-white/5 cursor-pointer
+                          transition-all duration-300 overflow-hidden ${c.badge} max-sm:mb-0.5 md:mb-1`}
                       >
                         {/* Glass Reflection */}
                         <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-80" />
@@ -670,21 +671,21 @@ export default function Certifications() {
 
                       {/* Title */}
                       <h3
-                        className="font-display max-sm:text-[18px] md:text-[22px] font-semibold text-white tracking-wide leading-snug
-                          group-hover:text-white transition-colors duration-300"
+                        className="font-display max-sm:text-[15px] md:text-[22px] font-semibold text-white tracking-wide leading-snug
+                          group-hover:text-white transition-colors duration-300 max-sm:line-clamp-1"
                       >
                         {cert.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-white/50 max-sm:text-[13px] md:text-[14px] leading-relaxed group-hover:text-white/70 transition-colors duration-500 max-sm:mb-1 md:mb-2 max-sm:pr-2">
+                      <p className="text-white/50 max-sm:text-[11px] md:text-[14px] leading-relaxed group-hover:text-white/70 transition-colors duration-500 max-sm:mb-0.5 md:mb-2 max-sm:line-clamp-2">
                         {cert.description}
                       </p>
 
                       {/* Footer */}
-                      <div className="flex items-center gap-[7px] mt-1 max-sm:translate-y-0 md:-translate-y-[7px]">
-                        <Award size={16} className={`${c.iconText} shrink-0 opacity-80 max-sm:scale-90`} />
-                        <span className="max-sm:text-[12px] md:text-[13px] text-white/40">
+                      <div className="flex items-center gap-[5px] max-sm:mt-0.5 mt-1 max-sm:translate-y-0 md:-translate-y-[7px]">
+                        <Award size={16} className={`${c.iconText} shrink-0 opacity-80 max-sm:scale-[0.65] max-sm:-mr-0.5`} />
+                        <span className="max-sm:text-[10px] md:text-[13px] text-white/40 max-sm:truncate">
                           {isCompleted ? "Certified by" : "Provided by"} ·{" "}
                           <span className="text-white/60 font-medium tracking-wide">
                             {cert.issuer}
@@ -694,7 +695,7 @@ export default function Certifications() {
                     </div>
 
                     {/* Arrow button */}
-                    <div className="shrink-0 md:mt-0 relative max-sm:self-end max-sm:-mt-10 max-sm:scale-75 max-sm:origin-bottom-right">
+                    <div className="shrink-0 md:mt-0 relative -translate-x-[16px] max-sm:translate-x-0 max-sm:scale-[0.6] max-sm:-mr-3">
                       <ArrowBtn color={cert.color} />
                     </div>
                   </motion.div>

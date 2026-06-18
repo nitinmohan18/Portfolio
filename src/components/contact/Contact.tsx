@@ -348,22 +348,22 @@ export default function Contact() {
       {/* Inject contact-scoped keyframes */}
       <style>{contactKeyframes}</style>
 
-      <SectionWrapper id="contact" className="!py-20 md:!py-28 lg:!py-32">
+      <SectionWrapper id="contact" className="max-sm:!pt-8 max-sm:!pb-16 !py-20 md:!py-28 lg:!py-32">
         {/* ── Background Layer ── */}
 
 
         {/* ── Two-Column Layout ── */}
-        <div className="relative z-10 grid gap-12 lg:grid-cols-[45fr_55fr] lg:gap-20 xl:gap-28 max-sm:!w-[92vw] max-sm:relative max-sm:left-1/2 max-sm:-translate-x-1/2">
+        <div className="relative z-10 grid gap-12 max-sm:gap-8 lg:grid-cols-[45fr_55fr] lg:gap-20 xl:gap-28 max-sm:!w-[92vw] max-sm:relative max-sm:left-1/2 max-sm:-translate-x-1/2">
           {/* ═══ Left Column ═══ */}
           <div className="flex flex-col justify-center">
             {/* Section Label */}
-            <div className="-translate-x-4 -translate-y-6 md:-translate-x-[60px] md:-translate-y-[100px]" style={{ perspective: 800 }}>
+            <div className="-translate-x-4 -translate-y-6 max-sm:translate-x-0 max-sm:translate-y-0 md:-translate-x-[60px] md:-translate-y-[100px]" style={{ perspective: 800 }}>
               <motion.div 
                 initial={{ opacity: 0, z: -100, rotateX: 45, filter: "blur(10px)" }}
                 whileInView={{ opacity: 1, z: 0, rotateX: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 1, delay: 0.1, type: "spring", bounce: 0.5 }}
-                className="relative mb-3 flex items-center gap-4 origin-bottom"
+                className="relative mb-3 max-sm:mb-5 flex items-center gap-4 origin-bottom"
               >
                 {/* Left Line & Dot */}
                 <div className="flex items-center gap-2 shrink-0">
@@ -402,8 +402,8 @@ export default function Contact() {
             </div>
 
             {/* Main Heading */}
-            <div className="-translate-y-8 md:-translate-y-[76px]" style={{ perspective: 1200 }}>
-              <h2 className="font-display text-[clamp(1.5rem,3vw,2.7rem)] font-extrabold leading-[1.15] tracking-tight text-white flex flex-col items-start">
+            <div className="-translate-y-8 max-sm:translate-y-0 md:-translate-y-[76px]" style={{ perspective: 1200 }}>
+              <h2 className="font-display text-[clamp(1.5rem,3vw,2.7rem)] max-sm:!text-[1.6rem] font-extrabold leading-[1.15] tracking-tight text-white flex flex-col items-start">
                 <motion.span
                   initial={{ opacity: 0, rotateX: 90, y: 40, filter: "blur(12px)", scale: 0.9 }}
                   whileInView={{ opacity: 1, rotateX: 0, y: 0, filter: "blur(0px)", scale: 1 }}
@@ -428,18 +428,18 @@ export default function Contact() {
             </div>
 
             {/* Supporting Text & Badges */}
-            <div className="mt-5 flex flex-col gap-5 -translate-y-6 md:-translate-y-[60px]" style={{ perspective: 800 }}>
+            <div className="mt-5 flex flex-col gap-5 -translate-y-6 max-sm:mt-3 max-sm:gap-4 max-sm:translate-y-0 md:-translate-y-[60px]" style={{ perspective: 800 }}>
               <motion.p 
                 initial={{ opacity: 0, z: -50, rotateX: -30, filter: "blur(8px)" }}
                 whileInView={{ opacity: 1, z: 0, rotateX: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 1, delay: 0.4, type: "spring", bounce: 0.4 }}
-                className="max-w-lg text-[16px] md:text-[18px] leading-[1.6] text-white/70 origin-top"
+                className="max-w-lg text-[16px] max-sm:text-[14px] md:text-[18px] leading-[1.6] text-white/70 origin-top"
               >
                 Open to internships, freelance projects, and full-time roles.
               </motion.p>
               
-              <div className="flex flex-wrap gap-4 mt-2">
+              <div className="flex flex-wrap gap-4 mt-2 max-sm:gap-3 max-sm:mt-1">
                 {/* Full-Stack Developer Badge */}
                 <motion.div 
                   initial={{ opacity: 0, scale: 0, rotateZ: -10, filter: "blur(10px)" }}
@@ -491,7 +491,7 @@ export default function Contact() {
             </div>
 
             {/* ── Info Cards ── */}
-            <div className="relative mt-10 flex flex-col gap-5 -translate-y-2">
+            <div className="relative mt-10 flex flex-col gap-5 max-sm:mt-6 max-sm:gap-4 -translate-y-2">
               
               {/* ── Structured Futuristic Connecting Line ── */}
               <div 
@@ -539,6 +539,7 @@ export default function Contact() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 1.2, delay: 0.1, type: "spring", stiffness: 40, damping: 15 }}
             style={{ marginTop: "-50px", transformPerspective: 1200 }}
+            className="max-sm:!mt-0"
           >
             <ContactForm />
           </motion.div>
