@@ -58,7 +58,7 @@ export default function GithubProjects() {
             },
           },
         }}
-        className="grid w-full gap-8"
+        className="grid w-full gap-8 max-sm:!grid-cols-1 max-sm:!w-[92vw]"
         style={{
           gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 420px), 1fr))",
           perspective: "1200px",

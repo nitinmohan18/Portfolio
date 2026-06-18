@@ -263,7 +263,7 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
               <span className="text-[10px] font-semibold text-emerald-400 uppercase tracking-wider drop-shadow-[0_0_4px_rgba(52,211,153,0.5)]">Copied!</span>
             )}
           </div>
-          <p className="mt-1 text-[15px] sm:text-[16px] font-semibold text-white/90 transition-colors duration-300 group-hover/card:text-white">
+          <p className="mt-1 text-[15px] sm:text-[16px] font-semibold text-white/90 transition-colors duration-300 group-hover/card:text-white max-sm:break-all">
             {value}
           </p>
           {subText && (
@@ -353,7 +353,7 @@ export default function Contact() {
 
 
         {/* ── Two-Column Layout ── */}
-        <div className="relative z-10 grid gap-12 lg:grid-cols-[45fr_55fr] lg:gap-20 xl:gap-28">
+        <div className="relative z-10 grid gap-12 lg:grid-cols-[45fr_55fr] lg:gap-20 xl:gap-28 max-sm:!w-[92vw] max-sm:relative max-sm:left-1/2 max-sm:-translate-x-1/2">
           {/* ═══ Left Column ═══ */}
           <div className="flex flex-col justify-center">
             {/* Section Label */}

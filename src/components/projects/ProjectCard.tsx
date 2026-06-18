@@ -86,15 +86,17 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
       ref={cardRef}
       onMouseMove={handleMove}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={() => {}} 
       variants={cardVariants}
       whileHover={{ scale: 1.02, y: -5 }}
+      whileTap={{ scale: 0.98 }} 
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className="group relative flex flex-col rounded-[24px] overflow-hidden cursor-default"
+      className="group relative flex flex-col w-full max-sm:w-full max-sm:max-w-none rounded-[24px] overflow-hidden cursor-default"
     >
       {/* Card body - 3D Solid Matte Dark Finish */}
       <div
-        className="relative flex flex-col flex-1 rounded-[24px] border transition-all duration-500 group-hover:border-opacity-100"
+        className="relative flex flex-col flex-1 rounded-[24px] border transition-all duration-500 group-hover:border-opacity-100 group-active:border-opacity-100 max-sm:!px-5 max-sm:!pt-5 max-sm:!pb-[40px]"
         style={{
           padding: "clamp(1.5rem, 5vw, 3rem)",
           background: "linear-gradient(165deg, #131824 0%, #05070a 100%)", // Fully solid matte dark finish
@@ -104,19 +106,19 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
       >
         {/* Spotlight overlay */}
         <motion.div
-          className="pointer-events-none absolute inset-0 rounded-[24px] opacity-0 transition-opacity duration-500 group-hover:opacity-100 z-0"
+          className="pointer-events-none absolute inset-0 rounded-[24px] opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-active:opacity-100 z-0"
           style={{ background: spotlight }}
         />
 
         {/* Top accent line */}
         <div
-          className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[24px] transition-opacity duration-300 opacity-60 group-hover:opacity-100"
+          className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[24px] transition-opacity duration-300 opacity-60 group-hover:opacity-100 group-active:opacity-100"
           style={{ background: `linear-gradient(90deg, ${cat.color}, transparent)` }}
         />
 
         {/* Corner glow */}
         <div
-          className="absolute bottom-0 right-0 w-32 h-32 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          className="absolute bottom-0 right-0 w-32 h-32 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-500"
           style={{ background: cat.color, filter: "blur(60px)", opacity: 0.08 }}
         />
 
@@ -137,7 +139,7 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
 
             {/* Category Text */}
             <div
-              className="font-mono text-[13px] font-bold tracking-[2px] uppercase flex items-center gap-2"
+              className="font-mono text-[13px] max-sm:text-[11px] font-bold tracking-[2px] max-sm:tracking-[1px] uppercase flex items-center gap-2"
               style={{ color: cat.color, textShadow: `0 0 10px rgba(${cat.rgb}, 0.5)` }}
             >
               <div 
@@ -166,12 +168,14 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
         </div>
 
         {/* Title */}
-        <h3
-          className="font-display font-bold text-white mb-4 relative z-10 capitalize"
-          style={{ fontSize: "36px", letterSpacing: "0.01em", transform: "translateZ(25px)" }}
-        >
-          {repo.name.toLowerCase() === "windly-frontend" ? "Windly" : repo.name.replace(/-/g, " ")}
-        </h3>
+        <div style={{ transform: "translateZ(30px)" }}>
+          <h3
+            className="text-[32px] sm:text-[40px] max-sm:text-[26px] font-bold text-white leading-[1.1] tracking-tight mb-6 max-sm:mb-4"
+            style={{ filter: "drop-shadow(0 2px 10px rgba(0,0,0,0.8))" }}
+          >
+            {repo.name.toLowerCase() === "windly-frontend" ? "Windly" : repo.name.replace(/-/g, " ")}
+          </h3>
+        </div>
 
         {/* Description */}
         <p
@@ -260,7 +264,13 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-4 mt-auto relative z-10" style={{ transform: `translateZ(30px) translateY(${index === 0 ? '26px' : '16px'})` }}>
+        <div 
+          className={`flex gap-4 mt-auto relative z-10 ${
+            index === 0 ? 'max-sm:[--y-offset:18px] sm:[--y-offset:26px]' : 
+            index === 1 ? 'max-sm:[--y-offset:16px] sm:[--y-offset:36px]' : ''
+          }`} 
+          style={{ transform: `translateZ(30px) translateY(${index <= 1 ? 'var(--y-offset, 16px)' : '16px'})` }}
+        >
           <motion.a
             whileHover={{ y: -3, scale: 1.02, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.15), inset 0 -2px 6px rgba(0,0,0,0.8), 0 10px 20px -5px rgba(0,0,0,0.8)" }}
             whileTap={{ y: 2, scale: 0.98, boxShadow: "inset 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 2px rgba(0,0,0,0.6)" }}
