@@ -8,7 +8,7 @@ import Image from "next/image";
 export default function SkillGrid() {
   return (
     <div className="w-full flex justify-center items-center max-sm:block">
-      <div className="grid grid-cols-2 lg:grid-cols-3 sm:auto-rows-fr gap-2.5 sm:gap-8 lg:gap-12 w-full max-sm:w-[92vw] max-sm:relative max-sm:left-1/2 max-sm:-translate-x-1/2 max-w-[1100px] perspective-1000 px-0 sm:px-0">
+      <div className="grid grid-cols-2 lg:grid-cols-3 sm:auto-rows-fr gap-x-2.5 gap-y-5 sm:gap-8 lg:gap-12 w-full max-sm:w-[92vw] max-sm:relative max-sm:left-1/2 max-sm:-translate-x-1/2 max-w-[1100px] perspective-1000 px-0 sm:px-0">
         {skillGroups.map((group, i) => (
           <SkillCard key={group.category} group={group} index={i} />
         ))}
@@ -90,12 +90,12 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
 
       <div className="p-2 sm:p-6 md:p-7 flex flex-col h-full relative z-10 w-full" style={{ transform: "translateZ(15px)" }}>
         {/* Header Section */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-4 sm:mb-5 w-full">
+        <div className="flex flex-col sm:flex-row items-center sm:items-center max-sm:gap-0 sm:gap-3 mb-4 sm:mb-5 w-full">
           {/* Sharp Glowing Category Indicator */}
           <div className="relative flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-[8px] bg-[#0d101c] border border-[#22d3ee]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] group-hover:border-[#22d3ee]/70 transition-colors duration-500 shrink-0">
             <div className="w-1.5 h-1.5 rounded-[2px] bg-gradient-to-r from-cyan-400 to-emerald-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] group-hover:scale-125 group-hover:shadow-[0_0_12px_rgba(34,211,238,1)] transition-all duration-500" />
           </div>
-          <h3 className="text-[14px] sm:text-[17px] font-bold text-white tracking-wide drop-shadow-md leading-tight">
+          <h3 className="text-[17px] sm:text-[19px] md:text-[21px] font-bold text-white tracking-wide relative z-10 text-center max-sm:-mt-2" style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
             {group.label}
           </h3>
         </div>
@@ -116,7 +116,7 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
                 skill={skill} 
                 index={j} 
                 isSingle={isSingle} 
-                className={`w-full ${isLastOdd ? 'col-span-2 sm:col-span-2 place-self-center w-[calc(50%-3px)] sm:w-[calc(50%-6px)]' : ''} ${isSingle ? 'w-full' : ''}`}
+                className={`w-full max-sm:w-[calc(100%-8px)] max-sm:mx-auto ${j % 2 === 0 ? 'max-sm:translate-x-[5px]' : ''} ${isLastOdd ? 'col-span-2 sm:col-span-2 place-self-center w-[calc(50%-3px)] sm:w-[calc(50%-6px)]' : ''} ${isSingle ? 'w-full' : ''}`}
               />
             );
           })}
@@ -197,7 +197,7 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
       )}
       {isSingle && (
         <span 
-          className="text-[11px] sm:text-[14px] font-bold text-gray-200 group-hover/skill:text-white transition-colors max-sm:tracking-tight max-sm:text-center max-sm:-mx-1 max-sm:truncate sm:truncate ml-0 mt-1 sm:ml-2 sm:mt-0"
+          className="text-[11px] sm:text-[14px] font-bold text-gray-200 group-hover/skill:text-white group-active/skill:text-white transition-colors max-sm:tracking-tight max-sm:text-center max-sm:-mx-1 max-sm:truncate sm:truncate ml-0 mt-1 sm:ml-2 sm:mt-0"
           style={{ transform: "translateZ(10px)", maxWidth: "100%" }}
         >
           {skill.name}
