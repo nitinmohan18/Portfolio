@@ -30,32 +30,38 @@ export default function Projects() {
 
           <h2
             className="font-display font-bold text-white leading-tight tracking-tight flex items-center justify-center gap-3 flex-wrap"
-            style={{ fontSize: "clamp(36px, 5vw, 64px)" }}
+            style={{ fontSize: "clamp(36px, 5vw, 64px)", perspective: "1000px" }}
           >
             <motion.span
-              initial={{ opacity: 0, y: -60, rotate: -8 }}
-              whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+              initial={{ opacity: 0, y: 40, scale: 0.8, rotateX: -60 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: 0.15 }}
+              transition={{ type: "spring", stiffness: 180, damping: 14, delay: 0.1 }}
               className="inline-block"
+              style={{ transformOrigin: "bottom center" }}
             >
               Featured
             </motion.span>
             <motion.span
-              initial={{ opacity: 0, x: 80 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 40, scale: 0.8, rotateX: -60 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: 0.3 }}
+              transition={{ type: "spring", stiffness: 180, damping: 14, delay: 0.25 }}
               className="inline-block"
-              style={{
-                background: "linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                filter: "drop-shadow(0 0 15px rgba(167, 139, 250, 0.4))",
-              }}
+              style={{ transformOrigin: "bottom center" }}
             >
-              Projects
+              <span
+                style={{
+                  background: "linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  filter: "drop-shadow(0 0 15px rgba(167, 139, 250, 0.4))",
+                  display: "inline-block"
+                }}
+              >
+                Projects
+              </span>
             </motion.span>
           </h2>
 

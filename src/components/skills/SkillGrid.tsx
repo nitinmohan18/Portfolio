@@ -7,8 +7,8 @@ import Image from "next/image";
 
 export default function SkillGrid() {
   return (
-    <div className="w-full flex justify-center items-center">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 w-full max-w-[1100px] perspective-1000">
+    <div className="w-full flex justify-center items-center max-sm:block">
+      <div className="grid grid-cols-2 lg:grid-cols-3 sm:auto-rows-fr gap-2.5 sm:gap-8 lg:gap-12 w-full max-sm:w-[92vw] max-sm:relative max-sm:left-1/2 max-sm:-translate-x-1/2 max-w-[1100px] perspective-1000 px-0 sm:px-0">
         {skillGroups.map((group, i) => (
           <SkillCard key={group.category} group={group} index={i} />
         ))}
@@ -88,22 +88,26 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
       {/* Realistic Curved Top Glass Reflection */}
       <div className="absolute inset-x-2 top-1 h-[30%] bg-gradient-to-b from-white/[0.06] to-transparent rounded-t-[14px] opacity-80 pointer-events-none transition-opacity duration-500 group-hover:opacity-100" />
 
-      <div className="p-6 md:p-7 flex flex-col h-full relative z-10 w-full" style={{ transform: "translateZ(15px)" }}>
+      <div className="p-2 sm:p-6 md:p-7 flex flex-col h-full relative z-10 w-full" style={{ transform: "translateZ(15px)" }}>
         {/* Header Section */}
-        <div className="flex items-center gap-3 mb-6 w-full">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-4 sm:mb-5 w-full">
           {/* Sharp Glowing Category Indicator */}
-          <div className="relative flex items-center justify-center w-7 h-7 rounded-[8px] bg-[#0d101c] border border-[#22d3ee]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] group-hover:border-[#22d3ee]/70 transition-colors duration-500">
+          <div className="relative flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-[8px] bg-[#0d101c] border border-[#22d3ee]/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] group-hover:border-[#22d3ee]/70 transition-colors duration-500 shrink-0">
             <div className="w-1.5 h-1.5 rounded-[2px] bg-gradient-to-r from-cyan-400 to-emerald-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] group-hover:scale-125 group-hover:shadow-[0_0_12px_rgba(34,211,238,1)] transition-all duration-500" />
           </div>
-          <h3 className="text-[17px] font-bold text-white tracking-wide drop-shadow-md">
+          <h3 className="text-[14px] sm:text-[17px] font-bold text-white tracking-wide drop-shadow-md leading-tight">
             {group.label}
           </h3>
         </div>
 
         {/* Skills Grid */}
-        <div className={`grid gap-3 w-[95%] sm:w-[92%] mx-auto relative left-2 md:left-3 ${isSingle ? 'grid-cols-1' : 'grid-cols-2'} mt-auto`}>
+        <div className={`
+          grid grid-cols-2 gap-1.5 sm:gap-3 w-full mt-auto
+          sm:w-[92%] sm:mx-auto sm:relative sm:left-2 md:left-3 
+          ${isSingle ? 'grid-cols-1 sm:grid-cols-1' : ''}
+        `}>
           {group.skills.map((skill, j) => {
-            // Check if it's the 5th (odd) item in a multi-skill card
+            // Restore desktop specific logic for odd final items
             const isLastOdd = !isSingle && group.skills.length % 2 !== 0 && j === group.skills.length - 1;
             
             return (
@@ -112,7 +116,7 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
                 skill={skill} 
                 index={j} 
                 isSingle={isSingle} 
-                className={isLastOdd ? "col-span-2 place-self-center w-[calc(50%-6px)]" : "w-full"}
+                className={`w-full ${isLastOdd ? 'col-span-2 sm:col-span-2 place-self-center w-[calc(50%-3px)] sm:w-[calc(50%-6px)]' : ''} ${isSingle ? 'w-full' : ''}`}
               />
             );
           })}
@@ -137,7 +141,7 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
       transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1], delay: 0.4 + (index * 0.05) }}
       whileHover={{ y: baseY - 2, scale: 1.05, boxShadow: `inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 6px rgba(0,0,0,0.8), 0 8px 20px -4px ${glowColor}40` }}
       whileTap={{ y: baseY + 2, scale: 0.94, boxShadow: "inset 0 2px 4px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.3)" }}
-      className={`relative flex items-center gap-2.5 p-[9px] rounded-[12px] border transition-all duration-300 group/skill cursor-pointer hover:border-[${glowColor}]/50 ${isSingle ? 'py-4 justify-center' : ''} ${className}`}
+      className={`relative flex max-sm:flex-col max-sm:justify-center items-center gap-2 sm:gap-2.5 p-2.5 py-3 sm:p-[9px] rounded-[10px] sm:rounded-[12px] border transition-all duration-300 group/skill hover:border-[${glowColor}]/50 ${isSingle ? 'py-4 justify-center' : ''} ${className}`}
       style={{ 
         transformStyle: "preserve-3d", 
         background: "linear-gradient(145deg, rgba(16, 22, 38, 0.7), rgba(8, 10, 16, 0.95))",
@@ -153,8 +157,8 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
 
       {/* Sharp Logo Container with Orbiting Ring */}
       <div 
-        className="relative flex items-center justify-center shrink-0 rounded-[8px] overflow-hidden bg-[#0c101a]"
-        style={{ width: isSingle ? 42 : 34, height: isSingle ? 42 : 34, transform: "translateZ(15px)" }}
+        className="relative flex items-center justify-center shrink-0 rounded-[8px] overflow-hidden bg-[#0c101a] w-[28px] h-[28px] sm:w-[34px] sm:h-[34px]"
+        style={{ transform: "translateZ(15px)" }}
       >
         {/* The spinning conic gradient border (Around Animation) */}
         <motion.div 
@@ -175,25 +179,25 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
           className="relative z-10 flex items-center justify-center w-full h-full"
         >
           <skill.icon 
-            size={isSingle ? 22 : 17} 
+            size={isSingle ? 20 : 16} 
             color="white" 
-            className="drop-shadow-[0_0_2px_rgba(255,255,255,0.8)]" 
+            className="drop-shadow-[0_0_2px_rgba(255,255,255,0.8)] scale-75 sm:scale-100" 
           />
         </motion.div>
       </div>
       
       {!isSingle && (
         <span 
-          className="text-[12px] md:text-[12.5px] font-semibold text-gray-300 group-hover/skill:text-white transition-colors truncate"
-          style={{ transform: "translateZ(10px)" }}
+          className="text-[10px] sm:text-[12px] md:text-[12.5px] font-semibold text-gray-300 group-hover/skill:text-white transition-colors max-sm:tracking-tight max-sm:text-center max-sm:-mx-1 max-sm:truncate sm:truncate"
+          style={{ transform: "translateZ(10px)", maxWidth: "100%" }}
         >
           {skill.name}
         </span>
       )}
       {isSingle && (
         <span 
-          className="text-[14px] font-bold text-gray-200 group-hover/skill:text-white transition-colors truncate ml-2"
-          style={{ transform: "translateZ(10px)" }}
+          className="text-[11px] sm:text-[14px] font-bold text-gray-200 group-hover/skill:text-white transition-colors max-sm:tracking-tight max-sm:text-center max-sm:-mx-1 max-sm:truncate sm:truncate ml-0 mt-1 sm:ml-2 sm:mt-0"
+          style={{ transform: "translateZ(10px)", maxWidth: "100%" }}
         >
           {skill.name}
         </span>

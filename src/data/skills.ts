@@ -42,14 +42,13 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    category: "backend",
-    label: "Backend",
+    category: "tools",
+    label: "Tools",
     skills: [
-      { name: "FastAPI", icon: SiFastapi, color: "#009688" },
-      { name: "Flask", icon: SiFlask, color: "#000000" },
-      { name: "Express.js", icon: SiExpress, color: "#000000" },
-      { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
-      { name: "Django", icon: SiDjango, color: "#092E20" },
+      { name: "Git", icon: SiGit, color: "#F05032" },
+      { name: "GitHub", icon: SiGithub, color: "#181717" },
+      { name: "Vercel", icon: SiVercel, color: "#000000" },
+      { name: "Render", icon: SiRender, color: "#46E3B7" },
     ],
   },
   {
@@ -74,13 +73,14 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    category: "tools",
-    label: "Tools",
+    category: "backend",
+    label: "Backend",
     skills: [
-      { name: "Git", icon: SiGit, color: "#F05032" },
-      { name: "GitHub", icon: SiGithub, color: "#181717" },
-      { name: "Vercel", icon: SiVercel, color: "#000000" },
-      { name: "Render", icon: SiRender, color: "#46E3B7" },
+      { name: "FastAPI", icon: SiFastapi, color: "#009688" },
+      { name: "Flask", icon: SiFlask, color: "#000000" },
+      { name: "Express.js", icon: SiExpress, color: "#000000" },
+      { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
+      { name: "Django", icon: SiDjango, color: "#092E20" },
     ],
   },
 ];

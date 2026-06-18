@@ -527,9 +527,8 @@ export default function About() {
             
             {/* Continuous Left Timeline Line */}
             <motion.div 
-              className="absolute z-0"
+              className="absolute z-0 max-md:left-[-21px] md:left-[-30px]"
               style={{
-                left: "-30px", // 30px left of the cards
                 width: "2px",
                 top: "20px", // Cut 20px from top
                 bottom: "0px", // Ends exactly at the bottom of the last card
@@ -545,9 +544,8 @@ export default function About() {
 
             {/* Traveling Cap Icon on the Left Line */}
             <motion.div
-              className="absolute z-20 flex items-center justify-center opacity-0"
+              className="absolute z-20 flex items-center justify-center opacity-0 max-md:left-[-28px] md:left-[-37px]"
               style={{ 
-                left: "-37px", 
                 marginTop: "-12px", // Center on coordinate
                 color: "#22d3ee",
                 filter: "drop-shadow(0 0 6px rgba(34,211,238,0.8))"
@@ -662,9 +660,8 @@ export default function About() {
                 >
                   {/* Left Side Dot Wrapper */}
                   <div 
-                    className="absolute z-10 flex items-center justify-center" 
+                    className="absolute z-10 flex items-center justify-center max-md:left-[-25px] md:left-[-34px]" 
                     style={{ 
-                      left: "-34px", // -30px + 1px center - 5px radius wrapper
                       top: "50%", 
                       transform: "translateY(-50%)", 
                       width: "10px", 
