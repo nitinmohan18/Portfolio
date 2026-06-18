@@ -89,7 +89,10 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
       onTouchStart={() => {}} 
       variants={cardVariants}
       whileHover={{ scale: 1.02, y: -5 }}
-      whileTap={{ scale: 0.98 }} 
+      whileTap={{ 
+        scale: 0.98,
+        boxShadow: `0 0 40px rgba(${cat.rgb}, 0.5), inset 0 2px 2px rgba(255, 255, 255, 0.05), inset 0 -4px 12px rgba(0, 0, 0, 0.8)`
+      }} 
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       className="group relative flex flex-col w-full max-sm:w-full max-sm:max-w-none rounded-[24px] overflow-hidden cursor-default"

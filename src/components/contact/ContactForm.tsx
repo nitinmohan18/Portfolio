@@ -430,7 +430,7 @@ export default function ContactForm() {
                 whileTap={disabled ? undefined : { 
                   scale: 0.98, 
                   y: 2, 
-                  boxShadow: "inset 0 4px 12px rgba(0,0,0,0.8), inset 0 2px 4px rgba(0,0,0,0.6), 0 4px 10px rgba(0,0,0,0.5), 0 0 10px rgba(34,211,238,0)",
+                  boxShadow: "inset 0 4px 12px rgba(0,0,0,0.8), inset 0 2px 4px rgba(0,0,0,0.6), 0 4px 10px rgba(0,0,0,0.5), 0 0 25px rgba(34,211,238,0.4)",
                   transition: { type: "spring", stiffness: 400, damping: 25, mass: 0.8 }
                 }}
                 className="group relative w-full cursor-pointer overflow-hidden px-6 text-[14px] font-extrabold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#030712] disabled:cursor-not-allowed disabled:opacity-70"
