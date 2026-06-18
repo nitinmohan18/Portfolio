@@ -17,9 +17,10 @@ export default function Signature({ isVisible = true }: SignatureProps) {
   return (
     <motion.div
       className="flex flex-col items-center justify-center -mt-5 sm:-mt-11 z-20 pointer-events-none"
-      initial={{ opacity: 0, scale: 0.9, filter: "blur(15px)" }}
-      animate={isVisible ? { opacity: 1, scale: 1, filter: "blur(0px)" } : { opacity: 0, scale: 0.9, filter: "blur(15px)" }}
-      transition={{ delay: 1.0, duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+      style={{ perspective: 1500 }}
+      initial={{ opacity: 0, scale: 0.7, rotateX: 45, y: 50, filter: "blur(20px) brightness(2.5)" }}
+      animate={isVisible ? { opacity: 1, scale: 1, rotateX: 0, y: 0, filter: "blur(0px) brightness(1)" } : { opacity: 0, scale: 0.7, rotateX: 45, y: 50, filter: "blur(20px) brightness(2.5)" }}
+      transition={{ delay: 1.0, duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
     >
       <style>{`
         @keyframes signaturePulse3D {
@@ -38,11 +39,11 @@ export default function Signature({ isVisible = true }: SignatureProps) {
         }
       `}</style>
       
-      {/* Cursive Name - Sweeps in from left like it's being written */}
+      {/* Cursive Name - Holographic Laser Wipe */}
       <motion.div 
-        initial={{ opacity: 0, x: -30, filter: "blur(8px)" }}
-        animate={isVisible ? { opacity: 1, x: 0, filter: "blur(0px)" } : { opacity: 0, x: -30, filter: "blur(8px)" }}
-        transition={{ delay: 1.3, duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ clipPath: "inset(0 100% 0 0)", filter: "blur(12px) saturate(200%)", x: -20 }}
+        animate={isVisible ? { clipPath: "inset(-20% -20% -20% -20%)", filter: "blur(0px) saturate(100%)", x: 0 } : { clipPath: "inset(0 100% 0 0)", filter: "blur(12px) saturate(200%)", x: -20 }}
+        transition={{ delay: 1.4, duration: 1.8, ease: "easeInOut" }}
       >
         <div className="signature-glow-pulse-3d">
           <div 
@@ -63,12 +64,12 @@ export default function Signature({ isVisible = true }: SignatureProps) {
         </div>
       </motion.div>
       
-      {/* Decorative divider and Last Name - Slides up elegantly to anchor the design */}
+      {/* Decorative divider and Last Name - Digital Data Expansion Reveal */}
       <motion.div 
         className="flex items-center gap-4 mt-2 sm:mt-4 w-full max-w-[500px] justify-center opacity-90 relative -top-5"
-        initial={{ opacity: 0, y: 20, filter: "blur(5px)" }}
-        animate={isVisible ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 20, filter: "blur(5px)" }}
-        transition={{ delay: 1.8, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ opacity: 0, y: 30, scaleX: 0.5, filter: "blur(10px) brightness(2)" }}
+        animate={isVisible ? { opacity: 1, y: 0, scaleX: 1, filter: "blur(0px) brightness(1)" } : { opacity: 0, y: 30, scaleX: 0.5, filter: "blur(10px) brightness(2)" }}
+        transition={{ delay: 2.0, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="h-[1px] flex-1 max-w-[80px] md:max-w-[120px] bg-gradient-to-r from-transparent to-[#22d3ee] opacity-80" style={{ boxShadow: "0 0 8px rgba(34,211,238,0.8)" }}></div>
         

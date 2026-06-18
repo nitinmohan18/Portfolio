@@ -86,8 +86,8 @@ export default function About() {
           40%  { top: 16%;  transform: scale(1); }
           
           /* Stop exactly at Card 2 node */
-          62%  { top: 46%;  transform: scale(1.3); }
-          72%  { top: 46%;  transform: scale(1); }
+          62%  { top: 47.5%;  transform: scale(1.3); }
+          72%  { top: 47.5%;  transform: scale(1); }
           
           /* Stop at Card 3 node */
           90%  { top: 83%;  transform: scale(1.3); opacity: 1; }
@@ -289,9 +289,9 @@ export default function About() {
           26%  { top: 18%;  opacity: 1; transform: scale(1.4); }
           33%  { top: 18%;  opacity: 1; transform: scale(1); }
 
-          48%  { top: 46%;  opacity: 1; transform: scale(1); }
-          54%  { top: 46%;  opacity: 1; transform: scale(1.4); }
-          61%  { top: 46%;  opacity: 1; transform: scale(1); }
+          48%  { top: 47.5%;  opacity: 1; transform: scale(1); }
+          54%  { top: 47.5%;  opacity: 1; transform: scale(1.4); }
+          61%  { top: 47.5%;  opacity: 1; transform: scale(1); }
 
           80%  { top: 83%;  opacity: 1; transform: scale(1); }
           86%  { top: 83%;  opacity: 1; transform: scale(1.4); }
