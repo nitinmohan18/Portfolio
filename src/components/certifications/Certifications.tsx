@@ -641,7 +641,7 @@ export default function Certifications() {
                     <div className="absolute inset-0 rounded-[22px] bg-[linear-gradient(135deg,rgba(255,255,255,0.05)_0%,transparent_100%)] pointer-events-none" />
 
                     {/* Floating icon */}
-                    <div className="shrink-0 relative translate-x-[16px] max-sm:translate-x-0 max-sm:scale-[0.6] max-sm:mx-0">
+                    <div className="shrink-0 relative translate-x-[16px] max-sm:translate-x-0 max-sm:scale-[0.7] max-sm:mx-0">
                       <FloatingIcon color={cert.color}>
                         <Icon size={32} strokeWidth={1.25} />
                       </FloatingIcon>
@@ -672,20 +672,27 @@ export default function Certifications() {
                       {/* Title */}
                       <h3
                         className="font-display text-[22px] max-sm:text-[14px] font-semibold text-white tracking-wide leading-snug
-                          group-hover:text-white transition-colors duration-300 max-sm:truncate"
+                          group-hover:text-white transition-colors duration-300 max-sm:overflow-x-auto max-sm:whitespace-nowrap"
+                        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                       >
                         {cert.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-white/50 text-[14px] max-sm:text-[10px] leading-relaxed group-hover:text-white/70 transition-colors duration-500 mb-2 max-sm:mb-0 max-sm:truncate">
+                      <p 
+                        className="text-white/50 text-[14px] max-sm:text-[10px] leading-relaxed group-hover:text-white/70 transition-colors duration-500 mb-2 max-sm:mb-0 max-sm:overflow-x-auto max-sm:whitespace-nowrap"
+                        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                      >
                         {cert.description}
                       </p>
 
                       {/* Footer */}
-                      <div className="flex items-center gap-[7px] max-sm:gap-[4px] mt-1 max-sm:mt-0 -translate-y-[7px] max-sm:translate-y-0">
+                      <div 
+                        className="flex items-center gap-[7px] max-sm:gap-[4px] mt-1 max-sm:mt-0 -translate-y-[7px] max-sm:translate-y-0 max-sm:overflow-x-auto max-sm:whitespace-nowrap"
+                        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                      >
                         <Award size={16} className={`${c.iconText} shrink-0 opacity-80 max-sm:scale-[0.65] max-sm:-mr-0.5`} />
-                        <span className="text-[13px] max-sm:text-[10px] text-white/40 max-sm:truncate">
+                        <span className="text-[13px] max-sm:text-[10px] text-white/40">
                           {isCompleted ? "Certified by" : "Provided by"} ·{" "}
                           <span className="text-white/60 font-medium tracking-wide">
                             {cert.issuer}
@@ -695,7 +702,7 @@ export default function Certifications() {
                     </div>
 
                     {/* Arrow button */}
-                    <div className="shrink-0 mt-4 md:mt-0 relative -translate-x-[16px] max-sm:translate-x-0 max-sm:mt-0 max-sm:scale-[0.5] max-sm:mx-0">
+                    <div className="shrink-0 mt-4 md:mt-0 relative -translate-x-[16px] max-sm:translate-x-0 max-sm:mt-0 max-sm:scale-[0.6] max-sm:mx-0">
                       <ArrowBtn color={cert.color} />
                     </div>
                   </motion.div>
