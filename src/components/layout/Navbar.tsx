@@ -104,11 +104,13 @@ export default function Navbar() {
           border-radius: 50%;
           padding: 4px;
         }
-        .nav-social-icon.github:hover {
+        .nav-social-icon.github:hover,
+        .nav-social-icon.github:active {
           color: #ffffff;
           box-shadow: 0 0 14px rgba(140,120,255,0.3);
         }
-        .nav-social-icon.linkedin:hover {
+        .nav-social-icon.linkedin:hover,
+        .nav-social-icon.linkedin:active {
           color: #0A66C2;
           box-shadow: 0 0 14px rgba(10,102,194,0.35);
         }
@@ -364,7 +366,8 @@ export default function Navbar() {
                 transition={{ delay: 2.6 + NAV_ITEMS.length * 0.06, duration: 0.4 }}
                 className="flex nav-social-icons group/social"
               >
-              <a
+              <motion.a
+                whileTap={{ color: "#ffffff", scale: 0.9, boxShadow: "0 0 14px rgba(140,120,255,0.3)" }}
                 href={profile.socials.find((s) => s.platform === "github")?.url}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -376,8 +379,9 @@ export default function Navbar() {
                   className="absolute bottom-[2px] right-[2px] w-[4px] h-[4px] md:w-[6px] md:h-[6px] bg-[#22c55e] rounded-full shadow-[0_0_4px_rgba(34,197,94,0.6)]"
                   style={{ animation: 'statusPulse 2s ease-in-out infinite' }}
                 />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
+                whileTap={{ color: "#0A66C2", scale: 0.9, boxShadow: "0 0 14px rgba(10,102,194,0.35)" }}
                 href={profile.socials.find((s) => s.platform === "linkedin")?.url}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -385,7 +389,7 @@ export default function Navbar() {
                 aria-label="LinkedIn"
               >
                 <Linkedin size={18} />
-              </a>
+              </motion.a>
               <div className="nav-social-tooltip">
                 <span className="animate-pulse mr-1 text-emerald-400">✦</span> Open to Opportunities
               </div>

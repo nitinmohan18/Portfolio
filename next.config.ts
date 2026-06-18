@@ -12,7 +12,8 @@ const nextConfig: NextConfig = {
       ],
     },
   ],
-  allowedDevOrigins: ["192.168.1.20:3000", "192.168.1.20"],
+  // @ts-ignore
+  allowedDevOrigins: ["192.168.1.20:3000", "192.168.1.20", "10.187.194.200", "10.187.194.200:3000"],
   turbopack: {
     rules: {
       "*.glsl": {

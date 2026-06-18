@@ -96,7 +96,7 @@ export default function Hero() {
               }
             `}</style>
             <motion.div
-              className="absolute bottom-3 left-1/2 -translate-x-1/2 z-[5] flex flex-col items-center gap-3 cursor-pointer"
+              className="relative mt-12 lg:mt-0 lg:absolute lg:bottom-6 left-1/2 -translate-x-1/2 z-[5] flex flex-col items-center gap-3 cursor-pointer"
               initial={{ opacity: 0 }}
               animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
               transition={{ delay: 1.2, duration: 0.8 }}
