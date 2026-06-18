@@ -468,7 +468,7 @@ export default function Certifications() {
           <motion.h2
             variants={fadeBlur}
             className="font-display text-[clamp(2.8rem,5.5vw,4.6rem)] max-sm:text-[2rem] font-bold leading-[1.08] text-white max-sm:!mb-[8px] mb-5 tracking-tight
-              drop-shadow-[0_0_40px_rgba(255,255,255,0.06)] relative -translate-y-10 max-sm:left-0 -left-[9.6px]"
+              drop-shadow-[0_0_40px_rgba(255,255,255,0.06)] relative -translate-y-10 max-sm:left-0 -left-[9.6px] sm:pt-[24px]"
           >
             Pursuit of <span className="font-serif italic font-medium bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 drop-shadow-[0_0_24px_rgba(99,102,241,0.4)] animate-[certShimmer_6s_ease-in-out_infinite]" style={{ backgroundSize: "200% auto" }}>Excellence</span>
           </motion.h2>

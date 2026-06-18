@@ -26,16 +26,22 @@ export default function Skills() {
             <span className="h-[2px] w-12 bg-gradient-to-l from-transparent to-blue-500" />
           </motion.div>
 
+          {/* Safe physical spacer for mobile layout */}
+          <div className="h-[20px] w-full hidden max-sm:block" />
+
           <motion.h2
             initial={{ opacity: 0, y: 40, scale: 0.9, rotateX: -15, filter: "blur(10px)" }}
             whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)" }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ type: "spring", stiffness: 120, damping: 14, delay: 0.1 }}
             style={{ perspective: "1000px", willChange: "transform, opacity, filter" }}
-            className="font-display text-3xl md:text-5xl lg:text-[4.5rem] font-extrabold leading-tight tracking-tight text-white mb-6 drop-shadow-md"
+            className="font-display text-3xl md:text-5xl lg:text-[4.5rem] font-extrabold leading-tight max-sm:leading-[0.95] tracking-tight text-white mb-6 drop-shadow-md"
           >
             Technologies Powering My <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 drop-shadow-[0_0_20px_rgba(56,189,248,0.5)]">Projects</span>
           </motion.h2>
+
+          {/* Safe physical spacer for mobile layout */}
+          <div className="h-[10px] w-full hidden max-sm:block" />
 
           <motion.p
             initial={{ opacity: 0, y: 20, filter: "blur(5px)" }}

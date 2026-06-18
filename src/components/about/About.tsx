@@ -333,7 +333,7 @@ export default function About() {
       `}</style>
       
       <motion.div 
-        className="absolute w-full text-center z-10 -top-[40px] md:-top-[80px] left-0 flex items-center justify-center gap-4"
+        className="relative w-full text-center z-10 mb-8 md:mb-12 flex items-center justify-center gap-4"
         initial={{ opacity: 0, y: -50, scale: 0.8, filter: "blur(8px)" }}
         whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
         viewport={{ once: true }}
@@ -359,7 +359,7 @@ export default function About() {
         <span className="h-[2px] w-12 md:w-24 bg-gradient-to-l from-transparent to-blue-500 opacity-80" />
       </motion.div>
 
-      <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center w-full mt-8">
+      <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center w-full mt-8 max-sm:!mt-[16px]">
         
         {/* Left — text */}
         <div className="flex flex-col pt-0">
@@ -468,7 +468,7 @@ export default function About() {
         </div>
 
         {/* Right — Timeline Cards */}
-        <div className="flex flex-col items-stretch relative w-full self-center" style={{ maxWidth: "480px" }}>
+        <div className="flex flex-col items-stretch relative w-full self-center max-sm:translate-x-[12px]" style={{ maxWidth: "480px" }}>
 
           <motion.div 
             className="w-full flex justify-center mb-10"

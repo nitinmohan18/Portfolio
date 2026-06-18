@@ -29,7 +29,7 @@ export default function Projects() {
           </motion.div>
 
           <h2
-            className="font-display font-bold text-white leading-tight tracking-tight flex items-center justify-center gap-3 flex-wrap"
+            className="font-display font-bold text-white leading-[0.8] tracking-tight flex items-center justify-center gap-x-3 gap-y-0 max-sm:-space-y-[10px] flex-wrap"
             style={{ fontSize: "clamp(36px, 5vw, 64px)", perspective: "1000px" }}
           >
             <motion.span

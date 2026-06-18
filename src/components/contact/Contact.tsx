@@ -684,12 +684,17 @@ export default function Contact() {
               {!isScrolledToEnd && (
                 <motion.div 
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.6 }} 
+                  animate={{ opacity: 0.8 }} 
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="absolute bottom-1.5 left-1/2 -translate-x-1/2 lg:hidden flex items-center justify-center pointer-events-none z-20"
+                  className="absolute bottom-1.5 left-[calc(50%+8px)] -translate-x-1/2 lg:hidden flex items-center justify-center pointer-events-none z-20"
                 >
-                  <ArrowRight className="w-5 h-5 text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.6)]" />
+                  <motion.div
+                    animate={{ x: [0, 6, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <ArrowRight className="w-5 h-5 text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.6)]" />
+                  </motion.div>
                 </motion.div>
               )}
             </AnimatePresence>
