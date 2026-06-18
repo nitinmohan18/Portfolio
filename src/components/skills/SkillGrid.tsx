@@ -61,16 +61,17 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40, scale: 0.95, filter: "blur(10px)" }}
-      whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+      initial={{ opacity: 0, y: 60, scale: 0.85, z: -50 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, z: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
       whileHover={{ y: -4, scale: 1.01 }}
       whileTap={{ scale: 0.98, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ type: "spring", stiffness: 300, damping: 25, delay: index * 0.1 }}
       style={{
         rotateX,
         rotateY,
         transformStyle: "preserve-3d",
+        willChange: "transform, opacity", // Forces dedicated GPU layer to prevent rendering lag
         background: "radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.08) 0%, rgba(10, 15, 28, 0.9) 60%, rgba(5, 8, 15, 1) 100%)",
         boxShadow: "0 10px 30px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -4px 8px rgba(0,0,0,0.8)",
       }}
@@ -79,9 +80,9 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
       onTouchStart={handleTouchMove}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleMouseLeave}
-      className="group relative flex flex-col h-full rounded-[16px] border border-white/[0.05] transition-colors duration-500 cursor-pointer hover:border-[#22d3ee]/40 hover:shadow-[0_15px_35px_rgba(34,211,238,0.15),inset_0_1px_2px_rgba(255,255,255,0.2),inset_0_-4px_8px_rgba(0,0,0,0.8)]"
+      className="group relative flex flex-col h-full rounded-[16px] border border-white/[0.05] overflow-hidden transition-all duration-500 cursor-pointer hover:border-[#22d3ee]/40 hover:shadow-[0_15px_35px_rgba(34,211,238,0.15)]"
     >
-      {/* Subtle Inner Casing/Bevel */}
+      {/* Internal sharp glowing border */}
       <div className="absolute inset-[1px] rounded-[15px] border border-white/[0.03] pointer-events-none" style={{ transform: "translateZ(1px)" }} />
 
       {/* Realistic Curved Top Glass Reflection */}
@@ -131,9 +132,9 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8, y: baseY + 20, filter: "blur(5px)" }}
-      whileInView={{ opacity: 1, scale: 1, y: baseY, filter: "blur(0px)" }}
-      transition={{ type: "spring", stiffness: 120, damping: 14, delay: index * 0.05 }}
+      initial={{ opacity: 0, y: baseY + 15 }}
+      whileInView={{ opacity: 1, y: baseY }}
+      transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1], delay: 0.4 + (index * 0.05) }}
       whileHover={{ y: baseY - 2, scale: 1.05, boxShadow: `inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 6px rgba(0,0,0,0.8), 0 8px 20px -4px ${glowColor}40` }}
       whileTap={{ y: baseY + 2, scale: 0.94, boxShadow: "inset 0 2px 4px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.3)" }}
       className={`relative flex items-center gap-2.5 p-[9px] rounded-[12px] border transition-all duration-300 group/skill cursor-pointer hover:border-[${glowColor}]/50 ${isSingle ? 'py-4 justify-center' : ''} ${className}`}

@@ -362,7 +362,7 @@ export default function About() {
                 color: "white" 
               }}
             >
-              AI & ML Student | <span style={{ color: "#22d3ee" }}>Full-Stack Developer</span>
+              AI & ML Student | <span className="text-[#22d3ee] drop-shadow-[0_0_4px_rgba(34,211,238,0.4)]">Full-Stack Developer</span>
             </h3>
           </motion.div>
 
