@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, MapPin, FileText, Check } from "lucide-react";
+import { Mail, MapPin, FileText, Check, ArrowRight } from "lucide-react";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import ContactForm from "./ContactForm";
 import SocialLinks from "./SocialLinks";
@@ -343,6 +343,18 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
    Main Contact Section
    ═══════════════════════════════════════════════ */
 export default function Contact() {
+  const [isScrolledToEnd, setIsScrolledToEnd] = useState(false);
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const target = e.currentTarget;
+    // Hide arrow when user scrolls to the right edge (allow 5px threshold)
+    if (target.scrollWidth - target.scrollLeft <= target.clientWidth + 5) {
+      setIsScrolledToEnd(true);
+    } else {
+      setIsScrolledToEnd(false);
+    }
+  };
+
   return (
     <>
       {/* Inject contact-scoped keyframes */}
@@ -353,7 +365,7 @@ export default function Contact() {
 
 
         {/* ── Two-Column Layout ── */}
-        <div className="relative z-10 grid gap-12 max-sm:gap-8 lg:grid-cols-[45fr_55fr] lg:gap-20 xl:gap-28 max-sm:!w-[92vw] max-sm:relative max-sm:left-1/2 max-sm:-translate-x-1/2">
+        <div className="relative z-10 grid gap-12 max-sm:gap-8 lg:grid-cols-[45fr_55fr] lg:gap-20 xl:gap-28 max-sm:!w-[96vw] max-sm:relative max-sm:left-1/2 max-sm:-translate-x-1/2">
           {/* ═══ Left Column ═══ */}
           <div className="flex flex-col justify-center">
             {/* Section Label */}
@@ -551,13 +563,13 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10"
+          className="relative z-10 max-sm:!w-[96vw] max-sm:relative max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:mb-28"
           style={{ marginTop: "60px" }}
         >
           {/* Outer subtle glow */}
           <div className="absolute -inset-1 rounded-[32px] bg-gradient-to-r from-cyan-400/[0.08] via-blue-500/[0.06] to-purple-500/[0.08] blur-2xl opacity-80" />
 
-          <div className="group relative overflow-hidden rounded-[30px] border border-white/[0.1] bg-gradient-to-br from-[#0C1222] to-[#03050A] px-6 py-8 shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.15),inset_0_-1px_1px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(34,211,238,0.03)] backdrop-blur-3xl sm:px-10 md:px-16 md:py-10 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.25),inset_0_-1px_1px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(34,211,238,0.15)] hover:border-cyan-400/30">
+          <div className="group relative overflow-hidden rounded-[30px] border border-white/[0.1] bg-gradient-to-br from-[#0C1222] to-[#03050A] px-6 max-sm:px-0 py-8 max-sm:py-10 shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.15),inset_0_-1px_1px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(34,211,238,0.03)] backdrop-blur-3xl sm:px-10 md:px-16 md:py-10 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.25),inset_0_-1px_1px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(34,211,238,0.15)] hover:border-cyan-400/30">
             
             {/* Top accent line (Neon lip) */}
             <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent opacity-30 shadow-[0_1px_8px_1px_rgba(34,211,238,0.5)] transition-opacity duration-500 group-hover:opacity-100" />
@@ -565,20 +577,17 @@ export default function Contact() {
             {/* Ambient Gradient Glow */}
             <div className="pointer-events-none absolute inset-0 opacity-10 bg-[radial-gradient(600px_circle_at_50%_-20%,rgba(34,211,238,0.3),transparent_70%)] transition-opacity duration-500 group-hover:opacity-30" />
 
-            <div className="relative z-10 flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
-              {/* ── Left: Title ── */}
-              <div className="shrink-0 text-center lg:text-left pl-3">
-                <h4 
-                  className="font-mono text-[12px] font-bold uppercase tracking-[0.25em] text-cyan-300 drop-shadow-[0_0_6px_rgba(34,211,238,0.4)]"
-                  style={{ transform: "translateX(20px)", display: "inline-block" }}
-                >
+            {/* ── DESKTOP LAYOUT (Hidden on mobile) ── */}
+            <div className="relative z-10 hidden max-sm:hidden lg:flex lg:flex-row lg:items-center lg:justify-between lg:gap-8">
+              {/* Left: Title */}
+              <div className="shrink-0 flex flex-col lg:items-start lg:text-left lg:pl-3 w-full lg:w-auto">
+                <h4 className="font-mono text-[12px] font-bold uppercase tracking-[0.25em] text-cyan-300 drop-shadow-[0_0_6px_rgba(34,211,238,0.4)] lg:translate-x-[20px]">
                   Let&apos;s Connect
                 </h4>
                 <p className="mt-1.5 text-[14px] font-medium text-white/50">
                   Connect with me across platforms
                 </p>
-                {/* Quick Response Info for Recruiters */}
-                <div className="mt-6 flex flex-col gap-2 text-[12px] text-white/40 font-medium ml-5">
+                <div className="mt-6 flex flex-col justify-center lg:items-start gap-2 text-[12px] text-white/40 font-medium lg:ml-5 w-full">
                   <div className="flex items-center justify-center lg:justify-start gap-2.5">
                     <span className="text-[14px]">📍</span> 
                     <span>Based in Bhopal, India</span>
@@ -590,34 +599,101 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* ── Center: Social Links ── */}
+              {/* Center: Social Links */}
               <SocialLinks />
 
-              {/* ── Right: Availability + Orbital ── */}
-              <div className="flex items-center gap-5 lg:gap-6">
-                {/* Availability badge */}
-                <div className="shrink-0 text-center lg:text-right">
-                  <p className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white/40">
+              {/* Right: Availability + Orbital */}
+              <div className="flex flex-col lg:flex-row items-center gap-5 lg:gap-6 w-full lg:w-auto">
+                <div className="shrink-0 flex flex-col items-center lg:items-end w-full lg:w-auto">
+                  <p className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white/40 text-center lg:text-right">
                     Available for
                   </p>
-                  <div className="mt-1.5 flex items-center justify-center lg:justify-end gap-2.5">
-                    <span className="text-[13px] font-semibold text-white/80 flex flex-wrap justify-center lg:justify-end items-center">
+                  <div className="mt-2 lg:mt-1.5 flex items-center justify-center lg:justify-end gap-2.5 w-full">
+                    <span className="text-[13px] font-semibold text-white/80 flex flex-wrap justify-center lg:justify-end items-center max-w-[280px] lg:max-w-none text-center">
                       <span>Internships</span><span className="text-cyan-400/50 mx-1.5">•</span><span>Freelance</span><span className="text-cyan-400/50 mx-1.5">•</span><span>Full-Time</span>
                     </span>
-                    {/* Green pulsing indicator */}
                     <span className="relative flex h-2.5 w-2.5 shrink-0 ml-1">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
                       <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
                     </span>
                   </div>
                 </div>
-
-                {/* Orbital decorative element */}
                 <div className="hidden lg:block">
                   <OrbitalElement />
                 </div>
               </div>
             </div>
+
+            {/* ── MOBILE LAYOUT (Scrollable, Native HTML Order) ── */}
+            <div 
+              className="relative z-10 lg:hidden w-full overflow-x-auto overflow-y-hidden snap-x scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+              onScroll={handleScroll}
+            >
+              <div className="flex flex-row w-max items-center gap-5 after:content-[''] after:w-24 after:block after:shrink-0">
+                
+                {/* 1. Animation */}
+                <div className="scale-[0.8] shrink-0 snap-start">
+                  <OrbitalElement />
+                </div>
+
+                {/* 2. Logos */}
+                <div className="snap-start flex flex-col items-start pt-2">
+                  <p className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-300 drop-shadow-[0_0_6px_rgba(34,211,238,0.4)] text-left mb-5 ml-2 -translate-y-2">
+                    Connect with me
+                  </p>
+                  <SocialLinks />
+                </div>
+
+                {/* 3. Location */}
+                <div className="shrink-0 flex flex-col items-start text-left w-auto snap-start">
+                  <div className="flex flex-col items-start justify-start gap-2 text-[12px] text-white/40 font-medium w-full">
+                    <div className="flex items-center justify-start gap-2">
+                      <span className="text-[14px]">📍</span> 
+                      <span>Based in Bhopal, India</span>
+                    </div>
+                    <div className="flex items-center justify-start gap-2">
+                      <span className="text-[14px]">🌍</span> 
+                      <span>Available for Remote Work</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 4. Availability */}
+                <div className="flex flex-row items-center gap-5 w-auto snap-end pr-6">
+                  <div className="shrink-0 flex flex-col items-start w-auto">
+                    <p className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white/40 text-left">
+                      Available for
+                    </p>
+                    <div className="mt-1.5 flex items-center justify-start gap-1.5 w-full">
+                      <span className="text-[11px] font-semibold text-white/80 flex flex-wrap justify-start items-center text-left">
+                        <span>Internships</span><span className="text-cyan-400/50 mx-1">•</span><span>Freelance</span><span className="text-cyan-400/50 mx-1">•</span><span>Full-Time</span>
+                      </span>
+                      <span className="relative flex h-2.5 w-2.5 shrink-0 ml-1">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* ── MOBILE SWIPE INDICATOR (Bottom Center) ── */}
+            <AnimatePresence>
+              {!isScrolledToEnd && (
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.6 }} 
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute bottom-1.5 left-1/2 -translate-x-1/2 lg:hidden flex items-center justify-center pointer-events-none z-20"
+                >
+                  <ArrowRight className="w-5 h-5 text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.6)]" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
           </div>
         </motion.div>
       </SectionWrapper>

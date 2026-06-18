@@ -72,7 +72,7 @@ export default function SocialLinks() {
   );
 
   return (
-    <div className="flex flex-wrap items-center gap-3 lg:gap-4">
+    <div className="flex flex-wrap max-sm:flex-nowrap items-center justify-center gap-3 max-sm:gap-2.5 lg:gap-4 shrink-0 max-sm:snap-center">
       {visibleSocials.map((social, index) => {
         const isEmail = social.platform === "email";
         const colors = brandColors[social.platform] || brandColors.github;
@@ -94,7 +94,7 @@ export default function SocialLinks() {
             }}
             whileHover={{ y: -6 }}
             whileTap={{ scale: 0.9, y: 2 }}
-            className={`group relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-black/80 bg-[linear-gradient(180deg,#1e2536_0%,#070a12_100%)] text-white/70 shadow-[0_10px_20px_rgba(0,0,0,0.8),0_2px_5px_rgba(0,0,0,0.6),inset_0_2px_2px_rgba(255,255,255,0.15),inset_0_-4px_8px_rgba(0,0,0,0.9)] transition-all duration-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 ${colors.border} ${colors.shadow}`}
+            className={`group relative flex h-12 w-12 max-sm:h-9 max-sm:w-9 items-center justify-center overflow-hidden rounded-full border border-black/80 bg-[linear-gradient(180deg,#1e2536_0%,#070a12_100%)] text-white/70 shadow-[0_10px_20px_rgba(0,0,0,0.8),0_2px_5px_rgba(0,0,0,0.6),inset_0_2px_2px_rgba(255,255,255,0.15),inset_0_-4px_8px_rgba(0,0,0,0.9)] transition-all duration-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 ${colors.border} ${colors.shadow}`}
             aria-label={social.label}
           >
             {/* 3D Inner Casing/Bevel */}

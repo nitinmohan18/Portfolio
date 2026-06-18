@@ -10,7 +10,7 @@ export default function ScrollToTop() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 sm:bottom-10 sm:right-10">
+    <div className="fixed bottom-2 right-2 z-50 sm:bottom-10 sm:right-10 max-sm:scale-75 max-sm:origin-bottom-right">
       <MagneticButton>
         <motion.button
           onClick={handleScrollTop}
