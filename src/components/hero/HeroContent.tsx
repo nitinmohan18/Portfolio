@@ -46,7 +46,7 @@ const STAT_CARDS = [
 export default function HeroContent({ isVisible = true }: HeroContentProps) {
   return (
     <div
-      className="flex flex-col gap-8 max-w-2xl"
+      className="flex flex-col gap-1 sm:gap-2 md:gap-8 max-w-2xl"
       style={{ perspective: "1400px", perspectiveOrigin: "50% 30%" }}
     >
       <div className="flex flex-col" style={{ gap: "4px" }}>
@@ -154,19 +154,14 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         }
         @media (max-width: 768px) {
           .stat-card-wrapper {
+            margin-top: 40px;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
           }
         }
         @media (max-width: 480px) {
           .stat-card-wrapper {
-            gap: 10px;
-          }
-        }
-        @media (max-width: 380px) {
-          .stat-card-wrapper {
-            grid-template-columns: repeat(1, 1fr);
-            gap: 12px;
+            gap: 8px;
           }
         }
         .stat-card {
@@ -199,27 +194,55 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
             padding: 14px 12px;
           }
         }
-        .stat-card:hover {
-          transform: translateY(-6px) scale(1.02);
+        @media (hover: hover) and (pointer: fine) {
+          .stat-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            background: linear-gradient(165deg, rgba(40, 50, 80, 0.5), rgba(15, 20, 35, 0.9));
+            border-color: var(--hover-border);
+            border-top: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 
+              inset 0 1px 2px rgba(255, 255, 255, 0.2), 
+              inset 0 -5px 15px rgba(0, 0, 0, 0.8), 
+              0 16px 32px -6px rgba(0, 0, 0, 0.8), 
+              0 0 25px var(--hover-glow);
+            transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+          }
+          .stat-card:hover .stat-card-top-line {
+            transform: scaleX(1);
+            opacity: 1;
+            transition: all 0.4s ease;
+          }
+          .stat-card:hover .stat-card-icon-box {
+            background: var(--icon-bg-hover);
+            border-color: var(--icon-border-hover);
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.25), inset 0 -2px 4px rgba(0, 0, 0, 0.6), 0 6px 12px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+          }
+        }
+        .stat-card:active {
+          transform: translateY(1px) scale(0.98);
           background: linear-gradient(165deg, rgba(40, 50, 80, 0.5), rgba(15, 20, 35, 0.9));
           border-color: var(--hover-border);
           border-top: 1px solid rgba(255,255,255,0.25);
           box-shadow: 
             inset 0 1px 2px rgba(255, 255, 255, 0.2), 
-            inset 0 -5px 15px rgba(0, 0, 0, 0.8), 
-            0 16px 32px -6px rgba(0, 0, 0, 0.8), 
-            0 0 25px var(--hover-glow);
-          transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-        }
-        .stat-card:active {
-          transform: translateY(-1px) scale(0.99);
-          border-bottom: 1px solid rgba(0,0,0,0.4);
-          border-top: 1px solid rgba(255,255,255,0.1);
-          box-shadow: 
             inset 0 4px 12px rgba(0, 0, 0, 0.8), 
-            inset 0 1px 2px rgba(0, 0, 0, 0.5), 
-            0 2px 6px rgba(0, 0, 0, 0.2);
-          transition: all 0.15s ease;
+            0 8px 16px -6px rgba(0, 0, 0, 0.8), 
+            0 0 20px var(--hover-glow);
+          transition: all 0.1s ease;
+        }
+        .stat-card:active .stat-card-top-line {
+          transform: scaleX(1);
+          opacity: 1;
+          transition: all 0.1s ease;
+        }
+        .stat-card:active .stat-card-icon-box {
+          background: var(--icon-bg-hover);
+          border-color: var(--icon-border-hover);
+          transform: scale(1.05) rotate(-3deg);
+          box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.25), inset 0 -2px 4px rgba(0, 0, 0, 0.6), 0 4px 8px rgba(0, 0, 0, 0.4);
+          transition: all 0.1s ease;
         }
         .stat-card-top-line {
           position: absolute;
@@ -231,11 +254,6 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           transform-origin: left;
           opacity: 0.8;
           transition: 0.4s ease;
-        }
-        .stat-card:hover .stat-card-top-line {
-          transform: scaleX(1);
-          opacity: 1;
-          transition: all 0.4s ease;
         }
         .stat-card-inner-glow {
           position: absolute;
@@ -256,13 +274,6 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
           border: 1px solid var(--icon-border);
           color: var(--icon-color);
           box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), inset 0 -1px 3px rgba(0, 0, 0, 0.4), 0 3px 6px rgba(0, 0, 0, 0.3);
-          transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-        }
-        .stat-card:hover .stat-card-icon-box {
-          background: var(--icon-bg-hover);
-          border-color: var(--icon-border-hover);
-          transform: scale(1.1) rotate(-5deg);
-          box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.25), inset 0 -2px 4px rgba(0, 0, 0, 0.6), 0 6px 12px rgba(0, 0, 0, 0.4);
           transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
         }
         .stat-card-label {
@@ -311,8 +322,8 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
       
       {/* Name */}
       <motion.h1
-        className="font-display font-[800] text-white tracking-tight flex flex-wrap"
-        style={{ fontSize: "clamp(32px, 8vw, 60px)", marginBottom: "8px", perspective: "1000px" }}
+        className="font-display font-[800] text-white tracking-tight flex flex-wrap mb-[-6px] md:mb-[8px]"
+        style={{ fontSize: "clamp(32px, 8vw, 60px)", perspective: "1000px" }}
         initial={{ opacity: 0, rotateX: 60, y: 40, scale: 0.9 }}
         animate={isVisible ? { opacity: 1, rotateX: 0, y: 0, scale: 1 } : { opacity: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.2 }}
@@ -353,7 +364,7 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
       </div>
 
       {/* Stats grid */}
-      <div className="stat-card-wrapper pt-2">
+      <div className="stat-card-wrapper">
         {STAT_CARDS.map((stat, i) => (
           <StatCardItem key={stat.label} stat={stat} index={i} isVisible={isVisible} />
         ))}

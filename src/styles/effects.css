@@ -9,11 +9,13 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.glass-card:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(108, 99, 255, 0.25);
-  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(108, 99, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(108, 99, 255, 0.25);
+    box-shadow: 0 8px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(108, 99, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
 }
 
 /* ─── Gradient borders ─── */
@@ -51,10 +53,6 @@
   border-radius: inherit;
 }
 
-.glow-button:hover::before {
-  opacity: 1;
-}
-
 .glow-button::after {
   content: "";
   position: absolute;
@@ -70,8 +68,13 @@
   filter: blur(15px);
 }
 
-.glow-button:hover::after {
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .glow-button:hover::before {
+    opacity: 1;
+  }
+  .glow-button:hover::after {
+    opacity: 1;
+  }
 }
 
 /* ─── Shimmer effect ─── */
@@ -148,9 +151,11 @@
 .card-lift {
   transition: transform 0.4s var(--ease-spring), box-shadow 0.4s ease;
 }
-.card-lift:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+@media (hover: hover) and (pointer: fine) {
+  .card-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
 }
 
 /* ─── Scrollbar hidden ─── */

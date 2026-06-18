@@ -180,10 +180,12 @@ textarea,
 .glass-hover {
   transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
-.glass-hover:hover {
-  background: var(--surface-2);
-  border-color: var(--border-strong);
-  box-shadow: var(--glow-sm);
+@media (hover: hover) and (pointer: fine) {
+  .glass-hover:hover {
+    background: var(--surface-2);
+    border-color: var(--border-strong);
+    box-shadow: var(--glow-sm);
+  }
 }
 
 /* ─── Glow Utilities ─── */
@@ -222,8 +224,10 @@ textarea,
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.premium-card:hover {
-  border-color: rgba(255, 255, 255, 0.18);
+@media (hover: hover) and (pointer: fine) {
+  .premium-card:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+  }
 }
 
 .premium-heading-label {

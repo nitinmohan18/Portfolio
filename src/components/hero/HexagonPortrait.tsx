@@ -148,8 +148,8 @@ export default function HexagonPortrait({ isVisible = true }: HexagonPortraitPro
           mass: 1.2 
         }}
       >
-        {/* Continuous Floating CSS Animation Wrapper */}
-        <div className="relative w-full h-full portrait-float">
+        {/* Continuous Floating CSS Animation Wrapper (Moved to parent in Hero.tsx) */}
+        <div className="relative w-full h-full">
           {/* Breathing Neon Glow wrapper */}
           <div className="relative w-full h-full breathing-drop-shadow transition-all duration-500 group-hover:drop-shadow-[0_0_35px_rgba(34,211,238,0.5)]">
             

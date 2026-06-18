@@ -39,17 +39,19 @@ export default function Hero() {
 
             {/* Content */}
             <div className="container-wide relative z-[5] w-full">
-              <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-8 w-full">
+              <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-0 lg:gap-8 w-full">
                 {/* Left side text content */}
-                <div className="w-full lg:w-[55%] xl:w-[50%] flex-shrink-0 z-10 pt-20 lg:pt-0">
+                <div className="hero-text-mobile-pull w-full lg:w-[55%] xl:w-[50%] flex-shrink-0 z-10 pt-0 lg:mt-0 lg:pt-0">
                   <HeroContent isVisible={isVisible} />
                 </div>
                 
                 {/* Right side portrait */}
-                <div className="w-full lg:w-[45%] xl:w-[50%] flex flex-col justify-center items-center relative z-10 top-4 lg:top-12">
-                  <HexagonPortrait isVisible={isVisible} />
-                  <div className="w-full flex justify-center pointer-events-none -mt-4 lg:-mt-8 z-30">
-                    <Signature isVisible={isVisible} />
+                <div className="w-full lg:w-[45%] xl:w-[50%] flex flex-col justify-center items-center relative z-10 top-0 lg:top-12">
+                  <div className="w-full flex flex-col items-center justify-center portrait-float">
+                    <HexagonPortrait isVisible={isVisible} />
+                    <div className="w-full flex justify-center pointer-events-none -mt-4 lg:-mt-8 z-30">
+                      <Signature isVisible={isVisible} />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -94,11 +96,16 @@ export default function Hero() {
                 box-shadow: 0 0 10px #22d3ee, 0 0 25px #22d3ee;
                 border-radius: 50px;
               }
+              @media (max-width: 1023px) {
+                .hero-text-mobile-pull {
+                  margin-top: -28px !important;
+                }
+              }
             `}</style>
             <motion.div
               className="relative mt-12 lg:mt-0 lg:absolute lg:bottom-6 left-1/2 -translate-x-1/2 z-[5] flex flex-col items-center gap-3 cursor-pointer"
               initial={{ opacity: 0 }}
-              animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+              animate={isVisible ? { opacity: 1, y: 15 } : { opacity: 0, y: 0 }}
               transition={{ delay: 1.2, duration: 0.8 }}
               style={{ willChange: "transform, opacity", perspective: "400px" }}
               onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}

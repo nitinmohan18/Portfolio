@@ -50,11 +50,32 @@ export default function Navbar() {
           letter-spacing: 2px;
           position: relative;
         }
-        .group:hover .nm-logo {
-          background: linear-gradient(135deg, #22d3ee 0%, #6366f1 60%, #a855f7 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+        @media (hover: hover) and (pointer: fine) {
+          .group:hover .nm-logo {
+            background: linear-gradient(135deg, #22d3ee 0%, #6366f1 60%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          }
+          .nav-link-hover:hover {
+            color: #CBD5E1;
+            transform: translateY(-1px);
+          }
+          .nav-link-hover:hover::after {
+            transform: scaleX(1);
+          }
+          .nav-social-icon.github:hover {
+            color: #ffffff;
+            box-shadow: 0 0 14px rgba(140,120,255,0.3);
+          }
+          .nav-social-icon.linkedin:hover {
+            color: #0A66C2;
+            box-shadow: 0 0 14px rgba(10,102,194,0.35);
+          }
+          .nav-social-icons:hover .nav-social-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
         .nav-link-hover {
           font-size: 13.5px;
@@ -63,10 +84,6 @@ export default function Navbar() {
           text-transform: uppercase;
           transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
           padding: 4px 0;
-        }
-        .nav-link-hover:hover {
-          color: #CBD5E1;
-          transform: translateY(-1px);
         }
         .nav-link-hover::after {
           content: '';
@@ -81,10 +98,8 @@ export default function Navbar() {
           transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           border-radius: 2px;
         }
-        .nav-link-hover.active::after, .nav-link-hover:hover::after {
-          transform: scaleX(1);
-        }
         .nav-link-hover.active::after {
+          transform: scaleX(1);
           box-shadow: 0 0 12px rgba(125,211,252,0.8);
           background: #7DD3FC;
         }
@@ -104,12 +119,10 @@ export default function Navbar() {
           border-radius: 50%;
           padding: 4px;
         }
-        .nav-social-icon.github:hover,
         .nav-social-icon.github:active {
           color: #ffffff;
           box-shadow: 0 0 14px rgba(140,120,255,0.3);
         }
-        .nav-social-icon.linkedin:hover,
         .nav-social-icon.linkedin:active {
           color: #0A66C2;
           box-shadow: 0 0 14px rgba(10,102,194,0.35);
@@ -129,10 +142,6 @@ export default function Navbar() {
           transform: translateY(-4px);
           transition: all 0.25s ease;
           pointer-events: none;
-        }
-        .nav-social-icons:hover .nav-social-tooltip {
-          opacity: 1;
-          transform: translateY(0);
         }
         /* Container */
         .side-nav {
@@ -223,14 +232,16 @@ export default function Navbar() {
         }
 
         /* HOVER STATE */
-        .side-nav-item:hover .dot-core {
-          background: rgba(34,211,238,0.6);
-          transform: scale(1.2);
-        }
+        @media (hover: hover) and (pointer: fine) {
+          .side-nav-item:hover .dot-core {
+            background: rgba(34,211,238,0.6);
+            transform: scale(1.2);
+          }
 
-        .side-nav-item:hover .dot-ring {
-          border-color: rgba(34,211,238,0.4);
-          transform: scale(1.3);
+          .side-nav-item:hover .dot-ring {
+            border-color: rgba(34,211,238,0.4);
+            transform: scale(1.3);
+          }
         }
 
         /* ACTIVE STATE */

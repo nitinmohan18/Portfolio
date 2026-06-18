@@ -137,59 +137,63 @@ export default function About() {
           pointer-events: none;
         }
 
-        .group:hover .edu-card {
-          background: linear-gradient(165deg, rgba(40, 50, 80, 0.5), rgba(15, 20, 35, 0.9));
-          border-color: rgba(var(--card-rgb), 0.4);
-          border-top: 1px solid rgba(255, 255, 255, 0.25);
-          transform: translateY(-6px) scale(1.02);
-          box-shadow: 
-            inset 0 1px 2px rgba(255, 255, 255, 0.2), 
-            inset 0 -5px 15px rgba(0, 0, 0, 0.8), 
-            0 16px 32px -6px rgba(0, 0, 0, 0.8), 
-            0 0 25px rgba(var(--card-rgb), 0.3);
+        @media (hover: hover) and (pointer: fine) {
+          .group:hover .edu-card {
+            background: linear-gradient(165deg, rgba(40, 50, 80, 0.5), rgba(15, 20, 35, 0.9));
+            border-color: rgba(var(--card-rgb), 0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 
+              inset 0 1px 2px rgba(255, 255, 255, 0.2), 
+              inset 0 -5px 15px rgba(0, 0, 0, 0.8), 
+              0 16px 32px -6px rgba(0, 0, 0, 0.8), 
+              0 0 25px rgba(var(--card-rgb), 0.3);
+          }
+          .group:hover .top-accent {
+            opacity: 1;
+          }
+          .group:hover .edu-dot {
+            transform: scale(1.5);
+            background: var(--card-color) !important;
+          }
+          .group:hover .score-badge {
+            background: rgba(var(--card-rgb), 0.14) !important;
+            border-color: rgba(var(--card-rgb), 0.35) !important;
+          }
+          .group:hover .card-3-glow {
+            animation: none;
+          }
         }
 
         .group:active .edu-card {
-          transform: translateY(-1px) scale(0.99);
-          border-bottom: 1px solid rgba(0,0,0,0.4);
-          border-top: 1px solid rgba(255,255,255,0.1);
+          background: linear-gradient(165deg, rgba(40, 50, 80, 0.5), rgba(15, 20, 35, 0.9));
+          border-color: rgba(var(--card-rgb), 0.4);
+          border-top: 1px solid rgba(255, 255, 255, 0.25);
+          transform: translateY(1px) scale(0.98);
           box-shadow: 
+            inset 0 1px 2px rgba(255, 255, 255, 0.2), 
             inset 0 4px 12px rgba(0, 0, 0, 0.8), 
-            inset 0 1px 2px rgba(0, 0, 0, 0.5), 
-            0 2px 6px rgba(0, 0, 0, 0.2);
-          transition: all 0.15s ease;
+            0 8px 16px -6px rgba(0, 0, 0, 0.8), 
+            0 0 20px rgba(var(--card-rgb), 0.3);
+          transition: all 0.1s ease;
         }
 
         .top-accent {
           opacity: 0.6;
           transition: opacity 0.3s ease;
         }
-        .group:hover .top-accent {
-          opacity: 1;
-        }
 
         .edu-dot {
           transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
           animation: nodePulse 2.5s ease-in-out infinite;
         }
-        .group:hover .edu-dot {
-          transform: scale(1.5);
-          background: var(--card-color) !important;
-        }
 
         .score-badge {
           transition: all 0.25s ease;
         }
-        .group:hover .score-badge {
-          background: rgba(var(--card-rgb), 0.14) !important;
-          border-color: rgba(var(--card-rgb), 0.35) !important;
-        }
 
         .card-3-glow {
           animation: borderGlow 3s ease-in-out infinite;
-        }
-        .group:hover .card-3-glow {
-          animation: none;
         }
 
         @keyframes shimmer {
@@ -223,18 +227,25 @@ export default function About() {
           animation: shimmer 3s ease-in-out infinite;
         }
 
-        .badge-primary:hover {
-          background: linear-gradient(165deg, rgba(34,211,238,0.2), rgba(10, 15, 25, 0.9));
-          border-color: rgba(34,211,238,0.6);
-          color: #ffffff;
-          box-shadow: inset 0 1px 2px rgba(255,255,255,0.25), inset 0 -2px 6px rgba(0,0,0,0.9), 0 8px 20px rgba(0,0,0,0.6), 0 0 16px rgba(34,211,238,0.3);
-          transform: translateY(-3px) scale(1.05);
-          text-shadow: 0 0 8px rgba(34, 211, 238, 0.5);
+        @media (hover: hover) and (pointer: fine) {
+          .badge-primary:hover {
+            background: linear-gradient(165deg, rgba(34,211,238,0.2), rgba(10, 15, 25, 0.9));
+            border-color: rgba(34,211,238,0.6);
+            color: #ffffff;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.25), inset 0 -2px 6px rgba(0,0,0,0.9), 0 8px 20px rgba(0,0,0,0.6), 0 0 16px rgba(34,211,238,0.3);
+            transform: translateY(-3px) scale(1.05);
+            text-shadow: 0 0 8px rgba(34, 211, 238, 0.5);
+          }
         }
 
         .badge-primary:active {
-          transform: scale(0.97);
-          transition: 0.12s ease;
+          background: linear-gradient(165deg, rgba(34,211,238,0.2), rgba(10, 15, 25, 0.9));
+          border-color: rgba(34,211,238,0.6);
+          color: #ffffff;
+          box-shadow: inset 0 1px 2px rgba(255,255,255,0.25), inset 0 2px 8px rgba(0,0,0,0.9), 0 4px 12px rgba(0,0,0,0.6), 0 0 12px rgba(34,211,238,0.3);
+          transform: translateY(1px) scale(0.97);
+          text-shadow: 0 0 8px rgba(34, 211, 238, 0.5);
+          transition: 0.1s ease;
         }
 
         .badge-dark {
@@ -255,17 +266,25 @@ export default function About() {
           transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .badge-dark:hover {
-          border-color: rgba(var(--badge-rgb), 0.6);
-          background: linear-gradient(165deg, rgba(var(--badge-rgb), 0.2), rgba(10, 15, 25, 0.9));
-          color: #ffffff;
-          box-shadow: inset 0 1px 2px rgba(255,255,255,0.25), inset 0 -2px 6px rgba(0,0,0,0.9), 0 8px 20px rgba(0,0,0,0.6), 0 0 16px rgba(var(--badge-rgb), 0.3);
-          transform: translateY(-3px) scale(1.05);
-          text-shadow: 0 0 8px rgba(var(--badge-rgb), 0.5);
+        @media (hover: hover) and (pointer: fine) {
+          .badge-dark:hover {
+            border-color: rgba(var(--badge-rgb), 0.6);
+            background: linear-gradient(165deg, rgba(var(--badge-rgb), 0.2), rgba(10, 15, 25, 0.9));
+            color: #ffffff;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.25), inset 0 -2px 6px rgba(0,0,0,0.9), 0 8px 20px rgba(0,0,0,0.6), 0 0 16px rgba(var(--badge-rgb), 0.3);
+            transform: translateY(-3px) scale(1.05);
+            text-shadow: 0 0 8px rgba(var(--badge-rgb), 0.5);
+          }
         }
 
         .badge-dark:active {
-          transform: scale(0.97);
+          border-color: rgba(var(--badge-rgb), 0.6);
+          background: linear-gradient(165deg, rgba(var(--badge-rgb), 0.2), rgba(10, 15, 25, 0.9));
+          color: #ffffff;
+          box-shadow: inset 0 1px 2px rgba(255,255,255,0.25), inset 0 2px 8px rgba(0,0,0,0.9), 0 4px 12px rgba(0,0,0,0.6), 0 0 12px rgba(var(--badge-rgb), 0.3);
+          transform: translateY(1px) scale(0.97);
+          text-shadow: 0 0 8px rgba(var(--badge-rgb), 0.5);
+          transition: 0.1s ease;
         }
 
         .badge-dot {
@@ -533,9 +552,19 @@ export default function About() {
                 color: "#22d3ee",
                 filter: "drop-shadow(0 0 6px rgba(34,211,238,0.8))"
               }}
-              initial={{ animation: "none" }}
-              whileInView={{ animation: "smoothTravel 5s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards" }}
-              viewport={{ once: true, margin: "-100px" }}
+              initial={{ top: "0%", opacity: 0, scale: 0.8 }}
+              whileInView={{
+                top: ["0%", "0%", "18%", "18%", "18%", "47.5%", "47.5%", "47.5%", "83%", "83%", "83%", "92%"],
+                opacity: [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                scale: [0.8, 1, 1, 1.4, 1, 1, 1.4, 1, 1, 1.4, 1, 1]
+              }}
+              viewport={{ once: true, margin: "0px" }}
+              transition={{
+                duration: 5,
+                times: [0, 0.04, 0.20, 0.26, 0.33, 0.48, 0.54, 0.61, 0.80, 0.86, 0.93, 1],
+                ease: "easeInOut",
+                delay: 0.8
+              }}
             >
               <div className="bg-[#0d101c] rounded-full p-[4px] relative z-10 flex items-center justify-center">
                 <School size={16} />
@@ -543,16 +572,36 @@ export default function About() {
               <motion.div 
                 className="absolute rounded-full border border-[#22d3ee] opacity-0 z-0" 
                 style={{ width: "24px", height: "24px" }} 
-                initial={{ animation: "none" }}
-                whileInView={{ animation: "nodeRing 5s linear 0.8s forwards" }}
-                viewport={{ once: true, margin: "-100px" }}
+                initial={{ scale: 1, opacity: 0, borderWidth: "1px" }}
+                whileInView={{
+                  scale: [1, 1, 2.5, 1, 2.5, 1, 2.5, 1],
+                  opacity: [0, 0, 0.6, 0, 0.6, 0, 0.6, 0],
+                  borderWidth: ["1px", "1px", "0px", "1px", "0px", "1px", "0px", "1px"]
+                }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 5,
+                  times: [0, 0.19, 0.33, 0.47, 0.61, 0.79, 0.93, 1],
+                  ease: "linear",
+                  delay: 0.8
+                }}
               />
               <motion.div 
                 className="absolute rounded-full border border-[#22d3ee] opacity-0 z-0" 
                 style={{ width: "24px", height: "24px" }} 
-                initial={{ animation: "none" }}
-                whileInView={{ animation: "endPulseRing 2s ease-out 5.8s infinite" }}
-                viewport={{ once: true, margin: "-100px" }}
+                initial={{ scale: 1, opacity: 0.8, borderWidth: "1px" }}
+                whileInView={{
+                  scale: [1, 2.5],
+                  opacity: [0.8, 0],
+                  borderWidth: ["1px", "0px"]
+                }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 2,
+                  ease: "easeOut",
+                  delay: 5.8,
+                  repeat: Infinity
+                }}
               />
             </motion.div>
 
