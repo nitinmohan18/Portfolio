@@ -618,10 +618,10 @@ export default function Certifications() {
                       },
                     }}
                     whileTap={{ scale: 0.99 }}
-                    className={`group w-full relative flex max-sm:flex-row flex-col md:flex-row max-sm:items-center items-start md:items-center
+                    className={`group w-full relative flex flex-col md:flex-row items-center max-sm:flex-row max-sm:!py-3 max-sm:!px-3 max-sm:!gap-2
                       backdrop-blur-xl border rounded-[22px]
                       transition-all duration-500 ${cert.link || cert.image ? "cursor-pointer" : "cursor-default"}
-                      p-6 sm:p-8 md:py-10 md:pl-8 md:pr-12 gap-5 sm:gap-8 md:gap-10 max-sm:!p-4 max-sm:!gap-3
+                      p-8 md:py-10 md:pl-8 md:pr-12 gap-8 md:gap-10
                       ${c.cardBg} ${c.cardHover}`}
                   >
                     {/* Card Flash Glow on Entry */}
@@ -641,21 +641,21 @@ export default function Certifications() {
                     <div className="absolute inset-0 rounded-[22px] bg-[linear-gradient(135deg,rgba(255,255,255,0.05)_0%,transparent_100%)] pointer-events-none" />
 
                     {/* Floating icon */}
-                    <div className="shrink-0 relative translate-x-[16px] max-sm:translate-x-0 max-sm:scale-[0.6] max-sm:-mx-3">
+                    <div className="shrink-0 relative translate-x-[16px] max-sm:translate-x-0 max-sm:scale-[0.6] max-sm:mx-0">
                       <FloatingIcon color={cert.color}>
                         <Icon size={32} strokeWidth={1.25} />
                       </FloatingIcon>
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 flex flex-col min-w-0 max-sm:gap-1 md:gap-3 justify-center w-full">
+                    <div className="flex-1 flex flex-col min-w-0 gap-3 max-sm:gap-[2px] justify-center max-sm:w-full">
                       {/* Status badge */}
                       <motion.div
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`inline-flex self-start items-center gap-2 max-sm:px-2 max-sm:py-0.5 md:px-3 md:py-1.5 max-sm:translate-y-0 translate-y-[10px]
-                          rounded-full max-sm:text-[8px] md:text-[10px] font-bold tracking-[0.15em] uppercase border border-white/5 cursor-pointer
-                          transition-all duration-300 overflow-hidden ${c.badge} max-sm:mb-0.5 md:mb-1`}
+                        className={`inline-flex self-start items-center gap-2 px-3 py-1.5 translate-y-[10px] max-sm:px-2 max-sm:py-0 max-sm:translate-y-0
+                          rounded-full text-[10px] max-sm:text-[7px] font-bold tracking-[0.15em] uppercase border border-white/5 cursor-pointer
+                          transition-all duration-300 overflow-hidden ${c.badge} mb-1 max-sm:mb-0`}
                       >
                         {/* Glass Reflection */}
                         <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-80" />
@@ -671,21 +671,21 @@ export default function Certifications() {
 
                       {/* Title */}
                       <h3
-                        className="font-display max-sm:text-[15px] md:text-[22px] font-semibold text-white tracking-wide leading-snug
-                          group-hover:text-white transition-colors duration-300 max-sm:line-clamp-1"
+                        className="font-display text-[22px] max-sm:text-[14px] font-semibold text-white tracking-wide leading-snug
+                          group-hover:text-white transition-colors duration-300 max-sm:truncate"
                       >
                         {cert.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-white/50 max-sm:text-[11px] md:text-[14px] leading-relaxed group-hover:text-white/70 transition-colors duration-500 max-sm:mb-0.5 md:mb-2 max-sm:line-clamp-2">
+                      <p className="text-white/50 text-[14px] max-sm:text-[10px] leading-relaxed group-hover:text-white/70 transition-colors duration-500 mb-2 max-sm:mb-0 max-sm:truncate">
                         {cert.description}
                       </p>
 
                       {/* Footer */}
-                      <div className="flex items-center gap-[5px] max-sm:mt-0.5 mt-1 max-sm:translate-y-0 md:-translate-y-[7px]">
+                      <div className="flex items-center gap-[7px] max-sm:gap-[4px] mt-1 max-sm:mt-0 -translate-y-[7px] max-sm:translate-y-0">
                         <Award size={16} className={`${c.iconText} shrink-0 opacity-80 max-sm:scale-[0.65] max-sm:-mr-0.5`} />
-                        <span className="max-sm:text-[10px] md:text-[13px] text-white/40 max-sm:truncate">
+                        <span className="text-[13px] max-sm:text-[10px] text-white/40 max-sm:truncate">
                           {isCompleted ? "Certified by" : "Provided by"} ·{" "}
                           <span className="text-white/60 font-medium tracking-wide">
                             {cert.issuer}
@@ -695,7 +695,7 @@ export default function Certifications() {
                     </div>
 
                     {/* Arrow button */}
-                    <div className="shrink-0 md:mt-0 relative -translate-x-[16px] max-sm:translate-x-0 max-sm:scale-[0.6] max-sm:-mr-3">
+                    <div className="shrink-0 mt-4 md:mt-0 relative -translate-x-[16px] max-sm:translate-x-0 max-sm:mt-0 max-sm:scale-[0.5] max-sm:mx-0">
                       <ArrowBtn color={cert.color} />
                     </div>
                   </motion.div>
