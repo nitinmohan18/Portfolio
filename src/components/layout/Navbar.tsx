@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Download, Menu, X } from "lucide-react";
 import { Github, Linkedin } from "@/components/ui/Icons";
@@ -16,6 +16,17 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const activeSection = useActiveSection(sectionIds);
   const progress = useScrollProgress();
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [mobileOpen]);
 
   const handleNav = useCallback((href: string) => {
     setMobileOpen(false);
@@ -346,12 +357,13 @@ export default function Navbar() {
 
           {/* Right actions */}
           <div className="flex items-center gap-2">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 2.6 + NAV_ITEMS.length * 0.06, duration: 0.4 }}
-              className="hidden sm:flex nav-social-icons group/social"
-            >
+            <div className="scale-[0.65] md:scale-100 origin-top-right transition-transform translate-y-3 md:translate-y-0">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 2.6 + NAV_ITEMS.length * 0.06, duration: 0.4 }}
+                className="flex nav-social-icons group/social"
+              >
               <a
                 href={profile.socials.find((s) => s.platform === "github")?.url}
                 target="_blank"
@@ -361,7 +373,7 @@ export default function Navbar() {
               >
                 <Github size={18} />
                 <div 
-                  className="absolute bottom-[2px] right-[2px] w-[6px] h-[6px] bg-[#22c55e] rounded-full shadow-[0_0_4px_rgba(34,197,94,0.6)]"
+                  className="absolute bottom-[2px] right-[2px] w-[4px] h-[4px] md:w-[6px] md:h-[6px] bg-[#22c55e] rounded-full shadow-[0_0_4px_rgba(34,197,94,0.6)]"
                   style={{ animation: 'statusPulse 2s ease-in-out infinite' }}
                 />
               </a>
@@ -377,7 +389,8 @@ export default function Navbar() {
               <div className="nav-social-tooltip">
                 <span className="animate-pulse mr-1 text-emerald-400">✦</span> Open to Opportunities
               </div>
-            </motion.div>
+              </motion.div>
+            </div>
 
             {profile.resumeUrl && (
               <MagneticButton>
@@ -386,7 +399,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 2.6 + (NAV_ITEMS.length + 2) * 0.06, duration: 0.4 }}
                   href={profile.resumeUrl}
-                  className="hidden sm:flex items-center gap-1.5 px-[18px] py-[8px] rounded-[50px] text-[13px] font-[600] text-white border border-[rgba(255,255,255,0.18)] relative overflow-hidden group/resume"
+                  className="hidden md:flex items-center gap-1.5 px-[18px] py-[8px] rounded-[50px] text-[13px] font-[600] text-white border border-[rgba(255,255,255,0.18)] relative overflow-hidden group/resume"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-[rgba(255,255,255,0.05)] to-[rgba(255,255,255,0.1)] group-hover/resume:from-[rgba(96,165,250,0.2)] group-hover/resume:to-[rgba(167,139,250,0.2)] transition-all duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.2)] to-transparent opacity-0 group-hover/resume:opacity-100 group-hover/resume:animate-[shimmer_1.5s_infinite] bg-[length:200%_100%] -skew-x-12" />
@@ -418,8 +431,11 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[999] bg-[rgba(8,10,20,0.97)] backdrop-blur-[20px] flex flex-col items-center justify-center gap-[32px] md:hidden"
+            className="fixed inset-0 z-[999] bg-[rgba(5,7,14,0.85)] backdrop-blur-[24px] flex flex-col items-center justify-center gap-[32px] md:hidden"
           >
+            {/* Ambient Background Glow for Menu */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.1),transparent_50%)] pointer-events-none" />
+            
             {NAV_ITEMS.map((item, i) => {
               const isActive = activeSection === item.id;
               return (

@@ -253,8 +253,8 @@ export default function ContactForm() {
             {/* Row 1: Name + Email */}
             <div className="grid sm:grid-cols-2" style={{ gap: "1.25rem" }}>
               <motion.div
-                initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
               >
@@ -283,8 +283,8 @@ export default function ContactForm() {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.8, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
               >

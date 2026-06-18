@@ -41,14 +41,14 @@ export default function Hero() {
             <div className="container-wide relative z-[5] w-full">
               <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-8 w-full">
                 {/* Left side text content */}
-                <div className="w-full lg:w-[55%] xl:w-[50%] flex-shrink-0 z-10">
+                <div className="w-full lg:w-[55%] xl:w-[50%] flex-shrink-0 z-10 pt-20 lg:pt-0">
                   <HeroContent isVisible={isVisible} />
                 </div>
                 
                 {/* Right side portrait */}
-                <div className="w-full lg:w-[45%] xl:w-[50%] flex justify-center items-center relative z-10 top-12">
+                <div className="w-full lg:w-[45%] xl:w-[50%] flex flex-col justify-center items-center relative z-10 top-4 lg:top-12">
                   <HexagonPortrait isVisible={isVisible} />
-                  <div className="absolute top-[80%] lg:top-[75%] xl:top-[80%] w-full flex justify-center pointer-events-none">
+                  <div className="w-full flex justify-center pointer-events-none -mt-4 lg:-mt-8 z-30">
                     <Signature isVisible={isVisible} />
                   </div>
                 </div>

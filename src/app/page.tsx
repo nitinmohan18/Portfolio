@@ -16,7 +16,7 @@ export default function Home() {
     <ClientLayout>
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
-        <main className="relative z-[1] flex-1 w-full flex flex-col gap-0">
+        <main className="relative z-[1] flex-1 w-full flex flex-col gap-0 overflow-x-hidden">
           <ParallaxStarsBackground />
           <Hero />
           <div className="section-divider" />

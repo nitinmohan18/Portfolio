@@ -155,12 +155,18 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         @media (max-width: 768px) {
           .stat-card-wrapper {
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 12px;
           }
         }
         @media (max-width: 480px) {
           .stat-card-wrapper {
-            gap: 8px;
+            gap: 10px;
+          }
+        }
+        @media (max-width: 380px) {
+          .stat-card-wrapper {
+            grid-template-columns: repeat(1, 1fr);
+            gap: 12px;
           }
         }
         .stat-card {
@@ -306,7 +312,7 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
       {/* Name */}
       <motion.h1
         className="font-display font-[800] text-white tracking-tight flex flex-wrap"
-        style={{ fontSize: "clamp(32px, 4.5vw, 60px)", marginBottom: "8px", perspective: "1000px" }}
+        style={{ fontSize: "clamp(32px, 8vw, 60px)", marginBottom: "8px", perspective: "1000px" }}
         initial={{ opacity: 0, rotateX: 60, y: 40, scale: 0.9 }}
         animate={isVisible ? { opacity: 1, rotateX: 0, y: 0, scale: 1 } : { opacity: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.2 }}

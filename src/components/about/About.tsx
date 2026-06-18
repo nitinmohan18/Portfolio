@@ -504,7 +504,7 @@ export default function About() {
           </motion.div>
 
           {/* Wrapper for exactly the timeline threads and cards */}
-          <div className="relative w-full flex flex-col items-stretch ml-8 md:ml-10 lg:ml-0">
+          <div className="relative w-full flex flex-col items-stretch ml-[40px] md:ml-[48px] lg:ml-0">
             
             {/* Continuous Left Timeline Line */}
             <motion.div 
@@ -668,7 +668,7 @@ export default function About() {
                   />
 
                   {/* Top Row: Left Info + Right Badge */}
-                  <div className="flex justify-between items-start gap-4">
+                  <div className="flex justify-between items-start gap-2 sm:gap-4 flex-wrap sm:flex-nowrap">
                     <div className="flex flex-col">
                       <div className="flex items-center gap-[6px] mb-[6px]">
                         <div style={{ color: item.color }}>{item.icon}</div>

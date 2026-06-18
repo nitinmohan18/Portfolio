@@ -76,29 +76,36 @@ export default function TypingText() {
           }}
           className="flex items-baseline flex-wrap w-full"
         >
-          {characters.map((char, i) => (
-            <motion.span
-              key={i}
-              variants={{
-                hidden: { opacity: 0, y: 20, rotateX: 90 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  rotateX: 0,
-                  transition: { duration: 0.4, ease: [0.34, 1.56, 0.64, 1] },
-                },
-              }}
-              style={{
-                display: "inline-block",
-                transformOrigin: "bottom",
-                whiteSpace: "pre",
-                color: char === " " ? "transparent" : "#CBD5E1", 
-                fontWeight: 500,
-                textShadow: "none"
-              }}
-            >
-              {char}
-            </motion.span>
+          {currentRole.split(" ").map((word, wIdx) => (
+            <span key={wIdx} style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+              {word.split("").map((char, cIdx) => (
+                <motion.span
+                  key={`${wIdx}-${cIdx}`}
+                  variants={{
+                    hidden: { opacity: 0, y: 20, rotateX: 90 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      rotateX: 0,
+                      transition: { duration: 0.4, ease: [0.34, 1.56, 0.64, 1] },
+                    },
+                  }}
+                  style={{
+                    display: "inline-block",
+                    transformOrigin: "bottom",
+                    color: "#CBD5E1", 
+                    fontWeight: 500,
+                    textShadow: "none"
+                  }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+              {/* Add space after word unless it's the last word */}
+              {wIdx < currentRole.split(" ").length - 1 && (
+                <span style={{ display: "inline-block", width: "0.25em" }}>&nbsp;</span>
+              )}
+            </span>
           ))}
           {/* Blinking 3-Dot Trail Cursor */}
           <motion.div

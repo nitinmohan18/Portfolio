@@ -556,7 +556,7 @@ export default function Contact() {
           {/* Outer subtle glow */}
           <div className="absolute -inset-1 rounded-[32px] bg-gradient-to-r from-cyan-400/[0.08] via-blue-500/[0.06] to-purple-500/[0.08] blur-2xl opacity-80" />
 
-          <div className="group relative overflow-hidden rounded-[30px] border border-white/[0.1] bg-gradient-to-br from-[#0C1222] to-[#03050A] px-10 py-8 shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.15),inset_0_-1px_1px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(34,211,238,0.03)] backdrop-blur-3xl sm:px-14 md:px-16 md:py-10 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.25),inset_0_-1px_1px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(34,211,238,0.15)] hover:border-cyan-400/30">
+          <div className="group relative overflow-hidden rounded-[30px] border border-white/[0.1] bg-gradient-to-br from-[#0C1222] to-[#03050A] px-6 py-8 shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.15),inset_0_-1px_1px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(34,211,238,0.03)] backdrop-blur-3xl sm:px-10 md:px-16 md:py-10 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.25),inset_0_-1px_1px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(34,211,238,0.15)] hover:border-cyan-400/30">
             
             {/* Top accent line (Neon lip) */}
             <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent opacity-30 shadow-[0_1px_8px_1px_rgba(34,211,238,0.5)] transition-opacity duration-500 group-hover:opacity-100" />
@@ -600,8 +600,8 @@ export default function Contact() {
                     Available for
                   </p>
                   <div className="mt-1.5 flex items-center justify-center lg:justify-end gap-2.5">
-                    <span className="text-[13px] font-semibold text-white/80">
-                      Internships <span className="text-cyan-400/50 mx-1">•</span> Freelance <span className="text-cyan-400/50 mx-1">•</span> Full-Time Opportunities
+                    <span className="text-[13px] font-semibold text-white/80 flex flex-wrap justify-center lg:justify-end items-center">
+                      <span>Internships</span><span className="text-cyan-400/50 mx-1.5">•</span><span>Freelance</span><span className="text-cyan-400/50 mx-1.5">•</span><span>Full-Time</span>
                     </span>
                     {/* Green pulsing indicator */}
                     <span className="relative flex h-2.5 w-2.5 shrink-0 ml-1">
