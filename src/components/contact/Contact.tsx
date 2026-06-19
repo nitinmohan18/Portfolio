@@ -188,7 +188,23 @@ function InfoCard({ icon: Icon, label, value, subText, href, iconColorClass = "t
   const handleCopy = (e: React.MouseEvent) => {
     if (label === "EMAIL") {
       e.preventDefault();
-      navigator.clipboard.writeText(value);
+      
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value);
+      } else {
+        // Fallback for non-secure HTTP contexts (like mobile local network IPs)
+        const textArea = document.createElement("textarea");
+        textArea.value = value;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+        } catch (err) {
+          console.error("Failed to copy", err);
+        }
+        document.body.removeChild(textArea);
+      }
+
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
