@@ -60,10 +60,10 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60, scale: 0.85, z: -50 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1, z: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
+      transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
       whileHover={{ y: -4, scale: 1.01 }}
       whileTap={{ scale: 0.98, y: 0 }}
       style={{
@@ -135,9 +135,7 @@ function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; i
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: baseY + 15 }}
-      whileInView={{ opacity: 1, y: baseY }}
-      transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1], delay: 0.4 + (index * 0.05) }}
+      initial={{ y: baseY }}
       whileHover={{ y: baseY - 2, scale: 1.05, boxShadow: `inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 6px rgba(0,0,0,0.8), 0 8px 20px -4px ${glowColor}40` }}
       whileTap={{ y: baseY + 2, scale: 0.94, boxShadow: `inset 0 2px 4px rgba(0,0,0,0.8), 0 4px 15px ${glowColor}60` }}
       className={`relative flex max-sm:flex-col max-sm:justify-center items-center gap-2 sm:gap-2.5 p-2.5 py-3 sm:p-[9px] rounded-[10px] sm:rounded-[12px] border transition-all duration-300 group/skill hover:border-[${glowColor}]/50 active:border-[${glowColor}]/70 ${isSingle ? 'py-4 justify-center' : ''} ${className}`}
