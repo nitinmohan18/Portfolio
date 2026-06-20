@@ -30,37 +30,37 @@ const SHOW_PLATFORMS = ["github", "linkedin", "twitter", "instagram", "email"];
 
 const brandColors: Record<string, { border: string, shadow: string, text: string, topGlow: string, sweep: string }> = {
   github: {
-    border: "hover:border-[#A371F7]/60",
-    shadow: "hover:shadow-[0_15px_30px_rgba(163,113,247,0.35),0_2px_15px_rgba(163,113,247,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
-    text: "group-hover:text-[#A371F7] group-hover:drop-shadow-[0_0_10px_rgba(163,113,247,0.9)]",
+    border: "hover:border-[#A371F7]/60 active:border-[#A371F7]/60",
+    shadow: "hover:shadow-[0_15px_30px_rgba(163,113,247,0.35),0_2px_15px_rgba(163,113,247,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)] active:shadow-[0_15px_30px_rgba(163,113,247,0.35),0_2px_15px_rgba(163,113,247,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
+    text: "group-hover:text-[#A371F7] group-hover:drop-shadow-[0_0_10px_rgba(163,113,247,0.9)] group-active:text-[#A371F7] group-active:drop-shadow-[0_0_10px_rgba(163,113,247,0.9)]",
     topGlow: "shadow-[0_1px_8px_rgba(163,113,247,1)] via-[#A371F7]/90",
     sweep: "via-[#A371F7]/25"
   },
   linkedin: {
-    border: "hover:border-[#0A66C2]/60",
-    shadow: "hover:shadow-[0_15px_30px_rgba(10,102,194,0.35),0_2px_15px_rgba(10,102,194,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
-    text: "group-hover:text-[#0A66C2] group-hover:drop-shadow-[0_0_10px_rgba(10,102,194,0.9)]",
+    border: "hover:border-[#0A66C2]/60 active:border-[#0A66C2]/60",
+    shadow: "hover:shadow-[0_15px_30px_rgba(10,102,194,0.35),0_2px_15px_rgba(10,102,194,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)] active:shadow-[0_15px_30px_rgba(10,102,194,0.35),0_2px_15px_rgba(10,102,194,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
+    text: "group-hover:text-[#0A66C2] group-hover:drop-shadow-[0_0_10px_rgba(10,102,194,0.9)] group-active:text-[#0A66C2] group-active:drop-shadow-[0_0_10px_rgba(10,102,194,0.9)]",
     topGlow: "shadow-[0_1px_8px_rgba(10,102,194,1)] via-[#0A66C2]/90",
     sweep: "via-[#0A66C2]/25"
   },
   twitter: {
-    border: "hover:border-white/60",
-    shadow: "hover:shadow-[0_15px_30px_rgba(255,255,255,0.25),0_2px_15px_rgba(255,255,255,0.4),inset_0_2px_3px_rgba(255,255,255,0.4),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
-    text: "group-hover:text-white group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]",
+    border: "hover:border-white/60 active:border-white/60",
+    shadow: "hover:shadow-[0_15px_30px_rgba(255,255,255,0.25),0_2px_15px_rgba(255,255,255,0.4),inset_0_2px_3px_rgba(255,255,255,0.4),inset_0_-4px_8px_rgba(0,0,0,0.9)] active:shadow-[0_15px_30px_rgba(255,255,255,0.25),0_2px_15px_rgba(255,255,255,0.4),inset_0_2px_3px_rgba(255,255,255,0.4),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
+    text: "group-hover:text-white group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] group-active:text-white group-active:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)]",
     topGlow: "shadow-[0_1px_8px_rgba(255,255,255,1)] via-white/90",
     sweep: "via-white/20"
   },
   instagram: {
-    border: "hover:border-[#F472B6]/60",
-    shadow: "hover:shadow-[0_15px_30px_rgba(244,114,182,0.35),0_2px_15px_rgba(244,114,182,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
-    text: "group-hover:text-[#F472B6] group-hover:drop-shadow-[0_0_10px_rgba(244,114,182,0.9)]",
+    border: "hover:border-[#F472B6]/60 active:border-[#F472B6]/60",
+    shadow: "hover:shadow-[0_15px_30px_rgba(244,114,182,0.35),0_2px_15px_rgba(244,114,182,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)] active:shadow-[0_15px_30px_rgba(244,114,182,0.35),0_2px_15px_rgba(244,114,182,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
+    text: "group-hover:text-[#F472B6] group-hover:drop-shadow-[0_0_10px_rgba(244,114,182,0.9)] group-active:text-[#F472B6] group-active:drop-shadow-[0_0_10px_rgba(244,114,182,0.9)]",
     topGlow: "shadow-[0_1px_8px_rgba(244,114,182,1)] via-[#F472B6]/90",
     sweep: "via-[#F472B6]/25"
   },
   email: {
-    border: "hover:border-[#EA4335]/60",
-    shadow: "hover:shadow-[0_15px_30px_rgba(234,67,53,0.35),0_2px_15px_rgba(234,67,53,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
-    text: "group-hover:text-[#EA4335] group-hover:drop-shadow-[0_0_10px_rgba(234,67,53,0.9)]",
+    border: "hover:border-[#EA4335]/60 active:border-[#EA4335]/60",
+    shadow: "hover:shadow-[0_15px_30px_rgba(234,67,53,0.35),0_2px_15px_rgba(234,67,53,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)] active:shadow-[0_15px_30px_rgba(234,67,53,0.35),0_2px_15px_rgba(234,67,53,0.5),inset_0_2px_3px_rgba(255,255,255,0.3),inset_0_-4px_8px_rgba(0,0,0,0.9)]",
+    text: "group-hover:text-[#EA4335] group-hover:drop-shadow-[0_0_10px_rgba(234,67,53,0.9)] group-active:text-[#EA4335] group-active:drop-shadow-[0_0_10px_rgba(234,67,53,0.9)]",
     topGlow: "shadow-[0_1px_8px_rgba(234,67,53,1)] via-[#EA4335]/90",
     sweep: "via-[#EA4335]/25"
   }
@@ -106,10 +106,10 @@ export default function SocialLinks() {
             <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
             
             {/* Top glowing edge on hover */}
-            <div className={`absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${colors.topGlow}`} />
+            <div className={`absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-active:opacity-100 ${colors.topGlow}`} />
 
             {/* Sweep effect */}
-            <div className={`absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent to-transparent skew-x-[-20deg] transition-transform duration-700 group-hover:translate-x-[150%] ${colors.sweep}`} />
+            <div className={`absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent to-transparent skew-x-[-20deg] transition-transform duration-700 group-hover:translate-x-[150%] group-active:translate-x-[150%] ${colors.sweep}`} />
             
             {/* Icon */}
             <span className={`relative z-10 transition-all duration-300 ${colors.text}`}>
