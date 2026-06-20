@@ -3,7 +3,7 @@ import { useState, useEffect, createContext, useContext } from "react";
 import { AnimatePresence } from "framer-motion";
 import PagePreloader from "@/components/ui/PagePreloader";
 
-export const PreloaderContext = createContext({ showContent: false });
+const PreloaderContext = createContext({ showContent: false });
 
 export const usePreloader = () => useContext(PreloaderContext);
 

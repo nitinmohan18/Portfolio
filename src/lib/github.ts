@@ -68,19 +68,3 @@ export async function getGithubRepos(): Promise<GithubRepo[]> {
     return [];
   }
 }
-
-export function detectLanguageColor(language: string | null): string {
-  const map: Record<string, string> = {
-    Python: "#3776AB",
-    TypeScript: "#3178C6",
-    JavaScript: "#F7DF1E",
-    "C++": "#00599C",
-    Java: "#ED8B00",
-    HTML: "#E34F26",
-    CSS: "#1572B6",
-    Rust: "#DEA584",
-    Go: "#00ADD8",
-    Shell: "#89E051",
-  };
-  return language ? (map[language] ?? "#6C63FF") : "#6C63FF";
-}

@@ -15,10 +15,12 @@ const PARTICLES = Array.from({ length: 8 }).map((_, i) => ({
   orbitRadius: Math.random() * 15 + 40, // 40% to 55% from center
   initialAngle: Math.random() * 360,
   reverse: Math.random() > 0.5,
+  delay: Math.random() * 20,
+  opacity: Math.random() * 0.4 + 0.3,
 }));
 
 export default function HexagonPortrait({ isVisible = true }: HexagonPortraitProps) {
-  const [isDesktop, setIsDesktop] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(() => typeof window !== 'undefined' ? window.innerWidth >= 1024 : true);
   
   // Motion values for smooth, spring-based parallax
   const mouseX = useMotionValue(0);
@@ -33,7 +35,8 @@ export default function HexagonPortrait({ isVisible = true }: HexagonPortraitPro
   const glowY = useTransform(springY, (v) => v * -0.6);
 
   useEffect(() => {
-    setIsDesktop(window.innerWidth >= 1024);
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+    window.addEventListener("resize", handleResize);
 
     const handleMouseMove = (e: MouseEvent) => {
       if (window.innerWidth < 1024) return;
@@ -45,7 +48,10 @@ export default function HexagonPortrait({ isVisible = true }: HexagonPortraitPro
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, [mouseX, mouseY]);
 
   return (
@@ -82,7 +88,7 @@ export default function HexagonPortrait({ isVisible = true }: HexagonPortraitPro
                 className="absolute inset-0"
                 style={{
                   animation: `orbit ${p.orbitSpeed}s linear infinite ${p.reverse ? "reverse" : "normal"}`,
-                  animationDelay: `-${Math.random() * 20}s`,
+                  animationDelay: `-${p.delay}s`,
                 }}
               >
                 <div
@@ -92,7 +98,7 @@ export default function HexagonPortrait({ isVisible = true }: HexagonPortraitPro
                     height: `${p.size}px`,
                     top: `${50 - p.orbitRadius}%`,
                     left: '50%',
-                    opacity: Math.random() * 0.4 + 0.3,
+                    opacity: p.opacity,
                   }}
                 />
               </div>

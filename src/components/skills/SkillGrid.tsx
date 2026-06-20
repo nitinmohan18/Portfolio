@@ -3,7 +3,6 @@ import React from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { skillGroups } from "@/data/skills";
 import type { Skill } from "@/data/skills";
-import Image from "next/image";
 
 export default function SkillGrid() {
   return (

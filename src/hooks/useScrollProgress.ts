@@ -2,34 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-export function useScrollProgress() {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    let ticking = false;
-    const update = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        setProgress(window.scrollY / totalHeight);
-      }
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(update);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    update();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  return progress;
-}
-
 export function useActiveSection(sectionIds: string[]) {
   const [activeSection, setActiveSection] = useState<string>(sectionIds[0] ?? "");
 

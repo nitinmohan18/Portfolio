@@ -23,7 +23,7 @@ export default function TypingText() {
   }, [roleIndex]);
 
   const currentRole = ROLES[roleIndex];
-  const characters = currentRole.split("");
+  const words = currentRole.split(" ");
 
   return (
     <div className="h-[52px] flex items-center relative w-full" style={{ perspective: "1000px" }}>
@@ -76,7 +76,7 @@ export default function TypingText() {
           }}
           className="flex items-baseline flex-wrap w-full"
         >
-          {currentRole.split(" ").map((word, wIdx) => (
+          {words.map((word, wIdx) => (
             <span key={wIdx} style={{ display: "inline-block", whiteSpace: "nowrap" }}>
               {word.split("").map((char, cIdx) => (
                 <motion.span
@@ -102,7 +102,7 @@ export default function TypingText() {
                 </motion.span>
               ))}
               {/* Add space after word unless it's the last word */}
-              {wIdx < currentRole.split(" ").length - 1 && (
+              {wIdx < words.length - 1 && (
                 <span style={{ display: "inline-block", width: "0.25em" }}>&nbsp;</span>
               )}
             </span>

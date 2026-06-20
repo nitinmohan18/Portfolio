@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { Download, Menu, X } from "lucide-react";
 import { Github, Linkedin } from "@/components/ui/Icons";
 import { cn } from "@/lib/utils";
 import { NAV_ITEMS } from "@/lib/constants";
 import { profile } from "@/data/profile";
-import { useActiveSection, useScrollProgress } from "@/hooks/useScrollProgress";
+import { useActiveSection } from "@/hooks/useScrollProgress";
 import MagneticButton from "@/components/ui/MagneticButton";
 
 const sectionIds = NAV_ITEMS.map((n) => n.id);
@@ -15,7 +15,7 @@ const sectionIds = NAV_ITEMS.map((n) => n.id);
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const activeSection = useActiveSection(sectionIds);
-  const progress = useScrollProgress();
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     if (mobileOpen) {
@@ -287,7 +287,7 @@ export default function Navbar() {
       {/* Scroll progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[2px] bg-[#60a5fa] z-[1001] origin-left"
-        style={{ scaleX: progress }}
+        style={{ scaleX: scrollYProgress }}
       />
 
       <motion.nav

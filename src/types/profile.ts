@@ -1,10 +1,10 @@
-export interface SocialLink {
+interface SocialLink {
   platform: "github" | "linkedin" | "instagram" | "twitter" | "email";
   url: string;
   label: string;
 }
 
-export interface StatCard {
+interface StatCard {
   icon: string;
   value: string;
   label: string;
