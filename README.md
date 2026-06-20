@@ -7,7 +7,7 @@
 <br />
 
 <div align="center">
-  <a href="https://nitinpandey.dev" target="_blank">
+  <a href="https://nitinpandey-portfolio.vercel.app" target="_blank">
     <img src="https://img.shields.io/badge/Website-Live_Demo-cyan?style=for-the-badge&logo=vercel" alt="Live Demo">
   </a>
   <img src="https://img.shields.io/badge/Next.js-16.2-black?style=for-the-badge&logo=next.js" alt="Next.js">
@@ -109,7 +109,7 @@ To fully run the project locally and in production, you must configure the follo
 
 | Variable | Description | Required |
 |----------|-------------|:--------:|
-| `NEXT_PUBLIC_SITE_URL` | Your production domain (e.g., `https://nitinpandey.dev`). Required for SEO, canonical tags, and Sitemap generation. | Yes |
+| `NEXT_PUBLIC_SITE_URL` | Your production domain (e.g., `https://nitinpandey-portfolio.vercel.app`). Required for SEO, canonical tags, and Sitemap generation. | Yes |
 | `NEXT_PUBLIC_EMAILJS_SERVICE_ID` | Your EmailJS Service ID (for Contact form). | Yes |
 | `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` | Your EmailJS Template ID. | Yes |
 | `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` | Your EmailJS Public Key. | Yes |
@@ -158,7 +158,7 @@ This project is perfectly tailored for [Vercel](https://vercel.com).
 - **GitHub:** [@nitinmohan18](https://github.com/nitinmohan18)
 - **LinkedIn:** [Nitin Mohan](https://www.linkedin.com/in/nitin-mohan-b672722b9/)
 - **X / Twitter:** [@NitinPandey494](https://x.com/NitinPandey494)
-- **Portfolio:** [https://nitinpandey.dev](https://nitinpandey.dev)
+- **Portfolio:** [https://nitinpandey-portfolio.vercel.app](https://nitinpandey-portfolio.vercel.app)
 
 ---
 *Built with ❤️ and Next.js*
