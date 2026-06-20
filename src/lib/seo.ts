@@ -10,7 +10,7 @@ interface SEOProps {
 }
 
 const DEFAULT_DESCRIPTION =
-  "Nitin Mohan — AI & ML Student and Full Stack Developer building intelligent, scalable web applications.";
+  "Nitin Mohan Pandey — AI & ML Student and Full Stack Developer building intelligent, scalable web applications.";
 
 export function buildMetadata({
   title,

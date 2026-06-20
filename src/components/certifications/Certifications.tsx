@@ -26,7 +26,7 @@ const certificationsData = [
     title: "Full Stack Development",
     issuer: "Udemy",
     link: undefined,
-    image: "/images/fullstack-cert.png",
+    image: "/images/fullstack-cert.webp",
     description:
       "Modern web development with React, Node.js, APIs, databases, and deployment.",
     status: "completed" as const,

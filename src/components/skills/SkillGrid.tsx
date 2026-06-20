@@ -113,7 +113,6 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
               <SkillChip 
                 key={skill.name} 
                 skill={skill} 
-                index={j} 
                 isSingle={isSingle} 
                 className={`w-full max-sm:w-[calc(100%-8px)] max-sm:mx-auto ${j % 2 === 0 ? 'max-sm:translate-x-[5px]' : ''} ${isLastOdd ? 'col-span-2 sm:col-span-2 place-self-center w-[calc(50%-3px)] sm:w-[calc(50%-6px)]' : ''} ${isSingle ? 'w-full' : ''}`}
               />
@@ -125,7 +124,7 @@ function SkillCard({ group, index }: { group: typeof skillGroups[0]; index: numb
   );
 }
 
-function SkillChip({ skill, index, isSingle, className = "" }: { skill: Skill; index: number; isSingle: boolean; className?: string }) {
+function SkillChip({ skill, isSingle, className = "" }: { skill: Skill; isSingle: boolean; className?: string }) {
   // Map pure black or very dark colors to white so the glowing animation is visible against dark backgrounds
   const isDark = ["#000000", "#181717"].includes(skill.color);
   const glowColor = isDark ? "#ffffff" : skill.color;

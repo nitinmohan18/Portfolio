@@ -1,5 +1,5 @@
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://nitinmohan.dev";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://nitinpandey.dev";
 
 
 export const NAV_ITEMS = [
