@@ -597,13 +597,13 @@ export default function Contact() {
             <div className="relative z-10 hidden max-sm:hidden lg:flex lg:flex-row lg:items-center lg:justify-between lg:gap-8">
               {/* Left: Title */}
               <div className="shrink-0 flex flex-col lg:items-start lg:text-left lg:pl-3 w-full lg:w-auto">
-                <h4 className="font-mono text-[12px] font-bold uppercase tracking-[0.25em] text-cyan-300 drop-shadow-[0_0_6px_rgba(34,211,238,0.4)] lg:translate-x-[20px]">
+                <h4 className="font-mono text-[12px] font-bold uppercase tracking-[0.25em] text-cyan-300 drop-shadow-[0_0_6px_rgba(34,211,238,0.4)] lg:translate-x-[28px]">
                   Let&apos;s Connect
                 </h4>
-                <p className="mt-1.5 text-[14px] font-medium text-white/50">
+                <p className="mt-1.5 text-[14px] font-medium text-white/50 lg:translate-x-[20px]">
                   Connect with me across platforms
                 </p>
-                <div className="mt-6 flex flex-col justify-center lg:items-start gap-2 text-[12px] text-white/40 font-medium lg:ml-5 w-full">
+                <div className="mt-6 flex flex-col justify-center lg:items-start gap-2 text-[12px] text-white/40 font-medium lg:ml-5 lg:translate-x-[20px] w-full">
                   <div className="flex items-center justify-center lg:justify-start gap-2.5">
                     <span className="text-[14px]">📍</span> 
                     <span>Based in Bhopal, India</span>
