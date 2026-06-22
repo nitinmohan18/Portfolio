@@ -37,9 +37,30 @@ export default function GithubProjects() {
     );
   }
 
-  const filtered = repos.filter(
-    (r) => r.name.toLowerCase() !== "nitin-portfolio" && r.description
+  let filtered = repos.filter(
+    (r) => r.name.toLowerCase() !== "nitinmohan18" && r.description
   );
+
+  const portfolioRepo = {
+    id: 999999,
+    name: "Portfolio",
+    full_name: "nitinmohan18/Portfolio",
+    description: "Modern personal developer portfolio built with Next.js, TypeScript, Tailwind CSS, and Framer Motion. Features highly interactive 3D UI elements and dynamic project fetching.",
+    html_url: "https://github.com/nitinmohan18/Portfolio",
+    homepage: "https://portfolio-coral-theta-92.vercel.app",
+    stargazers_count: 0,
+    forks_count: 0,
+    language: "TypeScript",
+    topics: ["nextjs", "react", "tailwindcss", "framer-motion", "portfolio"],
+    fork: false,
+    updated_at: new Date().toISOString()
+  };
+
+  const existingIdx = filtered.findIndex(r => r.name.toLowerCase() === "portfolio" || r.name.toLowerCase() === "nitin-portfolio");
+  if (existingIdx !== -1) {
+    filtered.splice(existingIdx, 1);
+  }
+  filtered.splice(2, 0, portfolioRepo as any);
 
   return (
     <div className="flex flex-col items-center gap-12 w-full">

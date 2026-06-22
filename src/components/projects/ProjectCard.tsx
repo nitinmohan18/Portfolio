@@ -95,7 +95,9 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
       }} 
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className="group relative flex flex-col w-full max-sm:w-full max-sm:max-w-none rounded-[24px] overflow-hidden cursor-default"
+      className={`group relative flex flex-col w-full max-sm:w-full max-sm:max-w-none rounded-[24px] overflow-hidden cursor-default ${
+        repo.name === "Portfolio" ? "md:translate-x-[326px]" : ""
+      }`}
     >
       {/* Card body - 3D Solid Matte Dark Finish */}
       <div

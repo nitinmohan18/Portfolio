@@ -46,6 +46,13 @@ export async function getGithubRepos(): Promise<GithubRepo[]> {
           homepage: "https://windly-weather.vercel.app"
         } as unknown as GithubRepo;
       }
+      if (repo.name.toLowerCase() === "portfolio" || repo.name.toLowerCase() === "nitin-portfolio") {
+        return {
+          ...repo,
+          description: "Modern personal developer portfolio built with Next.js, TypeScript, Tailwind CSS, and Framer Motion. Features highly interactive 3D UI elements and dynamic project fetching.",
+          homepage: "https://portfolio-coral-theta-92.vercel.app"
+        };
+      }
       return repo;
     });
 
@@ -61,6 +68,14 @@ export async function getGithubRepos(): Promise<GithubRepo[]> {
       const temp = sortedRepos[frontendIndex];
       sortedRepos[frontendIndex] = sortedRepos[backendIndex];
       sortedRepos[backendIndex] = temp;
+    }
+
+    // Ensure Portfolio is placed correctly
+    const portfolioIndex = sortedRepos.findIndex(r => r.name.toLowerCase() === "portfolio" || r.name.toLowerCase() === "nitin-portfolio");
+    if (portfolioIndex > -1) {
+      const portfolioRepo = sortedRepos.splice(portfolioIndex, 1)[0];
+      // Place it at index 2 (or at the end if there are less than 2)
+      sortedRepos.splice(2, 0, portfolioRepo);
     }
 
     return sortedRepos;
