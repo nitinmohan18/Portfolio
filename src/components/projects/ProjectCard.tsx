@@ -8,7 +8,7 @@ import type { GithubRepo } from "@/types/project";
 const CATEGORY_MAP: Record<string, { label: string; color: string; rgb: string }> = {
   python: { label: "INTELLIGENT SYSTEMS", color: "#818cf8", rgb: "129,140,248" },
   javascript: { label: "FULL-STACK APP", color: "#38bdf8", rgb: "56,189,248" },
-  typescript: { label: "FULL-STACK APP", color: "#38bdf8", rgb: "56,189,248" },
+  typescript: { label: "FULL-STACK APP", color: "#3178c6", rgb: "49,120,198" },
   default: { label: "OPEN SOURCE", color: "#34d399", rgb: "52,211,153" },
 };
 
@@ -96,7 +96,7 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       className={`group relative flex flex-col w-full max-sm:w-full max-sm:max-w-none rounded-[24px] overflow-hidden cursor-default ${
-        repo.name === "Portfolio" ? "md:translate-x-[326px]" : ""
+        repo.name === "Portfolio" ? "md:translate-x-[318px]" : ""
       }`}
     >
       {/* Card body - 3D Solid Matte Dark Finish */}
@@ -193,6 +193,7 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
         {/* Premium 3D Tags */}
         {(repo.language || repo.topics?.length) && (
           <div className="flex flex-wrap gap-2.5 mb-8 relative z-10" style={{ transform: "translateZ(15px) translateY(10px)" }}>
+            {/* Primary Language Badge */}
             {repo.language && (
               <motion.span
                 whileHover={{ y: -2, scale: 1.05, boxShadow: `inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 6px rgba(0,0,0,0.8), 0 8px 20px -4px rgba(${cat.rgb}, 0.5)` }}
@@ -237,21 +238,37 @@ export default function ProjectCard({ repo, index }: { repo: GithubRepo; index: 
               </>
             )}
             
-            {repo.topics?.slice(0, 3).map((t) => (
-              <motion.span
-                whileHover={{ y: -2, scale: 1.05, boxShadow: "inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 6px rgba(0,0,0,0.8), 0 8px 20px -4px rgba(255, 255, 255, 0.3)" }}
-                key={t}
-                className="px-3.5 py-1.5 rounded-[8px] text-[12px] font-bold border cursor-default transition-all duration-300 tracking-wide"
-                style={{
-                  background: "linear-gradient(145deg, rgba(16, 22, 38, 0.7), rgba(8, 10, 16, 0.95))",
-                  borderColor: "rgba(255,255,255,0.15)",
-                  color: "rgba(200, 215, 240, 0.9)",
-                  boxShadow: "inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -2px 4px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.3)"
-                }}
-              >
-                {t}
-              </motion.span>
-            ))}
+            {/* Topic Badges */}
+            {repo.topics?.slice(0, 4).map((t) => {
+              const customStyle: Record<string, { color: string, border: string, rgb: string, label: string }> = {
+                nextjs: { color: "rgba(255, 255, 255, 1)", border: "rgba(255, 255, 255, 0.4)", rgb: "255, 255, 255", label: "Next.js" },
+                react: { color: "rgba(97, 218, 251, 1)", border: "rgba(97, 218, 251, 0.4)", rgb: "97, 218, 251", label: "React" },
+                tailwindcss: { color: "rgba(56, 189, 248, 1)", border: "rgba(56, 189, 248, 0.4)", rgb: "56, 189, 248", label: "Tailwind" },
+                "framer-motion": { color: "rgba(232, 121, 249, 1)", border: "rgba(232, 121, 249, 0.4)", rgb: "232, 121, 249", label: "Motion" },
+              };
+              
+              const style = customStyle[t.toLowerCase()];
+              const tagColor = style?.color || "rgba(200, 215, 240, 0.9)";
+              const tagBorder = style?.border || "rgba(255,255,255,0.15)";
+              const tagRgb = style?.rgb || "255, 255, 255";
+              const tagLabel = style?.label || t;
+
+              return (
+                <motion.span
+                  whileHover={{ y: -2, scale: 1.05, boxShadow: `inset 0 1px 2px rgba(255,255,255,0.2), inset 0 -2px 6px rgba(0,0,0,0.8), 0 8px 20px -4px rgba(${tagRgb}, 0.5)` }}
+                  key={t}
+                  className="px-3.5 py-1.5 rounded-[8px] text-[12px] font-bold border cursor-default transition-all duration-300 tracking-wide"
+                  style={{
+                    background: "linear-gradient(145deg, rgba(16, 22, 38, 0.7), rgba(8, 10, 16, 0.95))",
+                    borderColor: tagBorder,
+                    color: tagColor,
+                    boxShadow: "inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -2px 4px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.3)"
+                  }}
+                >
+                  {tagLabel}
+                </motion.span>
+              );
+            })}
           </div>
         )}
 
