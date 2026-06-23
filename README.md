@@ -24,7 +24,7 @@ A stunning, highly optimized, and production-ready personal developer portfolio.
 
 ## ✨ Features
 
-- **Modern Cyber Aesthetic:** Deep space blacks, neon cyan/purple glows, glassmorphism, and meticulously crafted 3D lighting effects.
+- **Modern Cyber Aesthetic:** Deep space blacks, neon cyan/purple glows, glassmorphism, and meticulously crafted 3D  effects.
 - **Flawless Animations:** Advanced exit/enter animations, orchestrations, smooth scroll, and physics-based interactions powered by Framer Motion.
 - **Mobile First & Touch Optimized:** 100% responsive layout with native mobile touch states mirroring desktop hover interactions.
 - **GitHub API Integration:** Secure, server-side fetching of live repository data (stars, forks, topics) with built-in ISR caching.
