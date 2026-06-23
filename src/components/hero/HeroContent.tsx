@@ -161,6 +161,7 @@ export default function HeroContent({ isVisible = true }: HeroContentProps) {
         }
         @media (max-width: 480px) {
           .stat-card-wrapper {
+            grid-template-columns: repeat(1, 1fr);
             gap: 8px;
           }
         }
