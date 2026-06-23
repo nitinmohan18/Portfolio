@@ -219,6 +219,17 @@ export default function HeroButtons() {
           transform: rotate(15deg) scale(1.1);
           filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.6));
         }
+
+        @media (max-width: 640px) {
+          .btn-primary, .btn-secondary {
+            width: 100%;
+            justify-content: center;
+          }
+          .hero-buttons {
+            flex-direction: column;
+            width: 100%;
+          }
+        }
       `}</style>
 
       {/* CTA buttons */}
