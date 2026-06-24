@@ -161,4 +161,4 @@ This project is perfectly tailored for [Vercel](https://vercel.com).
 - **Portfolio:** [https://nitinpandey-portfolio.vercel.app](https://nitinpandey-portfolio.vercel.app)
 
 ---
-*Built with ❤️ and Next.js*
+*Built with Next.js*
