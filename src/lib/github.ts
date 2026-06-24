@@ -50,7 +50,7 @@ export async function getGithubRepos(): Promise<GithubRepo[]> {
         return {
           ...repo,
           description: "Modern personal developer portfolio built with Next.js, TypeScript, Tailwind CSS, and Framer Motion. Features highly interactive 3D UI elements and dynamic project fetching.",
-          homepage: "https://portfolio-coral-theta-92.vercel.app"
+          homepage: "https://nitinpandey-portfolio.vercel.app"
         };
       }
       return repo;
