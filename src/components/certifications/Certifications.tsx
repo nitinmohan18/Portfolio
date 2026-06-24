@@ -23,17 +23,17 @@ type ColorKey = "blue" | "purple" | "cyan";
 const certificationsData = [
   {
     id: "fullstack",
-    title: "Full Stack Development",
+    title: "The Complete Full-Stack Web Development Bootcamp",
     issuer: "Udemy",
     link: undefined,
-    image: "/images/fullstack-cert.webp",
+    image: "/images/fullstack-cert.png",
     description:
       "Modern web development with React, Node.js, APIs, databases, and deployment.",
     status: "completed" as const,
     icon: Code,
     color: "purple" as ColorKey,
     progress: 100,
-    issuedDate: "May 2024",
+    issuedDate: "March 2026",
   },
   {
     id: "dsa",
